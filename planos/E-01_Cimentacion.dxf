@@ -493,7 +493,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461311.109733796
+2461311.242523148
   9
 $TDUCREATE
  40
@@ -501,7 +501,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461311.10974537
+2461311.242534722
   9
 $TDUUPDATE
  40
@@ -933,11 +933,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{110144C8-C206-4185-B460-09F22834B1D8}
+{35D37A1A-C314-40FB-948F-409BC7A9AB08}
   9
 $VERSIONGUID
   2
-{49B57922-0BC6-4856-BC52-A8DF5CC52850}
+{6610A3F2-43DE-4205-8A16-5754AFB6618E}
   9
 $EXTNAMES
 290
@@ -1327,9 +1327,9 @@ ISM
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -1343,9 +1343,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -58025,7 +58025,7 @@ AcDbText
  40
 2.05
   1
-1. CONCRETO f'c = ____ kg/cm² en zapatas, vigas de cimentación y cimiento de escalera (COMPLETAR según memoria).
+1. CONCRETO f'c = 210 kg/cm² en zapatas, vigas de cimentación y cimiento de escalera; solados f'c = 100 kg/cm².
   7
 ARIAL
  41
@@ -181097,7 +181097,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-27T02:38:01.513041+00:00
+1.4.4 @ 2026-09-27T05:49:14.365867+00:00
   0
 VISUALSTYLE
   5
@@ -187787,7 +187787,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-27T02:38:02.436757+00:00
+1.4.4 @ 2026-09-27T05:49:15.175162+00:00
   0
 ENDSEC
   0
