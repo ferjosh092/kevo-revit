@@ -58,7 +58,10 @@ D38 = 0.009525 * M
 D34 = 0.01905 * M
 BAR_NAMES = {"3/8": ("SJ_3/8in_G60", D38)}
 COVER = 0.025 * M                 # recubrimiento de losa (2.5 cm, revision de planos)
-BORDE = 0.025 * M                 # a los bordes de la pieza
+BORDE = COVER + D38 / 2.0         # eje de la barra a los bordes de la pieza (2.5 cm libres)
+MECHA_SEP = 0.20 * M              # mechas del cimiento centradas en el bloque @ 20 cm (detalle E-09)
+MECHA_LAT = 0.05 * M              # recubrimiento lateral minimo de la mecha en el bloque
+LAP_MAX = 0.09 * M                # traslape sin contacto: separacion <= min(Ld/5, 15 cm) (E.060 12.14.2.3)
 SEP = 0.25 * M                    # malla @ 25 cm
 PATA_BAJA = 0.50 * M              # entrada horizontal en el descanso inferior
 PATA_ALTA = 0.40 * M              # doblez horizontal arriba en el descanso superior
@@ -492,6 +495,8 @@ def plan_piece(fr, frames):
         sin_t = fr["e1"][2]
         cos_t = math.sqrt(max(1e-12, 1.0 - sin_t * sin_t))
         w_t = fr["esp"] - COVER - d / 2.0
+        arranques = []                                       # (cimiento, a0, v, fx, fy) de las S que nacen en el bloque
+        s_v = []
         for i in range(n1):
             v0 = min(vs) + BORDE + i * sp1
             v = v0 + 0.04 * M if v0 + 0.04 * M <= max(vs) - BORDE else v0 - 0.04 * M
@@ -523,41 +528,65 @@ def plan_piece(fr, frames):
                 else:
                     # ARRANQUE SOBRE EL CIMIENTO (nodo 9B), como en la fig. 107 del Manual del Maestro Constructor:
                     # el acero SUPERIOR es el que baja al cimiento. Como el bloque se vacia antes, es una MECHA:
-                    # nace casi en el fondo del bloque, sube vertical junto a su cara posterior (7.5 cm de
-                    # recubrimiento), dobla siguiendo la capa superior del tramo y traslapa 45 cm con la barra superior.
+                    # nace a 10 cm del fondo del bloque, sube vertical a 16 cm libres de su cara posterior, dobla
+                    # siguiendo la capa superior del tramo y traslapa 45 cm con la barra superior.
+                    # Aqui solo se registra el arranque; las mechas se crean despues del ciclo, CENTRADAS en el
+                    # bloque @ 20 cm e independientes de la posicion de las barras S (detalle E-09).
                     for cz in CIMIENTOS:
                         wx, wy = lo[0] - cz["O"][0], lo[1] - cz["O"][1]
                         fx = wx * cz["bx"][0] + wy * cz["bx"][1]
                         fy = wx * cz["by"][0] + wy * cz["by"][1]
-                        if not (cz["x0"] <= fx <= cz["x1"] and cz["y0"] <= fy <= cz["y1"]):
-                            continue
-                        hx = h[0] * cz["bx"][0] + h[1] * cz["bx"][1]
-                        hy = h[0] * cz["by"][0] + h[1] * cz["by"][1]
-                        if abs(hx) >= abs(hy):
-                            atras = (fx - cz["x0"]) if hx > 0 else (cz["x1"] - fx)
-                        else:
-                            atras = (fy - cz["y0"]) if hy > 0 else (cz["y1"] - fy)
-                        retro = atras - (0.16 * M + d / 2.0)             # rama vertical a 16 cm de la cara posterior (bajo el arranque del tramo)
-                        if retro < 0:
-                            continue
-                        # recubrimiento LATERAL de la mecha en el bloque: >= 5 cm; si no, esa barra no baja como mecha
-                        if abs(hx) >= abs(hy):
-                            lat = min(fy - cz["y0"], cz["y1"] - fy)
-                        else:
-                            lat = min(fx - cz["x0"], cz["x1"] - fx)
-                        if lat < 0.05 * M + d / 2.0:
-                            continue
-                        lado = -1.0 if v < (min(vs) + max(vs)) / 2.0 else 1.0
-                        off = lado * (d + 0.002 * M)
-                        lo_m = add(lo, fr["e2"], off)
-                        k = add(lo_m, fr["e1"], -retro / cos_t)          # sigue la capa superior hacia atras y abajo
-                        z_bajo = cz["z0"] + 0.10 * M
-                        if k[2] > cz["z1"] - 0.015 * M or k[2] - z_bajo < 0.30 * M:
-                            continue
-                        extras.append(("MECHA_SUP{}".format(i + 1),
-                                       [(k[0], k[1], z_bajo), k, add(lo_m, fr["e1"], TRASLAPE_38)], cz["el"]))
-                        break
+                        if cz["x0"] <= fx <= cz["x1"] and cz["y0"] <= fy <= cz["y1"]:
+                            arranques.append((cz, a0, v, fx, fy))
+                            break
+                    s_v.append(v)
                 bars.append(("S{}".format(i + 1), pts, None))
+        # ---- MECHAS del cimiento de arranque (fig. 107 / detalle E-09) ----
+        # Centradas en el bloque @ 20 cm, a >= 5 cm libres de sus caras laterales y >= COVER de los bordes del
+        # tramo; rama vertical a 16 cm libres de la cara posterior (bajo el arranque), dobla sobre la capa
+        # superior del tramo y traslapa 45 cm, sin contacto, a <= 9 cm de una barra S.
+        if arranques:
+            cz, a0s, v_r, fx_r, fy_r = arranques[0]
+            hx = h[0] * cz["bx"][0] + h[1] * cz["bx"][1]
+            hy = h[0] * cz["by"][0] + h[1] * cz["by"][1]
+            if abs(hx) >= abs(hy):
+                atras = (fx_r - cz["x0"]) if hx > 0 else (cz["x1"] - fx_r)
+                f_r, f0, f1 = fy_r, cz["y0"], cz["y1"]
+                e2l = fr["e2"][0] * cz["by"][0] + fr["e2"][1] * cz["by"][1]
+            else:
+                atras = (fy_r - cz["y0"]) if hy > 0 else (cz["y1"] - fy_r)
+                f_r, f0, f1 = fx_r, cz["x0"], cz["x1"]
+                e2l = fr["e2"][0] * cz["bx"][0] + fr["e2"][1] * cz["bx"][1]
+            # retro > 0: la rama vertical queda detras del arranque de la barra S; retro < 0: queda delante,
+            # dentro del arranque del tramo (que esta embebido en el bloque). En ambos casos la mecha sube hasta
+            # la linea de la capa superior y la sigue 45 cm desde el arranque de la S.
+            retro = atras - (0.16 * M + d / 2.0)
+            if abs(e2l) > 1e-6:
+                vb = sorted([v_r + (f0 - f_r) / e2l, v_r + (f1 - f_r) / e2l])     # caras laterales del bloque en v
+                v_lo = max(vb[0] + MECHA_LAT + d / 2.0, min(vs) + BORDE)
+                v_hi = min(vb[1] - MECHA_LAT - d / 2.0, max(vs) - BORDE)
+                vc = (vb[0] + vb[1]) / 2.0
+                half = min(vc - v_lo, v_hi - vc)
+                if half >= 0:
+                    nm = int(math.floor(2 * half / MECHA_SEP + 1e-6)) + 1
+                    tan_t = sin_t / cos_t
+                    z_bajo = cz["z0"] + 0.10 * M
+                    for j in range(nm):
+                        vm = vc + (j - (nm - 1) / 2.0) * MECHA_SEP
+                        if s_v:
+                            vs_ = min(s_v, key=lambda x: abs(x - vm))
+                            if abs(vm - vs_) < d + 0.002 * M:                  # no montar sobre la barra S
+                                vm = vs_ - (d + 0.002 * M) if vs_ > vc else vs_ + (d + 0.002 * M)
+                            if abs(vm - vs_) > LAP_MAX:                        # traslape sin contacto fuera de norma
+                                vm = vs_ - (d + 0.002 * M) if vs_ > vc else vs_ + (d + 0.002 * M)
+                        if not (v_lo - 1e-6 <= vm <= v_hi + 1e-6):
+                            continue
+                        lo_m = P(fr, a0s + BORDE + w_t * tan_t, vm, w_t)
+                        k = add(lo_m, fr["e1"], -retro / cos_t)
+                        if k[2] - z_bajo < 0.30 * M or -retro / cos_t > TRASLAPE_38 - 0.10 * M:
+                            continue
+                        extras.append(("MECHA_SUP{}".format(j + 1),
+                                       [(k[0], k[1], z_bajo), k, add(lo_m, fr["e1"], TRASLAPE_38)], cz["el"]))
     # ---- capa 2: transversales (a lo largo de e2) ----
     Wu = (max(us) - min(us)) - 2 * BORDE
     n2 = max(2, int(math.ceil(Wu / SEP - 1e-6)) + 1)

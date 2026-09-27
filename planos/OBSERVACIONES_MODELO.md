@@ -51,8 +51,8 @@ queda sin recubrimiento lateral. Lista completa: `ESCALERA_RECUBRIMIENTOS.csv`.
 
 En E-09 (y E-01) el acero se dibuja corregido y las mechas se reemplazan por 5 centradas @ 0.20, a ≥ 5 cm de
 las caras, con traslape de 0.45 con el acero superior del tramo ("corregir posición de mechas según detalle").
-El modelo se ajustará con el nodo 13. Los anclajes del tramo 2 atraviesan un vacío de 5 cm del modelo bajo la
-plataforma (nudo J1) en todos los pisos: en obra se vacía monolítico.
+El modelo se ajusta con `herramientas/dynamo/nodo13_acero_escalera.py` (recubrimiento 2.5 cm libres también a los bordes: `BORDE = COVER + Ø/2`; 5 mechas centradas @ 0.20 con rama vertical a 0.16 de la cara posterior, traslape sin contacto ≤ 9 cm de la barra superior, E.060) y `nodo18_rediseno_escalera.py` (nudo J1 hasta el fondo de la plataforma). En el IFC actual los anclajes del tramo 2 atraviesan un vacío de 5 cm bajo la plataforma (nudo J1); el nodo 18
+corregido lo cierra.
 
 ## 5. Otros
 
