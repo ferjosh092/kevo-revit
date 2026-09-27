@@ -493,7 +493,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461311.097743056
+2461311.109525463
   9
 $TDUCREATE
  40
@@ -501,7 +501,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461311.097743056
+2461311.109525463
   9
 $TDUUPDATE
  40
@@ -553,7 +553,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-287
+288
   9
 $SURFTAB1
  70
@@ -933,11 +933,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{833C8A04-907D-4268-B923-3BEC2050812B}
+{B6E3A9A3-AD7F-4C14-8AEF-FDEC7688752C}
   9
 $VERSIONGUID
   2
-{34245270-94BF-4868-B390-1210B012D60A}
+{4EF9C086-C86B-4D81-A4A9-63913F8D8649}
   9
 $EXTNAMES
 290
@@ -1327,9 +1327,9 @@ ISM
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -1343,9 +1343,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -1377,7 +1377,7 @@ AcDbSymbolTable
   0
 VPORT
   5
-283
+284
 330
 8
 100
@@ -2257,7 +2257,7 @@ LAYER
 100
 AcDbSymbolTable
  70
-24
+25
   0
 LAYER
   5
@@ -2834,6 +2834,30 @@ Continuous
 0
 370
 13
+390
+13
+347
+21
+  0
+LAYER
+  5
+A1
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+E-HOJA
+ 70
+0
+ 62
+7
+  6
+Continuous
+370
+0
 390
 13
 347
@@ -3667,7 +3691,7 @@ ACAD
   0
 APPID
   5
-284
+285
 330
 3
 100
@@ -3681,7 +3705,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-285
+286
 330
 3
 100
@@ -5487,7 +5511,7 @@ _CLOSEDBLANK
   0
 BLOCK_RECORD
   5
-A1
+A2
 330
 9
 100
@@ -5497,7 +5521,7 @@ AcDbBlockTableRecord
   2
 *Paper_Space0
 340
-A4
+A5
  70
 0
 280
@@ -5807,9 +5831,9 @@ AcDbBlockEnd
   0
 BLOCK
   5
-A2
+A3
 330
-A1
+A2
 100
 AcDbEntity
   8
@@ -5833,9 +5857,9 @@ AcDbBlockBegin
   0
 VIEWPORT
   5
-A5
+A6
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -5937,15 +5961,17 @@ AcDbViewport
   0
 LWPOLYLINE
   5
-A6
+A7
 330
-A1
+A2
 100
 AcDbEntity
  67
 1
   8
-E-VPORT
+E-HOJA
+370
+0
 100
 AcDbPolyline
  90
@@ -5971,9 +5997,9 @@ AcDbPolyline
   0
 LWPOLYLINE
   5
-A7
+A8
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6007,37 +6033,9 @@ AcDbPolyline
   0
 LINE
   5
-A8
-330
-A1
-100
-AcDbEntity
- 67
-1
-  8
-E-TABLA
-370
-50
-100
-AcDbLine
- 10
-30.0
- 20
-572.0
- 30
-0.0
- 11
-272.0
- 21
-572.0
- 31
-0.0
-  0
-LINE
-  5
 A9
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6051,13 +6049,13 @@ AcDbLine
  10
 30.0
  20
-564.4
+572.0
  30
 0.0
  11
 272.0
  21
-564.4
+572.0
  31
 0.0
   0
@@ -6065,7 +6063,7 @@ LINE
   5
 AA
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6073,19 +6071,19 @@ AcDbEntity
   8
 E-TABLA
 370
-18
+50
 100
 AcDbLine
  10
 30.0
  20
-556.8
+564.4
  30
 0.0
  11
 272.0
  21
-556.8
+564.4
  31
 0.0
   0
@@ -6093,7 +6091,7 @@ LINE
   5
 AB
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6107,13 +6105,13 @@ AcDbLine
  10
 30.0
  20
-549.2
+556.8
  30
 0.0
  11
 272.0
  21
-549.2
+556.8
  31
 0.0
   0
@@ -6121,7 +6119,7 @@ LINE
   5
 AC
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6135,13 +6133,13 @@ AcDbLine
  10
 30.0
  20
-541.6
+549.2
  30
 0.0
  11
 272.0
  21
-541.6
+549.2
  31
 0.0
   0
@@ -6149,7 +6147,7 @@ LINE
   5
 AD
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6163,13 +6161,13 @@ AcDbLine
  10
 30.0
  20
-534.0
+541.6
  30
 0.0
  11
 272.0
  21
-534.0
+541.6
  31
 0.0
   0
@@ -6177,7 +6175,7 @@ LINE
   5
 AE
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6191,13 +6189,13 @@ AcDbLine
  10
 30.0
  20
-526.4
+534.0
  30
 0.0
  11
 272.0
  21
-526.4
+534.0
  31
 0.0
   0
@@ -6205,7 +6203,7 @@ LINE
   5
 AF
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6219,13 +6217,13 @@ AcDbLine
  10
 30.0
  20
-518.8
+526.4
  30
 0.0
  11
 272.0
  21
-518.8
+526.4
  31
 0.0
   0
@@ -6233,7 +6231,7 @@ LINE
   5
 B0
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6247,13 +6245,13 @@ AcDbLine
  10
 30.0
  20
-511.2
+518.8
  30
 0.0
  11
 272.0
  21
-511.2
+518.8
  31
 0.0
   0
@@ -6261,7 +6259,7 @@ LINE
   5
 B1
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6275,13 +6273,13 @@ AcDbLine
  10
 30.0
  20
-503.6
+511.2
  30
 0.0
  11
 272.0
  21
-503.6
+511.2
  31
 0.0
   0
@@ -6289,7 +6287,7 @@ LINE
   5
 B2
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6303,13 +6301,13 @@ AcDbLine
  10
 30.0
  20
-496.0
+503.6
  30
 0.0
  11
 272.0
  21
-496.0
+503.6
  31
 0.0
   0
@@ -6317,7 +6315,7 @@ LINE
   5
 B3
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6331,13 +6329,13 @@ AcDbLine
  10
 30.0
  20
-488.4
+496.0
  30
 0.0
  11
 272.0
  21
-488.4
+496.0
  31
 0.0
   0
@@ -6345,7 +6343,7 @@ LINE
   5
 B4
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6359,13 +6357,13 @@ AcDbLine
  10
 30.0
  20
-480.8
+488.4
  30
 0.0
  11
 272.0
  21
-480.8
+488.4
  31
 0.0
   0
@@ -6373,7 +6371,7 @@ LINE
   5
 B5
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6387,13 +6385,13 @@ AcDbLine
  10
 30.0
  20
-473.2
+480.8
  30
 0.0
  11
 272.0
  21
-473.2
+480.8
  31
 0.0
   0
@@ -6401,7 +6399,7 @@ LINE
   5
 B6
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6415,13 +6413,13 @@ AcDbLine
  10
 30.0
  20
-465.6
+473.2
  30
 0.0
  11
 272.0
  21
-465.6
+473.2
  31
 0.0
   0
@@ -6429,7 +6427,35 @@ LINE
   5
 B7
 330
-A1
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-TABLA
+370
+18
+100
+AcDbLine
+ 10
+30.0
+ 20
+465.6
+ 30
+0.0
+ 11
+272.0
+ 21
+465.6
+ 31
+0.0
+  0
+LINE
+  5
+B8
+330
+A2
 100
 AcDbEntity
  67
@@ -6455,9 +6481,9 @@ AcDbLine
   0
 LINE
   5
-B8
+B9
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6476,34 +6502,6 @@ AcDbLine
 0.0
  11
 272.0
- 21
-450.4
- 31
-0.0
-  0
-LINE
-  5
-B9
-330
-A1
-100
-AcDbEntity
- 67
-1
-  8
-E-TABLA
-370
-50
-100
-AcDbLine
- 10
-30.0
- 20
-572.0
- 30
-0.0
- 11
-30.0
  21
 450.4
  31
@@ -6513,7 +6511,7 @@ LINE
   5
 BA
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6521,17 +6519,17 @@ AcDbEntity
   8
 E-TABLA
 370
-18
+50
 100
 AcDbLine
  10
-58.0
+30.0
  20
 572.0
  30
 0.0
  11
-58.0
+30.0
  21
 450.4
  31
@@ -6541,7 +6539,7 @@ LINE
   5
 BB
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6553,13 +6551,13 @@ E-TABLA
 100
 AcDbLine
  10
-136.0
+58.0
  20
 572.0
  30
 0.0
  11
-136.0
+58.0
  21
 450.4
  31
@@ -6569,7 +6567,7 @@ LINE
   5
 BC
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6581,13 +6579,13 @@ E-TABLA
 100
 AcDbLine
  10
-152.0
+136.0
  20
 572.0
  30
 0.0
  11
-152.0
+136.0
  21
 450.4
  31
@@ -6597,7 +6595,7 @@ LINE
   5
 BD
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6609,13 +6607,13 @@ E-TABLA
 100
 AcDbLine
  10
-176.0
+152.0
  20
 572.0
  30
 0.0
  11
-176.0
+152.0
  21
 450.4
  31
@@ -6625,7 +6623,7 @@ LINE
   5
 BE
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6637,13 +6635,13 @@ E-TABLA
 100
 AcDbLine
  10
-214.0
+176.0
  20
 572.0
  30
 0.0
  11
-214.0
+176.0
  21
 450.4
  31
@@ -6653,7 +6651,35 @@ LINE
   5
 BF
 330
-A1
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-TABLA
+370
+18
+100
+AcDbLine
+ 10
+214.0
+ 20
+572.0
+ 30
+0.0
+ 11
+214.0
+ 21
+450.4
+ 31
+0.0
+  0
+LINE
+  5
+C0
+330
+A2
 100
 AcDbEntity
  67
@@ -6679,9 +6705,9 @@ AcDbLine
   0
 LINE
   5
-C0
+C1
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6707,9 +6733,9 @@ AcDbLine
   0
 TEXT
   5
-C1
+C2
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6747,9 +6773,9 @@ AcDbText
   0
 TEXT
   5
-C2
+C3
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6787,9 +6813,9 @@ AcDbText
   0
 TEXT
   5
-C3
+C4
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6827,9 +6853,9 @@ AcDbText
   0
 TEXT
   5
-C4
+C5
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6867,9 +6893,9 @@ AcDbText
   0
 TEXT
   5
-C5
+C6
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6907,9 +6933,9 @@ AcDbText
   0
 TEXT
   5
-C6
+C7
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6947,9 +6973,9 @@ AcDbText
   0
 TEXT
   5
-C7
+C8
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -6987,9 +7013,9 @@ AcDbText
   0
 TEXT
   5
-C8
+C9
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7025,9 +7051,9 @@ AcDbText
   0
 TEXT
   5
-C9
+CA
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7063,9 +7089,9 @@ AcDbText
   0
 TEXT
   5
-CA
+CB
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7103,9 +7129,9 @@ AcDbText
   0
 TEXT
   5
-CB
+CC
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7143,9 +7169,9 @@ AcDbText
   0
 TEXT
   5
-CC
+CD
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7183,9 +7209,9 @@ AcDbText
   0
 TEXT
   5
-CD
+CE
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7223,9 +7249,9 @@ AcDbText
   0
 TEXT
   5
-CE
+CF
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7263,9 +7289,9 @@ AcDbText
   0
 TEXT
   5
-CF
+D0
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7301,9 +7327,9 @@ AcDbText
   0
 TEXT
   5
-D0
+D1
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7339,9 +7365,9 @@ AcDbText
   0
 TEXT
   5
-D1
+D2
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7379,9 +7405,9 @@ AcDbText
   0
 TEXT
   5
-D2
+D3
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7419,9 +7445,9 @@ AcDbText
   0
 TEXT
   5
-D3
+D4
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7459,9 +7485,9 @@ AcDbText
   0
 TEXT
   5
-D4
+D5
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7499,9 +7525,9 @@ AcDbText
   0
 TEXT
   5
-D5
+D6
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7539,9 +7565,9 @@ AcDbText
   0
 TEXT
   5
-D6
+D7
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7577,9 +7603,9 @@ AcDbText
   0
 TEXT
   5
-D7
+D8
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7615,9 +7641,9 @@ AcDbText
   0
 TEXT
   5
-D8
+D9
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7655,9 +7681,9 @@ AcDbText
   0
 TEXT
   5
-D9
+DA
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7695,9 +7721,9 @@ AcDbText
   0
 TEXT
   5
-DA
+DB
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7735,9 +7761,9 @@ AcDbText
   0
 TEXT
   5
-DB
+DC
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7775,9 +7801,9 @@ AcDbText
   0
 TEXT
   5
-DC
+DD
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7815,9 +7841,9 @@ AcDbText
   0
 TEXT
   5
-DD
+DE
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7853,9 +7879,9 @@ AcDbText
   0
 TEXT
   5
-DE
+DF
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7891,9 +7917,9 @@ AcDbText
   0
 TEXT
   5
-DF
+E0
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7931,9 +7957,9 @@ AcDbText
   0
 TEXT
   5
-E0
+E1
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -7971,9 +7997,9 @@ AcDbText
   0
 TEXT
   5
-E1
+E2
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8011,9 +8037,9 @@ AcDbText
   0
 TEXT
   5
-E2
+E3
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8051,9 +8077,9 @@ AcDbText
   0
 TEXT
   5
-E3
+E4
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8091,9 +8117,9 @@ AcDbText
   0
 TEXT
   5
-E4
+E5
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8129,9 +8155,9 @@ AcDbText
   0
 TEXT
   5
-E5
+E6
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8167,9 +8193,9 @@ AcDbText
   0
 TEXT
   5
-E6
+E7
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8207,9 +8233,9 @@ AcDbText
   0
 TEXT
   5
-E7
+E8
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8247,9 +8273,9 @@ AcDbText
   0
 TEXT
   5
-E8
+E9
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8287,9 +8313,9 @@ AcDbText
   0
 TEXT
   5
-E9
+EA
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8327,9 +8353,9 @@ AcDbText
   0
 TEXT
   5
-EA
+EB
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8367,9 +8393,9 @@ AcDbText
   0
 TEXT
   5
-EB
+EC
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8405,9 +8431,9 @@ AcDbText
   0
 TEXT
   5
-EC
+ED
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8443,9 +8469,9 @@ AcDbText
   0
 TEXT
   5
-ED
+EE
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8483,9 +8509,9 @@ AcDbText
   0
 TEXT
   5
-EE
+EF
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8523,9 +8549,9 @@ AcDbText
   0
 TEXT
   5
-EF
+F0
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8563,9 +8589,9 @@ AcDbText
   0
 TEXT
   5
-F0
+F1
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8603,9 +8629,9 @@ AcDbText
   0
 TEXT
   5
-F1
+F2
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8643,9 +8669,9 @@ AcDbText
   0
 TEXT
   5
-F2
+F3
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8681,9 +8707,9 @@ AcDbText
   0
 TEXT
   5
-F3
+F4
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8719,9 +8745,9 @@ AcDbText
   0
 TEXT
   5
-F4
+F5
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8759,9 +8785,9 @@ AcDbText
   0
 TEXT
   5
-F5
+F6
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8799,9 +8825,9 @@ AcDbText
   0
 TEXT
   5
-F6
+F7
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8839,9 +8865,9 @@ AcDbText
   0
 TEXT
   5
-F7
+F8
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8879,9 +8905,9 @@ AcDbText
   0
 TEXT
   5
-F8
+F9
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8919,9 +8945,9 @@ AcDbText
   0
 TEXT
   5
-F9
+FA
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8957,9 +8983,9 @@ AcDbText
   0
 TEXT
   5
-FA
+FB
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -8995,9 +9021,9 @@ AcDbText
   0
 TEXT
   5
-FB
+FC
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9035,9 +9061,9 @@ AcDbText
   0
 TEXT
   5
-FC
+FD
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9075,9 +9101,9 @@ AcDbText
   0
 TEXT
   5
-FD
+FE
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9115,9 +9141,9 @@ AcDbText
   0
 TEXT
   5
-FE
+FF
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9155,9 +9181,9 @@ AcDbText
   0
 TEXT
   5
-FF
+100
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9195,9 +9221,9 @@ AcDbText
   0
 TEXT
   5
-100
+101
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9233,9 +9259,9 @@ AcDbText
   0
 TEXT
   5
-101
+102
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9271,9 +9297,9 @@ AcDbText
   0
 TEXT
   5
-102
+103
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9311,9 +9337,9 @@ AcDbText
   0
 TEXT
   5
-103
+104
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9351,9 +9377,9 @@ AcDbText
   0
 TEXT
   5
-104
+105
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9391,9 +9417,9 @@ AcDbText
   0
 TEXT
   5
-105
+106
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9431,9 +9457,9 @@ AcDbText
   0
 TEXT
   5
-106
+107
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9471,9 +9497,9 @@ AcDbText
   0
 TEXT
   5
-107
+108
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9509,9 +9535,9 @@ AcDbText
   0
 TEXT
   5
-108
+109
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9547,9 +9573,9 @@ AcDbText
   0
 TEXT
   5
-109
+10A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9587,9 +9613,9 @@ AcDbText
   0
 TEXT
   5
-10A
+10B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9627,9 +9653,9 @@ AcDbText
   0
 TEXT
   5
-10B
+10C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9667,9 +9693,9 @@ AcDbText
   0
 TEXT
   5
-10C
+10D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9707,9 +9733,9 @@ AcDbText
   0
 TEXT
   5
-10D
+10E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9747,9 +9773,9 @@ AcDbText
   0
 TEXT
   5
-10E
+10F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9785,9 +9811,9 @@ AcDbText
   0
 TEXT
   5
-10F
+110
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9823,9 +9849,9 @@ AcDbText
   0
 TEXT
   5
-110
+111
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9863,9 +9889,9 @@ AcDbText
   0
 TEXT
   5
-111
+112
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9903,9 +9929,9 @@ AcDbText
   0
 TEXT
   5
-112
+113
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9943,9 +9969,9 @@ AcDbText
   0
 TEXT
   5
-113
+114
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -9983,9 +10009,9 @@ AcDbText
   0
 TEXT
   5
-114
+115
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10023,9 +10049,9 @@ AcDbText
   0
 TEXT
   5
-115
+116
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10061,9 +10087,9 @@ AcDbText
   0
 TEXT
   5
-116
+117
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10099,9 +10125,9 @@ AcDbText
   0
 TEXT
   5
-117
+118
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10139,9 +10165,9 @@ AcDbText
   0
 TEXT
   5
-118
+119
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10179,9 +10205,9 @@ AcDbText
   0
 TEXT
   5
-119
+11A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10219,9 +10245,9 @@ AcDbText
   0
 TEXT
   5
-11A
+11B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10259,9 +10285,9 @@ AcDbText
   0
 TEXT
   5
-11B
+11C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10299,9 +10325,9 @@ AcDbText
   0
 TEXT
   5
-11C
+11D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10337,9 +10363,9 @@ AcDbText
   0
 TEXT
   5
-11D
+11E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10375,9 +10401,9 @@ AcDbText
   0
 TEXT
   5
-11E
+11F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10415,9 +10441,9 @@ AcDbText
   0
 TEXT
   5
-11F
+120
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10455,9 +10481,9 @@ AcDbText
   0
 TEXT
   5
-120
+121
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10495,9 +10521,9 @@ AcDbText
   0
 TEXT
   5
-121
+122
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10535,9 +10561,9 @@ AcDbText
   0
 TEXT
   5
-122
+123
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10575,9 +10601,9 @@ AcDbText
   0
 TEXT
   5
-123
+124
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10613,9 +10639,9 @@ AcDbText
   0
 TEXT
   5
-124
+125
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10651,9 +10677,9 @@ AcDbText
   0
 TEXT
   5
-125
+126
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10691,9 +10717,9 @@ AcDbText
   0
 TEXT
   5
-126
+127
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10731,9 +10757,9 @@ AcDbText
   0
 TEXT
   5
-127
+128
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10771,9 +10797,9 @@ AcDbText
   0
 TEXT
   5
-128
+129
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10811,9 +10837,9 @@ AcDbText
   0
 TEXT
   5
-129
+12A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10851,9 +10877,9 @@ AcDbText
   0
 TEXT
   5
-12A
+12B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10889,9 +10915,9 @@ AcDbText
   0
 TEXT
   5
-12B
+12C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10927,9 +10953,9 @@ AcDbText
   0
 TEXT
   5
-12C
+12D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -10967,9 +10993,9 @@ AcDbText
   0
 TEXT
   5
-12D
+12E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11007,9 +11033,9 @@ AcDbText
   0
 TEXT
   5
-12E
+12F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11047,9 +11073,9 @@ AcDbText
   0
 TEXT
   5
-12F
+130
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11087,9 +11113,9 @@ AcDbText
   0
 TEXT
   5
-130
+131
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11127,37 +11153,9 @@ AcDbText
   0
 LINE
   5
-131
-330
-A1
-100
-AcDbEntity
- 67
-1
-  8
-E-TABLA
-370
-50
-100
-AcDbLine
- 10
-286.0
- 20
-572.0
- 30
-0.0
- 11
-528.0
- 21
-572.0
- 31
-0.0
-  0
-LINE
-  5
 132
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11171,13 +11169,13 @@ AcDbLine
  10
 286.0
  20
-564.4
+572.0
  30
 0.0
  11
 528.0
  21
-564.4
+572.0
  31
 0.0
   0
@@ -11185,7 +11183,7 @@ LINE
   5
 133
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11193,19 +11191,19 @@ AcDbEntity
   8
 E-TABLA
 370
-18
+50
 100
 AcDbLine
  10
 286.0
  20
-556.8
+564.4
  30
 0.0
  11
 528.0
  21
-556.8
+564.4
  31
 0.0
   0
@@ -11213,7 +11211,7 @@ LINE
   5
 134
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11227,13 +11225,13 @@ AcDbLine
  10
 286.0
  20
-549.2
+556.8
  30
 0.0
  11
 528.0
  21
-549.2
+556.8
  31
 0.0
   0
@@ -11241,7 +11239,7 @@ LINE
   5
 135
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11255,13 +11253,13 @@ AcDbLine
  10
 286.0
  20
-541.6
+549.2
  30
 0.0
  11
 528.0
  21
-541.6
+549.2
  31
 0.0
   0
@@ -11269,7 +11267,7 @@ LINE
   5
 136
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11283,13 +11281,13 @@ AcDbLine
  10
 286.0
  20
-534.0
+541.6
  30
 0.0
  11
 528.0
  21
-534.0
+541.6
  31
 0.0
   0
@@ -11297,7 +11295,7 @@ LINE
   5
 137
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11311,13 +11309,13 @@ AcDbLine
  10
 286.0
  20
-526.4
+534.0
  30
 0.0
  11
 528.0
  21
-526.4
+534.0
  31
 0.0
   0
@@ -11325,7 +11323,7 @@ LINE
   5
 138
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11339,13 +11337,13 @@ AcDbLine
  10
 286.0
  20
-518.8
+526.4
  30
 0.0
  11
 528.0
  21
-518.8
+526.4
  31
 0.0
   0
@@ -11353,7 +11351,7 @@ LINE
   5
 139
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11367,13 +11365,13 @@ AcDbLine
  10
 286.0
  20
-511.2
+518.8
  30
 0.0
  11
 528.0
  21
-511.2
+518.8
  31
 0.0
   0
@@ -11381,7 +11379,7 @@ LINE
   5
 13A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11395,13 +11393,13 @@ AcDbLine
  10
 286.0
  20
-503.6
+511.2
  30
 0.0
  11
 528.0
  21
-503.6
+511.2
  31
 0.0
   0
@@ -11409,7 +11407,7 @@ LINE
   5
 13B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11423,13 +11421,13 @@ AcDbLine
  10
 286.0
  20
-496.0
+503.6
  30
 0.0
  11
 528.0
  21
-496.0
+503.6
  31
 0.0
   0
@@ -11437,7 +11435,7 @@ LINE
   5
 13C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11451,13 +11449,13 @@ AcDbLine
  10
 286.0
  20
-488.4
+496.0
  30
 0.0
  11
 528.0
  21
-488.4
+496.0
  31
 0.0
   0
@@ -11465,7 +11463,7 @@ LINE
   5
 13D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11479,13 +11477,13 @@ AcDbLine
  10
 286.0
  20
-480.8
+488.4
  30
 0.0
  11
 528.0
  21
-480.8
+488.4
  31
 0.0
   0
@@ -11493,7 +11491,35 @@ LINE
   5
 13E
 330
-A1
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-TABLA
+370
+18
+100
+AcDbLine
+ 10
+286.0
+ 20
+480.8
+ 30
+0.0
+ 11
+528.0
+ 21
+480.8
+ 31
+0.0
+  0
+LINE
+  5
+13F
+330
+A2
 100
 AcDbEntity
  67
@@ -11519,9 +11545,9 @@ AcDbLine
   0
 LINE
   5
-13F
+140
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11540,34 +11566,6 @@ AcDbLine
 0.0
  11
 528.0
- 21
-465.6
- 31
-0.0
-  0
-LINE
-  5
-140
-330
-A1
-100
-AcDbEntity
- 67
-1
-  8
-E-TABLA
-370
-50
-100
-AcDbLine
- 10
-286.0
- 20
-572.0
- 30
-0.0
- 11
-286.0
  21
 465.6
  31
@@ -11577,7 +11575,7 @@ LINE
   5
 141
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11585,17 +11583,17 @@ AcDbEntity
   8
 E-TABLA
 370
-18
+50
 100
 AcDbLine
  10
-314.0
+286.0
  20
 572.0
  30
 0.0
  11
-314.0
+286.0
  21
 465.6
  31
@@ -11605,7 +11603,7 @@ LINE
   5
 142
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11617,13 +11615,13 @@ E-TABLA
 100
 AcDbLine
  10
-392.0
+314.0
  20
 572.0
  30
 0.0
  11
-392.0
+314.0
  21
 465.6
  31
@@ -11633,7 +11631,7 @@ LINE
   5
 143
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11645,13 +11643,13 @@ E-TABLA
 100
 AcDbLine
  10
-408.0
+392.0
  20
 572.0
  30
 0.0
  11
-408.0
+392.0
  21
 465.6
  31
@@ -11661,7 +11659,7 @@ LINE
   5
 144
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11673,13 +11671,13 @@ E-TABLA
 100
 AcDbLine
  10
-432.0
+408.0
  20
 572.0
  30
 0.0
  11
-432.0
+408.0
  21
 465.6
  31
@@ -11689,7 +11687,7 @@ LINE
   5
 145
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11701,13 +11699,13 @@ E-TABLA
 100
 AcDbLine
  10
-470.0
+432.0
  20
 572.0
  30
 0.0
  11
-470.0
+432.0
  21
 465.6
  31
@@ -11717,7 +11715,35 @@ LINE
   5
 146
 330
-A1
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-TABLA
+370
+18
+100
+AcDbLine
+ 10
+470.0
+ 20
+572.0
+ 30
+0.0
+ 11
+470.0
+ 21
+465.6
+ 31
+0.0
+  0
+LINE
+  5
+147
+330
+A2
 100
 AcDbEntity
  67
@@ -11743,9 +11769,9 @@ AcDbLine
   0
 LINE
   5
-147
+148
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11771,9 +11797,9 @@ AcDbLine
   0
 TEXT
   5
-148
+149
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11811,9 +11837,9 @@ AcDbText
   0
 TEXT
   5
-149
+14A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11851,9 +11877,9 @@ AcDbText
   0
 TEXT
   5
-14A
+14B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11891,9 +11917,9 @@ AcDbText
   0
 TEXT
   5
-14B
+14C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11931,9 +11957,9 @@ AcDbText
   0
 TEXT
   5
-14C
+14D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -11971,9 +11997,9 @@ AcDbText
   0
 TEXT
   5
-14D
+14E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12011,9 +12037,9 @@ AcDbText
   0
 TEXT
   5
-14E
+14F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12051,9 +12077,9 @@ AcDbText
   0
 TEXT
   5
-14F
+150
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12089,9 +12115,9 @@ AcDbText
   0
 TEXT
   5
-150
+151
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12127,9 +12153,9 @@ AcDbText
   0
 TEXT
   5
-151
+152
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12167,9 +12193,9 @@ AcDbText
   0
 TEXT
   5
-152
+153
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12207,9 +12233,9 @@ AcDbText
   0
 TEXT
   5
-153
+154
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12247,9 +12273,9 @@ AcDbText
   0
 TEXT
   5
-154
+155
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12287,9 +12313,9 @@ AcDbText
   0
 TEXT
   5
-155
+156
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12327,9 +12353,9 @@ AcDbText
   0
 TEXT
   5
-156
+157
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12365,9 +12391,9 @@ AcDbText
   0
 TEXT
   5
-157
+158
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12403,9 +12429,9 @@ AcDbText
   0
 TEXT
   5
-158
+159
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12443,9 +12469,9 @@ AcDbText
   0
 TEXT
   5
-159
+15A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12483,9 +12509,9 @@ AcDbText
   0
 TEXT
   5
-15A
+15B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12523,9 +12549,9 @@ AcDbText
   0
 TEXT
   5
-15B
+15C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12563,9 +12589,9 @@ AcDbText
   0
 TEXT
   5
-15C
+15D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12603,9 +12629,9 @@ AcDbText
   0
 TEXT
   5
-15D
+15E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12641,9 +12667,9 @@ AcDbText
   0
 TEXT
   5
-15E
+15F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12679,9 +12705,9 @@ AcDbText
   0
 TEXT
   5
-15F
+160
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12719,9 +12745,9 @@ AcDbText
   0
 TEXT
   5
-160
+161
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12759,9 +12785,9 @@ AcDbText
   0
 TEXT
   5
-161
+162
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12799,9 +12825,9 @@ AcDbText
   0
 TEXT
   5
-162
+163
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12839,9 +12865,9 @@ AcDbText
   0
 TEXT
   5
-163
+164
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12879,9 +12905,9 @@ AcDbText
   0
 TEXT
   5
-164
+165
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12917,9 +12943,9 @@ AcDbText
   0
 TEXT
   5
-165
+166
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12955,9 +12981,9 @@ AcDbText
   0
 TEXT
   5
-166
+167
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -12995,9 +13021,9 @@ AcDbText
   0
 TEXT
   5
-167
+168
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13035,9 +13061,9 @@ AcDbText
   0
 TEXT
   5
-168
+169
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13075,9 +13101,9 @@ AcDbText
   0
 TEXT
   5
-169
+16A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13115,9 +13141,9 @@ AcDbText
   0
 TEXT
   5
-16A
+16B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13155,9 +13181,9 @@ AcDbText
   0
 TEXT
   5
-16B
+16C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13193,9 +13219,9 @@ AcDbText
   0
 TEXT
   5
-16C
+16D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13231,9 +13257,9 @@ AcDbText
   0
 TEXT
   5
-16D
+16E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13271,9 +13297,9 @@ AcDbText
   0
 TEXT
   5
-16E
+16F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13311,9 +13337,9 @@ AcDbText
   0
 TEXT
   5
-16F
+170
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13351,9 +13377,9 @@ AcDbText
   0
 TEXT
   5
-170
+171
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13391,9 +13417,9 @@ AcDbText
   0
 TEXT
   5
-171
+172
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13431,9 +13457,9 @@ AcDbText
   0
 TEXT
   5
-172
+173
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13469,9 +13495,9 @@ AcDbText
   0
 TEXT
   5
-173
+174
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13507,9 +13533,9 @@ AcDbText
   0
 TEXT
   5
-174
+175
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13547,9 +13573,9 @@ AcDbText
   0
 TEXT
   5
-175
+176
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13587,9 +13613,9 @@ AcDbText
   0
 TEXT
   5
-176
+177
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13627,9 +13653,9 @@ AcDbText
   0
 TEXT
   5
-177
+178
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13667,9 +13693,9 @@ AcDbText
   0
 TEXT
   5
-178
+179
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13707,9 +13733,9 @@ AcDbText
   0
 TEXT
   5
-179
+17A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13745,9 +13771,9 @@ AcDbText
   0
 TEXT
   5
-17A
+17B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13783,9 +13809,9 @@ AcDbText
   0
 TEXT
   5
-17B
+17C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13823,9 +13849,9 @@ AcDbText
   0
 TEXT
   5
-17C
+17D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13863,9 +13889,9 @@ AcDbText
   0
 TEXT
   5
-17D
+17E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13903,9 +13929,9 @@ AcDbText
   0
 TEXT
   5
-17E
+17F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13943,9 +13969,9 @@ AcDbText
   0
 TEXT
   5
-17F
+180
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -13983,9 +14009,9 @@ AcDbText
   0
 TEXT
   5
-180
+181
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14021,9 +14047,9 @@ AcDbText
   0
 TEXT
   5
-181
+182
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14059,9 +14085,9 @@ AcDbText
   0
 TEXT
   5
-182
+183
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14099,9 +14125,9 @@ AcDbText
   0
 TEXT
   5
-183
+184
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14139,9 +14165,9 @@ AcDbText
   0
 TEXT
   5
-184
+185
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14179,9 +14205,9 @@ AcDbText
   0
 TEXT
   5
-185
+186
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14219,9 +14245,9 @@ AcDbText
   0
 TEXT
   5
-186
+187
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14259,9 +14285,9 @@ AcDbText
   0
 TEXT
   5
-187
+188
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14297,9 +14323,9 @@ AcDbText
   0
 TEXT
   5
-188
+189
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14335,9 +14361,9 @@ AcDbText
   0
 TEXT
   5
-189
+18A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14375,9 +14401,9 @@ AcDbText
   0
 TEXT
   5
-18A
+18B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14415,9 +14441,9 @@ AcDbText
   0
 TEXT
   5
-18B
+18C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14455,9 +14481,9 @@ AcDbText
   0
 TEXT
   5
-18C
+18D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14495,9 +14521,9 @@ AcDbText
   0
 TEXT
   5
-18D
+18E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14535,9 +14561,9 @@ AcDbText
   0
 TEXT
   5
-18E
+18F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14573,9 +14599,9 @@ AcDbText
   0
 TEXT
   5
-18F
+190
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14611,9 +14637,9 @@ AcDbText
   0
 TEXT
   5
-190
+191
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14651,9 +14677,9 @@ AcDbText
   0
 TEXT
   5
-191
+192
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14691,9 +14717,9 @@ AcDbText
   0
 TEXT
   5
-192
+193
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14731,9 +14757,9 @@ AcDbText
   0
 TEXT
   5
-193
+194
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14771,9 +14797,9 @@ AcDbText
   0
 TEXT
   5
-194
+195
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14811,9 +14837,9 @@ AcDbText
   0
 TEXT
   5
-195
+196
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14849,9 +14875,9 @@ AcDbText
   0
 TEXT
   5
-196
+197
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14887,9 +14913,9 @@ AcDbText
   0
 TEXT
   5
-197
+198
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14927,9 +14953,9 @@ AcDbText
   0
 TEXT
   5
-198
+199
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -14967,9 +14993,9 @@ AcDbText
   0
 TEXT
   5
-199
+19A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15007,9 +15033,9 @@ AcDbText
   0
 TEXT
   5
-19A
+19B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15047,9 +15073,9 @@ AcDbText
   0
 TEXT
   5
-19B
+19C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15087,9 +15113,9 @@ AcDbText
   0
 TEXT
   5
-19C
+19D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15125,9 +15151,9 @@ AcDbText
   0
 TEXT
   5
-19D
+19E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15163,9 +15189,9 @@ AcDbText
   0
 TEXT
   5
-19E
+19F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15203,9 +15229,9 @@ AcDbText
   0
 TEXT
   5
-19F
+1A0
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15243,9 +15269,9 @@ AcDbText
   0
 TEXT
   5
-1A0
+1A1
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15283,9 +15309,9 @@ AcDbText
   0
 TEXT
   5
-1A1
+1A2
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15323,9 +15349,9 @@ AcDbText
   0
 TEXT
   5
-1A2
+1A3
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15363,9 +15389,9 @@ AcDbText
   0
 TEXT
   5
-1A3
+1A4
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15401,9 +15427,9 @@ AcDbText
   0
 TEXT
   5
-1A4
+1A5
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15439,9 +15465,9 @@ AcDbText
   0
 TEXT
   5
-1A5
+1A6
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15479,9 +15505,9 @@ AcDbText
   0
 TEXT
   5
-1A6
+1A7
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15519,9 +15545,9 @@ AcDbText
   0
 TEXT
   5
-1A7
+1A8
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15559,9 +15585,9 @@ AcDbText
   0
 TEXT
   5
-1A8
+1A9
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15599,9 +15625,9 @@ AcDbText
   0
 TEXT
   5
-1A9
+1AA
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15639,9 +15665,9 @@ AcDbText
   0
 TEXT
   5
-1AA
+1AB
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15677,37 +15703,9 @@ AcDbText
   0
 LINE
   5
-1AB
-330
-A1
-100
-AcDbEntity
- 67
-1
-  8
-E-TABLA
-370
-50
-100
-AcDbLine
- 10
-30.0
- 20
-435.4
- 30
-0.0
- 11
-264.0
- 21
-435.4
- 31
-0.0
-  0
-LINE
-  5
 1AC
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15721,13 +15719,13 @@ AcDbLine
  10
 30.0
  20
-428.2
+435.4
  30
 0.0
  11
 264.0
  21
-428.2
+435.4
  31
 0.0
   0
@@ -15735,7 +15733,7 @@ LINE
   5
 1AD
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15743,19 +15741,19 @@ AcDbEntity
   8
 E-TABLA
 370
-18
+50
 100
 AcDbLine
  10
 30.0
  20
-421.0
+428.2
  30
 0.0
  11
 264.0
  21
-421.0
+428.2
  31
 0.0
   0
@@ -15763,7 +15761,7 @@ LINE
   5
 1AE
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15777,13 +15775,13 @@ AcDbLine
  10
 30.0
  20
-413.79999999999995
+421.0
  30
 0.0
  11
 264.0
  21
-413.79999999999995
+421.0
  31
 0.0
   0
@@ -15791,7 +15789,7 @@ LINE
   5
 1AF
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15805,13 +15803,13 @@ AcDbLine
  10
 30.0
  20
-406.59999999999997
+413.79999999999995
  30
 0.0
  11
 264.0
  21
-406.59999999999997
+413.79999999999995
  31
 0.0
   0
@@ -15819,7 +15817,7 @@ LINE
   5
 1B0
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15833,13 +15831,13 @@ AcDbLine
  10
 30.0
  20
-399.4
+406.59999999999997
  30
 0.0
  11
 264.0
  21
-399.4
+406.59999999999997
  31
 0.0
   0
@@ -15847,7 +15845,7 @@ LINE
   5
 1B1
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15861,13 +15859,13 @@ AcDbLine
  10
 30.0
  20
-392.2
+399.4
  30
 0.0
  11
 264.0
  21
-392.2
+399.4
  31
 0.0
   0
@@ -15875,7 +15873,35 @@ LINE
   5
 1B2
 330
-A1
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-TABLA
+370
+18
+100
+AcDbLine
+ 10
+30.0
+ 20
+392.2
+ 30
+0.0
+ 11
+264.0
+ 21
+392.2
+ 31
+0.0
+  0
+LINE
+  5
+1B3
+330
+A2
 100
 AcDbEntity
  67
@@ -15901,9 +15927,9 @@ AcDbLine
   0
 LINE
   5
-1B3
+1B4
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15922,34 +15948,6 @@ AcDbLine
 0.0
  11
 264.0
- 21
-377.79999999999995
- 31
-0.0
-  0
-LINE
-  5
-1B4
-330
-A1
-100
-AcDbEntity
- 67
-1
-  8
-E-TABLA
-370
-50
-100
-AcDbLine
- 10
-30.0
- 20
-435.4
- 30
-0.0
- 11
-30.0
  21
 377.79999999999995
  31
@@ -15959,7 +15957,7 @@ LINE
   5
 1B5
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15967,17 +15965,17 @@ AcDbEntity
   8
 E-TABLA
 370
-18
+50
 100
 AcDbLine
  10
-70.0
+30.0
  20
 435.4
  30
 0.0
  11
-70.0
+30.0
  21
 377.79999999999995
  31
@@ -15987,7 +15985,7 @@ LINE
   5
 1B6
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -15999,13 +15997,13 @@ E-TABLA
 100
 AcDbLine
  10
-102.0
+70.0
  20
 435.4
  30
 0.0
  11
-102.0
+70.0
  21
 377.79999999999995
  31
@@ -16015,7 +16013,7 @@ LINE
   5
 1B7
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16027,13 +16025,13 @@ E-TABLA
 100
 AcDbLine
  10
-134.0
+102.0
  20
 435.4
  30
 0.0
  11
-134.0
+102.0
  21
 377.79999999999995
  31
@@ -16043,7 +16041,7 @@ LINE
   5
 1B8
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16055,13 +16053,13 @@ E-TABLA
 100
 AcDbLine
  10
-166.0
+134.0
  20
 435.4
  30
 0.0
  11
-166.0
+134.0
  21
 377.79999999999995
  31
@@ -16071,7 +16069,7 @@ LINE
   5
 1B9
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16083,13 +16081,13 @@ E-TABLA
 100
 AcDbLine
  10
-198.0
+166.0
  20
 435.4
  30
 0.0
  11
-198.0
+166.0
  21
 377.79999999999995
  31
@@ -16099,7 +16097,35 @@ LINE
   5
 1BA
 330
-A1
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-TABLA
+370
+18
+100
+AcDbLine
+ 10
+198.0
+ 20
+435.4
+ 30
+0.0
+ 11
+198.0
+ 21
+377.79999999999995
+ 31
+0.0
+  0
+LINE
+  5
+1BB
+330
+A2
 100
 AcDbEntity
  67
@@ -16125,9 +16151,9 @@ AcDbLine
   0
 LINE
   5
-1BB
+1BC
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16153,9 +16179,9 @@ AcDbLine
   0
 TEXT
   5
-1BC
+1BD
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16193,9 +16219,9 @@ AcDbText
   0
 TEXT
   5
-1BD
+1BE
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16233,9 +16259,9 @@ AcDbText
   0
 TEXT
   5
-1BE
+1BF
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16273,9 +16299,9 @@ AcDbText
   0
 TEXT
   5
-1BF
+1C0
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16313,9 +16339,9 @@ AcDbText
   0
 TEXT
   5
-1C0
+1C1
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16353,9 +16379,9 @@ AcDbText
   0
 TEXT
   5
-1C1
+1C2
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16393,9 +16419,9 @@ AcDbText
   0
 TEXT
   5
-1C2
+1C3
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16433,9 +16459,9 @@ AcDbText
   0
 TEXT
   5
-1C3
+1C4
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16471,49 +16497,9 @@ AcDbText
   0
 TEXT
   5
-1C4
-330
-A1
-100
-AcDbEntity
- 67
-1
-  8
-E-TABLA
-100
-AcDbText
- 10
-86.0
- 20
-424.59999999999997
- 30
-0.0
- 40
-2.4
-  1
-—
-  7
-ARIAL
- 41
-0.85
- 72
-1
- 11
-86.0
- 21
-424.59999999999997
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
 1C5
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16523,7 +16509,7 @@ E-TABLA
 100
 AcDbText
  10
-118.0
+86.0
  20
 424.59999999999997
  30
@@ -16539,7 +16525,7 @@ ARIAL
  72
 1
  11
-118.0
+86.0
  21
 424.59999999999997
  31
@@ -16553,7 +16539,47 @@ TEXT
   5
 1C6
 330
-A1
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-TABLA
+100
+AcDbText
+ 10
+118.0
+ 20
+424.59999999999997
+ 30
+0.0
+ 40
+2.4
+  1
+—
+  7
+ARIAL
+ 41
+0.85
+ 72
+1
+ 11
+118.0
+ 21
+424.59999999999997
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+1C7
+330
+A2
 100
 AcDbEntity
  67
@@ -16591,9 +16617,9 @@ AcDbText
   0
 TEXT
   5
-1C7
+1C8
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16631,9 +16657,9 @@ AcDbText
   0
 TEXT
   5
-1C8
+1C9
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16671,9 +16697,9 @@ AcDbText
   0
 TEXT
   5
-1C9
+1CA
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16711,9 +16737,9 @@ AcDbText
   0
 TEXT
   5
-1CA
+1CB
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16749,9 +16775,9 @@ AcDbText
   0
 TEXT
   5
-1CB
+1CC
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16789,9 +16815,9 @@ AcDbText
   0
 TEXT
   5
-1CC
+1CD
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16829,9 +16855,9 @@ AcDbText
   0
 TEXT
   5
-1CD
+1CE
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16869,9 +16895,9 @@ AcDbText
   0
 TEXT
   5
-1CE
+1CF
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16909,9 +16935,9 @@ AcDbText
   0
 TEXT
   5
-1CF
+1D0
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16949,9 +16975,9 @@ AcDbText
   0
 TEXT
   5
-1D0
+1D1
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -16989,9 +17015,9 @@ AcDbText
   0
 TEXT
   5
-1D1
+1D2
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17027,9 +17053,9 @@ AcDbText
   0
 TEXT
   5
-1D2
+1D3
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17067,9 +17093,9 @@ AcDbText
   0
 TEXT
   5
-1D3
+1D4
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17107,9 +17133,9 @@ AcDbText
   0
 TEXT
   5
-1D4
+1D5
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17147,9 +17173,9 @@ AcDbText
   0
 TEXT
   5
-1D5
+1D6
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17187,9 +17213,9 @@ AcDbText
   0
 TEXT
   5
-1D6
+1D7
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17227,9 +17253,9 @@ AcDbText
   0
 TEXT
   5
-1D7
+1D8
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17267,9 +17293,9 @@ AcDbText
   0
 TEXT
   5
-1D8
+1D9
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17305,9 +17331,9 @@ AcDbText
   0
 TEXT
   5
-1D9
+1DA
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17345,9 +17371,9 @@ AcDbText
   0
 TEXT
   5
-1DA
+1DB
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17385,9 +17411,9 @@ AcDbText
   0
 TEXT
   5
-1DB
+1DC
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17425,49 +17451,9 @@ AcDbText
   0
 TEXT
   5
-1DC
-330
-A1
-100
-AcDbEntity
- 67
-1
-  8
-E-TABLA
-100
-AcDbText
- 10
-182.0
- 20
-403.0
- 30
-0.0
- 40
-2.4
-  1
-—
-  7
-ARIAL
- 41
-0.85
- 72
-1
- 11
-182.0
- 21
-403.0
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
 1DD
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17477,7 +17463,7 @@ E-TABLA
 100
 AcDbText
  10
-214.0
+182.0
  20
 403.0
  30
@@ -17493,7 +17479,7 @@ ARIAL
  72
 1
  11
-214.0
+182.0
  21
 403.0
  31
@@ -17507,7 +17493,47 @@ TEXT
   5
 1DE
 330
-A1
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-TABLA
+100
+AcDbText
+ 10
+214.0
+ 20
+403.0
+ 30
+0.0
+ 40
+2.4
+  1
+—
+  7
+ARIAL
+ 41
+0.85
+ 72
+1
+ 11
+214.0
+ 21
+403.0
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+1DF
+330
+A2
 100
 AcDbEntity
  67
@@ -17545,9 +17571,9 @@ AcDbText
   0
 TEXT
   5
-1DF
+1E0
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17583,9 +17609,9 @@ AcDbText
   0
 TEXT
   5
-1E0
+1E1
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17612,46 +17638,6 @@ ARIAL
 1
  11
 86.0
- 21
-395.79999999999995
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
-1E1
-330
-A1
-100
-AcDbEntity
- 67
-1
-  8
-E-TABLA
-100
-AcDbText
- 10
-118.0
- 20
-395.79999999999995
- 30
-0.0
- 40
-2.4
-  1
-338.8
-  7
-ARIAL
- 41
-0.85
- 72
-1
- 11
-118.0
  21
 395.79999999999995
  31
@@ -17665,7 +17651,7 @@ TEXT
   5
 1E2
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17675,7 +17661,7 @@ E-TABLA
 100
 AcDbText
  10
-150.0
+118.0
  20
 395.79999999999995
  30
@@ -17683,7 +17669,7 @@ AcDbText
  40
 2.4
   1
-—
+338.8
   7
 ARIAL
  41
@@ -17691,7 +17677,7 @@ ARIAL
  72
 1
  11
-150.0
+118.0
  21
 395.79999999999995
  31
@@ -17705,7 +17691,7 @@ TEXT
   5
 1E3
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17715,7 +17701,7 @@ E-TABLA
 100
 AcDbText
  10
-182.0
+150.0
  20
 395.79999999999995
  30
@@ -17731,7 +17717,7 @@ ARIAL
  72
 1
  11
-182.0
+150.0
  21
 395.79999999999995
  31
@@ -17745,7 +17731,47 @@ TEXT
   5
 1E4
 330
-A1
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-TABLA
+100
+AcDbText
+ 10
+182.0
+ 20
+395.79999999999995
+ 30
+0.0
+ 40
+2.4
+  1
+—
+  7
+ARIAL
+ 41
+0.85
+ 72
+1
+ 11
+182.0
+ 21
+395.79999999999995
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+1E5
+330
+A2
 100
 AcDbEntity
  67
@@ -17783,9 +17809,9 @@ AcDbText
   0
 TEXT
   5
-1E5
+1E6
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17823,9 +17849,9 @@ AcDbText
   0
 TEXT
   5
-1E6
+1E7
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17861,9 +17887,9 @@ AcDbText
   0
 TEXT
   5
-1E7
+1E8
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17901,9 +17927,9 @@ AcDbText
   0
 TEXT
   5
-1E8
+1E9
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17941,9 +17967,9 @@ AcDbText
   0
 TEXT
   5
-1E9
+1EA
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -17981,9 +18007,9 @@ AcDbText
   0
 TEXT
   5
-1EA
+1EB
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18021,9 +18047,9 @@ AcDbText
   0
 TEXT
   5
-1EB
+1EC
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18061,9 +18087,9 @@ AcDbText
   0
 TEXT
   5
-1EC
+1ED
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18101,9 +18127,9 @@ AcDbText
   0
 TEXT
   5
-1ED
+1EE
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18139,9 +18165,9 @@ AcDbText
   0
 TEXT
   5
-1EE
+1EF
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18179,9 +18205,9 @@ AcDbText
   0
 TEXT
   5
-1EF
+1F0
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18219,9 +18245,9 @@ AcDbText
   0
 TEXT
   5
-1F0
+1F1
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18259,9 +18285,9 @@ AcDbText
   0
 TEXT
   5
-1F1
+1F2
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18299,9 +18325,9 @@ AcDbText
   0
 TEXT
   5
-1F2
+1F3
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18339,9 +18365,9 @@ AcDbText
   0
 TEXT
   5
-1F3
+1F4
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18379,9 +18405,9 @@ AcDbText
   0
 TEXT
   5
-1F4
+1F5
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18417,37 +18443,9 @@ AcDbText
   0
 LINE
   5
-1F5
-330
-A1
-100
-AcDbEntity
- 67
-1
-  8
-E-TABLA
-370
-50
-100
-AcDbLine
- 10
-30.0
- 20
-361.79999999999995
- 30
-0.0
- 11
-186.0
- 21
-361.79999999999995
- 31
-0.0
-  0
-LINE
-  5
 1F6
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18461,13 +18459,13 @@ AcDbLine
  10
 30.0
  20
-354.59999999999997
+361.79999999999995
  30
 0.0
  11
 186.0
  21
-354.59999999999997
+361.79999999999995
  31
 0.0
   0
@@ -18475,7 +18473,7 @@ LINE
   5
 1F7
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18483,19 +18481,19 @@ AcDbEntity
   8
 E-TABLA
 370
-18
+50
 100
 AcDbLine
  10
 30.0
  20
-347.4
+354.59999999999997
  30
 0.0
  11
 186.0
  21
-347.4
+354.59999999999997
  31
 0.0
   0
@@ -18503,7 +18501,7 @@ LINE
   5
 1F8
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18517,13 +18515,13 @@ AcDbLine
  10
 30.0
  20
-340.19999999999993
+347.4
  30
 0.0
  11
 186.0
  21
-340.19999999999993
+347.4
  31
 0.0
   0
@@ -18531,7 +18529,7 @@ LINE
   5
 1F9
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18545,13 +18543,13 @@ AcDbLine
  10
 30.0
  20
-332.99999999999994
+340.19999999999993
  30
 0.0
  11
 186.0
  21
-332.99999999999994
+340.19999999999993
  31
 0.0
   0
@@ -18559,7 +18557,7 @@ LINE
   5
 1FA
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18573,13 +18571,13 @@ AcDbLine
  10
 30.0
  20
-325.79999999999995
+332.99999999999994
  30
 0.0
  11
 186.0
  21
-325.79999999999995
+332.99999999999994
  31
 0.0
   0
@@ -18587,7 +18585,7 @@ LINE
   5
 1FB
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18601,13 +18599,13 @@ AcDbLine
  10
 30.0
  20
-318.59999999999997
+325.79999999999995
  30
 0.0
  11
 186.0
  21
-318.59999999999997
+325.79999999999995
  31
 0.0
   0
@@ -18615,7 +18613,7 @@ LINE
   5
 1FC
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18629,13 +18627,13 @@ AcDbLine
  10
 30.0
  20
-311.4
+318.59999999999997
  30
 0.0
  11
 186.0
  21
-311.4
+318.59999999999997
  31
 0.0
   0
@@ -18643,7 +18641,35 @@ LINE
   5
 1FD
 330
-A1
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-TABLA
+370
+18
+100
+AcDbLine
+ 10
+30.0
+ 20
+311.4
+ 30
+0.0
+ 11
+186.0
+ 21
+311.4
+ 31
+0.0
+  0
+LINE
+  5
+1FE
+330
+A2
 100
 AcDbEntity
  67
@@ -18669,9 +18695,9 @@ AcDbLine
   0
 LINE
   5
-1FE
+1FF
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18690,34 +18716,6 @@ AcDbLine
 0.0
  11
 186.0
- 21
-296.99999999999994
- 31
-0.0
-  0
-LINE
-  5
-1FF
-330
-A1
-100
-AcDbEntity
- 67
-1
-  8
-E-TABLA
-370
-50
-100
-AcDbLine
- 10
-30.0
- 20
-361.79999999999995
- 30
-0.0
- 11
-30.0
  21
 296.99999999999994
  31
@@ -18727,7 +18725,35 @@ LINE
   5
 200
 330
-A1
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-TABLA
+370
+50
+100
+AcDbLine
+ 10
+30.0
+ 20
+361.79999999999995
+ 30
+0.0
+ 11
+30.0
+ 21
+296.99999999999994
+ 31
+0.0
+  0
+LINE
+  5
+201
+330
+A2
 100
 AcDbEntity
  67
@@ -18753,9 +18779,9 @@ AcDbLine
   0
 LINE
   5
-201
+202
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18781,9 +18807,9 @@ AcDbLine
   0
 TEXT
   5
-202
+203
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18821,9 +18847,9 @@ AcDbText
   0
 TEXT
   5
-203
+204
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18861,9 +18887,9 @@ AcDbText
   0
 TEXT
   5
-204
+205
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18899,9 +18925,9 @@ AcDbText
   0
 TEXT
   5
-205
+206
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18939,9 +18965,9 @@ AcDbText
   0
 TEXT
   5
-206
+207
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -18977,9 +19003,9 @@ AcDbText
   0
 TEXT
   5
-207
+208
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19017,9 +19043,9 @@ AcDbText
   0
 TEXT
   5
-208
+209
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19055,9 +19081,9 @@ AcDbText
   0
 TEXT
   5
-209
+20A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19095,9 +19121,9 @@ AcDbText
   0
 TEXT
   5
-20A
+20B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19133,9 +19159,9 @@ AcDbText
   0
 TEXT
   5
-20B
+20C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19173,9 +19199,9 @@ AcDbText
   0
 TEXT
   5
-20C
+20D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19211,9 +19237,9 @@ AcDbText
   0
 TEXT
   5
-20D
+20E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19251,9 +19277,9 @@ AcDbText
   0
 TEXT
   5
-20E
+20F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19289,9 +19315,9 @@ AcDbText
   0
 TEXT
   5
-20F
+210
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19329,9 +19355,9 @@ AcDbText
   0
 TEXT
   5
-210
+211
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19367,9 +19393,9 @@ AcDbText
   0
 TEXT
   5
-211
+212
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19407,9 +19433,9 @@ AcDbText
   0
 TEXT
   5
-212
+213
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19445,9 +19471,9 @@ AcDbText
   0
 TEXT
   5
-213
+214
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19485,9 +19511,9 @@ AcDbText
   0
 TEXT
   5
-214
+215
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19523,9 +19549,9 @@ AcDbText
   0
 TEXT
   5
-215
+216
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19561,37 +19587,9 @@ AcDbText
   0
 LINE
   5
-216
-330
-A1
-100
-AcDbEntity
- 67
-1
-  8
-E-TABLA
-370
-50
-100
-AcDbLine
- 10
-300.0
- 20
-435.4
- 30
-0.0
- 11
-510.0
- 21
-435.4
- 31
-0.0
-  0
-LINE
-  5
 217
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19605,13 +19603,13 @@ AcDbLine
  10
 300.0
  20
-428.2
+435.4
  30
 0.0
  11
 510.0
  21
-428.2
+435.4
  31
 0.0
   0
@@ -19619,7 +19617,7 @@ LINE
   5
 218
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19627,19 +19625,19 @@ AcDbEntity
   8
 E-TABLA
 370
-18
+50
 100
 AcDbLine
  10
 300.0
  20
-421.0
+428.2
  30
 0.0
  11
 510.0
  21
-421.0
+428.2
  31
 0.0
   0
@@ -19647,7 +19645,7 @@ LINE
   5
 219
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19661,13 +19659,13 @@ AcDbLine
  10
 300.0
  20
-413.79999999999995
+421.0
  30
 0.0
  11
 510.0
  21
-413.79999999999995
+421.0
  31
 0.0
   0
@@ -19675,7 +19673,7 @@ LINE
   5
 21A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19689,13 +19687,13 @@ AcDbLine
  10
 300.0
  20
-406.59999999999997
+413.79999999999995
  30
 0.0
  11
 510.0
  21
-406.59999999999997
+413.79999999999995
  31
 0.0
   0
@@ -19703,7 +19701,7 @@ LINE
   5
 21B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19717,13 +19715,13 @@ AcDbLine
  10
 300.0
  20
-399.4
+406.59999999999997
  30
 0.0
  11
 510.0
  21
-399.4
+406.59999999999997
  31
 0.0
   0
@@ -19731,7 +19729,35 @@ LINE
   5
 21C
 330
-A1
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-TABLA
+370
+18
+100
+AcDbLine
+ 10
+300.0
+ 20
+399.4
+ 30
+0.0
+ 11
+510.0
+ 21
+399.4
+ 31
+0.0
+  0
+LINE
+  5
+21D
+330
+A2
 100
 AcDbEntity
  67
@@ -19757,9 +19783,9 @@ AcDbLine
   0
 LINE
   5
-21D
+21E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19778,34 +19804,6 @@ AcDbLine
 0.0
  11
 510.0
- 21
-385.0
- 31
-0.0
-  0
-LINE
-  5
-21E
-330
-A1
-100
-AcDbEntity
- 67
-1
-  8
-E-TABLA
-370
-50
-100
-AcDbLine
- 10
-300.0
- 20
-435.4
- 30
-0.0
- 11
-300.0
  21
 385.0
  31
@@ -19815,7 +19813,7 @@ LINE
   5
 21F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19823,17 +19821,17 @@ AcDbEntity
   8
 E-TABLA
 370
-18
+50
 100
 AcDbLine
  10
-352.0
+300.0
  20
 435.4
  30
 0.0
  11
-352.0
+300.0
  21
 385.0
  31
@@ -19843,7 +19841,7 @@ LINE
   5
 220
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19855,13 +19853,13 @@ E-TABLA
 100
 AcDbLine
  10
-378.0
+352.0
  20
 435.4
  30
 0.0
  11
-378.0
+352.0
  21
 385.0
  31
@@ -19871,7 +19869,7 @@ LINE
   5
 221
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19883,13 +19881,13 @@ E-TABLA
 100
 AcDbLine
  10
-404.0
+378.0
  20
 435.4
  30
 0.0
  11
-404.0
+378.0
  21
 385.0
  31
@@ -19899,7 +19897,7 @@ LINE
   5
 222
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19911,13 +19909,13 @@ E-TABLA
 100
 AcDbLine
  10
-430.0
+404.0
  20
 435.4
  30
 0.0
  11
-430.0
+404.0
  21
 385.0
  31
@@ -19927,7 +19925,7 @@ LINE
   5
 223
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -19939,13 +19937,13 @@ E-TABLA
 100
 AcDbLine
  10
-456.0
+430.0
  20
 435.4
  30
 0.0
  11
-456.0
+430.0
  21
 385.0
  31
@@ -19955,7 +19953,35 @@ LINE
   5
 224
 330
-A1
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-TABLA
+370
+18
+100
+AcDbLine
+ 10
+456.0
+ 20
+435.4
+ 30
+0.0
+ 11
+456.0
+ 21
+385.0
+ 31
+0.0
+  0
+LINE
+  5
+225
+330
+A2
 100
 AcDbEntity
  67
@@ -19981,9 +20007,9 @@ AcDbLine
   0
 LINE
   5
-225
+226
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20009,9 +20035,9 @@ AcDbLine
   0
 TEXT
   5
-226
+227
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20049,9 +20075,9 @@ AcDbText
   0
 TEXT
   5
-227
+228
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20089,9 +20115,9 @@ AcDbText
   0
 TEXT
   5
-228
+229
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20129,9 +20155,9 @@ AcDbText
   0
 TEXT
   5
-229
+22A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20169,9 +20195,9 @@ AcDbText
   0
 TEXT
   5
-22A
+22B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20209,9 +20235,9 @@ AcDbText
   0
 TEXT
   5
-22B
+22C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20249,9 +20275,9 @@ AcDbText
   0
 TEXT
   5
-22C
+22D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20289,9 +20315,9 @@ AcDbText
   0
 TEXT
   5
-22D
+22E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20327,9 +20353,9 @@ AcDbText
   0
 TEXT
   5
-22E
+22F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20367,9 +20393,9 @@ AcDbText
   0
 TEXT
   5
-22F
+230
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20407,9 +20433,9 @@ AcDbText
   0
 TEXT
   5
-230
+231
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20447,9 +20473,9 @@ AcDbText
   0
 TEXT
   5
-231
+232
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20487,9 +20513,9 @@ AcDbText
   0
 TEXT
   5
-232
+233
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20527,9 +20553,9 @@ AcDbText
   0
 TEXT
   5
-233
+234
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20567,9 +20593,9 @@ AcDbText
   0
 TEXT
   5
-234
+235
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20605,9 +20631,9 @@ AcDbText
   0
 TEXT
   5
-235
+236
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20645,9 +20671,9 @@ AcDbText
   0
 TEXT
   5
-236
+237
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20685,49 +20711,9 @@ AcDbText
   0
 TEXT
   5
-237
-330
-A1
-100
-AcDbEntity
- 67
-1
-  8
-E-TABLA
-100
-AcDbText
- 10
-417.0
- 20
-417.4
- 30
-0.0
- 40
-2.4
-  1
-—
-  7
-ARIAL
- 41
-0.85
- 72
-1
- 11
-417.0
- 21
-417.4
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
 238
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20737,7 +20723,7 @@ E-TABLA
 100
 AcDbText
  10
-443.0
+417.0
  20
 417.4
  30
@@ -20753,7 +20739,7 @@ ARIAL
  72
 1
  11
-443.0
+417.0
  21
 417.4
  31
@@ -20767,7 +20753,47 @@ TEXT
   5
 239
 330
-A1
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-TABLA
+100
+AcDbText
+ 10
+443.0
+ 20
+417.4
+ 30
+0.0
+ 40
+2.4
+  1
+—
+  7
+ARIAL
+ 41
+0.85
+ 72
+1
+ 11
+443.0
+ 21
+417.4
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+23A
+330
+A2
 100
 AcDbEntity
  67
@@ -20805,9 +20831,9 @@ AcDbText
   0
 TEXT
   5
-23A
+23B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20845,9 +20871,9 @@ AcDbText
   0
 TEXT
   5
-23B
+23C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20883,9 +20909,9 @@ AcDbText
   0
 TEXT
   5
-23C
+23D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20923,9 +20949,9 @@ AcDbText
   0
 TEXT
   5
-23D
+23E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -20963,9 +20989,9 @@ AcDbText
   0
 TEXT
   5
-23E
+23F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21003,9 +21029,9 @@ AcDbText
   0
 TEXT
   5
-23F
+240
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21043,9 +21069,9 @@ AcDbText
   0
 TEXT
   5
-240
+241
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21083,9 +21109,9 @@ AcDbText
   0
 TEXT
   5
-241
+242
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21123,9 +21149,9 @@ AcDbText
   0
 TEXT
   5
-242
+243
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21161,9 +21187,9 @@ AcDbText
   0
 TEXT
   5
-243
+244
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21201,9 +21227,9 @@ AcDbText
   0
 TEXT
   5
-244
+245
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21241,9 +21267,9 @@ AcDbText
   0
 TEXT
   5
-245
+246
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21281,9 +21307,9 @@ AcDbText
   0
 TEXT
   5
-246
+247
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21321,9 +21347,9 @@ AcDbText
   0
 TEXT
   5
-247
+248
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21361,9 +21387,9 @@ AcDbText
   0
 TEXT
   5
-248
+249
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21401,9 +21427,9 @@ AcDbText
   0
 TEXT
   5
-249
+24A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21439,9 +21465,9 @@ AcDbText
   0
 TEXT
   5
-24A
+24B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21479,9 +21505,9 @@ AcDbText
   0
 TEXT
   5
-24B
+24C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21519,9 +21545,9 @@ AcDbText
   0
 TEXT
   5
-24C
+24D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21559,9 +21585,9 @@ AcDbText
   0
 TEXT
   5
-24D
+24E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21599,9 +21625,9 @@ AcDbText
   0
 TEXT
   5
-24E
+24F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21639,9 +21665,9 @@ AcDbText
   0
 TEXT
   5
-24F
+250
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21679,9 +21705,9 @@ AcDbText
   0
 TEXT
   5
-250
+251
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21717,49 +21743,9 @@ AcDbText
   0
 TEXT
   5
-251
-330
-A1
-100
-AcDbEntity
- 67
-1
-  8
-E-TABLA
-100
-AcDbText
- 10
-365.0
- 20
-388.59999999999997
- 30
-0.0
- 40
-2.4
-  1
-—
-  7
-ARIAL
- 41
-0.85
- 72
-1
- 11
-365.0
- 21
-388.59999999999997
- 31
-0.0
-100
-AcDbText
- 73
-2
-  0
-TEXT
-  5
 252
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21769,7 +21755,7 @@ E-TABLA
 100
 AcDbText
  10
-391.0
+365.0
  20
 388.59999999999997
  30
@@ -21785,7 +21771,7 @@ ARIAL
  72
 1
  11
-391.0
+365.0
  21
 388.59999999999997
  31
@@ -21799,7 +21785,47 @@ TEXT
   5
 253
 330
-A1
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-TABLA
+100
+AcDbText
+ 10
+391.0
+ 20
+388.59999999999997
+ 30
+0.0
+ 40
+2.4
+  1
+—
+  7
+ARIAL
+ 41
+0.85
+ 72
+1
+ 11
+391.0
+ 21
+388.59999999999997
+ 31
+0.0
+100
+AcDbText
+ 73
+2
+  0
+TEXT
+  5
+254
+330
+A2
 100
 AcDbEntity
  67
@@ -21837,9 +21863,9 @@ AcDbText
   0
 TEXT
   5
-254
+255
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21877,9 +21903,9 @@ AcDbText
   0
 TEXT
   5
-255
+256
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21917,9 +21943,9 @@ AcDbText
   0
 TEXT
   5
-256
+257
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21957,9 +21983,9 @@ AcDbText
   0
 TEXT
   5
-257
+258
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -21995,9 +22021,9 @@ AcDbText
   0
 TEXT
   5
-258
+259
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22033,9 +22059,9 @@ AcDbText
   0
 TEXT
   5
-259
+25A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22071,9 +22097,9 @@ AcDbText
   0
 TEXT
   5
-25A
+25B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22109,9 +22135,9 @@ AcDbText
   0
 TEXT
   5
-25B
+25C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22147,9 +22173,9 @@ AcDbText
   0
 TEXT
   5
-25C
+25D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22185,9 +22211,9 @@ AcDbText
   0
 TEXT
   5
-25D
+25E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22223,9 +22249,9 @@ AcDbText
   0
 TEXT
   5
-25E
+25F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22261,9 +22287,9 @@ AcDbText
   0
 TEXT
   5
-25F
+260
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22299,9 +22325,9 @@ AcDbText
   0
 TEXT
   5
-260
+261
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22337,9 +22363,9 @@ AcDbText
   0
 TEXT
   5
-261
+262
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22375,9 +22401,9 @@ AcDbText
   0
 TEXT
   5
-262
+263
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22413,9 +22439,9 @@ AcDbText
   0
 TEXT
   5
-263
+264
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22451,9 +22477,9 @@ AcDbText
   0
 TEXT
   5
-264
+265
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22489,9 +22515,9 @@ AcDbText
   0
 TEXT
   5
-265
+266
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22527,9 +22553,9 @@ AcDbText
   0
 TEXT
   5
-266
+267
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22565,9 +22591,9 @@ AcDbText
   0
 TEXT
   5
-267
+268
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22603,9 +22629,9 @@ AcDbText
   0
 TEXT
   5
-268
+269
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22641,9 +22667,9 @@ AcDbText
   0
 TEXT
   5
-269
+26A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22679,9 +22705,9 @@ AcDbText
   0
 TEXT
   5
-26A
+26B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22717,9 +22743,9 @@ AcDbText
   0
 TEXT
   5
-26B
+26C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22755,9 +22781,9 @@ AcDbText
   0
 TEXT
   5
-26C
+26D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22793,9 +22819,9 @@ AcDbText
   0
 LWPOLYLINE
   5
-26D
+26E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22829,37 +22855,9 @@ AcDbPolyline
   0
 LINE
   5
-26E
-330
-A1
-100
-AcDbEntity
- 67
-1
-  8
-E-MARCO
-370
-25
-100
-AcDbLine
- 10
-631.0
- 20
-54.0
- 30
-0.0
- 11
-831.0
- 21
-54.0
- 31
-0.0
-  0
-LINE
-  5
 26F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22873,13 +22871,13 @@ AcDbLine
  10
 631.0
  20
-40.0
+54.0
  30
 0.0
  11
 831.0
  21
-40.0
+54.0
  31
 0.0
   0
@@ -22887,7 +22885,35 @@ LINE
   5
 270
 330
-A1
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-MARCO
+370
+25
+100
+AcDbLine
+ 10
+631.0
+ 20
+40.0
+ 30
+0.0
+ 11
+831.0
+ 21
+40.0
+ 31
+0.0
+  0
+LINE
+  5
+271
+330
+A2
 100
 AcDbEntity
  67
@@ -22913,9 +22939,9 @@ AcDbLine
   0
 LINE
   5
-271
+272
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22941,9 +22967,9 @@ AcDbLine
   0
 LINE
   5
-272
+273
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -22969,9 +22995,9 @@ AcDbLine
   0
 TEXT
   5
-273
+274
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -23007,9 +23033,9 @@ AcDbText
   0
 TEXT
   5
-274
+275
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -23045,9 +23071,9 @@ AcDbText
   0
 TEXT
   5
-275
+276
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -23083,9 +23109,9 @@ AcDbText
   0
 TEXT
   5
-276
+277
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -23121,9 +23147,9 @@ AcDbText
   0
 TEXT
   5
-277
+278
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -23159,9 +23185,9 @@ AcDbText
   0
 TEXT
   5
-278
+279
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -23197,9 +23223,9 @@ AcDbText
   0
 TEXT
   5
-279
+27A
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -23237,9 +23263,9 @@ AcDbText
   0
 TEXT
   5
-27A
+27B
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -23277,9 +23303,9 @@ AcDbText
   0
 TEXT
   5
-27B
+27C
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -23315,9 +23341,9 @@ AcDbText
   0
 TEXT
   5
-27C
+27D
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -23353,9 +23379,9 @@ AcDbText
   0
 TEXT
   5
-27D
+27E
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -23391,9 +23417,9 @@ AcDbText
   0
 TEXT
   5
-27E
+27F
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -23429,9 +23455,9 @@ AcDbText
   0
 TEXT
   5
-27F
+280
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -23467,9 +23493,9 @@ AcDbText
   0
 TEXT
   5
-280
+281
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -23505,9 +23531,9 @@ AcDbText
   0
 TEXT
   5
-281
+282
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -23543,9 +23569,9 @@ AcDbText
   0
 TEXT
   5
-282
+283
 330
-A1
+A2
 100
 AcDbEntity
  67
@@ -23581,9 +23607,9 @@ AcDbText
   0
 ENDBLK
   5
-A3
+A4
 330
-A1
+A2
 100
 AcDbEntity
   8
@@ -23701,7 +23727,7 @@ Layout1
   3
 E-10
 350
-A4
+A5
   0
 DICTIONARY
   5
@@ -24691,7 +24717,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-286
+287
   0
 DICTIONARYVAR
   5
@@ -24703,7 +24729,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-27T02:20:45.852271+00:00
+1.4.4 @ 2026-09-27T02:37:43.438641+00:00
   0
 VISUALSTYLE
   5
@@ -31257,7 +31283,7 @@ strokes_ogs.tif
   0
 LAYOUT
   5
-A4
+A5
 330
 D
 100
@@ -31379,13 +31405,13 @@ E-10
  76
 1
 330
-A1
+A2
 331
-A5
+A6
   0
 DICTIONARYVAR
   5
-286
+287
 330
 2D
 100
@@ -31393,7 +31419,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-27T02:20:45.910909+00:00
+1.4.4 @ 2026-09-27T02:37:43.493308+00:00
   0
 ENDSEC
   0
