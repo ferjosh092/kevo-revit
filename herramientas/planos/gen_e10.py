@@ -96,11 +96,11 @@ for t, e in E.items():
     if v is None:
         continue
     cat = {"zapata": "Zapatas y cimiento de escalera", "columna": "Columnas", "viga": "Vigas (cimentación y entrepiso)",
-           "losa": "Losas (modelo macizo h=0.20)", "escalera": "Escalera", "falsopiso": "Falso piso"}.get(e["cat"], e["cat"])
+           "losa": "Losas (maciza h=0.20 en el modelo)", "escalera": "Escalera", "falsopiso": "Falso piso"}.get(e["cat"], e["cat"])
     vol[cat] += v
 area_losas = sum(e["psets"].get("Cotas", {}).get("Área", 0) for e in E.values() if e["cat"] == "losa")
 rv = [["ELEMENTO", "CONCRETO (m³)"]]
-for k in ["Zapatas y cimiento de escalera", "Columnas", "Vigas (cimentación y entrepiso)", "Losas (modelo macizo h=0.20)", "Escalera", "Falso piso"]:
+for k in ["Zapatas y cimiento de escalera", "Columnas", "Vigas (cimentación y entrepiso)", "Losas (maciza h=0.20 en el modelo)", "Escalera", "Falso piso"]:
     rv.append([k, f"{vol[k]:.2f}"])
 alig = area_losas * (0.05 + 0.15 * 0.10 / 0.40)
 rv.append([f"Losa aligerada real (estimado: {area_losas:.1f} m² x 0.0875)", f"{alig:.2f}"])
@@ -153,11 +153,13 @@ obs = ["OBSERVACIONES DEL MODELO (revisión automática del IFC)",
        "A. VIGAS: el nodo 12 desplazó capas de acero longitudinal hacia el interior para evitar choques: 1ra capa",
        "   2-3.5 cm; capas siguientes hasta 25 cm (sup. de vigas de entrepiso a media altura). En E-01 y E-08 se",
        "   dibujan en su posición de diseño. Corregir el nodo 12 (no desplazar la capa entera; resolver cruces en el nudo).",
-       "B. LOSAS: modeladas macizas (casetones no modelados). Viguetas paralelas a los ejes N (el docstring del",
-       "   nodo 14 dice ejes A). Malla Ø1/4\" a la misma cota que bastones: ~5 mm de interferencia en cruces.",
+       "B. LOSAS: maciza de 0.20 en el modelo por criterio (aligerado representado con su acero, metrado aparte).",
+       "   Malla Ø1/4\" a la misma cota que los bastones: ~5 mm de interferencia en cruces (ajustar en obra).",
        "C. VIGA CHATA: barras superiores 3.3 cm bajo la esquina del estribo; una barra cruza la rama del estribo.",
        "D. LÍMITE DE PROPIEDAD: zapatas y columnas del eje N-4 lo sobrepasan hasta 0.60 m (verificar levantamiento).",
-       "E. Revit exporta el peso del acero en 0: los pesos de esta lámina se calculan con longitudes y kg/m nominales."]
+       "E. ESCALERA: acero modelado con 2.0 cm libres (mínimo de proyecto 2.5 cm; 5 cm en el cimiento); 6 mechas",
+       "   reemplazadas por 5 centradas. Se dibuja y metra corregido (E-09); ajustar el modelo con el nodo 13.",
+       "F. Revit exporta el peso del acero en 0: los pesos de esta lámina se calculan con longitudes y kg/m nominales."]
 notes(ps, 300, 175, obs, h=2.3, lead=4.6, title_h=2.8)
 
 title_block(ps, "E-10", ["PLANILLA DE ACERO, METRADOS,", "ESPECIFICACIONES Y OBSERVACIONES"])

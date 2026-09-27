@@ -10,6 +10,8 @@ from sheetcommon import *
 from sheetlib import View, section_mark, ptext, view_title, add_vp, table
 
 M = load_model()
+from stair_fix import load_corrected
+M["bars"], STAIR = load_corrected(M)       # acero corregido a recubrimientos de proyecto; 5 mechas centradas
 E = M["elements"]
 GU, GV = M["GU"], M["GV"]
 LV = M["levels"]
@@ -677,11 +679,13 @@ L(V, pt_on(bSc, u=6.72), (6.55, 0.68), f'{bSc["code"]}: sup.', side=-1)
 L(V, dot_of(selC, h11, 6.496), (7.00, 0.14), f'{bars_of(h11, "T")[0]["code"]}: transv.', side=1)
 V.text("CIMIENTO", ((cb0[0] + cb1[0]) / 2, -0.78), 2.0, "E-TITULO")
 V.text(f"{cb1[1] - cb0[1]:.2f} x {cb1[0] - cb0[0]:.2f} x {cb1[2] - cb0[2]:.2f}", ((cb0[0] + cb1[0]) / 2, -0.86), 1.6, "E-TEXTO")
-V.text("rec. 7.5 cm", (u_m + 0.02, -0.95), 1.4, "E-ACERO-TXT", "MIDDLE_LEFT")
+V.text(f"mechas a {u_m - cb0[0]:.2f} de la cara posterior", (cb1[0] + 0.06, -0.60), 1.5, "E-ACERO-TXT", "MIDDLE_LEFT")
+V.text("CORREGIR POSICIÓN DE", (cb1[0] + 0.06, -0.72), 2.0, "E-TITULO", "MIDDLE_LEFT")
+V.text("MECHAS SEGÚN DETALLE", (cb1[0] + 0.06, -0.80), 2.0, "E-TITULO", "MIDDLE_LEFT")
 V.text("falso piso", (7.25, -0.05), 1.4, "E-TEXTO")
 
 # planta del cimiento
-CPW = (5.62, -0.30, 7.40, 1.66)
+CPW = (5.62, -0.30, 7.40, 1.82)
 CP = View(doc, 20, (0, 125))
 V = CP
 V.hatch([(6.1, -0.15), (6.7, -0.15), (6.7, 0.15), (6.1, 0.15)], "E-COLUMNA-ACH")
@@ -703,7 +707,8 @@ V.vdim_chain([cb0[1]] + vm + [cb1[1]], cb0[0], 5.74, texts=[f"{b_ - a_:.2f}" for
 V.dim((cb1[0], cb0[1]), (cb1[0], cb1[1]), (6.86, cb0[1]), 90)
 V.dim((cb0[0], cb1[1]), (cb1[0], cb1[1]), (cb0[0], cb1[1] + 6 * V.m), 0)
 V.dim((cb0[0], cb1[1]), (f1["u0"], cb1[1]), (cb0[0], cb1[1] + 11 * V.m), 0)
-L(V, (vm[-1] * 0 + mech[-1]["pl"][0, 0], vm[-1]), (6.20, 1.60), "mecha extrema: sin recubr. lateral (obs. 1)", side=1, h=1.4)
+L(V, (mech[-1]["pl"][0, 0], vm[-1]), (6.20, 1.60), f"{len(mech)} mechas centradas @ {vm[1] - vm[0]:.2f} (≥ 5 cm de las caras)", side=1, h=1.4)
+V.text("CORREGIR POSICIÓN DE MECHAS SEGÚN DETALLE", (6.25, 1.74), 1.8, "E-TITULO", "MIDDLE_LEFT")
 section_mark(V, (6.00, vC), (6.62, vC), "C")
 
 # ============================================================ 4. SECCION TRANSVERSAL TIPICA DE TRAMO 1:10 (perpendicular a la losa)
@@ -734,7 +739,7 @@ for let in ("L", "S"):
         TSD.setdefault(let, []).append((float(P[1]), nloc(P)))
 bt = min(bars_of(ft["tag"], "T"), key=lambda b: abs(b["pl"][:, 0].mean() - umid))
 pT = bt["pl"]
-nT = nloc(pT.mean(0))
+nT = TSD["L"][0][1] + 2 * RAD["3/8"]        # capa 2 apoyada sobre la capa 1
 V.pline([(pT[0, 1], nT), (pT[-1, 1], nT)], "E-ACERO", const_width=2 * RAD["3/8"])
 TSD["T"] = (float(pT[0, 1]), float(pT[-1, 1]), nT)
 V.dim((ft["v0"], 0), (ft["v1"], 0), (ft["v0"], -0.045), 0)
@@ -750,8 +755,7 @@ V.hdim_chain([ft["v0"]] + xs_L + [ft["v1"]], 0, tt + 0.07,
 L(V, TSD["L"][2], (0.52, -0.075), f'{code_of(ft["tag"], "L")}: long. inf. (capa 1)', side=-1, h=1.8)
 L(V, TSD["S"][3], (1.00, 0.33), f'{code_of(ft["tag"], "S")}: long. sup.', side=1, h=1.8)
 L(V, (0.98, nT), (1.08, -0.075), f'{bt["code"]}: transv. (capa 2)', side=1, h=1.8)
-V.text("(eje de barras de capa 1 a capa 2: {:.1f} mm)".format((nT - yL) * 1000), ((ft["v0"] + ft["v1"]) / 2, -0.125), 1.6,
-       "E-TEXTO")
+V.text("(capa 2 apoyada sobre la capa 1; recubrimiento libre 2.5 cm)", ((ft["v0"] + ft["v1"]) / 2, -0.125), 1.6, "E-TEXTO")
 
 # ------------------------------------------------------------------ hoja
 ps = new_sheet(doc, "E-09")
@@ -857,23 +861,26 @@ notas = [
     "NOTAS - ESCALERA",
     "1. CONCRETO f'c = 210 kg/cm² en tramos, descansos, plataformas y cimiento de arranque.",
     "2. ACERO corrugado ASTM A615 Grado 60, fy = 4200 kg/cm². Todo el acero de escalera es Ø3/8\" (0.56 kg/m).",
-    "3. RECUBRIMIENTO libre 2 cm en losas de escalera (E.060 7.7.1); cimiento de arranque 7.5 cm contra el terreno.",
+    "3. RECUBRIMIENTO libre mínimo de proyecto: 2.5 cm en tramos, descansos y plataformas; 5 cm en el cimiento de",
+    "    arranque. El acero se dibuja corregido a estos valores (lista de barras: planos/ESCALERA_RECUBRIMIENTOS.csv).",
     "4. Losa (garganta) e = 0.15 m. Malla inferior Ø3/8\" en dos capas (capa 1 longitudinal abajo, capa 2 transversal)",
     "    y acero superior longitudinal Ø3/8\" corrido; separación de diseño @ 0.25 máx., modelada @ .19 - .24 (ver cortes).",
     "5. ANCLAJES (medidos): extremo bajo, inferior entra horizontal 0.49 en la plataforma; superior baja y entra 0.36.",
     "    Extremo alto: ambas capas suben en el nudo y doblan 0.40 horizontales ARRIBA en el descanso/plataforma.",
     f"6. ARRANQUE (fig. 107, Manual del Maestro Constructor - Aceros Arequipa): el inferior llega recto al cimiento;",
-    f"    el superior traslapa {lapv:.2f} con mechas Ø3/8\" que salen del cimiento (vertical {z_bend - z_bot:.2f} a 7.5 cm de su cara posterior).",
+    f"    el superior traslapa {lapv:.2f} con {len(mech)} mechas Ø3/8\" centradas que salen del cimiento (vertical {z_bend - z_bot:.2f}).",
+    "    CORREGIR POSICIÓN DE MECHAS SEGÚN DETALLE (corte C-C y planta del cimiento).",
     "7. Traslape de Ø3/8\" = 0.45 m. El cimiento se vacía antes que la escalera (dejar mechas).",
     "8. Cimiento de arranque 1.25 x 0.50 x 1.00, fondo -1.00: confirmar capacidad portante a esa profundidad (EMS a Df 2.00).",
-    "9. Niveles NPT en metros. Plano generado del modelo IFC 'Proyect sj.ifc'; acero tal como está modelado.",
+    "9. Niveles NPT en metros. Plano generado del modelo IFC 'Proyect sj.ifc'; acero del modelo corregido (nodo 13 pendiente).",
 ]
 ny = notes(ps, 280, 168, notas, h=2.1, lead=4.4)
 obs = [
     "OBSERVACIONES DEL MODELO (revisar antes de emitir)",
-    "1. Mecha extrema del cimiento (E1, a 0.004 del borde del tramo 1): queda en la cara lateral, sin recubrimiento.",
-    "2. Tramo 1 N1-N2: patas superiores en el descanso con recubr. 1.2-1.4 cm; barras de borde del descanso y",
-    "    plataforma N1-N2 (a 1.5 cm del borde) con 1.0 cm. Deben quedar a 2 cm libres.",
+    "1. En el modelo el acero de escalera tiene 2.0 cm libres (1.1-1.3 cm en patas y bordes de N1-N2), bajo el mínimo",
+    "    de 2.5 cm: en esta lámina se dibuja corregido. Ajustar el modelo con el nodo 13.",
+    "2. Las 6 mechas del modelo (la extrema sin recubrimiento lateral, las demás con 2.2 cm al tope del cimiento) se",
+    "    reemplazan por 5 mechas centradas en el bloque, a ≥ 5 cm de sus caras, traslape 0.45 con el acero superior.",
     "3. Nudo de llegada del tramo 2 (J1) termina 0.05 bajo el fondo de la plataforma (+3.00 vs +3.05; igual en N3-N5):",
     "    vacío en el modelo que atraviesan los anclajes del tramo 2. En obra se vacía monolítico.",
     "4. Capa 2 (transversal) a 4.5 mm de eje de la capa 1 (7.3 mm en T2 N1-N2): las mallas se interfieren en el modelo;",

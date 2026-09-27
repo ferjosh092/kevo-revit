@@ -1,0 +1,315 @@
+id,piso,pieza,rol,d,rec_modelo_cm,minimo_cm,falla,correccion
+228653,N1-N2,Cimiento,MECHA_SUP1,3/8,2.2,5.0,True,reemplazada (5 mechas centradas)
+228654,N1-N2,Cimiento,MECHA_SUP2,3/8,2.2,5.0,True,reemplazada (5 mechas centradas)
+228655,N1-N2,Cimiento,MECHA_SUP3,3/8,2.2,5.0,True,reemplazada (5 mechas centradas)
+228656,N1-N2,Cimiento,MECHA_SUP4,3/8,2.2,5.0,True,reemplazada (5 mechas centradas)
+228657,N1-N2,Cimiento,MECHA_SUP5,3/8,2.2,5.0,True,reemplazada (5 mechas centradas)
+228658,N1-N2,Cimiento,MECHA_SUP6,3/8,0.0,5.0,True,reemplazada (5 mechas centradas)
+228594,N1-N2,Descanso,L1,3/8,2.1,2.5,True,trasladada 1.5 cm máx.
+228603,N1-N2,Descanso,L10,3/8,1.1,2.5,True,trasladada 1.5 cm máx.
+228595,N1-N2,Descanso,L2,3/8,2.1,2.5,True,trasladada 1.5 cm máx.
+228596,N1-N2,Descanso,L3,3/8,2.1,2.5,True,trasladada 1.5 cm máx.
+228597,N1-N2,Descanso,L4,3/8,2.1,2.5,True,trasladada 1.5 cm máx.
+228598,N1-N2,Descanso,L5,3/8,2.1,2.5,True,trasladada 1.5 cm máx.
+228599,N1-N2,Descanso,L6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228600,N1-N2,Descanso,L7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228601,N1-N2,Descanso,L8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228602,N1-N2,Descanso,L9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228604,N1-N2,Descanso,T1,3/8,2.1,2.5,True,trasladada 2.7 cm máx.
+228605,N1-N2,Descanso,T2,3/8,2.1,2.5,True,trasladada 2.7 cm máx.
+228606,N1-N2,Descanso,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228607,N1-N2,Descanso,T4,3/8,3.0,2.5,False,trasladada 0.5 cm máx.
+228608,N1-N2,Descanso,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228609,N1-N2,Descanso,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228610,N1-N2,Plataforma,L1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228619,N1-N2,Plataforma,L10,3/8,1.1,2.5,True,trasladada 1.5 cm máx.
+228611,N1-N2,Plataforma,L2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228612,N1-N2,Plataforma,L3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228613,N1-N2,Plataforma,L4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228614,N1-N2,Plataforma,L5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228615,N1-N2,Plataforma,L6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228616,N1-N2,Plataforma,L7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228617,N1-N2,Plataforma,L8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228618,N1-N2,Plataforma,L9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228620,N1-N2,Plataforma,T1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228621,N1-N2,Plataforma,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228622,N1-N2,Plataforma,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228623,N1-N2,Plataforma,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228624,N1-N2,Plataforma,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228625,N1-N2,Plataforma,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228626,N1-N2,Tramo 1,L1,3/8,1.3,2.5,True,trasladada 1.7 cm máx.
+228627,N1-N2,Tramo 1,L2,3/8,1.3,2.5,True,trasladada 1.7 cm máx.
+228628,N1-N2,Tramo 1,L3,3/8,1.3,2.5,True,trasladada 1.7 cm máx.
+228629,N1-N2,Tramo 1,L4,3/8,1.3,2.5,True,trasladada 1.7 cm máx.
+228630,N1-N2,Tramo 1,L5,3/8,1.3,2.5,True,trasladada 1.7 cm máx.
+228631,N1-N2,Tramo 1,L6,3/8,1.3,2.5,True,trasladada 1.7 cm máx.
+228632,N1-N2,Tramo 1,S1,3/8,1.3,2.5,True,trasladada 2.8 cm máx.
+228633,N1-N2,Tramo 1,S2,3/8,1.3,2.5,True,trasladada 2.8 cm máx.
+228634,N1-N2,Tramo 1,S3,3/8,1.3,2.5,True,trasladada 2.8 cm máx.
+228635,N1-N2,Tramo 1,S4,3/8,1.3,2.5,True,trasladada 2.8 cm máx.
+228636,N1-N2,Tramo 1,S5,3/8,1.3,2.5,True,trasladada 2.8 cm máx.
+228637,N1-N2,Tramo 1,S6,3/8,1.3,2.5,True,trasladada 2.8 cm máx.
+228638,N1-N2,Tramo 1,T1,3/8,3.1,2.5,False,trasladada 0.5 cm máx.
+228647,N1-N2,Tramo 1,T10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228648,N1-N2,Tramo 1,T11,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228649,N1-N2,Tramo 1,T12,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228650,N1-N2,Tramo 1,T13,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228651,N1-N2,Tramo 1,T14,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228652,N1-N2,Tramo 1,T15,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228639,N1-N2,Tramo 1,T2,3/8,3.1,2.5,False,trasladada 0.5 cm máx.
+228640,N1-N2,Tramo 1,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228641,N1-N2,Tramo 1,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228642,N1-N2,Tramo 1,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228643,N1-N2,Tramo 1,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228644,N1-N2,Tramo 1,T7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228645,N1-N2,Tramo 1,T8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228646,N1-N2,Tramo 1,T9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228573,N1-N2,Tramo 2,L1,3/8,vacío J1,2.5,True,trasladada 3.0 cm máx.
+228574,N1-N2,Tramo 2,L2,3/8,vacío J1,2.5,True,trasladada 3.0 cm máx.
+228575,N1-N2,Tramo 2,L3,3/8,vacío J1,2.5,True,trasladada 3.0 cm máx.
+228576,N1-N2,Tramo 2,L4,3/8,vacío J1,2.5,True,trasladada 3.0 cm máx.
+228577,N1-N2,Tramo 2,L5,3/8,vacío J1,2.5,True,trasladada 3.0 cm máx.
+228578,N1-N2,Tramo 2,L6,3/8,vacío J1,2.5,True,trasladada 3.0 cm máx.
+228579,N1-N2,Tramo 2,S1,3/8,vacío J1,2.5,True,trasladada 3.6 cm máx.
+228580,N1-N2,Tramo 2,S2,3/8,vacío J1,2.5,True,trasladada 3.6 cm máx.
+228581,N1-N2,Tramo 2,S3,3/8,vacío J1,2.5,True,trasladada 3.6 cm máx.
+228582,N1-N2,Tramo 2,S4,3/8,vacío J1,2.5,True,trasladada 3.6 cm máx.
+228583,N1-N2,Tramo 2,S5,3/8,vacío J1,2.5,True,trasladada 3.6 cm máx.
+228584,N1-N2,Tramo 2,S6,3/8,vacío J1,2.5,True,trasladada 3.6 cm máx.
+228585,N1-N2,Tramo 2,T1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228586,N1-N2,Tramo 2,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228587,N1-N2,Tramo 2,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228588,N1-N2,Tramo 2,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228589,N1-N2,Tramo 2,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228590,N1-N2,Tramo 2,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228591,N1-N2,Tramo 2,T7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228592,N1-N2,Tramo 2,T8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228593,N1-N2,Tramo 2,T9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228659,N2-N3,Descanso,L1,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
+228668,N2-N3,Descanso,L10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228660,N2-N3,Descanso,L2,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
+228661,N2-N3,Descanso,L3,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
+228662,N2-N3,Descanso,L4,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
+228663,N2-N3,Descanso,L5,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
+228664,N2-N3,Descanso,L6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228665,N2-N3,Descanso,L7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228666,N2-N3,Descanso,L8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228667,N2-N3,Descanso,L9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228669,N2-N3,Descanso,T1,3/8,2.1,2.5,True,trasladada 2.7 cm máx.
+228670,N2-N3,Descanso,T2,3/8,2.1,2.5,True,trasladada 2.7 cm máx.
+228671,N2-N3,Descanso,T3,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
+228672,N2-N3,Descanso,T4,3/8,3.0,2.5,False,—
+228673,N2-N3,Descanso,T5,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
+228674,N2-N3,Descanso,T6,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
+228675,N2-N3,Plataforma,L1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228684,N2-N3,Plataforma,L10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228676,N2-N3,Plataforma,L2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228677,N2-N3,Plataforma,L3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228678,N2-N3,Plataforma,L4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228679,N2-N3,Plataforma,L5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228680,N2-N3,Plataforma,L6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228681,N2-N3,Plataforma,L7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228682,N2-N3,Plataforma,L8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228683,N2-N3,Plataforma,L9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228685,N2-N3,Plataforma,T1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228686,N2-N3,Plataforma,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228687,N2-N3,Plataforma,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228688,N2-N3,Plataforma,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228689,N2-N3,Plataforma,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228690,N2-N3,Plataforma,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228551,N2-N3,Tramo 1,L1,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228552,N2-N3,Tramo 1,L2,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228553,N2-N3,Tramo 1,L3,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228554,N2-N3,Tramo 1,L4,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228555,N2-N3,Tramo 1,L5,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228556,N2-N3,Tramo 1,L6,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228557,N2-N3,Tramo 1,S1,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228558,N2-N3,Tramo 1,S2,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228559,N2-N3,Tramo 1,S3,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228560,N2-N3,Tramo 1,S4,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228561,N2-N3,Tramo 1,S5,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228562,N2-N3,Tramo 1,S6,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228563,N2-N3,Tramo 1,T1,3/8,1.5,2.5,True,trasladada 0.5 cm máx.
+228572,N2-N3,Tramo 1,T10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228564,N2-N3,Tramo 1,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228565,N2-N3,Tramo 1,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228566,N2-N3,Tramo 1,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228567,N2-N3,Tramo 1,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228568,N2-N3,Tramo 1,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228569,N2-N3,Tramo 1,T7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228570,N2-N3,Tramo 1,T8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228571,N2-N3,Tramo 1,T9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228691,N2-N3,Tramo 2,L1,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228692,N2-N3,Tramo 2,L2,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228693,N2-N3,Tramo 2,L3,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228694,N2-N3,Tramo 2,L4,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228695,N2-N3,Tramo 2,L5,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228696,N2-N3,Tramo 2,L6,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228697,N2-N3,Tramo 2,S1,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228698,N2-N3,Tramo 2,S2,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228699,N2-N3,Tramo 2,S3,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228700,N2-N3,Tramo 2,S4,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228701,N2-N3,Tramo 2,S5,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228702,N2-N3,Tramo 2,S6,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228703,N2-N3,Tramo 2,T1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228712,N2-N3,Tramo 2,T10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228704,N2-N3,Tramo 2,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228705,N2-N3,Tramo 2,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228706,N2-N3,Tramo 2,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228707,N2-N3,Tramo 2,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228708,N2-N3,Tramo 2,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228709,N2-N3,Tramo 2,T7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228710,N2-N3,Tramo 2,T8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228711,N2-N3,Tramo 2,T9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228713,N3-N4,Descanso,L1,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
+228722,N3-N4,Descanso,L10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228714,N3-N4,Descanso,L2,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
+228715,N3-N4,Descanso,L3,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
+228716,N3-N4,Descanso,L4,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
+228717,N3-N4,Descanso,L5,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
+228718,N3-N4,Descanso,L6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228719,N3-N4,Descanso,L7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228720,N3-N4,Descanso,L8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228721,N3-N4,Descanso,L9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228723,N3-N4,Descanso,T1,3/8,2.1,2.5,True,trasladada 2.7 cm máx.
+228724,N3-N4,Descanso,T2,3/8,2.1,2.5,True,trasladada 2.7 cm máx.
+228725,N3-N4,Descanso,T3,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
+228726,N3-N4,Descanso,T4,3/8,3.0,2.5,False,—
+228727,N3-N4,Descanso,T5,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
+228728,N3-N4,Descanso,T6,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
+228729,N3-N4,Plataforma,L1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228738,N3-N4,Plataforma,L10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228730,N3-N4,Plataforma,L2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228731,N3-N4,Plataforma,L3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228732,N3-N4,Plataforma,L4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228733,N3-N4,Plataforma,L5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228734,N3-N4,Plataforma,L6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228735,N3-N4,Plataforma,L7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228736,N3-N4,Plataforma,L8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228737,N3-N4,Plataforma,L9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228739,N3-N4,Plataforma,T1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228740,N3-N4,Plataforma,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228741,N3-N4,Plataforma,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228742,N3-N4,Plataforma,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228743,N3-N4,Plataforma,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228744,N3-N4,Plataforma,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228745,N3-N4,Tramo 1,L1,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228746,N3-N4,Tramo 1,L2,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228747,N3-N4,Tramo 1,L3,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228748,N3-N4,Tramo 1,L4,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228749,N3-N4,Tramo 1,L5,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228750,N3-N4,Tramo 1,L6,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228751,N3-N4,Tramo 1,S1,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228752,N3-N4,Tramo 1,S2,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228753,N3-N4,Tramo 1,S3,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228754,N3-N4,Tramo 1,S4,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228755,N3-N4,Tramo 1,S5,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228756,N3-N4,Tramo 1,S6,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228757,N3-N4,Tramo 1,T1,3/8,1.5,2.5,True,trasladada 0.5 cm máx.
+228766,N3-N4,Tramo 1,T10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228758,N3-N4,Tramo 1,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228759,N3-N4,Tramo 1,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228760,N3-N4,Tramo 1,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228761,N3-N4,Tramo 1,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228762,N3-N4,Tramo 1,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228763,N3-N4,Tramo 1,T7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228764,N3-N4,Tramo 1,T8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228765,N3-N4,Tramo 1,T9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228767,N3-N4,Tramo 2,L1,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228768,N3-N4,Tramo 2,L2,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228769,N3-N4,Tramo 2,L3,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228770,N3-N4,Tramo 2,L4,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228771,N3-N4,Tramo 2,L5,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228772,N3-N4,Tramo 2,L6,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228773,N3-N4,Tramo 2,S1,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228774,N3-N4,Tramo 2,S2,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228775,N3-N4,Tramo 2,S3,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228776,N3-N4,Tramo 2,S4,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228777,N3-N4,Tramo 2,S5,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228778,N3-N4,Tramo 2,S6,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228779,N3-N4,Tramo 2,T1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228788,N3-N4,Tramo 2,T10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228780,N3-N4,Tramo 2,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228781,N3-N4,Tramo 2,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228782,N3-N4,Tramo 2,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228783,N3-N4,Tramo 2,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228784,N3-N4,Tramo 2,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228785,N3-N4,Tramo 2,T7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228786,N3-N4,Tramo 2,T8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228787,N3-N4,Tramo 2,T9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228789,N4-N5,Descanso,L1,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
+228798,N4-N5,Descanso,L10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228790,N4-N5,Descanso,L2,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
+228791,N4-N5,Descanso,L3,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
+228792,N4-N5,Descanso,L4,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
+228793,N4-N5,Descanso,L5,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
+228794,N4-N5,Descanso,L6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228795,N4-N5,Descanso,L7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228796,N4-N5,Descanso,L8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228797,N4-N5,Descanso,L9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228799,N4-N5,Descanso,T1,3/8,2.1,2.5,True,trasladada 2.7 cm máx.
+228800,N4-N5,Descanso,T2,3/8,2.1,2.5,True,trasladada 2.7 cm máx.
+228801,N4-N5,Descanso,T3,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
+228802,N4-N5,Descanso,T4,3/8,3.0,2.5,False,—
+228803,N4-N5,Descanso,T5,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
+228804,N4-N5,Descanso,T6,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
+228805,N4-N5,Plataforma,L1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228814,N4-N5,Plataforma,L10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228806,N4-N5,Plataforma,L2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228807,N4-N5,Plataforma,L3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228808,N4-N5,Plataforma,L4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228809,N4-N5,Plataforma,L5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228810,N4-N5,Plataforma,L6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228811,N4-N5,Plataforma,L7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228812,N4-N5,Plataforma,L8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228813,N4-N5,Plataforma,L9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228815,N4-N5,Plataforma,T1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228816,N4-N5,Plataforma,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228817,N4-N5,Plataforma,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228818,N4-N5,Plataforma,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228819,N4-N5,Plataforma,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228820,N4-N5,Plataforma,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228821,N4-N5,Tramo 1,L1,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228822,N4-N5,Tramo 1,L2,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228823,N4-N5,Tramo 1,L3,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228824,N4-N5,Tramo 1,L4,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228825,N4-N5,Tramo 1,L5,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228826,N4-N5,Tramo 1,L6,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228827,N4-N5,Tramo 1,S1,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228828,N4-N5,Tramo 1,S2,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228829,N4-N5,Tramo 1,S3,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228830,N4-N5,Tramo 1,S4,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228831,N4-N5,Tramo 1,S5,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228832,N4-N5,Tramo 1,S6,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
+228833,N4-N5,Tramo 1,T1,3/8,1.5,2.5,True,trasladada 0.5 cm máx.
+228842,N4-N5,Tramo 1,T10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228834,N4-N5,Tramo 1,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228835,N4-N5,Tramo 1,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228836,N4-N5,Tramo 1,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228837,N4-N5,Tramo 1,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228838,N4-N5,Tramo 1,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228839,N4-N5,Tramo 1,T7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228840,N4-N5,Tramo 1,T8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228841,N4-N5,Tramo 1,T9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228843,N4-N5,Tramo 2,L1,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228844,N4-N5,Tramo 2,L2,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228845,N4-N5,Tramo 2,L3,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228846,N4-N5,Tramo 2,L4,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228847,N4-N5,Tramo 2,L5,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228848,N4-N5,Tramo 2,L6,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228849,N4-N5,Tramo 2,S1,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228850,N4-N5,Tramo 2,S2,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228851,N4-N5,Tramo 2,S3,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228852,N4-N5,Tramo 2,S4,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228853,N4-N5,Tramo 2,S5,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228854,N4-N5,Tramo 2,S6,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
+228855,N4-N5,Tramo 2,T1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228864,N4-N5,Tramo 2,T10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228856,N4-N5,Tramo 2,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228857,N4-N5,Tramo 2,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228858,N4-N5,Tramo 2,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228859,N4-N5,Tramo 2,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228860,N4-N5,Tramo 2,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228861,N4-N5,Tramo 2,T7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228862,N4-N5,Tramo 2,T8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+228863,N4-N5,Tramo 2,T9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.

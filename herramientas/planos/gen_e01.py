@@ -18,6 +18,8 @@ GV = {k: g["pos"] for k, g in grids.items() if g["dir"] == "u"}   # ejes N -> co
 import pickle as _pk
 from beamdesign import corrected_bars
 _M = _pk.load(open("model_all.pkl", "rb"))
+from stair_fix import load_corrected
+_M["bars"], _SF = load_corrected(_M)
 _cb, DESIGN_POS = corrected_bars(_M)
 _hosts = {x["id"] for x in cim["footings"]} | {x["id"] for x in cim["columns"]} | {x["id"] for x in cim["beams"]}
 bars = [dict(b, pl=np.asarray(b["pl"], float).tolist()) for b in _cb if b["host"] in _hosts or "MECHA" in b["role"]]
@@ -532,7 +534,7 @@ CE.level(cu1 + 0.9, 0.0, "NPT ±0.00", left=False)
 CE.level(cu0 - 0.1, -1.0, "-1.00", left=True)
 mz = bar_arr(mechas[0])
 CE.leader((mz[:, 0].mean(), -0.55), (cu1 + 0.25, -0.45), f'{len(mechas)} mechas {dstr(mechas[0]["d"])} L={mechas[0]["L"]:.2f}', 1.8, side=1)
-CE.text("traslapan 0.45 con el acero sup. del tramo", (cu1 + 0.25, -0.58), 1.5, "E-ACERO-TXT", "MIDDLE_LEFT")
+CE.text("centradas; traslapan 0.45 con el acero sup. del tramo", (cu1 + 0.25, -0.58), 1.5, "E-ACERO-TXT", "MIDDLE_LEFT")
 CE.leader((cu0 + 0.33, 0.25), (cu0 + 0.9, 0.62), f'malla {dstr("3/8")} @ .25 (ver E-09)', 1.8, side=1)
 CE.text("CE", ((cu0 + cu1) / 2, -0.80), 2.2, "E-TITULO")
 

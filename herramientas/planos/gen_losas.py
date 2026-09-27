@@ -485,6 +485,18 @@ def build(level, code, basename):
         except Exception:
             continue
         PL.pline(list(g.exterior.coords), "E-PROYECCION")
+    plat = [e for e in E.values() if e["cat"] == "escalera" and "EXTENSION_PLATAFORMA" in e["com"] and abs(e["bbox"][1][2] - zt) < 0.03]
+    for e in plat:
+        g = footprint(e)
+        pts = list(g.exterior.coords)[:-1]
+        hh = PL.hatch(pts, "E-CORTE-ACH")
+        hh.set_pattern_fill("ANSI31", scale=0.02, color=8)
+        PL.pline(list(g.exterior.coords), "E-CORTE")
+        gb = g.bounds
+        PL.text("ZONA MACIZA", ((gb[0] + gb[2]) / 2, (gb[1] + gb[3]) / 2 + 0.22), 1.8, "E-TITULO", rot=90)
+        PL.text(f"e = {e['bbox'][1][2] - e['bbox'][0][2]:.2f} (plataforma, ver E-09)", ((gb[0] + gb[2]) / 2 + 0.22, (gb[1] + gb[3]) / 2 + 0.22), 1.4, "E-TEXTO", rot=90)
+    PL.text("FRENTE EN VOLADO 1.50 (viguetas dir. Y ancladas en VCH)", (2.3, vmin - 0.08), 1.45, "E-TEXTO", "TOP_CENTER")
+    PL.text("bordes sobre vigas en volado A-1, A-4 y collarín A-2", (2.3, vmin - 0.18), 1.45, "E-TEXTO", "TOP_CENTER")
     hole = box(GU["A-2"] - 0.3, 0.15, 10.15, faceN["N-3"][0]).difference(fp)
     hb = hole.bounds
     PL.text("ABERTURA / ESCALERA", ((hb[0] + hb[2]) / 2 + 0.5, (hb[1] + hb[3]) / 2 + 0.25), 2.0, "E-TEXTO")
@@ -515,8 +527,8 @@ def build(level, code, basename):
     notch_u = max(bot)
     PL.hdim_chain([min(bot), GU["A-1"], GU["A-4"], notch_u, GU["A-2"], GU["A-3"], umax], vmin, -0.45)
     # niveles
-    PL.level(1.6, 0.25, f"NPT {npt}", left=False)
-    PL.text(f"Fondo de losa +{zb:.2f}", (1.6 + 2.6 * m, 0.25 - 1.2 * m), 1.5, "E-NIVEL", "TOP_LEFT")
+    PL.level(5.05, 0.30, f"NPT {npt}", left=False)
+    PL.text(f"Fondo de losa +{zb:.2f}", (5.05 + 2.6 * m, 0.30 - 1.2 * m), 1.5, "E-NIVEL", "TOP_LEFT")
 
     # -------- marcas de corte
     U1 = 8.95
@@ -606,8 +618,7 @@ def build(level, code, basename):
     S1.dim((win1[2], zb), (win1[2], zt), (win1[2] + 10 * m1, zb), 90)
     S1.leader((ribs1[1], zb + 0.07), (ribs1[1] + 0.12, zb - 0.26), f"vigueta {RIB:.2f}", 1.7, side=1, layer="E-TEXTO")
     cm_ = [(a + b) / 2 for a, b in cas1 if abs((b - a) - 0.30) < 0.02][0]
-    S1.leader((cm_ + 0.05, zb + 0.05), (cm_ + 0.25, zt + 0.30), f"casetón poliestireno 0.30x{CAS_H:.2f}", 1.7, side=1, layer="E-TEXTO")
-    S1.text("(NO MODELADO)", (cm_ + 0.25 + 3 * m1, zt + 0.30 - 3.2 * m1), 1.6, "E-TEXTO", "MIDDLE_LEFT")
+    S1.leader((cm_ + 0.05, zb + 0.05), (cm_ + 0.25, zt + 0.30), f"bloque 0.30 x {CAS_H:.2f}", 1.7, side=1, layer="E-TEXTO")
     S1.leader((ch["L"]["v0"] - 0.15, zt - 0.025), (ch["L"]["v0"] - 0.12, zt + 0.22), f"losita {LOSITA:.2f}", 1.7, side=-1, layer="E-TEXTO")
     S1.leader((ribs1[0], zb + 0.031), (ribs1[0] - 0.05, zb - 0.26), f'1{dtxt("1/2")} inf. (V1)', 1.7, side=-1)
     S1.leader(((ch["L"]["v0"] + ch["L"]["v1"]) / 2, zt - 0.10), ((ch["L"]["v0"] + ch["L"]["v1"]) / 2 + 0.05, zt + 0.12),
@@ -694,6 +705,74 @@ def build(level, code, basename):
     S5.leader((pe[:, 1].max(), (pe[:, 2].min() + pe[:, 2].max()) / 2), (c["v1"] + 0.03, zt + 0.015),
               f'Est. {dtxt("1/4")} {sp(c["s"])}  ({c["n"]} und.)', 1.7, side=1)
 
+
+    # ============================================================ 7. DETALLE DE ALIGERADO 1:15 (tipico del proyecto)
+    DA = View(doc, 15, (60, -40))
+    mA = DA.m
+    dI = byb["VIG_INF"][0]["d"]
+    dB = byb["VIG_BAS12_"][0]["d"]
+    rI, rB, rT = RAD[dI], RAD[dB], RAD["1/4"]
+    cov = 0.025
+    # (a) corte transversal: 3 viguetas a 0.40
+    x0 = 0.0
+    Wd = 1.30
+    ribs = [0.15, 0.55, 0.95]
+    conc = Polygon([(x0, CAS_H), (Wd, CAS_H), (Wd, H), (x0, H)])
+    for rx in ribs:
+        conc = conc.union(box(rx - RIB / 2, 0, rx + RIB / 2, CAS_H + 0.001))
+    conc = conc.buffer(0)
+    DA.hatch(list(conc.exterior.coords)[:-1], "E-CORTE-ACH")
+    DA.pline(list(conc.exterior.coords), "E-CORTE")
+    for a, b_ in ((ribs[0] + RIB / 2, ribs[1] - RIB / 2), (ribs[1] + RIB / 2, ribs[2] - RIB / 2)):
+        DA.pline([(a, 0), (b_, 0), (b_, CAS_H), (a, CAS_H)], "E-PROYECCION", close=True)
+        DA.line((a, 0), (b_, CAS_H), "E-PROYECCION")
+        DA.line((a, CAS_H), (b_, 0), "E-PROYECCION")
+    for xb in (0.0, Wd):
+        DA.break_line((xb, CAS_H - 0.02), (xb, H + 0.02))
+    for rx in ribs:
+        DA.circle((rx, cov + rI), rI, "E-ACERO", fill=True)
+        DA.circle((rx, H - cov - rB), rB, "E-ACERO", fill=True)
+    zt_ = H - cov - rB * 2 - rT
+    DA.pline([(0.02, zt_), (Wd - 0.02, zt_)], "E-ACERO")
+    for xt in np.arange(0.075, Wd - 0.02, 0.25):
+        DA.circle((xt, zt_ - 2 * rT), rT, "E-ACERO", fill=True)
+    DA.hdim_chain([ribs[0] - RIB / 2, ribs[0] + RIB / 2, ribs[1] - RIB / 2], 0, -4 * mA)
+    DA.dim((ribs[0], 0), (ribs[1], 0), (ribs[0], -9 * mA), 0)
+    DA.vdim_chain([0, CAS_H, H], Wd, Wd + 4 * mA)
+    DA.dim((Wd, 0), (Wd, H), (Wd + 13 * mA, 0), 90)
+    DA.leader((ribs[1] + 0.12, CAS_H * 0.45), (ribs[1] + 0.20, -0.14), f"bloque 0.30 x {CAS_H:.2f}", 1.8, side=1, layer="E-TEXTO")
+    DA.leader((ribs[2], 0.03), (ribs[2] + 0.14, -0.20), f'1 {dtxt(dI)} inf. corrido por vigueta', 1.8, side=1)
+    DA.leader((0.325, zt_), (0.20, H + 0.10), f'temperatura {dtxt("1/4")} @ 0.25 (ambos sentidos)', 1.8, side=1)
+    DA.leader((ribs[2], H - cov - rB), (ribs[2] + 0.10, H + 0.10), f'bastón {dtxt(dB)} sup. (sobre vigas)', 1.8, side=1)
+    DA.leader((ribs[0] - 0.02, 0.07), (ribs[0] - 0.10, -0.20), f"vigueta {RIB:.2f}", 1.8, side=-1, layer="E-TEXTO")
+    DA.text(f"losita {LOSITA:.2f}", (-0.03, H - LOSITA / 2), 1.8, "E-TEXTO", "MIDDLE_RIGHT")
+    DA.text("r = 0.025", (ribs[1], -0.035), 1.4, "E-ACERO-TXT")
+    DA.text("a) CORTE TRANSVERSAL", (Wd / 2, -0.33), 2.2, "E-TITULO")
+    # (b) corte longitudinal de vigueta sobre una viga de apoyo
+    ox = 1.75
+    bw, bh = 0.30, 0.50
+    Lb = 0.55
+    L2 = 0.80
+    DA.hatch([(ox, 0), (ox + 2 * L2 + bw, 0), (ox + 2 * L2 + bw, H), (ox, H)], "E-CORTE-ACH")
+    DA.hatch([(ox + L2, H - bh), (ox + L2 + bw, H - bh), (ox + L2 + bw, 0), (ox + L2, 0)], "E-CORTE-ACH")
+    DA.pline([(ox, 0), (ox + L2, 0), (ox + L2, H - bh), (ox + L2 + bw, H - bh), (ox + L2 + bw, 0), (ox + 2 * L2 + bw, 0)], "E-CORTE")
+    DA.pline([(ox, H), (ox + 2 * L2 + bw, H)], "E-CORTE")
+    for xb in (ox, ox + 2 * L2 + bw):
+        DA.break_line((xb, -0.02), (xb, H + 0.02))
+    DA.break_line((ox + L2 - 0.02, H - bh), (ox + L2 + bw + 0.02, H - bh))
+    DA.pline([(ox + 0.02, cov + rI), (ox + 2 * L2 + bw - 0.02, cov + rI)], "E-ACERO")
+    xa, xb_ = ox + L2 - Lb, ox + L2 + bw + Lb
+    DA.pline([(xa, H - cov - rB), (xb_, H - cov - rB)], "E-ACERO")
+    for xt in np.arange(ox + 0.10, ox + 2 * L2 + bw - 0.05, 0.25):
+        DA.circle((xt, zt_ + 0.004), rT, "E-ACERO", fill=True)
+    DA.hdim_chain([xa, ox + L2, ox + L2 + bw, xb_], H, H + 6 * mA, texts=["Lb", f"{bw:.2f}", "Lb"])
+    DA.leader((xa + 0.15, H - cov - rB), (xa - 0.05, H + 0.16), f'bastón {dtxt(dB)} sup.', 1.8, side=-1)
+    DA.text("Lb desde la cara de la viga: ver planta y cuadro de bastones", (ox + L2 + bw / 2, H + 0.23), 1.5, "E-TEXTO", "BOTTOM_CENTER")
+    DA.leader((ox + 2 * L2 + bw - 0.25, cov + rI), (ox + 2 * L2 + bw - 0.15, -0.15), f'1 {dtxt(dI)} inf. corrido', 1.8, side=1)
+    DA.text("viga de apoyo", (ox + L2 + bw / 2, H - bh / 2 - 0.02), 1.5, "E-TEXTO", rot=90)
+    DA.text("b) CORTE LONGITUDINAL DE VIGUETA SOBRE VIGA", (ox + L2 + bw / 2, -0.33), 2.2, "E-TITULO")
+    winA = (-0.35, -0.45, ox + 2 * L2 + bw + 0.55, H + 0.32)
+
     # ============================================================ HOJA
     ps = new_sheet(doc, code)
     # planta
@@ -733,6 +812,13 @@ def build(level, code, basename):
     place(S5, win5, 10, 0.50, 0.55, zt - 0.36, zt + 0.10, xr0 + w3 + 14, y3 - 10, "DETALLE 5-5  VIGA CHATA VCH", "ESC. 1:10")
     c3y = y3 - h3 / 2
     row4 = c3y - h3 / 2 - 32
+
+
+    # detalle de aligerado 1:15 (zona libre bajo el cuadro de bastones)
+    wA = (winA[2] - winA[0]) * 1000 / 15
+    hA = (winA[3] - winA[1] - 0.10) * 1000 / 15
+    add_vp(ps, 335 + wA / 2, 205 - hA / 2, wA, hA, DA.P((winA[0] + winA[2]) / 2, (winA[1] + winA[3]) / 2 - 0.05), 15)
+    view_title(ps, 335 + wA / 2, 205 - hA - 7, "DETALLE DE ALIGERADO", "ESC. 1:15  (típico del proyecto)")
 
     # leyenda
     lx, ly = 640, row4 - 80
@@ -789,12 +875,14 @@ def build(level, code, basename):
     notas = [
         "NOTAS - LOSA ALIGERADA",
         "1. CONCRETO f'c = 210 kg/cm².  ACERO ASTM A615 Grado 60, fy = 4200 kg/cm².",
-        f"2. ALIGERADO h = {H:.2f} en una dirección: viguetas 0.10 @ 0.40, losita {LOSITA:.2f}, casetones de poliestireno",
-        "    0.30 x 0.15. Los CASETONES NO ESTÁN MODELADOS: el modelo representa la losa como piso macizo de 0.20",
-        "    (tipo PISO_ESTRUCTURAL_MACIZO_200mm_VOLADO); ubicarlos según la posición de viguetas de esta planta.",
+        f"2. LOSA ALIGERADA h = {H:.2f} (bloque {CAS_H:.2f} + losita {LOSITA:.2f}): viguetas {RIB:.2f} @ 0.40, bloques 0.30 x {CAS_H:.2f},",
+        '    temperatura Ø1/4" @ 0.25 en la losita, 1 barra inferior por vigueta corrida y bastones superiores sobre vigas',
+        "    (ver DETALLE DE ALIGERADO). En el modelo la losa es maciza de 0.20 por criterio: el aligerado se representa",
+        "    con su acero y el concreto se metra aparte. Zona maciza e = 0.15 en la plataforma de llegada de la escalera.",
         f"3. RECUBRIMIENTO libre 2 cm (medido: inferior {cov_inf * 100:.1f} cm, superior {cov_sup * 100:.1f} cm).",
-        "4. Viguetas de los paños en dir. X (paralelas a ejes N) apoyadas en las vigas de los ejes A. En las franjas",
-        "    laterales (volado lado N-4 y borde N-1) viguetas en dir. Y ancladas 1.50 m en la viga chata VCH 0.30x0.20.",
+        "4. Sentido de viguetas según el acero del modelo: en los paños, dir. X (paralelas a ejes N) apoyadas en las vigas",
+        "    de los ejes A; en las franjas laterales (frente en volado 1.50 lado N-4, sobre vigas en volado A-1, A-4 y",
+        "    collarín A-2; y borde N-1) viguetas en dir. Y ancladas en la viga chata VCH 0.30 x 0.20.",
         "5. Bastones: longitudes medidas desde la cara de apoyo. Barras > 9 m traslapadas 0.60 sobre la viga interior.",
         "    Ganchos a 90° de 0.12 en bordes libres y apoyos extremos.",
         f'6. Malla de temperatura {dtxt("1/4")} en ambos sentidos en toda la losita ({tsep["TEMP_V"][0]} + {tsep["TEMP_U"][0]} líneas, sep. medida',

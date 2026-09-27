@@ -28,6 +28,8 @@ def load_model(path="model_all.pkl", design=True):
     M["bars_model"] = M["bars"]
     if design:
         from beamdesign import corrected_bars
+        from stair_fix import load_corrected
+        M["bars"], M["stair_fix"] = load_corrected(M)      # escalera: recubrimientos de proyecto, 5 mechas
         M["bars"], M["design_pos"] = corrected_bars(M)
     GU = {k: g["pos"] for k, g in M["grids"].items() if g["dir"] == "v"}
     GV = {k: g["pos"] for k, g in M["grids"].items() if g["dir"] == "u"}

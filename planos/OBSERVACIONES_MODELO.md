@@ -27,25 +27,34 @@ por dentro de las de los ejes N únicamente dentro de la columna (bayoneta), no 
 
 ## 2. Losas
 
-- Modeladas como piso macizo de 0.20 (`PISO_ESTRUCTURAL_MACIZO_200mm_VOLADO`); los casetones no
-  están modelados. El volumen de concreto del modelo (73.9 m³) no representa el aligerado
-  (≈ 32.3 m³ estimado con 0.0875 m³/m²).
-- Las viguetas principales van paralelas a los ejes N (apoyadas en A-1/A-4/A-2/A-3); el
-  docstring del nodo 14 dice "paralelas a los ejes A". Los planos dibujan lo modelado.
-- Malla de temperatura Ø1/4" a la misma cota que bastones y barras superiores: ~5 mm de
-  interferencia en cientos de cruces.
-- Viga chata VCH: barras superiores 3.3 cm bajo la esquina del estribo; una barra cruza la rama
-  del estribo (5.8 mm) en Niveles 2 y 5.
-- Diferencias puntuales entre niveles (barras L2 rectas en Nivel 3, LAT_SUPR25 recta en Nivel 2,
-  pieza de VCH 4.4 cm más baja en Niveles 3 y 4).
-- TEMP_U43/44 prácticamente sobre el borde inclinado A-1 (recubrimiento lateral ~0).
+- La losa se modela maciza de 0.20 **por criterio**: el aligerado (bloque 0.15 + losita 0.05, viguetas
+  0.10 @ 0.40) se representa con su acero y el concreto se metra aparte. En E-04 a E-07 se dibuja como
+  aligerada, con el sentido de viguetas tomado del acero del modelo (VIG_* en X; LAT_* en Y en las franjas
+  laterales con viga chata 0.30 x 0.20) y la zona maciza e = 0.15 de la plataforma de llegada de la escalera.
+- Malla de temperatura Ø1/4" a la misma cota que bastones y barras superiores: ~5 mm de interferencia en
+  cruces (se resuelve en obra apoyando la malla sobre los bastones).
+- Viga chata VCH: barras superiores 3.3 cm bajo la esquina del estribo; una barra cruza la rama del estribo
+  (5.8 mm) en Niveles 2 y 5.
 
 ## 3. Límite de propiedad
 
 Las zapatas Z-1 del eje N-4 (hasta v = -0.60) y las columnas de escalera (hasta -0.15) quedan
 fuera de la línea de propiedad del modelo (v ≈ 0.03–0.39). Verificar con el levantamiento.
 
-## 4. Otros
+## 4. Escalera — recubrimientos (nodo 13)
+
+Mínimo de proyecto: 2.5 cm en tramos, descansos y plataformas; 5 cm en el cimiento de arranque.
+En el modelo el acero de escalera tiene 2.0 cm libres en casi todas las barras (83 de 86 en N1-N2, 75 de 76
+en cada piso típico) y 1.1–1.3 cm en las patas superiores del tramo 1 y en las barras de borde del descanso
+y la plataforma de N1-N2. Las 6 mechas del cimiento tienen 2.2 cm al tope del bloque y la extrema (id 228658)
+queda sin recubrimiento lateral. Lista completa: `ESCALERA_RECUBRIMIENTOS.csv`.
+
+En E-09 (y E-01) el acero se dibuja corregido y las mechas se reemplazan por 5 centradas @ 0.20, a ≥ 5 cm de
+las caras, con traslape de 0.45 con el acero superior del tramo ("corregir posición de mechas según detalle").
+El modelo se ajustará con el nodo 13. Los anclajes del tramo 2 atraviesan un vacío de 5 cm del modelo bajo la
+plataforma (nudo J1) en todos los pisos: en obra se vacía monolítico.
+
+## 5. Otros
 
 - Revit exporta el peso del acero en 0; los pesos de las láminas se calculan con la longitud de
   cada barra y el peso nominal por metro.
