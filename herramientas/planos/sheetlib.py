@@ -82,7 +82,8 @@ class View:
         self.k = k
         self.m = k / 1000.0          # metros de modelo por mm de papel
         self.off = np.array(offset, float)
-        add_linetypes(doc, k)
+        self.ltk = max(k, 20)          # patrones muy cortos (1:5, 1:10) cuelgan el render de ezdxf
+        add_linetypes(doc, self.ltk)
         self._dimstyle()
 
     # --- transformacion ---
@@ -93,7 +94,7 @@ class View:
         return v * self.m
 
     def lt(self, base):
-        return f"{base}{self.k}"
+        return f"{base}{self.ltk}"
 
     def _dimstyle(self):
         name = f"COTA{self.k}"

@@ -15,7 +15,12 @@ meshes = MS["meshes"]
 grids = cim["grids"]
 GU = {k: g["pos"] for k, g in grids.items() if g["dir"] == "v"}   # ejes A -> coordenada u
 GV = {k: g["pos"] for k, g in grids.items() if g["dir"] == "u"}   # ejes N -> coordenada v
-bars = cim["bars"]
+import pickle as _pk
+from beamdesign import corrected_bars
+_M = _pk.load(open("model_all.pkl", "rb"))
+_cb, DESIGN_POS = corrected_bars(_M)
+_hosts = {x["id"] for x in cim["footings"]} | {x["id"] for x in cim["columns"]} | {x["id"] for x in cim["beams"]}
+bars = [dict(b, pl=np.asarray(b["pl"], float).tolist()) for b in _cb if b["host"] in _hosts or "MECHA" in b["role"]]
 
 
 def dstr(d):
@@ -455,28 +460,12 @@ for b in beamN:
 nbar, ucut, vb = best
 vbp = np.array(vb["poly"])
 vc_v = vbp[:, 1].mean()
-VS = View(doc, 10, (200 - vc_v, 0))
-winb = (vbp[:, 1].min() - 0.12, -1.50, vbp[:, 1].max() + 0.12, -1.00)
-draw_cut(VS, cut_polys(vb["id"], 0, ucut), winb)
-beam_bars = bars_of([x["id"] for x in beamN])
-dots = draw_bars_section(VS, beam_bars, 0, ucut, winb, dot_min_mm=0.9, par_tol=0.06)
-# estribo mas cercano (proyectado)
-estr = [b for b in beam_bars if b["role"] == "ESTRIBOS" and abs(bar_arr(b)[:, 1].mean() - vc_v) < 0.3]
-ne = min(estr, key=lambda b: abs(bar_arr(b)[:, 0].mean() - ucut))
-VS.pline([tuple(p[[1, 2]]) for p in bar_arr(ne)], "E-ACERO")
-vy0, vy1 = vbp[:, 1].min(), vbp[:, 1].max()
-VS.dim((vy0, -1.45), (vy1, -1.45), (vy0, -1.45 - 6 * VS.m), 0)
-VS.dim((vy1, -1.45), (vy1, -1.05), (vy1 + 6 * VS.m, -1.45), 90)
-VS.level(vy0 - 0.02, -1.05, "-1.05", left=True)
-VS.level(vy0 - 0.02, -1.45, "-1.45", left=True)
-sup = sorted([d for d in dots if d[0][1] > -1.25], key=lambda d: d[0][0])
-inf = sorted([d for d in dots if d[0][1] <= -1.25], key=lambda d: d[0][0])
-zs_sup = sorted({round(d[0][1], 2) for d in sup})
-zs_inf = sorted({round(d[0][1], 2) for d in inf})
-VS.leader(sup[-1][0], (vy1 + 0.05, -1.08), f'{len(sup)} {dstr("3/4")} ({len(zs_sup)} capas)' if len(zs_sup) > 1 else f'{len(sup)} {dstr("3/4")}', 2.0, side=1)
-VS.leader(inf[-1][0], (vy1 + 0.05, -1.42), f'{len(inf)} {dstr("3/4")} ({len(zs_inf)} capas)' if len(zs_inf) > 1 else f'{len(inf)} {dstr("3/4")}', 2.0, side=1)
-VS.leader((vy0 + 0.02, -1.20), (vy0 - 0.06, -1.16), f'Estribo {dstr("3/8")}', 2.0, side=-1)
-VS.text("r = 0.04", ((vy0 + vy1) / 2, -1.45 + 0.012), 1.6, "E-ACERO-TXT", "BOTTOM_CENTER")
+VS = View(doc, 10, (200, 0))
+from details import beam_section
+beam_section(VS, 0.25, 0.40, 4, 5, "3/4", "3/8", lab_side=1)
+VS.level(-0.10, 0.40, "-1.05", left=True)
+VS.level(-0.10, 0.0, "-1.45", left=True)
+winb = (-0.20, -0.08, 0.55, 0.47)
 
 # distribucion de estribos del tramo representativo (medida del modelo)
 def stirrup_dist(beam):
@@ -687,7 +676,8 @@ add_vp(ps, bx, by, wv, hv, VS.P((winb[0] + winb[2]) / 2 + 0.07, (winb[1] + winb[
 view_title(ps, bx, by - hv / 2 - 6, "CORTE A-A  VIGA DE CIMENTACIÓN VC-1", "ESC. 1:10")
 ptext(ps, f'VC-1  0.25 x 0.40', (bx - wv / 2 + 2, by - hv / 2 - 19), 2.4, "E-TITULO")
 ptext(ps, f'Estribos {dstr("3/8")}: {dist_txt}', (bx - wv / 2 + 2, by - hv / 2 - 24), 2.1)
-ptext(ps, VS_title_extra, (bx - wv / 2 + 2, by - hv / 2 - 28.5), 1.8)
+ptext(ps, "Sección de diseño (E.060). En los nudos, las barras de los", (bx - wv / 2 + 2, by - hv / 2 - 28.5), 1.7)
+ptext(ps, "ejes A pasan por dentro de las de los ejes N.", (bx - wv / 2 + 2, by - hv / 2 - 32), 1.7)
 
 # cimiento escalera
 cx2, cy2 = 522, 206
@@ -819,6 +809,9 @@ ptext(ps, "_______________________", (mx0 + 77, my0_ + 4), 2.0)
 doc.set_modelspace_vport(height=20, center=(5, 5))
 doc.saveas("E-01_Cimentacion.dxf")
 print("DXF ok")
+for e in doc.modelspace():
+    if e.dxf.hasattr("linetype") and e.dxf.linetype.upper() not in ("BYLAYER", "CONTINUOUS", "BYBLOCK"):
+        e.dxf.ltscale = e.dxf.get("ltscale", 1.0) * 1000.0
 
 # ------------------------------------------------------------ PDF
 from ezdxf.addons.drawing import Frontend, RenderContext, pymupdf, layout, config
@@ -829,7 +822,8 @@ cfg = config.Configuration(background_policy=config.BackgroundPolicy.WHITE,
                            lineweight_policy=config.LineweightPolicy.ABSOLUTE,
                            lineweight_scaling=1.0,
                            min_lineweight=0.09,
-                           hatch_policy=config.HatchPolicy.NORMAL)
+                           hatch_policy=config.HatchPolicy.NORMAL,
+                           line_policy=config.LinePolicy.ACCURATE)
 
 
 def not_vport(e):
