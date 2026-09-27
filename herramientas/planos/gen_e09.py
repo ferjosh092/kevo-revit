@@ -215,6 +215,21 @@ def arrow_head(V, tip, direction, L_mm=2.6, W_mm=1.0, layer="E-ESC-FLECHA"):
     V.pline(pts, layer, close=True)
 
 
+def dpl(V, pts, layer="E-OCULTO", close=False, dash_mm=2.5, gap_mm=1.2, **kw):
+    """linea oculta dibujada como trazos reales (el visor PDF no escala los tipos de linea en ventanas)"""
+    pts = [tuple(map(float, p)) for p in pts]
+    if close:
+        pts = pts + [pts[0]]
+    ls = LineString(pts)
+    Lt = ls.length
+    d, g = dash_mm * V.m, gap_mm * V.m
+    t = 0.0
+    while t < Lt - 1e-9:
+        a, b = ls.interpolate(t), ls.interpolate(min(t + d, Lt))
+        V.line((a.x, a.y), (b.x, b.y), layer)
+        t += d + g
+
+
 def poly_edges_in(V, poly, win, layer, **kw):
     """dibuja el contorno de poly recortado a la ventana, sin los bordes de la ventana"""
     W = box(*win)
@@ -225,7 +240,10 @@ def poly_edges_in(V, poly, win, layer, **kw):
             vis = LineString(list(ring.coords)).difference(edge)
             for ls in (vis.geoms if hasattr(vis, "geoms") else [vis]):
                 if ls.length > 1e-4:
-                    V.pline(list(ls.coords), layer, **kw)
+                    if layer == "E-OCULTO":
+                        dpl(V, list(ls.coords))
+                    else:
+                        V.pline(list(ls.coords), layer, **kw)
 
 
 # ============================================================ 1. PLANTAS 1:25
@@ -268,7 +286,7 @@ def plan_view(off, tr, plat_tr, first):
             c = fp.centroid
             V.text("VIGA COLLARÍN 0.30x0.50", (c.x, c.y), 1.6, "E-TEXTO")
         else:
-            poly_edges_in(V, fp, PWIN, "E-OCULTO", linetype=V.lt("OCULTA"))
+            poly_edges_in(V, fp, PWIN, "E-OCULTO")
     # columnas
     for t, e in E.items():
         if e["cat"] != "columna":
@@ -285,7 +303,7 @@ def plan_view(off, tr, plat_tr, first):
                1.6, "E-TEXTO", "BOTTOM_LEFT" if fp.bounds[1] > 1 else "TOP_LEFT")
     # cimiento de arranque (oculto)
     if first:
-        V.pline(list(CIMP.exterior.coords), "E-OCULTO", linetype=V.lt("OCULTA"))
+        dpl(V, list(CIMP.exterior.coords))
         V.text("CIMIENTO DE ARRANQUE (abajo)", (6.25, 1.52), 1.5, "E-TEXTO", "BOTTOM_CENTER")
     # piezas de la escalera
     t1, t2 = FL[(tr, "T1")], FL[(tr, "T2")]
@@ -298,8 +316,7 @@ def plan_view(off, tr, plat_tr, first):
     V.pline([(d[0], d[2]), (d[1], d[2]), (d[1], d[3]), (d[0], d[3])], "E-CORTE", close=True)
     if first:
         pa = FL[(tr, "P")]
-        V.pline([(pa[0], pa[2]), (pa[1], pa[2]), (pa[1], pa[3]), (pa[0], pa[3])], "E-OCULTO", close=True,
-                 linetype=V.lt("OCULTA"))
+        dpl(V, [(pa[0], pa[2]), (pa[1], pa[2]), (pa[1], pa[3]), (pa[0], pa[3])], close=True)
         V.text(f"PLATAFORMA NPT {sgn2(pa[5])} (arriba)", ((pa[0] + pa[1]) / 2, pa[3] - 0.12), 1.5, "E-TEXTO")
     else:
         V.pline([(pl_[0], pl_[2]), (pl_[1], pl_[2]), (pl_[1], pl_[3]), (pl_[0], pl_[3])], "E-CORTE", close=True)
@@ -350,8 +367,6 @@ def plan_view(off, tr, plat_tr, first):
     V.dim((10.15, t2["v0"]), (10.15, t2["v1"]), (10.62, t2["v0"]), 90)
     V.dim((10.15, d[2]), (10.15, d[3]), (10.90, d[2]), 90, dec=3)
     V.dim((10.15, GV["N-4"]), (10.15, GV["N-3"]), (11.18, GV["N-4"]), 90, dec=3)
-    V.leader((9.00 if first else 9.15, 1.257), (9.60, 2.62) if False else (10.25, 2.72), "junta 0.015", 1.5, side=1,
-             layer="E-TEXTO") if False else None
     # marcas de corte
     section_mark(V, (5.92, t1["vc"]), (10.30, t1["vc"]), "A")
     section_mark(V, (5.92, t2["vc"]), (10.30, t2["vc"]), "B")
@@ -400,13 +415,6 @@ def pick_bars(val, hosts):
                 out.append(min(bl, key=lambda b: abs(b["pl"][:, 1].mean() - val)))
         out += [b for b in bars_of(h, "T") if b["pl"][:, 1].min() <= val <= b["pl"][:, 1].max()]
     return out
-
-
-def proj_flight(V, f, win):
-    """proyeccion (mas alla del corte) de un tramo: contorno de losa + peldanos"""
-    W = box(*win)
-    for tag in (f["tag"],):
-        pass
 
 
 def pt_on(b, frac=None, u=None):
@@ -680,23 +688,23 @@ V.hatch([(6.1, -0.15), (6.7, -0.15), (6.7, 0.15), (6.1, 0.15)], "E-COLUMNA-ACH")
 V.pline([(6.1, -0.15), (6.7, -0.15), (6.7, 0.15), (6.1, 0.15)], "E-COLUMNA", close=True)
 V.text("C-1", (6.40, 0.0), 1.6, "E-TEXTO")
 V.pline(list(CIMP.exterior.coords), "E-ZAPATA")
-V.pline([(f1["u0"], f1["v0"]), (6.98, f1["v0"])], "E-OCULTO", linetype=V.lt("OCULTA"))
-V.pline([(f1["u0"], f1["v1"]), (6.98, f1["v1"])], "E-OCULTO", linetype=V.lt("OCULTA"))
-V.pline([(f1["u0"], f1["v0"]), (f1["u0"], f1["v1"])], "E-OCULTO", linetype=V.lt("OCULTA"))
+dpl(V, [(f1["u0"], f1["v0"]), (6.98, f1["v0"])])
+dpl(V, [(f1["u0"], f1["v1"]), (6.98, f1["v1"])])
+dpl(V, [(f1["u0"], f1["v0"]), (f1["u0"], f1["v1"])])
 for u in f1["risers"][:3]:
-    V.line((u, f1["v0"]), (u, f1["v1"]), "E-OCULTO", linetype=V.lt("OCULTA"))
+    dpl(V, [(u, f1["v0"]), (u, f1["v1"])])
 V.text("TRAMO 1 (arriba)", (7.02, (f1["v0"] + f1["v1"]) / 2), 1.5, "E-TEXTO", rot=90)
 for b in mech:
     p = b["pl"]
     V.circle((p[0, 0], p[0, 1]), 0.55 * V.m, "E-ACERO", fill=True)
     V.pline([(p[1, 0], p[1, 1]), (p[-1, 0], p[-1, 1])], "E-ACERO")
 vm = [float(b["pl"][0, 1]) for b in mech]
-V.vdim_chain([cb0[1]] + vm + [cb1[1]], cb0[0], 5.80, texts=[f"{b_ - a_:.2f}" for a_, b_ in zip([cb0[1]] + vm, vm + [cb1[1]])])
+V.vdim_chain([cb0[1]] + vm + [cb1[1]], cb0[0], 5.74, texts=[f"{b_ - a_:.2f}" for a_, b_ in zip([cb0[1]] + vm, vm + [cb1[1]])])
 V.dim((cb1[0], cb0[1]), (cb1[0], cb1[1]), (6.86, cb0[1]), 90)
 V.dim((cb0[0], cb1[1]), (cb1[0], cb1[1]), (cb0[0], cb1[1] + 6 * V.m), 0)
 V.dim((cb0[0], cb1[1]), (f1["u0"], cb1[1]), (cb0[0], cb1[1] + 11 * V.m), 0)
 L(V, (vm[-1] * 0 + mech[-1]["pl"][0, 0], vm[-1]), (6.20, 1.60), "mecha extrema: sin recubr. lateral (obs. 1)", side=1, h=1.4)
-section_mark(V, (5.88, vC), (6.62, vC), "C")
+section_mark(V, (6.00, vC), (6.62, vC), "C")
 
 # ============================================================ 4. SECCION TRANSVERSAL TIPICA DE TRAMO 1:10 (perpendicular a la losa)
 TS = View(doc, 10, (0, 140))
@@ -719,7 +727,6 @@ TSD = {}
 for let in ("L", "S"):
     for b in bars_of(ft["tag"], let):
         p = b["pl"]
-        P = p[np.argmin(np.abs(p[:, 0] - umid))] if False else None
         i = int(np.argmax([np.linalg.norm(p[k + 1] - p[k]) for k in range(len(p) - 1)]))
         a, c = p[i], p[i + 1]
         P = a + (c - a) * ((umid - a[0]) / (c[0] - a[0]))
@@ -737,7 +744,7 @@ yS = TSD["S"][0][1]
 V.dim((ft["v0"], 0), (ft["v0"], yL - RAD["3/8"]), (ft["v0"] - 0.035, 0), 90, text=f"{yL - RAD['3/8']:.3f}")
 V.dim((ft["v0"], yS + RAD["3/8"]), (ft["v0"], tt), (ft["v0"] - 0.035, yS), 90, text=f"{tt - yS - RAD['3/8']:.3f}")
 xs_L = sorted(x for x, _ in TSD["L"])
-V.hdim_chain([ft["v0"]] + xs_L + [ft["v1"]], 0, -0.09 if False else tt + 0.07,
+V.hdim_chain([ft["v0"]] + xs_L + [ft["v1"]], 0, tt + 0.07,
              texts=[f"{b_ - a_:.3f}" if abs((b_ - a_) * 100 - round((b_ - a_) * 100)) > 0.05 else f"{b_ - a_:.2f}"
                     for a_, b_ in zip([ft["v0"]] + xs_L, xs_L + [ft["v1"]])])
 L(V, TSD["L"][2], (0.52, -0.075), f'{code_of(ft["tag"], "L")}: long. inf. (capa 1)', side=-1, h=1.8)
@@ -894,9 +901,9 @@ def render(doc, ps, base, pdf=True, dpi=110):
         ps, filter_func=lambda e: e.dxf.layer != "E-VPORT" or e.dxftype() == "VIEWPORT")
     page = layout.Page(W_, H_, layout.Units.mm, margins=layout.Margins.all(0))
     st_ = layout.Settings(fit_page=False, scale=1.0)
+    open(base + "_preview.png", "wb").write(be.get_pixmap_bytes(page, fmt="png", dpi=dpi, settings=st_))
     if pdf:
         open(base + ".pdf", "wb").write(be.get_pdf_bytes(page, settings=st_))
-    open(base + "_preview.png", "wb").write(be.get_pixmap_bytes(page, fmt="png", dpi=dpi, settings=st_))
 
 
 render(doc, ps, "E-09_Escalera", pdf=not os.environ.get("QUICK"))

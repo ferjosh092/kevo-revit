@@ -32,6 +32,7 @@ LAYERS = {
     "E-TABLA": (7, 18, None),
     "E-MARCO": (7, 50, None),
     "E-VPORT": (7, 13, None),
+    "E-HOJA": (7, 0, None),
 }
 
 
@@ -238,7 +239,7 @@ def section_mark(v: View, a, b, tag, flip=False):
 
 
 def frame_and_title(ps, W, H):
-    ps.add_lwpolyline([(0, 0), (W, 0), (W, H), (0, H)], close=True, dxfattribs={"layer": "E-VPORT"})
+    ps.add_lwpolyline([(0, 0), (W, 0), (W, H), (0, H)], close=True, dxfattribs={"layer": "E-HOJA", "lineweight": 0})
     ps.add_lwpolyline([(25, 10), (W - 10, 10), (W - 10, H - 10), (25, H - 10)], close=True,
                       dxfattribs={"layer": "E-MARCO", "lineweight": 70})
 
