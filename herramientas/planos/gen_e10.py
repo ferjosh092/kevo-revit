@@ -137,7 +137,8 @@ ptext(ps, "Columnas y escalera se asignan al nivel donde nacen; vigas y losas al
 # especificaciones generales
 esp = ["ESPECIFICACIONES TÉCNICAS GENERALES",
        "1. NORMAS: E.020 Cargas, E.030 Diseño Sismorresistente, E.050 Suelos y Cimentaciones, E.060 Concreto Armado.",
-       "2. CONCRETO: f'c = ____ kg/cm² (COMPLETAR según memoria de cálculo) en todos los elementos estructurales.",
+       "2. CONCRETO: f'c = 210 kg/cm² en columnas, vigas, zapatas, losas y escalera; f'c = 175 kg/cm² en falso piso;",
+       "    f'c = 100 kg/cm² en solados.",
        "3. ACERO: corrugado ASTM A615 Grado 60, fy = 4200 kg/cm².",
        "4. RECUBRIMIENTOS LIBRES: zapatas 7.5 cm; vigas y columnas 4 cm; losas y escalera 2 cm (medido 2.5 cm).",
        "5. SUELO: qadm = 1.22 - 1.31 kg/cm² a Df = 2.00 m (EMS). Cimiento de escalera a -1.00 m: confirmar.",

@@ -13,7 +13,8 @@ metros reales + layout con ventanas a escala) y PDF.
 | E-09 | Escalera: plantas, cortes, cimiento de arranque y cuadro de acero |
 | E-10 | Planilla de acero, metrados, especificaciones generales y observaciones |
 
-Antes de emitir: completar f'c y revisar `OBSERVACIONES_MODELO.md` (acero de vigas desplazado en el
+Concreto f'c = 210 kg/cm² (estructurales), 175 (falso piso), 100 (solados); fy = 4200 kg/cm².
+Antes de emitir: revisar `OBSERVACIONES_MODELO.md` (acero de vigas desplazado en el
 modelo, losas macizas, límite de propiedad, recubrimientos en la escalera).
 
 Visor BIM 3D para celular: https://claude.ai/artifact/3KgWQoNvcEe7pFJHi8hXLS

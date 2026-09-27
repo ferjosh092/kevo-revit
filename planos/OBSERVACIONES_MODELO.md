@@ -51,4 +51,5 @@ fuera de la línea de propiedad del modelo (v ≈ 0.03–0.39). Verificar con el
   cada barra y el peso nominal por metro.
 - Las barras de un conjunto se exportan como entidades separadas pero con la cantidad y longitud
   total del conjunto copiadas; sumar esos campos directamente da ~522 t en vez de 18.8 t.
-- f'c no está en el modelo: queda "____ kg/cm² (COMPLETAR)" en las notas.
+- f'c no está en el modelo; se tomó de la especificación del proyecto: 210 kg/cm² en elementos
+  estructurales, 175 en falso piso y 100 en solados (fy = 4200 kg/cm²).

@@ -208,7 +208,7 @@ Wt, Ht = table(ps, 40, yl_end - 8, [34, 24, 24, 24, 24], rows, row_h=6.0, h_txt=
 ptext(ps, "CUADRO DE VIGAS POR NIVEL", (40, yl_end - 6), 3.0, "E-TITULO")
 
 nts = ["NOTAS - VIGAS",
-       "1. CONCRETO f'c = ____ kg/cm² (COMPLETAR). ACERO ASTM A615 Gr. 60, fy = 4200 kg/cm².",
+       "1. CONCRETO f'c = 210 kg/cm². ACERO ASTM A615 Gr. 60, fy = 4200 kg/cm².",
        "2. RECUBRIMIENTO libre al estribo 4 cm. Estribos cerrados con gancho 135°.",
        "3. Barras corridas por eje; gancho estándar 90° en columnas extremas y en el extremo del volado.",
        "4. Traslapes fuera de nudos: sup. 1.15 m al centro del vano, inf. 0.90 m a 2h de la cara, alternados.",

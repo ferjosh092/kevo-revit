@@ -855,7 +855,7 @@ m1 = sorted(bars_of(CIM, "M"), key=lambda b: b["pl"][:, 1].mean())[0]
 lapv = lap
 notas = [
     "NOTAS - ESCALERA",
-    "1. CONCRETO f'c = ____ kg/cm² (COMPLETAR según memoria) en tramos, descansos, plataformas y cimiento de arranque.",
+    "1. CONCRETO f'c = 210 kg/cm² en tramos, descansos, plataformas y cimiento de arranque.",
     "2. ACERO corrugado ASTM A615 Grado 60, fy = 4200 kg/cm². Todo el acero de escalera es Ø3/8\" (0.56 kg/m).",
     "3. RECUBRIMIENTO libre 2 cm en losas de escalera (E.060 7.7.1); cimiento de arranque 7.5 cm contra el terreno.",
     "4. Losa (garganta) e = 0.15 m. Malla inferior Ø3/8\" en dos capas (capa 1 longitudinal abajo, capa 2 transversal)",

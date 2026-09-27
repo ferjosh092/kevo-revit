@@ -493,7 +493,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461311.109525463
+2461311.2422453705
   9
 $TDUCREATE
  40
@@ -501,7 +501,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461311.109525463
+2461311.2422453705
   9
 $TDUUPDATE
  40
@@ -553,7 +553,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-288
+289
   9
 $SURFTAB1
  70
@@ -933,11 +933,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{B6E3A9A3-AD7F-4C14-8AEF-FDEC7688752C}
+{F03E645B-BEA7-4F1F-BB4E-DFDB7977D7E8}
   9
 $VERSIONGUID
   2
-{4EF9C086-C86B-4D81-A4A9-63913F8D8649}
+{4BB773FD-9E98-4903-8DEB-CC6CA4843DC9}
   9
 $EXTNAMES
 290
@@ -1377,7 +1377,7 @@ AcDbSymbolTable
   0
 VPORT
   5
-284
+285
 330
 8
 100
@@ -3691,7 +3691,7 @@ ACAD
   0
 APPID
   5
-285
+286
 330
 3
 100
@@ -3705,7 +3705,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-286
+287
 330
 3
 100
@@ -22155,7 +22155,7 @@ AcDbText
  40
 2.3
   1
-2. CONCRETO: f'c = ____ kg/cm² (COMPLETAR según memoria de cálculo) en todos los elementos estructurales.
+2. CONCRETO: f'c = 210 kg/cm² en columnas, vigas, zapatas, losas y escalera; f'c = 175 kg/cm² en falso piso;
   7
 ARIAL
  41
@@ -22193,7 +22193,7 @@ AcDbText
  40
 2.3
   1
-3. ACERO: corrugado ASTM A615 Grado 60, fy = 4200 kg/cm².
+    f'c = 100 kg/cm² en solados.
   7
 ARIAL
  41
@@ -22231,7 +22231,7 @@ AcDbText
  40
 2.3
   1
-4. RECUBRIMIENTOS LIBRES: zapatas 7.5 cm; vigas y columnas 4 cm; losas y escalera 2 cm (medido 2.5 cm).
+3. ACERO: corrugado ASTM A615 Grado 60, fy = 4200 kg/cm².
   7
 ARIAL
  41
@@ -22269,7 +22269,7 @@ AcDbText
  40
 2.3
   1
-5. SUELO: qadm = 1.22 - 1.31 kg/cm² a Df = 2.00 m (EMS). Cimiento de escalera a -1.00 m: confirmar.
+4. RECUBRIMIENTOS LIBRES: zapatas 7.5 cm; vigas y columnas 4 cm; losas y escalera 2 cm (medido 2.5 cm).
   7
 ARIAL
  41
@@ -22307,7 +22307,7 @@ AcDbText
  40
 2.3
   1
-6. SOBRECARGAS (nodo 14): piso terminado 100, tabiquería equivalente 210, s/c 200 kg/m².
+5. SUELO: qadm = 1.22 - 1.31 kg/cm² a Df = 2.00 m (EMS). Cimiento de escalera a -1.00 m: confirmar.
   7
 ARIAL
  41
@@ -22345,7 +22345,7 @@ AcDbText
  40
 2.3
   1
-7. GANCHOS: estándar 90° (12 db) en anclajes; estribos y grapas 135° con extensión 6 db ≥ 7.5 cm.
+6. SOBRECARGAS (nodo 14): piso terminado 100, tabiquería equivalente 210, s/c 200 kg/m².
   7
 ARIAL
  41
@@ -22383,7 +22383,7 @@ AcDbText
  40
 2.3
   1
-8. TRASLAPES clase B: Ø3/4" sup. 1.15 / inf. 0.90; Ø5/8" 0.75; Ø1/2" 0.60 m. Fuera de nudos y zonas de confinamiento.
+7. GANCHOS: estándar 90° (12 db) en anclajes; estribos y grapas 135° con extensión 6 db ≥ 7.5 cm.
   7
 ARIAL
  41
@@ -22421,7 +22421,7 @@ AcDbText
  40
 2.3
   1
-9. Cotas en metros. Niveles: NFZ -2.00, N1 ±0.00, N2 +3.20, N3 +5.80, N4 +8.40, N5 +11.00.
+8. TRASLAPES clase B: Ø3/4" sup. 1.15 / inf. 0.90; Ø5/8" 0.75; Ø1/2" 0.60 m. Fuera de nudos y zonas de confinamiento.
   7
 ARIAL
  41
@@ -22459,7 +22459,7 @@ AcDbText
  40
 2.3
   1
-10. Láminas generadas del modelo IFC 'Proyect sj.ifc' (Revit 2027); cantidades según el modelo.
+9. Cotas en metros. Niveles: NFZ -2.00, N1 ±0.00, N2 +3.20, N3 +5.80, N4 +8.40, N5 +11.00.
   7
 ARIAL
  41
@@ -22478,6 +22478,44 @@ AcDbText
 TEXT
   5
 265
+330
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-TEXTO
+100
+AcDbText
+ 10
+30.0
+ 20
+122.2
+ 30
+0.0
+ 40
+2.3
+  1
+10. Láminas generadas del modelo IFC 'Proyect sj.ifc' (Revit 2027); cantidades según el modelo.
+  7
+ARIAL
+ 41
+0.9
+ 11
+30.0
+ 21
+122.2
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+266
 330
 A2
 100
@@ -22515,7 +22553,7 @@ AcDbText
   0
 TEXT
   5
-266
+267
 330
 A2
 100
@@ -22553,7 +22591,7 @@ AcDbText
   0
 TEXT
   5
-267
+268
 330
 A2
 100
@@ -22591,7 +22629,7 @@ AcDbText
   0
 TEXT
   5
-268
+269
 330
 A2
 100
@@ -22629,7 +22667,7 @@ AcDbText
   0
 TEXT
   5
-269
+26A
 330
 A2
 100
@@ -22667,7 +22705,7 @@ AcDbText
   0
 TEXT
   5
-26A
+26B
 330
 A2
 100
@@ -22705,7 +22743,7 @@ AcDbText
   0
 TEXT
   5
-26B
+26C
 330
 A2
 100
@@ -22743,7 +22781,7 @@ AcDbText
   0
 TEXT
   5
-26C
+26D
 330
 A2
 100
@@ -22781,7 +22819,7 @@ AcDbText
   0
 TEXT
   5
-26D
+26E
 330
 A2
 100
@@ -22819,7 +22857,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-26E
+26F
 330
 A2
 100
@@ -22855,34 +22893,6 @@ AcDbPolyline
   0
 LINE
   5
-26F
-330
-A2
-100
-AcDbEntity
- 67
-1
-  8
-E-MARCO
-370
-25
-100
-AcDbLine
- 10
-631.0
- 20
-54.0
- 30
-0.0
- 11
-831.0
- 21
-54.0
- 31
-0.0
-  0
-LINE
-  5
 270
 330
 A2
@@ -22899,13 +22909,13 @@ AcDbLine
  10
 631.0
  20
-40.0
+54.0
  30
 0.0
  11
 831.0
  21
-40.0
+54.0
  31
 0.0
   0
@@ -22927,6 +22937,34 @@ AcDbLine
  10
 631.0
  20
+40.0
+ 30
+0.0
+ 11
+831.0
+ 21
+40.0
+ 31
+0.0
+  0
+LINE
+  5
+272
+330
+A2
+100
+AcDbEntity
+ 67
+1
+  8
+E-MARCO
+370
+25
+100
+AcDbLine
+ 10
+631.0
+ 20
 28.0
  30
 0.0
@@ -22939,7 +22977,7 @@ AcDbLine
   0
 LINE
   5
-272
+273
 330
 A2
 100
@@ -22967,7 +23005,7 @@ AcDbLine
   0
 LINE
   5
-273
+274
 330
 A2
 100
@@ -22995,7 +23033,7 @@ AcDbLine
   0
 TEXT
   5
-274
+275
 330
 A2
 100
@@ -23033,7 +23071,7 @@ AcDbText
   0
 TEXT
   5
-275
+276
 330
 A2
 100
@@ -23071,7 +23109,7 @@ AcDbText
   0
 TEXT
   5
-276
+277
 330
 A2
 100
@@ -23109,7 +23147,7 @@ AcDbText
   0
 TEXT
   5
-277
+278
 330
 A2
 100
@@ -23147,7 +23185,7 @@ AcDbText
   0
 TEXT
   5
-278
+279
 330
 A2
 100
@@ -23185,7 +23223,7 @@ AcDbText
   0
 TEXT
   5
-279
+27A
 330
 A2
 100
@@ -23223,7 +23261,7 @@ AcDbText
   0
 TEXT
   5
-27A
+27B
 330
 A2
 100
@@ -23263,7 +23301,7 @@ AcDbText
   0
 TEXT
   5
-27B
+27C
 330
 A2
 100
@@ -23303,7 +23341,7 @@ AcDbText
   0
 TEXT
   5
-27C
+27D
 330
 A2
 100
@@ -23341,7 +23379,7 @@ AcDbText
   0
 TEXT
   5
-27D
+27E
 330
 A2
 100
@@ -23379,7 +23417,7 @@ AcDbText
   0
 TEXT
   5
-27E
+27F
 330
 A2
 100
@@ -23417,7 +23455,7 @@ AcDbText
   0
 TEXT
   5
-27F
+280
 330
 A2
 100
@@ -23455,7 +23493,7 @@ AcDbText
   0
 TEXT
   5
-280
+281
 330
 A2
 100
@@ -23493,7 +23531,7 @@ AcDbText
   0
 TEXT
   5
-281
+282
 330
 A2
 100
@@ -23531,7 +23569,7 @@ AcDbText
   0
 TEXT
   5
-282
+283
 330
 A2
 100
@@ -23569,7 +23607,7 @@ AcDbText
   0
 TEXT
   5
-283
+284
 330
 A2
 100
@@ -24717,7 +24755,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-287
+288
   0
 DICTIONARYVAR
   5
@@ -24729,7 +24767,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-27T02:37:43.438641+00:00
+1.4.4 @ 2026-09-27T05:48:50.915540+00:00
   0
 VISUALSTYLE
   5
@@ -31411,7 +31449,7 @@ A6
   0
 DICTIONARYVAR
   5
-287
+288
 330
 2D
 100
@@ -31419,7 +31457,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-27T02:37:43.493308+00:00
+1.4.4 @ 2026-09-27T05:48:50.949113+00:00
   0
 ENDSEC
   0

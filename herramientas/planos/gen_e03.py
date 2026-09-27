@@ -265,7 +265,7 @@ add_vp(ps, 32 + _wd / 2, 145, _wd, 95, VE_.P(DET_W / 2 - 0.11, 0.25), 10)
 view_title(ps, 32 + _wd / 2, 90, "DETALLE DE ESTRIBOS Y GRAPAS (juego típico, medidas exteriores del modelo)", "ESC. 1:10", w=190)
 
 nts = ["NOTAS - COLUMNAS",
-       "1. CONCRETO f'c = ____ kg/cm² (COMPLETAR). ACERO ASTM A615 Gr. 60, fy = 4200 kg/cm².",
+       "1. CONCRETO f'c = 210 kg/cm². ACERO ASTM A615 Gr. 60, fy = 4200 kg/cm².",
        "2. RECUBRIMIENTO libre al estribo 4 cm.",
        "3. Estribos cerrados con ganchos de 135° y extensión 6 db (≥ 7.5 cm); grapas con 135°/90° alternados.",
        "4. Traslapes clase B a media altura libre: Ø5/8\" 0.75 m, Ø1/2\" 0.60 m, con bayoneta 1:6.",

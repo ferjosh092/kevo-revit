@@ -788,7 +788,7 @@ def build(level, code, basename):
     cargas = "piso terminado 100, tabiquería equivalente 210, s/c 200 kg/m²; muro de ladrillo de 10 cm en contorno y volados 516 kg/m"
     notas = [
         "NOTAS - LOSA ALIGERADA",
-        "1. CONCRETO f'c = ____ kg/cm² (COMPLETAR).  ACERO ASTM A615 Grado 60, fy = 4200 kg/cm².",
+        "1. CONCRETO f'c = 210 kg/cm².  ACERO ASTM A615 Grado 60, fy = 4200 kg/cm².",
         f"2. ALIGERADO h = {H:.2f} en una dirección: viguetas 0.10 @ 0.40, losita {LOSITA:.2f}, casetones de poliestireno",
         "    0.30 x 0.15. Los CASETONES NO ESTÁN MODELADOS: el modelo representa la losa como piso macizo de 0.20",
         "    (tipo PISO_ESTRUCTURAL_MACIZO_200mm_VOLADO); ubicarlos según la posición de viguetas de esta planta.",

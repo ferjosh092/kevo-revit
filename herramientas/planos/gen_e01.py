@@ -746,7 +746,7 @@ ptext(ps, "RESUMEN DE MATERIALES DE CIMENTACIÓN (calculado del modelo)", (tx0, 
 # ------------------------------------------------------------ notas
 notas = [
     "ESPECIFICACIONES TÉCNICAS - CIMENTACIÓN",
-    "1. CONCRETO f'c = ____ kg/cm² en zapatas, vigas de cimentación y cimiento de escalera (COMPLETAR según memoria).",
+    "1. CONCRETO f'c = 210 kg/cm² en zapatas, vigas de cimentación y cimiento de escalera; solados f'c = 100 kg/cm².",
     "2. ACERO corrugado ASTM A615 Grado 60, fy = 4200 kg/cm².",
     "3. RECUBRIMIENTOS: zapatas 7.5 cm (contra terreno); vigas de cimentación 4 cm; columnas ver E-03.",
     "4. SUELO (EMS): qadm = 1.22 - 1.31 kg/cm² a Df = 2.00 m. NFZ = -2.00 m. El cimiento de escalera se funda a -1.00 m:",
