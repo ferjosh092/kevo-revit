@@ -907,9 +907,11 @@ def render(doc, ps, base, pdf=True, dpi=110):
         ps, filter_func=lambda e: e.dxf.layer != "E-VPORT" or e.dxftype() == "VIEWPORT")
     page = layout.Page(W_, H_, layout.Units.mm, margins=layout.Margins.all(0))
     st_ = layout.Settings(fit_page=False, scale=1.0)
-    open(base + "_preview.png", "wb").write(be.get_pixmap_bytes(page, fmt="png", dpi=dpi, settings=st_))
+    # get_pdf_bytes / get_pixmap_bytes transforman la grabacion en su lugar: el PDF va PRIMERO (una sola
+    # transformacion); si se genera despues de la imagen, sale con la escala aplicada dos veces
     if pdf:
         open(base + ".pdf", "wb").write(be.get_pdf_bytes(page, settings=st_))
+    open(base + "_preview.png", "wb").write(be.get_pixmap_bytes(page, fmt="png", dpi=dpi, settings=st_))
 
 
 render(doc, ps, "E-09_Escalera", pdf=not os.environ.get("QUICK"))
