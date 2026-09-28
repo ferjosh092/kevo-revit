@@ -157,8 +157,8 @@ obs = ["OBSERVACIONES DEL MODELO (revisión automática del IFC)",
        "   Malla Ø1/4\" a la misma cota que los bastones: ~5 mm de interferencia en cruces (ajustar en obra).",
        "C. VIGA CHATA: barras superiores 3.3 cm bajo la esquina del estribo; una barra cruza la rama del estribo.",
        "D. LÍMITE DE PROPIEDAD: zapatas y columnas del eje N-4 lo sobrepasan hasta 0.60 m (verificar levantamiento).",
-       "E. ESCALERA: acero modelado con 2.0 cm libres (mínimo de proyecto 2.5 cm; 5 cm en el cimiento); 6 mechas",
-       "   reemplazadas por 5 centradas. Se dibuja y metra corregido (E-09); ajustar el modelo con el nodo 13.",
+       "E. ESCALERA: extremos y anclajes con 1.6-2.2 cm libres en el modelo (mínimo 2.5 cm; 5 cm en el cimiento).",
+       "   Se dibuja y metra corregido (E-09); mechas y nudo J1 ya correctos. Ajustar con el nodo 13 actualizado.",
        "F. Revit exporta el peso del acero en 0: los pesos de esta lámina se calculan con longitudes y kg/m nominales."]
 notes(ps, 300, 175, obs, h=2.3, lead=4.6, title_h=2.8)
 

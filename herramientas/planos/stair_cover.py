@@ -3,7 +3,7 @@ Salida: stair_cover.json  {bar_id: {piso, pieza, role, d, cover_min, punto, dir_
 import itertools, json
 from sheetcommon import *
 
-M = load_model()
+M = load_model(design=False)
 E = M["elements"]
 
 

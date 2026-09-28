@@ -636,8 +636,9 @@ for hp, zl in ((hp2, 2.90), (hp3, 5.50)):
     L(V, (6.20, zb), (6.12, zl), lab_txt(hp, "L"), side=-1)
     L(V, dot_of(selB, hp, 6.13), (6.02, zl - 0.18), lab_txt(hp, "T"), side=-1)
 nj1 = rect(PC[("N1-N2", "NUDO_PRISMATICO_J1")])
-V.leader(((nj1[0] + nj1[1]) / 2, (nj1[5] + p2[4]) / 2), (6.70, 2.36), f"vacío de {p2[4] - nj1[5]:.2f} en el modelo (obs. 3)",
-         1.5, side=-1, layer="E-TEXTO")
+if p2[4] - nj1[5] > 0.005:
+    V.leader(((nj1[0] + nj1[1]) / 2, (nj1[5] + p2[4]) / 2), (6.70, 2.36), f"vacío de {p2[4] - nj1[5]:.2f} en el modelo",
+             1.5, side=-1, layer="E-TEXTO")
 for k in ("A-2", "A-3"):
     V.line((GU[k], BW[1] + 0.02 + 8.4 * m), (GU[k], 1.80), "E-EJES", linetype=V.lt("EJE"))
     V.grid_bubble((GU[k], BW[1] + 0.02 + 4.4 * m), k, 4)
@@ -872,23 +873,21 @@ notas = [
     "    CORREGIR POSICIÓN DE MECHAS SEGÚN DETALLE (corte C-C y planta del cimiento).",
     "7. Traslape de Ø3/8\" = 0.45 m. El cimiento se vacía antes que la escalera (dejar mechas).",
     "8. Cimiento de arranque 1.25 x 0.50 x 1.00, fondo -1.00: confirmar capacidad portante a esa profundidad (EMS a Df 2.00).",
-    "9. Niveles NPT en metros. Plano generado del modelo IFC 'Proyect sj.ifc'; acero del modelo corregido (nodo 13 pendiente).",
+    "9. Niveles NPT en metros. Plano generado del modelo IFC 'Proyect sj.ifc'; acero dibujado a los recubrimientos de proyecto.",
 ]
 ny = notes(ps, 280, 168, notas, h=2.1, lead=4.4)
 obs = [
     "OBSERVACIONES DEL MODELO (revisar antes de emitir)",
-    "1. En el modelo el acero de escalera tiene 2.0 cm libres (1.1-1.3 cm en patas y bordes de N1-N2), bajo el mínimo",
-    "    de 2.5 cm: en esta lámina se dibuja corregido. Ajustar el modelo con el nodo 13.",
-    "2. Las 6 mechas del modelo (la extrema sin recubrimiento lateral, las demás con 2.2 cm al tope del cimiento) se",
-    "    reemplazan por 5 mechas centradas en el bloque, a ≥ 5 cm de sus caras, traslape 0.45 con el acero superior.",
-    "3. Nudo de llegada del tramo 2 (J1) termina 0.05 bajo el fondo de la plataforma (+3.00 vs +3.05; igual en N3-N5):",
-    "    vacío en el modelo que atraviesan los anclajes del tramo 2. En obra se vacía monolítico.",
-    "4. Capa 2 (transversal) a 4.5 mm de eje de la capa 1 (7.3 mm en T2 N1-N2): las mallas se interfieren en el modelo;",
-    "    en obra la transversal apoya sobre la longitudinal.",
+    "1. En el IFC, 77 barras en N1-N2 y 51 por piso típico tienen 1.6 - 2.2 cm libres en extremos y anclajes",
+    "    (patas en nudos): aquí se dibujan con 2.5 cm. Se ajustan con el nodo 13 actualizado (herramientas/dynamo).",
+    "2. Mechas: el modelo ya tiene las 5 mechas centradas @ 0.20 del detalle (ids 231415 - 231419).",
+    "3. Nudo J1 (nodo 18) llega al fondo de la plataforma: sin vacío bajo la llegada del tramo 2.",
+    "4. Capa 2 (transversal) de T2 N1-N2 cruza 0.4 - 4.2 mm la capa 1 en el modelo; se corrige con",
+    "    correccion_escalera.py (correr después del nodo 13). En obra la transversal apoya sobre la longitudinal.",
     "5. Acero superior sin barras transversales de repartición en el modelo: definir (sugerido Ø3/8\" @ .25).",
     "6. Descansos intermedios sin viga de apoyo modelada (apoyan en los tramos y en las caras de columnas A-3).",
 ]
-notes(ps, 520, 234, obs, h=2.1, lead=4.4)
+notes(ps, 520, 229, obs, h=2.1, lead=4.4)
 
 title_block(ps, "E-09", ["ESCALERA: PLANTAS, CORTES, CIMIENTO DE", "ARRANQUE Y CUADRO DE ACERO"])
 import os
