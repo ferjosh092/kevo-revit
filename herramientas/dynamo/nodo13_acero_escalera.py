@@ -475,7 +475,7 @@ def plan_piece(fr, frames):
                 hi = pts[-1]
                 g = flat_piece_at(frames, add(hi, h, 0.20 * M), hi[2])
                 if g is not None and sin_t > 1e-6:
-                    z_t = g["poly"][0][2] + g["esp"] - COVER - d / 2.0
+                    z_t = g["poly"][0][2] + g["esp"] - COVER - d / 2.0 - 0.01 * M   # pata alta 1 cm bajo la capa teorica (margen de Revit)
                     cos_t = math.sqrt(max(1e-12, 1.0 - sin_t * sin_t))
                     k1 = P(fr, a1 + 0.06 * M / cos_t, v, w1)          # 6 cm (en planta) pasado el borde del tramo
                     if 0.05 * M < z_t - k1[2] < 0.60 * M:
@@ -508,11 +508,11 @@ def plan_piece(fr, frames):
                 # barra quede dentro de la losa, a BORDE de la cara extrema.
                 tan_t = sin_t / cos_t
                 lo = P(fr, a0 + BORDE + w_t * tan_t, v, w_t)
-                hi = P(fr, a1 - BORDE, v, w_t)
+                hi = P(fr, a1 - BORDE - w_t * tan_t, v, w_t)          # extremo alto de la S retirado de la cara extrema
                 pts = [lo, hi]
                 g = flat_piece_at(frames, add(hi, h, 0.20 * M), hi[2])
                 if g is not None:
-                    z_t = g["poly"][0][2] + g["esp"] - COVER - d / 2.0
+                    z_t = g["poly"][0][2] + g["esp"] - COVER - d / 2.0 - 0.01 * M   # pata alta 1 cm bajo la capa teorica (margen de Revit)
                     # subida dentro del nudo, a 10 cm EN PLANTA pasado el borde del tramo
                     k1 = P(fr, a1 + (0.10 * M + w_t * sin_t) / cos_t, v, w_t)
                     if 0.03 * M < z_t - k1[2] < 0.60 * M:
@@ -583,6 +583,9 @@ def plan_piece(fr, frames):
                             continue
                         lo_m = P(fr, a0s + BORDE + w_t * tan_t, vm, w_t)
                         k = add(lo_m, fr["e1"], -retro / cos_t)
+                        z_q = cz["z1"] - COVER - d / 2.0                  # el quiebre queda dentro del bloque
+                        if k[2] > z_q:
+                            k = (k[0], k[1], z_q)
                         if k[2] - z_bajo < 0.30 * M or -retro / cos_t > TRASLAPE_38 - 0.10 * M:
                             continue
                         extras.append(("MECHA_SUP{}".format(j + 1),
@@ -838,8 +841,13 @@ try:
                         loc = reg.local(lo, hi)
                         lat = fr["e2"] if (tag.startswith("L") or tag.startswith("S") or tag.startswith("MECHA")) else fr["e1"]
                         mejor = None
+                        vs_fr = [q[1] for q in fr["uv"]] if lat is fr["e2"] else [q[0] for q in fr["uv"]]
                         for dl in (0.0, 0.010 * M, -0.010 * M, 0.020 * M, -0.020 * M, 0.030 * M, -0.030 * M):
                             cand = [add(p, lat, dl) for p in pts]
+                            if dl != 0.0 and lat is fr["e2"] and tag[0] in "LS":
+                                vv = [dot(add(q, fr["P0"], -1.0), lat) for q in cand]
+                                if min(vv) < min(vs_fr) + BORDE - 1e-6 or max(vv) > max(vs_fr) - BORDE + 1e-6:
+                                    continue                             # la correccion no puede quitar recubrimiento
                             pen, quien = loc.worst(cand, D38 / 2.0, 0.0)
                             if mejor is None or pen < mejor[0]:
                                 mejor = (pen, quien, cand)
