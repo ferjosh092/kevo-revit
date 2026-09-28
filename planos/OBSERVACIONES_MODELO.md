@@ -41,18 +41,24 @@ por dentro de las de los ejes N únicamente dentro de la columna (bayoneta), no 
 Las zapatas Z-1 del eje N-4 (hasta v = -0.60) y las columnas de escalera (hasta -0.15) quedan
 fuera de la línea de propiedad del modelo (v ≈ 0.03–0.39). Verificar con el levantamiento.
 
-## 4. Escalera — recubrimientos (nodo 13)
+## 4. Escalera — recubrimientos (nodos 13 y 18)
 
 Mínimo de proyecto: 2.5 cm en tramos, descansos y plataformas; 5 cm en el cimiento de arranque.
-En el modelo el acero de escalera tiene 2.0 cm libres en casi todas las barras (83 de 86 en N1-N2, 75 de 76
-en cada piso típico) y 1.1–1.3 cm en las patas superiores del tramo 1 y en las barras de borde del descanso
-y la plataforma de N1-N2. Las 6 mechas del cimiento tienen 2.2 cm al tope del bloque y la extrema (id 228658)
-queda sin recubrimiento lateral. Lista completa: `ESCALERA_RECUBRIMIENTOS.csv`.
 
-En E-09 (y E-01) el acero se dibuja corregido y las mechas se reemplazan por 5 centradas @ 0.20, a ≥ 5 cm de
-las caras, con traslape de 0.45 con el acero superior del tramo ("corregir posición de mechas según detalle").
-El modelo se ajusta con `herramientas/dynamo/nodo13_acero_escalera.py` (recubrimiento 2.5 cm libres también a los bordes: `BORDE = COVER + Ø/2`; 5 mechas centradas @ 0.20 con rama vertical a 0.16 de la cara posterior, traslape sin contacto ≤ 9 cm de la barra superior, E.060) y `nodo18_rediseno_escalera.py` (nudo J1 hasta el fondo de la plataforma). En el IFC actual los anclajes del tramo 2 atraviesan un vacío de 5 cm bajo la plataforma (nudo J1); el nodo 18
-corregido lo cierra.
+Estado del IFC actual (nodos 18, 9B y 13 corridos):
+
+- **Nudo J1 (nodo 18):** llega al fondo de la plataforma en los 4 pisos; ya no hay vacío.
+- **Mechas:** 5 centradas @ 0.20 (ids 231415–231419), rama vertical a 0.16 de la cara posterior, ≥ 5 cm
+  libres en el bloque, traslape 0.45: coinciden con el detalle de E-09.
+- **Extremos y anclajes:** 77 barras en N1-N2 y 51 por piso típico con 1.6–2.2 cm libres (extremos de T y de L
+  de descansos y plataformas, patas altas en J2/J1, L10 corridas por la corrección anti-choque). En E-09 se
+  dibujan con 2.5 cm. Se ajustan con el nodo 13 actualizado (extremo alto de S, patas altas 1 cm más abajo,
+  quiebre de mechas dentro del bloque, corrección anti-choque sin quitar recubrimiento). Si los extremos de las T
+  siguen a 2.0 cm, revisar el recubrimiento asignado a las losas de escalera en Revit (debe ser 25 mm).
+- **Cruces:** T2–T9 del tramo 2 de N1-N2 cruzan 0.4–4.2 mm la capa 1; se corrigen con
+  `herramientas/dynamo/correccion_escalera.py`, que se corre **después** del nodo 13.
+
+Lista por barra: `ESCALERA_RECUBRIMIENTOS.csv`.
 
 ## 5. Otros
 

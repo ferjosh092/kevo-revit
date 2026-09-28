@@ -1,315 +1,314 @@
 id,piso,pieza,rol,d,rec_modelo_cm,minimo_cm,falla,correccion
-228653,N1-N2,Cimiento,MECHA_SUP1,3/8,2.2,5.0,True,reemplazada (5 mechas centradas)
-228654,N1-N2,Cimiento,MECHA_SUP2,3/8,2.2,5.0,True,reemplazada (5 mechas centradas)
-228655,N1-N2,Cimiento,MECHA_SUP3,3/8,2.2,5.0,True,reemplazada (5 mechas centradas)
-228656,N1-N2,Cimiento,MECHA_SUP4,3/8,2.2,5.0,True,reemplazada (5 mechas centradas)
-228657,N1-N2,Cimiento,MECHA_SUP5,3/8,2.2,5.0,True,reemplazada (5 mechas centradas)
-228658,N1-N2,Cimiento,MECHA_SUP6,3/8,0.0,5.0,True,reemplazada (5 mechas centradas)
-228594,N1-N2,Descanso,L1,3/8,2.1,2.5,True,trasladada 1.5 cm máx.
-228603,N1-N2,Descanso,L10,3/8,1.1,2.5,True,trasladada 1.5 cm máx.
-228595,N1-N2,Descanso,L2,3/8,2.1,2.5,True,trasladada 1.5 cm máx.
-228596,N1-N2,Descanso,L3,3/8,2.1,2.5,True,trasladada 1.5 cm máx.
-228597,N1-N2,Descanso,L4,3/8,2.1,2.5,True,trasladada 1.5 cm máx.
-228598,N1-N2,Descanso,L5,3/8,2.1,2.5,True,trasladada 1.5 cm máx.
-228599,N1-N2,Descanso,L6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228600,N1-N2,Descanso,L7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228601,N1-N2,Descanso,L8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228602,N1-N2,Descanso,L9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228604,N1-N2,Descanso,T1,3/8,2.1,2.5,True,trasladada 2.7 cm máx.
-228605,N1-N2,Descanso,T2,3/8,2.1,2.5,True,trasladada 2.7 cm máx.
-228606,N1-N2,Descanso,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228607,N1-N2,Descanso,T4,3/8,3.0,2.5,False,trasladada 0.5 cm máx.
-228608,N1-N2,Descanso,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228609,N1-N2,Descanso,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228610,N1-N2,Plataforma,L1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228619,N1-N2,Plataforma,L10,3/8,1.1,2.5,True,trasladada 1.5 cm máx.
-228611,N1-N2,Plataforma,L2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228612,N1-N2,Plataforma,L3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228613,N1-N2,Plataforma,L4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228614,N1-N2,Plataforma,L5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228615,N1-N2,Plataforma,L6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228616,N1-N2,Plataforma,L7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228617,N1-N2,Plataforma,L8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228618,N1-N2,Plataforma,L9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228620,N1-N2,Plataforma,T1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228621,N1-N2,Plataforma,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228622,N1-N2,Plataforma,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228623,N1-N2,Plataforma,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228624,N1-N2,Plataforma,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228625,N1-N2,Plataforma,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228626,N1-N2,Tramo 1,L1,3/8,1.3,2.5,True,trasladada 1.7 cm máx.
-228627,N1-N2,Tramo 1,L2,3/8,1.3,2.5,True,trasladada 1.7 cm máx.
-228628,N1-N2,Tramo 1,L3,3/8,1.3,2.5,True,trasladada 1.7 cm máx.
-228629,N1-N2,Tramo 1,L4,3/8,1.3,2.5,True,trasladada 1.7 cm máx.
-228630,N1-N2,Tramo 1,L5,3/8,1.3,2.5,True,trasladada 1.7 cm máx.
-228631,N1-N2,Tramo 1,L6,3/8,1.3,2.5,True,trasladada 1.7 cm máx.
-228632,N1-N2,Tramo 1,S1,3/8,1.3,2.5,True,trasladada 2.8 cm máx.
-228633,N1-N2,Tramo 1,S2,3/8,1.3,2.5,True,trasladada 2.8 cm máx.
-228634,N1-N2,Tramo 1,S3,3/8,1.3,2.5,True,trasladada 2.8 cm máx.
-228635,N1-N2,Tramo 1,S4,3/8,1.3,2.5,True,trasladada 2.8 cm máx.
-228636,N1-N2,Tramo 1,S5,3/8,1.3,2.5,True,trasladada 2.8 cm máx.
-228637,N1-N2,Tramo 1,S6,3/8,1.3,2.5,True,trasladada 2.8 cm máx.
-228638,N1-N2,Tramo 1,T1,3/8,3.1,2.5,False,trasladada 0.5 cm máx.
-228647,N1-N2,Tramo 1,T10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228648,N1-N2,Tramo 1,T11,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228649,N1-N2,Tramo 1,T12,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228650,N1-N2,Tramo 1,T13,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228651,N1-N2,Tramo 1,T14,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228652,N1-N2,Tramo 1,T15,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228639,N1-N2,Tramo 1,T2,3/8,3.1,2.5,False,trasladada 0.5 cm máx.
-228640,N1-N2,Tramo 1,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228641,N1-N2,Tramo 1,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228642,N1-N2,Tramo 1,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228643,N1-N2,Tramo 1,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228644,N1-N2,Tramo 1,T7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228645,N1-N2,Tramo 1,T8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228646,N1-N2,Tramo 1,T9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228573,N1-N2,Tramo 2,L1,3/8,vacío J1,2.5,True,trasladada 3.0 cm máx.
-228574,N1-N2,Tramo 2,L2,3/8,vacío J1,2.5,True,trasladada 3.0 cm máx.
-228575,N1-N2,Tramo 2,L3,3/8,vacío J1,2.5,True,trasladada 3.0 cm máx.
-228576,N1-N2,Tramo 2,L4,3/8,vacío J1,2.5,True,trasladada 3.0 cm máx.
-228577,N1-N2,Tramo 2,L5,3/8,vacío J1,2.5,True,trasladada 3.0 cm máx.
-228578,N1-N2,Tramo 2,L6,3/8,vacío J1,2.5,True,trasladada 3.0 cm máx.
-228579,N1-N2,Tramo 2,S1,3/8,vacío J1,2.5,True,trasladada 3.6 cm máx.
-228580,N1-N2,Tramo 2,S2,3/8,vacío J1,2.5,True,trasladada 3.6 cm máx.
-228581,N1-N2,Tramo 2,S3,3/8,vacío J1,2.5,True,trasladada 3.6 cm máx.
-228582,N1-N2,Tramo 2,S4,3/8,vacío J1,2.5,True,trasladada 3.6 cm máx.
-228583,N1-N2,Tramo 2,S5,3/8,vacío J1,2.5,True,trasladada 3.6 cm máx.
-228584,N1-N2,Tramo 2,S6,3/8,vacío J1,2.5,True,trasladada 3.6 cm máx.
-228585,N1-N2,Tramo 2,T1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228586,N1-N2,Tramo 2,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228587,N1-N2,Tramo 2,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228588,N1-N2,Tramo 2,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228589,N1-N2,Tramo 2,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228590,N1-N2,Tramo 2,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228591,N1-N2,Tramo 2,T7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228592,N1-N2,Tramo 2,T8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228593,N1-N2,Tramo 2,T9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228659,N2-N3,Descanso,L1,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
-228668,N2-N3,Descanso,L10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228660,N2-N3,Descanso,L2,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
-228661,N2-N3,Descanso,L3,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
-228662,N2-N3,Descanso,L4,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
-228663,N2-N3,Descanso,L5,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
-228664,N2-N3,Descanso,L6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228665,N2-N3,Descanso,L7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228666,N2-N3,Descanso,L8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228667,N2-N3,Descanso,L9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228669,N2-N3,Descanso,T1,3/8,2.1,2.5,True,trasladada 2.7 cm máx.
-228670,N2-N3,Descanso,T2,3/8,2.1,2.5,True,trasladada 2.7 cm máx.
-228671,N2-N3,Descanso,T3,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
-228672,N2-N3,Descanso,T4,3/8,3.0,2.5,False,—
-228673,N2-N3,Descanso,T5,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
-228674,N2-N3,Descanso,T6,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
-228675,N2-N3,Plataforma,L1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228684,N2-N3,Plataforma,L10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228676,N2-N3,Plataforma,L2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228677,N2-N3,Plataforma,L3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228678,N2-N3,Plataforma,L4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228679,N2-N3,Plataforma,L5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228680,N2-N3,Plataforma,L6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228681,N2-N3,Plataforma,L7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228682,N2-N3,Plataforma,L8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228683,N2-N3,Plataforma,L9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228685,N2-N3,Plataforma,T1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228686,N2-N3,Plataforma,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228687,N2-N3,Plataforma,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228688,N2-N3,Plataforma,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228689,N2-N3,Plataforma,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228690,N2-N3,Plataforma,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228551,N2-N3,Tramo 1,L1,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228552,N2-N3,Tramo 1,L2,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228553,N2-N3,Tramo 1,L3,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228554,N2-N3,Tramo 1,L4,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228555,N2-N3,Tramo 1,L5,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228556,N2-N3,Tramo 1,L6,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228557,N2-N3,Tramo 1,S1,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228558,N2-N3,Tramo 1,S2,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228559,N2-N3,Tramo 1,S3,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228560,N2-N3,Tramo 1,S4,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228561,N2-N3,Tramo 1,S5,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228562,N2-N3,Tramo 1,S6,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228563,N2-N3,Tramo 1,T1,3/8,1.5,2.5,True,trasladada 0.5 cm máx.
-228572,N2-N3,Tramo 1,T10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228564,N2-N3,Tramo 1,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228565,N2-N3,Tramo 1,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228566,N2-N3,Tramo 1,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228567,N2-N3,Tramo 1,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228568,N2-N3,Tramo 1,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228569,N2-N3,Tramo 1,T7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228570,N2-N3,Tramo 1,T8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228571,N2-N3,Tramo 1,T9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228691,N2-N3,Tramo 2,L1,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228692,N2-N3,Tramo 2,L2,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228693,N2-N3,Tramo 2,L3,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228694,N2-N3,Tramo 2,L4,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228695,N2-N3,Tramo 2,L5,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228696,N2-N3,Tramo 2,L6,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228697,N2-N3,Tramo 2,S1,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228698,N2-N3,Tramo 2,S2,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228699,N2-N3,Tramo 2,S3,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228700,N2-N3,Tramo 2,S4,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228701,N2-N3,Tramo 2,S5,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228702,N2-N3,Tramo 2,S6,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228703,N2-N3,Tramo 2,T1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228712,N2-N3,Tramo 2,T10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228704,N2-N3,Tramo 2,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228705,N2-N3,Tramo 2,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228706,N2-N3,Tramo 2,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228707,N2-N3,Tramo 2,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228708,N2-N3,Tramo 2,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228709,N2-N3,Tramo 2,T7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228710,N2-N3,Tramo 2,T8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228711,N2-N3,Tramo 2,T9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228713,N3-N4,Descanso,L1,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
-228722,N3-N4,Descanso,L10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228714,N3-N4,Descanso,L2,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
-228715,N3-N4,Descanso,L3,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
-228716,N3-N4,Descanso,L4,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
-228717,N3-N4,Descanso,L5,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
-228718,N3-N4,Descanso,L6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228719,N3-N4,Descanso,L7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228720,N3-N4,Descanso,L8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228721,N3-N4,Descanso,L9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228723,N3-N4,Descanso,T1,3/8,2.1,2.5,True,trasladada 2.7 cm máx.
-228724,N3-N4,Descanso,T2,3/8,2.1,2.5,True,trasladada 2.7 cm máx.
-228725,N3-N4,Descanso,T3,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
-228726,N3-N4,Descanso,T4,3/8,3.0,2.5,False,—
-228727,N3-N4,Descanso,T5,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
-228728,N3-N4,Descanso,T6,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
-228729,N3-N4,Plataforma,L1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228738,N3-N4,Plataforma,L10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228730,N3-N4,Plataforma,L2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228731,N3-N4,Plataforma,L3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228732,N3-N4,Plataforma,L4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228733,N3-N4,Plataforma,L5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228734,N3-N4,Plataforma,L6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228735,N3-N4,Plataforma,L7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228736,N3-N4,Plataforma,L8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228737,N3-N4,Plataforma,L9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228739,N3-N4,Plataforma,T1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228740,N3-N4,Plataforma,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228741,N3-N4,Plataforma,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228742,N3-N4,Plataforma,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228743,N3-N4,Plataforma,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228744,N3-N4,Plataforma,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228745,N3-N4,Tramo 1,L1,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228746,N3-N4,Tramo 1,L2,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228747,N3-N4,Tramo 1,L3,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228748,N3-N4,Tramo 1,L4,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228749,N3-N4,Tramo 1,L5,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228750,N3-N4,Tramo 1,L6,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228751,N3-N4,Tramo 1,S1,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228752,N3-N4,Tramo 1,S2,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228753,N3-N4,Tramo 1,S3,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228754,N3-N4,Tramo 1,S4,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228755,N3-N4,Tramo 1,S5,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228756,N3-N4,Tramo 1,S6,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228757,N3-N4,Tramo 1,T1,3/8,1.5,2.5,True,trasladada 0.5 cm máx.
-228766,N3-N4,Tramo 1,T10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228758,N3-N4,Tramo 1,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228759,N3-N4,Tramo 1,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228760,N3-N4,Tramo 1,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228761,N3-N4,Tramo 1,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228762,N3-N4,Tramo 1,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228763,N3-N4,Tramo 1,T7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228764,N3-N4,Tramo 1,T8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228765,N3-N4,Tramo 1,T9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228767,N3-N4,Tramo 2,L1,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228768,N3-N4,Tramo 2,L2,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228769,N3-N4,Tramo 2,L3,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228770,N3-N4,Tramo 2,L4,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228771,N3-N4,Tramo 2,L5,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228772,N3-N4,Tramo 2,L6,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228773,N3-N4,Tramo 2,S1,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228774,N3-N4,Tramo 2,S2,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228775,N3-N4,Tramo 2,S3,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228776,N3-N4,Tramo 2,S4,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228777,N3-N4,Tramo 2,S5,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228778,N3-N4,Tramo 2,S6,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228779,N3-N4,Tramo 2,T1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228788,N3-N4,Tramo 2,T10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228780,N3-N4,Tramo 2,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228781,N3-N4,Tramo 2,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228782,N3-N4,Tramo 2,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228783,N3-N4,Tramo 2,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228784,N3-N4,Tramo 2,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228785,N3-N4,Tramo 2,T7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228786,N3-N4,Tramo 2,T8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228787,N3-N4,Tramo 2,T9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228789,N4-N5,Descanso,L1,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
-228798,N4-N5,Descanso,L10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228790,N4-N5,Descanso,L2,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
-228791,N4-N5,Descanso,L3,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
-228792,N4-N5,Descanso,L4,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
-228793,N4-N5,Descanso,L5,3/8,2.1,2.5,True,trasladada 1.2 cm máx.
-228794,N4-N5,Descanso,L6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228795,N4-N5,Descanso,L7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228796,N4-N5,Descanso,L8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228797,N4-N5,Descanso,L9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228799,N4-N5,Descanso,T1,3/8,2.1,2.5,True,trasladada 2.7 cm máx.
-228800,N4-N5,Descanso,T2,3/8,2.1,2.5,True,trasladada 2.7 cm máx.
-228801,N4-N5,Descanso,T3,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
-228802,N4-N5,Descanso,T4,3/8,3.0,2.5,False,—
-228803,N4-N5,Descanso,T5,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
-228804,N4-N5,Descanso,T6,3/8,2.1,2.5,True,trasladada 0.1 cm máx.
-228805,N4-N5,Plataforma,L1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228814,N4-N5,Plataforma,L10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228806,N4-N5,Plataforma,L2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228807,N4-N5,Plataforma,L3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228808,N4-N5,Plataforma,L4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228809,N4-N5,Plataforma,L5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228810,N4-N5,Plataforma,L6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228811,N4-N5,Plataforma,L7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228812,N4-N5,Plataforma,L8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228813,N4-N5,Plataforma,L9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228815,N4-N5,Plataforma,T1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228816,N4-N5,Plataforma,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228817,N4-N5,Plataforma,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228818,N4-N5,Plataforma,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228819,N4-N5,Plataforma,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228820,N4-N5,Plataforma,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228821,N4-N5,Tramo 1,L1,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228822,N4-N5,Tramo 1,L2,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228823,N4-N5,Tramo 1,L3,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228824,N4-N5,Tramo 1,L4,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228825,N4-N5,Tramo 1,L5,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228826,N4-N5,Tramo 1,L6,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228827,N4-N5,Tramo 1,S1,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228828,N4-N5,Tramo 1,S2,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228829,N4-N5,Tramo 1,S3,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228830,N4-N5,Tramo 1,S4,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228831,N4-N5,Tramo 1,S5,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228832,N4-N5,Tramo 1,S6,3/8,2.1,2.5,True,trasladada 2.9 cm máx.
-228833,N4-N5,Tramo 1,T1,3/8,1.5,2.5,True,trasladada 0.5 cm máx.
-228842,N4-N5,Tramo 1,T10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228834,N4-N5,Tramo 1,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228835,N4-N5,Tramo 1,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228836,N4-N5,Tramo 1,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228837,N4-N5,Tramo 1,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228838,N4-N5,Tramo 1,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228839,N4-N5,Tramo 1,T7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228840,N4-N5,Tramo 1,T8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228841,N4-N5,Tramo 1,T9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228843,N4-N5,Tramo 2,L1,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228844,N4-N5,Tramo 2,L2,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228845,N4-N5,Tramo 2,L3,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228846,N4-N5,Tramo 2,L4,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228847,N4-N5,Tramo 2,L5,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228848,N4-N5,Tramo 2,L6,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228849,N4-N5,Tramo 2,S1,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228850,N4-N5,Tramo 2,S2,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228851,N4-N5,Tramo 2,S3,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228852,N4-N5,Tramo 2,S4,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228853,N4-N5,Tramo 2,S5,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228854,N4-N5,Tramo 2,S6,3/8,vacío J1,2.5,True,trasladada 2.9 cm máx.
-228855,N4-N5,Tramo 2,T1,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228864,N4-N5,Tramo 2,T10,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228856,N4-N5,Tramo 2,T2,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228857,N4-N5,Tramo 2,T3,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228858,N4-N5,Tramo 2,T4,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228859,N4-N5,Tramo 2,T5,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228860,N4-N5,Tramo 2,T6,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228861,N4-N5,Tramo 2,T7,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228862,N4-N5,Tramo 2,T8,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
-228863,N4-N5,Tramo 2,T9,3/8,2.1,2.5,True,trasladada 0.5 cm máx.
+231415,N1-N2,CIMIENTO,MECHA_SUP1,3/8,2.7,5.0,False,mecha correcta: >= 5 cm en el bloque; 2.7 cm en el tramo
+231416,N1-N2,CIMIENTO,MECHA_SUP2,3/8,2.7,5.0,False,mecha correcta: >= 5 cm en el bloque; 2.7 cm en el tramo
+231417,N1-N2,CIMIENTO,MECHA_SUP3,3/8,2.7,5.0,False,mecha correcta: >= 5 cm en el bloque; 2.7 cm en el tramo
+231418,N1-N2,CIMIENTO,MECHA_SUP4,3/8,2.7,5.0,False,mecha correcta: >= 5 cm en el bloque; 2.7 cm en el tramo
+231419,N1-N2,CIMIENTO,MECHA_SUP5,3/8,2.7,5.0,False,mecha correcta: >= 5 cm en el bloque; 2.7 cm en el tramo
+231356,N1-N2,DESCANSO_J2,L1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231357,N1-N2,DESCANSO_J2,L2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231358,N1-N2,DESCANSO_J2,L3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231359,N1-N2,DESCANSO_J2,L4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231360,N1-N2,DESCANSO_J2,L5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231361,N1-N2,DESCANSO_J2,L6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231362,N1-N2,DESCANSO_J2,L7,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231363,N1-N2,DESCANSO_J2,L8,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231364,N1-N2,DESCANSO_J2,L9,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231365,N1-N2,DESCANSO_J2,L10,3/8,1.6,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231366,N1-N2,DESCANSO_J2,T1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231367,N1-N2,DESCANSO_J2,T2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231368,N1-N2,DESCANSO_J2,T3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231369,N1-N2,DESCANSO_J2,T4,3/8,3.5,2.5,False,
+231370,N1-N2,DESCANSO_J2,T5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231371,N1-N2,DESCANSO_J2,T6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231372,N1-N2,EXTENSION_PLATAFORMA_J1,L1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231373,N1-N2,EXTENSION_PLATAFORMA_J1,L2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231374,N1-N2,EXTENSION_PLATAFORMA_J1,L3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231375,N1-N2,EXTENSION_PLATAFORMA_J1,L4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231376,N1-N2,EXTENSION_PLATAFORMA_J1,L5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231377,N1-N2,EXTENSION_PLATAFORMA_J1,L6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231378,N1-N2,EXTENSION_PLATAFORMA_J1,L7,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231379,N1-N2,EXTENSION_PLATAFORMA_J1,L8,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231380,N1-N2,EXTENSION_PLATAFORMA_J1,L9,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231381,N1-N2,EXTENSION_PLATAFORMA_J1,L10,3/8,1.6,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231382,N1-N2,EXTENSION_PLATAFORMA_J1,T1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231383,N1-N2,EXTENSION_PLATAFORMA_J1,T2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231384,N1-N2,EXTENSION_PLATAFORMA_J1,T3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231385,N1-N2,EXTENSION_PLATAFORMA_J1,T4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231386,N1-N2,EXTENSION_PLATAFORMA_J1,T5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231387,N1-N2,EXTENSION_PLATAFORMA_J1,T6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231388,N1-N2,LOSA_T1,L1,3/8,1.8,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231389,N1-N2,LOSA_T1,L2,3/8,1.8,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231390,N1-N2,LOSA_T1,L3,3/8,1.8,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231391,N1-N2,LOSA_T1,L4,3/8,1.8,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231392,N1-N2,LOSA_T1,L5,3/8,1.8,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231393,N1-N2,LOSA_T1,L6,3/8,1.8,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231394,N1-N2,LOSA_T1,S1,3/8,1.8,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231395,N1-N2,LOSA_T1,S2,3/8,1.8,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231396,N1-N2,LOSA_T1,S3,3/8,1.8,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231397,N1-N2,LOSA_T1,S4,3/8,1.8,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231398,N1-N2,LOSA_T1,S5,3/8,1.8,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231399,N1-N2,LOSA_T1,S6,3/8,1.8,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231400,N1-N2,LOSA_T1,T1,3/8,3.1,2.5,False,
+231401,N1-N2,LOSA_T1,T2,3/8,3.1,2.5,False,
+231402,N1-N2,LOSA_T1,T3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231403,N1-N2,LOSA_T1,T4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231404,N1-N2,LOSA_T1,T5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231405,N1-N2,LOSA_T1,T6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231406,N1-N2,LOSA_T1,T7,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231407,N1-N2,LOSA_T1,T8,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231408,N1-N2,LOSA_T1,T9,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231409,N1-N2,LOSA_T1,T10,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231410,N1-N2,LOSA_T1,T11,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231411,N1-N2,LOSA_T1,T12,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231412,N1-N2,LOSA_T1,T13,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231413,N1-N2,LOSA_T1,T14,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231414,N1-N2,LOSA_T1,T15,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231335,N1-N2,LOSA_T2,L1,3/8,2.2,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231336,N1-N2,LOSA_T2,L2,3/8,2.2,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231337,N1-N2,LOSA_T2,L3,3/8,2.2,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231338,N1-N2,LOSA_T2,L4,3/8,2.2,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231339,N1-N2,LOSA_T2,L5,3/8,2.2,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231340,N1-N2,LOSA_T2,L6,3/8,2.2,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231341,N1-N2,LOSA_T2,S1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231342,N1-N2,LOSA_T2,S2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231343,N1-N2,LOSA_T2,S3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231344,N1-N2,LOSA_T2,S4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231345,N1-N2,LOSA_T2,S5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231346,N1-N2,LOSA_T2,S6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231347,N1-N2,LOSA_T2,T1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231348,N1-N2,LOSA_T2,T2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231349,N1-N2,LOSA_T2,T3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231350,N1-N2,LOSA_T2,T4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231351,N1-N2,LOSA_T2,T5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231352,N1-N2,LOSA_T2,T6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231353,N1-N2,LOSA_T2,T7,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231354,N1-N2,LOSA_T2,T8,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231355,N1-N2,LOSA_T2,T9,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231420,N2-N3,DESCANSO_J2,L1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231421,N2-N3,DESCANSO_J2,L2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231422,N2-N3,DESCANSO_J2,L3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231423,N2-N3,DESCANSO_J2,L4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231424,N2-N3,DESCANSO_J2,L5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231425,N2-N3,DESCANSO_J2,L6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231426,N2-N3,DESCANSO_J2,L7,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231427,N2-N3,DESCANSO_J2,L8,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231428,N2-N3,DESCANSO_J2,L9,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231429,N2-N3,DESCANSO_J2,L10,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231430,N2-N3,DESCANSO_J2,T1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231431,N2-N3,DESCANSO_J2,T2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231432,N2-N3,DESCANSO_J2,T3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231433,N2-N3,DESCANSO_J2,T4,3/8,3.5,2.5,False,
+231434,N2-N3,DESCANSO_J2,T5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231435,N2-N3,DESCANSO_J2,T6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231436,N2-N3,EXTENSION_PLATAFORMA_J1,L1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231437,N2-N3,EXTENSION_PLATAFORMA_J1,L2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231438,N2-N3,EXTENSION_PLATAFORMA_J1,L3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231439,N2-N3,EXTENSION_PLATAFORMA_J1,L4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231440,N2-N3,EXTENSION_PLATAFORMA_J1,L5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231441,N2-N3,EXTENSION_PLATAFORMA_J1,L6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231442,N2-N3,EXTENSION_PLATAFORMA_J1,L7,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231443,N2-N3,EXTENSION_PLATAFORMA_J1,L8,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231444,N2-N3,EXTENSION_PLATAFORMA_J1,L9,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231445,N2-N3,EXTENSION_PLATAFORMA_J1,L10,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231446,N2-N3,EXTENSION_PLATAFORMA_J1,T1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231447,N2-N3,EXTENSION_PLATAFORMA_J1,T2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231448,N2-N3,EXTENSION_PLATAFORMA_J1,T3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231449,N2-N3,EXTENSION_PLATAFORMA_J1,T4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231450,N2-N3,EXTENSION_PLATAFORMA_J1,T5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231451,N2-N3,EXTENSION_PLATAFORMA_J1,T6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231313,N2-N3,LOSA_T1,L1,3/8,2.6,2.5,False,
+231314,N2-N3,LOSA_T1,L2,3/8,2.6,2.5,False,
+231315,N2-N3,LOSA_T1,L3,3/8,2.6,2.5,False,
+231316,N2-N3,LOSA_T1,L4,3/8,2.6,2.5,False,
+231317,N2-N3,LOSA_T1,L5,3/8,2.6,2.5,False,
+231318,N2-N3,LOSA_T1,L6,3/8,2.6,2.5,False,
+231319,N2-N3,LOSA_T1,S1,3/8,2.6,2.5,False,
+231320,N2-N3,LOSA_T1,S2,3/8,2.6,2.5,False,
+231321,N2-N3,LOSA_T1,S3,3/8,2.6,2.5,False,
+231322,N2-N3,LOSA_T1,S4,3/8,2.6,2.5,False,
+231323,N2-N3,LOSA_T1,S5,3/8,2.6,2.5,False,
+231324,N2-N3,LOSA_T1,S6,3/8,2.6,2.5,False,
+231325,N2-N3,LOSA_T1,T1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231326,N2-N3,LOSA_T1,T2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231327,N2-N3,LOSA_T1,T3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231328,N2-N3,LOSA_T1,T4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231329,N2-N3,LOSA_T1,T5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231330,N2-N3,LOSA_T1,T6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231331,N2-N3,LOSA_T1,T7,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231332,N2-N3,LOSA_T1,T8,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231333,N2-N3,LOSA_T1,T9,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231334,N2-N3,LOSA_T1,T10,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231452,N2-N3,LOSA_T2,L1,3/8,2.6,2.5,False,
+231453,N2-N3,LOSA_T2,L2,3/8,2.6,2.5,False,
+231454,N2-N3,LOSA_T2,L3,3/8,2.6,2.5,False,
+231455,N2-N3,LOSA_T2,L4,3/8,2.6,2.5,False,
+231456,N2-N3,LOSA_T2,L5,3/8,2.6,2.5,False,
+231457,N2-N3,LOSA_T2,L6,3/8,2.6,2.5,False,
+231458,N2-N3,LOSA_T2,S1,3/8,2.6,2.5,False,
+231459,N2-N3,LOSA_T2,S2,3/8,2.6,2.5,False,
+231460,N2-N3,LOSA_T2,S3,3/8,2.6,2.5,False,
+231461,N2-N3,LOSA_T2,S4,3/8,2.6,2.5,False,
+231462,N2-N3,LOSA_T2,S5,3/8,2.6,2.5,False,
+231463,N2-N3,LOSA_T2,S6,3/8,2.6,2.5,False,
+231464,N2-N3,LOSA_T2,T1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231465,N2-N3,LOSA_T2,T2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231466,N2-N3,LOSA_T2,T3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231467,N2-N3,LOSA_T2,T4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231468,N2-N3,LOSA_T2,T5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231469,N2-N3,LOSA_T2,T6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231470,N2-N3,LOSA_T2,T7,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231471,N2-N3,LOSA_T2,T8,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231472,N2-N3,LOSA_T2,T9,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231473,N2-N3,LOSA_T2,T10,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231474,N3-N4,DESCANSO_J2,L1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231475,N3-N4,DESCANSO_J2,L2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231476,N3-N4,DESCANSO_J2,L3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231477,N3-N4,DESCANSO_J2,L4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231478,N3-N4,DESCANSO_J2,L5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231479,N3-N4,DESCANSO_J2,L6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231480,N3-N4,DESCANSO_J2,L7,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231481,N3-N4,DESCANSO_J2,L8,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231482,N3-N4,DESCANSO_J2,L9,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231483,N3-N4,DESCANSO_J2,L10,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231484,N3-N4,DESCANSO_J2,T1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231485,N3-N4,DESCANSO_J2,T2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231486,N3-N4,DESCANSO_J2,T3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231487,N3-N4,DESCANSO_J2,T4,3/8,3.5,2.5,False,
+231488,N3-N4,DESCANSO_J2,T5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231489,N3-N4,DESCANSO_J2,T6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231490,N3-N4,EXTENSION_PLATAFORMA_J1,L1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231491,N3-N4,EXTENSION_PLATAFORMA_J1,L2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231492,N3-N4,EXTENSION_PLATAFORMA_J1,L3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231493,N3-N4,EXTENSION_PLATAFORMA_J1,L4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231494,N3-N4,EXTENSION_PLATAFORMA_J1,L5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231495,N3-N4,EXTENSION_PLATAFORMA_J1,L6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231496,N3-N4,EXTENSION_PLATAFORMA_J1,L7,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231497,N3-N4,EXTENSION_PLATAFORMA_J1,L8,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231498,N3-N4,EXTENSION_PLATAFORMA_J1,L9,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231499,N3-N4,EXTENSION_PLATAFORMA_J1,L10,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231500,N3-N4,EXTENSION_PLATAFORMA_J1,T1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231501,N3-N4,EXTENSION_PLATAFORMA_J1,T2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231502,N3-N4,EXTENSION_PLATAFORMA_J1,T3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231503,N3-N4,EXTENSION_PLATAFORMA_J1,T4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231504,N3-N4,EXTENSION_PLATAFORMA_J1,T5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231505,N3-N4,EXTENSION_PLATAFORMA_J1,T6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231506,N3-N4,LOSA_T1,L1,3/8,2.6,2.5,False,
+231507,N3-N4,LOSA_T1,L2,3/8,2.6,2.5,False,
+231508,N3-N4,LOSA_T1,L3,3/8,2.6,2.5,False,
+231509,N3-N4,LOSA_T1,L4,3/8,2.6,2.5,False,
+231510,N3-N4,LOSA_T1,L5,3/8,2.6,2.5,False,
+231511,N3-N4,LOSA_T1,L6,3/8,2.6,2.5,False,
+231512,N3-N4,LOSA_T1,S1,3/8,2.6,2.5,False,
+231513,N3-N4,LOSA_T1,S2,3/8,2.6,2.5,False,
+231514,N3-N4,LOSA_T1,S3,3/8,2.6,2.5,False,
+231515,N3-N4,LOSA_T1,S4,3/8,2.6,2.5,False,
+231516,N3-N4,LOSA_T1,S5,3/8,2.6,2.5,False,
+231517,N3-N4,LOSA_T1,S6,3/8,2.6,2.5,False,
+231518,N3-N4,LOSA_T1,T1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231519,N3-N4,LOSA_T1,T2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231520,N3-N4,LOSA_T1,T3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231521,N3-N4,LOSA_T1,T4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231522,N3-N4,LOSA_T1,T5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231523,N3-N4,LOSA_T1,T6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231524,N3-N4,LOSA_T1,T7,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231525,N3-N4,LOSA_T1,T8,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231526,N3-N4,LOSA_T1,T9,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231527,N3-N4,LOSA_T1,T10,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231528,N3-N4,LOSA_T2,L1,3/8,2.6,2.5,False,
+231529,N3-N4,LOSA_T2,L2,3/8,2.6,2.5,False,
+231530,N3-N4,LOSA_T2,L3,3/8,2.6,2.5,False,
+231531,N3-N4,LOSA_T2,L4,3/8,2.6,2.5,False,
+231532,N3-N4,LOSA_T2,L5,3/8,2.6,2.5,False,
+231533,N3-N4,LOSA_T2,L6,3/8,2.6,2.5,False,
+231534,N3-N4,LOSA_T2,S1,3/8,2.6,2.5,False,
+231535,N3-N4,LOSA_T2,S2,3/8,2.6,2.5,False,
+231536,N3-N4,LOSA_T2,S3,3/8,2.6,2.5,False,
+231537,N3-N4,LOSA_T2,S4,3/8,2.6,2.5,False,
+231538,N3-N4,LOSA_T2,S5,3/8,2.6,2.5,False,
+231539,N3-N4,LOSA_T2,S6,3/8,2.6,2.5,False,
+231540,N3-N4,LOSA_T2,T1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231541,N3-N4,LOSA_T2,T2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231542,N3-N4,LOSA_T2,T3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231543,N3-N4,LOSA_T2,T4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231544,N3-N4,LOSA_T2,T5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231545,N3-N4,LOSA_T2,T6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231546,N3-N4,LOSA_T2,T7,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231547,N3-N4,LOSA_T2,T8,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231548,N3-N4,LOSA_T2,T9,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231549,N3-N4,LOSA_T2,T10,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231550,N4-N5,DESCANSO_J2,L1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231551,N4-N5,DESCANSO_J2,L2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231552,N4-N5,DESCANSO_J2,L3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231553,N4-N5,DESCANSO_J2,L4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231554,N4-N5,DESCANSO_J2,L5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231555,N4-N5,DESCANSO_J2,L6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231556,N4-N5,DESCANSO_J2,L7,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231557,N4-N5,DESCANSO_J2,L8,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231558,N4-N5,DESCANSO_J2,L9,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231559,N4-N5,DESCANSO_J2,L10,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231560,N4-N5,DESCANSO_J2,T1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231561,N4-N5,DESCANSO_J2,T2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231562,N4-N5,DESCANSO_J2,T3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231563,N4-N5,DESCANSO_J2,T4,3/8,3.5,2.5,False,
+231564,N4-N5,DESCANSO_J2,T5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231565,N4-N5,DESCANSO_J2,T6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231566,N4-N5,EXTENSION_PLATAFORMA_J1,L1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231567,N4-N5,EXTENSION_PLATAFORMA_J1,L2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231568,N4-N5,EXTENSION_PLATAFORMA_J1,L3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231569,N4-N5,EXTENSION_PLATAFORMA_J1,L4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231570,N4-N5,EXTENSION_PLATAFORMA_J1,L5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231571,N4-N5,EXTENSION_PLATAFORMA_J1,L6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231572,N4-N5,EXTENSION_PLATAFORMA_J1,L7,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231573,N4-N5,EXTENSION_PLATAFORMA_J1,L8,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231574,N4-N5,EXTENSION_PLATAFORMA_J1,L9,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231575,N4-N5,EXTENSION_PLATAFORMA_J1,L10,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231576,N4-N5,EXTENSION_PLATAFORMA_J1,T1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231577,N4-N5,EXTENSION_PLATAFORMA_J1,T2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231578,N4-N5,EXTENSION_PLATAFORMA_J1,T3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231579,N4-N5,EXTENSION_PLATAFORMA_J1,T4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231580,N4-N5,EXTENSION_PLATAFORMA_J1,T5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231581,N4-N5,EXTENSION_PLATAFORMA_J1,T6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231582,N4-N5,LOSA_T1,L1,3/8,2.6,2.5,False,
+231583,N4-N5,LOSA_T1,L2,3/8,2.6,2.5,False,
+231584,N4-N5,LOSA_T1,L3,3/8,2.6,2.5,False,
+231585,N4-N5,LOSA_T1,L4,3/8,2.6,2.5,False,
+231586,N4-N5,LOSA_T1,L5,3/8,2.6,2.5,False,
+231587,N4-N5,LOSA_T1,L6,3/8,2.6,2.5,False,
+231588,N4-N5,LOSA_T1,S1,3/8,2.6,2.5,False,
+231589,N4-N5,LOSA_T1,S2,3/8,2.6,2.5,False,
+231590,N4-N5,LOSA_T1,S3,3/8,2.6,2.5,False,
+231591,N4-N5,LOSA_T1,S4,3/8,2.6,2.5,False,
+231592,N4-N5,LOSA_T1,S5,3/8,2.6,2.5,False,
+231593,N4-N5,LOSA_T1,S6,3/8,2.6,2.5,False,
+231594,N4-N5,LOSA_T1,T1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231595,N4-N5,LOSA_T1,T2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231596,N4-N5,LOSA_T1,T3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231597,N4-N5,LOSA_T1,T4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231598,N4-N5,LOSA_T1,T5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231599,N4-N5,LOSA_T1,T6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231600,N4-N5,LOSA_T1,T7,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231601,N4-N5,LOSA_T1,T8,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231602,N4-N5,LOSA_T1,T9,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231603,N4-N5,LOSA_T1,T10,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231604,N4-N5,LOSA_T2,L1,3/8,2.6,2.5,False,
+231605,N4-N5,LOSA_T2,L2,3/8,2.6,2.5,False,
+231606,N4-N5,LOSA_T2,L3,3/8,2.6,2.5,False,
+231607,N4-N5,LOSA_T2,L4,3/8,2.6,2.5,False,
+231608,N4-N5,LOSA_T2,L5,3/8,2.6,2.5,False,
+231609,N4-N5,LOSA_T2,L6,3/8,2.6,2.5,False,
+231610,N4-N5,LOSA_T2,S1,3/8,2.6,2.5,False,
+231611,N4-N5,LOSA_T2,S2,3/8,2.6,2.5,False,
+231612,N4-N5,LOSA_T2,S3,3/8,2.6,2.5,False,
+231613,N4-N5,LOSA_T2,S4,3/8,2.6,2.5,False,
+231614,N4-N5,LOSA_T2,S5,3/8,2.6,2.5,False,
+231615,N4-N5,LOSA_T2,S6,3/8,2.6,2.5,False,
+231616,N4-N5,LOSA_T2,T1,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231617,N4-N5,LOSA_T2,T2,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231618,N4-N5,LOSA_T2,T3,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231619,N4-N5,LOSA_T2,T4,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231620,N4-N5,LOSA_T2,T5,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231621,N4-N5,LOSA_T2,T6,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231622,N4-N5,LOSA_T2,T7,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231623,N4-N5,LOSA_T2,T8,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231624,N4-N5,LOSA_T2,T9,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
+231625,N4-N5,LOSA_T2,T10,3/8,2.1,2.5,True,dibujada con 2.5 cm en E-09; nodo 13 actualizado
