@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-CYJpeknJB93JtiwQMx5mnir7KfpTE43MqxijLCToMa8=' 'sha256-29tLLVlD2OfBpRCC4aCjXM9hCyQfWqlBlH11Aq4pkao=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-CYJpeknJB93JtiwQMx5mnir7KfpTE43MqxijLCToMa8=' 'sha256-E4No/FwGOc5SFNxkQQwaPI88bJ9qgpdnjqnr2CC7Gdk=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Wasi 3D</title>
 <meta name="description" content="Tours 3D, maqueta interactiva, plano con medidas y fotos HDR para alojamientos de Airbnb en Cusco. Listo en 48 horas.">
@@ -344,6 +344,119 @@ html.lenis,html.lenis body{height:auto}
 .barra-movil b{font-family:var(--font-display);font-size:1.25rem}
 @media (min-width:761px){.barra-movil{display:none!important}}
 @media (prefers-reduced-motion: reduce){.cinta__pista{animation:none}.barra-movil{transition:none}}
+
+/* ================= Vida: atardecer en Cusco =================
+   Secciones con color propio que suben sobre la anterior con un perfil de cerro o de andenes.
+   Las secciones de color redefinen los tokens: todo lo que llevan dentro se adapta solo. */
+:root{
+  --noche:#141B3A;--noche-2:#222B57;--carmin:#9E1240;--carmin-2:#6A0A28;--oro:#E9B949;
+  --cielo:linear-gradient(180deg,#0E1430 0%,#1E2252 26%,#4A2160 48%,#8E1F4F 66%,#C8473E 82%,#E9A54A 100%);
+  --r-lg:26px;--r-md:18px;
+  --sombra:0 1px 2px rgba(20,27,58,.06),0 12px 32px -12px rgba(20,27,58,.22);
+  --mask-cerro:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%2090%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M0%2C90%20L0%2C32.3%20L9%2C30.7%20L18%2C29.7%20L27%2C29.2%20L36%2C29.5%20L45%2C30.4%20L54%2C31.9%20L63%2C33.8%20L72%2C36.2%20L81%2C38.7%20L90%2C41.3%20L99%2C43.7%20L108%2C45.8%20L117%2C47.4%20L126%2C48.5%20L135%2C49.1%20L144%2C49.2%20L153%2C48.7%20L162%2C47.9%20L171%2C46.9%20L180%2C45.8%20L189%2C44.7%20L198%2C43.8%20L207%2C43.1%20L216%2C42.8%20L225%2C42.8%20L234%2C43.1%20L243%2C43.7%20L252%2C44.4%20L261%2C45.2%20L270%2C45.8%20L279%2C46.2%20L288%2C46.2%20L297%2C45.8%20L306%2C44.9%20L315%2C43.7%20L324%2C42.0%20L333%2C40.0%20L342%2C37.9%20L351%2C35.9%20L360%2C34.0%20L369%2C32.5%20L378%2C31.5%20L387%2C31.2%20L396%2C31.5%20L405%2C32.5%20L414%2C34.2%20L423%2C36.5%20L432%2C39.2%20L441%2C42.3%20L450%2C45.5%20L459%2C48.7%20L468%2C51.8%20L477%2C54.6%20L486%2C57.0%20L495%2C59.1%20L504%2C60.7%20L513%2C62.1%20L522%2C63.2%20L531%2C64.2%20L540%2C65.2%20L549%2C66.4%20L558%2C67.7%20L567%2C69.4%20L576%2C71.4%20L585%2C73.7%20L594%2C76.3%20L603%2C79.1%20L612%2C81.9%20L621%2C84.6%20L630%2C87.1%20L639%2C89.1%20L648%2C90.5%20L657%2C91.3%20L666%2C91.4%20L675%2C90.8%20L684%2C89.5%20L693%2C87.7%20L702%2C85.4%20L711%2C82.9%20L720%2C80.3%20L729%2C77.8%20L738%2C75.5%20L747%2C73.6%20L756%2C72.1%20L765%2C71.2%20L774%2C70.7%20L783%2C70.6%20L792%2C70.8%20L801%2C71.2%20L810%2C71.7%20L819%2C72.1%20L828%2C72.3%20L837%2C72.3%20L846%2C71.9%20L855%2C71.2%20L864%2C70.2%20L873%2C69.0%20L882%2C67.6%20L891%2C66.3%20L900%2C65.2%20L909%2C64.4%20L918%2C64.0%20L927%2C64.0%20L936%2C64.6%20L945%2C65.8%20L954%2C67.3%20L963%2C69.3%20L972%2C71.4%20L981%2C73.6%20L990%2C75.7%20L999%2C77.4%20L1008%2C78.7%20L1017%2C79.5%20L1026%2C79.6%20L1035%2C79.0%20L1044%2C77.8%20L1053%2C76.0%20L1062%2C73.8%20L1071%2C71.2%20L1080%2C68.5%20L1089%2C65.8%20L1098%2C63.2%20L1107%2C60.8%20L1116%2C58.8%20L1125%2C57.1%20L1134%2C55.7%20L1143%2C54.5%20L1152%2C53.6%20L1161%2C52.7%20L1170%2C51.7%20L1179%2C50.6%20L1188%2C49.2%20L1197%2C47.3%20L1206%2C45.2%20L1215%2C42.6%20L1224%2C39.7%20L1233%2C36.6%20L1242%2C33.4%20L1251%2C30.3%20L1260%2C27.5%20L1269%2C25.1%20L1278%2C23.2%20L1287%2C22.0%20L1296%2C21.5%20L1305%2C21.8%20L1314%2C22.7%20L1323%2C24.2%20L1332%2C26.2%20L1341%2C28.6%20L1350%2C31.0%20L1359%2C33.5%20L1368%2C35.8%20L1377%2C37.8%20L1386%2C39.4%20L1395%2C40.6%20L1404%2C41.4%20L1413%2C41.8%20L1422%2C42.0%20L1431%2C42.1%20L1440%2C42.1%20L1440%2C90%20Z%22%2F%3E%3C%2Fsvg%3E");--mask-andenes:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%2090%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M0%2C90%20L0%2C60%20L6%2C60%20L120%2C60%20L128%2C70%20L134%2C70%20L218%2C70%20L226%2C70%20L232%2C70%20L406%2C70%20L414%2C58%20L420%2C58%20L504%2C58%20L512%2C40%20L518%2C40%20L602%2C40%20L610%2C58%20L616%2C58%20L760%2C58%20L768%2C40%20L774%2C40%20L888%2C40%20L896%2C52%20L902%2C52%20L1046%2C52%20L1054%2C40%20L1060%2C40%20L1144%2C40%20L1152%2C52%20L1158%2C52%20L1272%2C52%20L1280%2C34%20L1286%2C34%20L1430%2C34%20L1438%2C46%20L1444%2C46%20L1440%2C46%20L1448%2C34%20L1440%2C90%20Z%22%2F%3E%3C%2Fsvg%3E");--tejido:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2248%22%20height%3D%2214%22%20viewBox%3D%220%200%2048%2014%22%3E%3Crect%20width%3D%2248%22%20height%3D%2214%22%20fill%3D%22%236A0A28%22%2F%3E%3Cpath%20d%3D%22M0%207%20L6%201%20L12%207%20L6%2013Z%20M24%207%20L30%201%20L36%207%20L30%2013Z%22%20fill%3D%22%23E9B949%22%2F%3E%3Cpath%20d%3D%22M12%207%20L18%203%20L24%207%20L18%2011Z%20M36%207%20L42%203%20L48%207%20L42%2011Z%22%20fill%3D%22%23F4DCE3%22%2F%3E%3C%2Fsvg%3E");
+}
+section.block{border-top:0;padding-block:96px}
+.sec{position:relative;background:var(--sec-bg);isolation:isolate}
+.sec::before{content:"";position:absolute;left:0;right:0;top:-70px;height:72px;background:var(--sec-bg);-webkit-mask:var(--sec-mask) bottom/100% 100% no-repeat;mask:var(--sec-mask) bottom/100% 100% no-repeat;pointer-events:none;z-index:1}
+.sec-claro{--sec-bg:var(--bg);--sec-mask:var(--mask-cerro)}
+.sec-carmin{--sec-bg:var(--carmin);--sec-mask:var(--mask-andenes);
+  --ink:#FFF4F2;--muted:#F3C4D2;--line:rgba(255,255,255,.22);--surface:rgba(255,255,255,.07);--accent:var(--oro);--accent-soft:rgba(255,255,255,.12);--accent-ink:#2A1600;color:var(--ink);
+  background-image:radial-gradient(120% 80% at 85% 0%,rgba(233,185,73,.18),transparent 60%),radial-gradient(90% 70% at 0% 100%,rgba(20,27,58,.35),transparent 60%)}
+.sec-noche{--sec-bg:var(--noche);--sec-mask:var(--mask-cerro);
+  --ink:#EEF0FF;--muted:#AAB3D9;--line:rgba(255,255,255,.14);--surface:rgba(255,255,255,.05);--bg:rgba(255,255,255,.04);--accent:var(--oro);--accent-soft:rgba(233,185,73,.14);--accent-ink:#2A1600;--ok:#7FE0B4;color:var(--ink);
+  background-image:radial-gradient(1px 1px at 12% 22%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 28% 68%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 44% 14%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 63% 48%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 79% 24%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 91% 72%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 6% 86%,#fff 50%,transparent 51%),radial-gradient(80% 60% at 50% 120%,rgba(158,18,64,.35),transparent 70%)}
+.sec-noche .btn-ghost,.sec-carmin .btn-ghost{color:var(--ink);border-color:var(--line)}
+
+/* ---------- Héroe ---------- */
+.hero{position:relative;overflow:hidden;color:#F3F1FA;background:var(--cielo);padding-block:56px 170px;isolation:isolate}
+.hero .eyebrow{color:var(--oro)}
+.hero h1{color:#FFF}
+.hero h1 em{color:var(--oro)}
+.hero .lede{color:#D4D0EA}
+.hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.35)}
+.hero .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.cielo{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.cielo::before{content:"";position:absolute;inset:0;background:radial-gradient(600px circle at var(--mx,70%) var(--my,30%),rgba(233,185,73,.22),transparent 60%);transition:background .2s}
+.estrellas{position:absolute;inset:0 0 40% 0;opacity:.8;background-image:radial-gradient(1px 1px at 8% 18%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 18% 42%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 27% 9%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 39% 30%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 52% 12%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 61% 36%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 72% 8%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 84% 26%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 93% 14%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 97% 44%,#fff 50%,transparent 51%);animation:titilar 5s ease-in-out infinite alternate}
+@keyframes titilar{to{opacity:.45}}
+.montes{position:absolute;left:0;right:0;bottom:-2px;width:100%;height:260px}
+.montes .m1{fill:#5A2A5E;opacity:.85}
+.montes .m2{fill:#2E1D46}
+.montes .m3{fill:var(--bg)}
+.viewer-wrap{position:relative;margin-top:34px}
+.hero .viewer{margin-top:0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:var(--r-lg);backdrop-filter:blur(6px);box-shadow:0 30px 80px -30px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.18)}
+.hero .viewer:fullscreen{background:#1E2252}
+.flota{position:absolute;z-index:4;font:600 .82rem/1 var(--font-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:9px 14px;box-shadow:var(--sombra);animation:flotar 6s ease-in-out infinite;white-space:nowrap}
+.flota b{color:var(--accent);font-family:var(--font-display)}
+.flota.f1{left:-18px;top:22%;animation-delay:-1s}
+.flota.f2{right:-14px;top:46%;animation-delay:-3s}
+.flota.f3{left:12%;bottom:-18px;animation-delay:-4.5s}
+@keyframes flotar{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media (max-width:860px){.flota{display:none}.hero{padding-block:36px 130px}.montes{height:170px}}
+
+/* Encabezado transparente sobre el cielo */
+.top{transition:background .3s,border-color .3s}
+.top.sobre{background:transparent;border-color:transparent;backdrop-filter:none}
+.top.sobre .brand,.top.sobre .nav a{color:#fff}
+.top.sobre .nav a:hover{color:var(--oro)}
+
+/* ---------- Faja tejida ---------- */
+.cinta{position:relative;z-index:5;margin-top:-58px;transform:rotate(-1.6deg);background:var(--carmin);border:0;color:#FFF4F2;padding-block:16px;box-shadow:0 18px 40px -18px rgba(106,10,40,.6)}
+.cinta::before,.cinta::after{content:"";position:absolute;left:0;right:0;height:10px;background:var(--tejido) repeat-x left center/auto 100%}
+.cinta::before{top:0}.cinta::after{bottom:0}
+.cinta i{color:var(--oro)}
+
+/* ---------- Tarjetas con vida ---------- */
+.views{gap:18px;background:none;border:0;border-radius:0;overflow:visible}
+.view{border-radius:var(--r-lg);border:1px solid var(--line);box-shadow:var(--sombra);transform-style:preserve-3d;will-change:transform;transition:background .25s,box-shadow .3s}
+.view:hover{background:var(--surface);box-shadow:0 1px 2px rgba(20,27,58,.06),0 26px 50px -18px rgba(158,18,64,.35)}
+.ico{width:58px;height:58px;border-radius:20px 20px 20px 6px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.ico svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.view:hover .ico path,.view:hover .ico rect,.view:hover .ico circle{stroke-dasharray:1;stroke-dashoffset:1;animation:trazar .9s ease forwards}
+@keyframes trazar{to{stroke-dashoffset:0}}
+.stats{gap:20px}
+.stat{border-top:0;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px}
+.stat .n{font-size:clamp(2.4rem,4.6vw,3.6rem)}
+.where-list{border-top:0;display:grid;gap:10px}
+.where-list li{border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;background:var(--surface)}
+.note{border-radius:var(--r-lg);border:1px dashed var(--line)}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);font:600 1.05rem var(--font-display);padding:0;box-shadow:0 0 0 6px var(--accent-soft),0 0 28px rgba(233,185,73,.35)}
+.steps li{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px}
+.track{border-radius:3px;height:3px}
+.plan{border-radius:var(--r-lg);box-shadow:var(--sombra);transform-style:preserve-3d;will-change:transform}
+.plan.featured{border:0;color:#FFF4F2;background:linear-gradient(160deg,#B3164A 0%,#7A0E31 70%,#4A0820 100%);--ink:#FFF4F2;--muted:#F3C4D2;--ok:var(--oro);--line:rgba(255,255,255,.2);box-shadow:0 30px 60px -24px rgba(158,18,64,.65);position:relative;top:-10px}
+.plan.featured .pill{background:var(--oro);color:#2A1600}
+.plan.featured .btn-primary{background:#fff;color:var(--carmin)}
+.calc{border-radius:var(--r-lg);box-shadow:var(--sombra)}
+.phases{border-top:0;gap:14px}
+.phase,.phase+.phase{border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;background:var(--surface)}
+.who span{background:var(--surface);border-color:var(--line)}
+.faq{border-top:0;display:grid;gap:10px}
+.faq details{border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;background:var(--surface);transition:box-shadow .25s}
+.faq details[open]{box-shadow:var(--sombra)}
+.cot-form,.mirador{border-radius:var(--r-lg);box-shadow:var(--sombra)}
+.opt span{border-radius:14px}
+.stepper{border-radius:14px}
+#cotPlano{border-radius:16px}
+
+/* Botones con brillo */
+.btn{position:relative;overflow:hidden;will-change:transform}
+.btn-primary{background:linear-gradient(135deg,#C21F52,var(--accent) 55%,#7A0E31);box-shadow:0 10px 24px -10px rgba(158,18,64,.7)}
+.sec-carmin .btn-primary,.sec-noche .btn-primary{background:var(--oro);color:#2A1600;box-shadow:0 10px 24px -10px rgba(233,185,73,.7)}
+.btn-primary::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s ease}
+.btn-primary:hover::after{transform:translateX(120%)}
+
+/* Pie de página nocturno */
+footer.sec{border-top:0;padding-block:70px 56px}
+footer.sec a{color:var(--ink)}
+
+@media (prefers-reduced-motion: reduce){.estrellas,.flota{animation:none}.btn-primary::after{display:none}.view:hover .ico *{animation:none}}
+
+/* El encabezado se superpone al cielo; el héroe sube por debajo */
+main{overflow-x:clip}
+.hero{margin-top:-62px;padding-top:118px}
+.stat .n{font-size:clamp(1.7rem,2.6vw,2.5rem);white-space:nowrap}
+@media (max-width:860px){.hero{padding-top:98px}.stat .n{font-size:clamp(2rem,9vw,2.8rem)}}
 </style>
 </head>
 <body>
@@ -367,6 +480,7 @@ html.lenis,html.lenis body{height:auto}
 
 <main id="inicio">
   <section class="hero">
+    <div class="cielo" aria-hidden="true"><div class="estrellas"></div><svg class="montes" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true"><path class="m1" d="M0,260 L0,98.0 L8,96.4 L16,95.6 L24,95.5 L32,96.0 L40,97.0 L48,98.3 L56,99.7 L64,101.2 L72,102.6 L80,103.8 L88,104.7 L96,105.3 L104,105.6 L112,105.6 L120,105.3 L128,104.9 L136,104.4 L144,104.0 L152,103.7 L160,103.7 L168,104.1 L176,104.9 L184,106.2 L192,108.0 L200,110.3 L208,113.1 L216,116.3 L224,119.8 L232,123.4 L240,127.0 L248,130.5 L256,133.7 L264,136.5 L272,138.7 L280,140.2 L288,141.0 L296,141.0 L304,140.2 L312,138.7 L320,136.6 L328,133.8 L336,130.7 L344,127.3 L352,123.8 L360,120.4 L368,117.3 L376,114.5 L384,112.3 L392,110.7 L400,109.8 L408,109.7 L416,110.2 L424,111.5 L432,113.4 L440,115.8 L448,118.7 L456,121.8 L464,125.1 L472,128.4 L480,131.6 L488,134.6 L496,137.4 L504,139.9 L512,142.1 L520,144.0 L528,145.7 L536,147.2 L544,148.7 L552,150.2 L560,152.0 L568,154.0 L576,156.4 L584,159.3 L592,162.7 L600,166.7 L608,171.3 L616,176.4 L624,181.9 L632,187.8 L640,193.9 L648,200.0 L656,206.0 L664,211.7 L672,217.0 L680,221.6 L688,225.5 L696,228.5 L704,230.6 L712,231.7 L720,231.8 L728,231.0 L736,229.3 L744,226.8 L752,223.8 L760,220.2 L768,216.3 L776,212.3 L784,208.2 L792,204.3 L800,200.6 L808,197.3 L816,194.3 L824,191.6 L832,189.4 L840,187.5 L848,185.8 L856,184.3 L864,182.9 L872,181.4 L880,179.7 L888,177.8 L896,175.6 L904,172.9 L912,169.8 L920,166.4 L928,162.5 L936,158.4 L944,154.1 L952,149.7 L960,145.3 L968,141.2 L976,137.4 L984,134.1 L992,131.4 L1000,129.4 L1008,128.2 L1016,127.8 L1024,128.1 L1032,129.2 L1040,131.0 L1048,133.4 L1056,136.1 L1064,139.1 L1072,142.2 L1080,145.2 L1088,148.0 L1096,150.3 L1104,152.1 L1112,153.3 L1120,153.8 L1128,153.5 L1136,152.6 L1144,150.9 L1152,148.7 L1160,145.9 L1168,142.8 L1176,139.4 L1184,136.0 L1192,132.5 L1200,129.3 L1208,126.2 L1216,123.6 L1224,121.3 L1232,119.4 L1240,117.9 L1248,116.8 L1256,115.9 L1264,115.2 L1272,114.6 L1280,114.0 L1288,113.2 L1296,112.1 L1304,110.7 L1312,108.9 L1320,106.7 L1328,104.0 L1336,101.0 L1344,97.6 L1352,94.0 L1360,90.3 L1368,86.6 L1376,83.1 L1384,80.1 L1392,77.5 L1400,75.6 L1408,74.5 L1416,74.3 L1424,75.1 L1432,76.8 L1440,79.5 L1440,260 Z"/><path class="m2" d="M0,260 L0,127.4 L8,125.2 L16,124.0 L24,124.0 L32,125.0 L40,127.1 L48,129.9 L56,133.4 L64,137.3 L72,141.2 L80,145.2 L88,148.9 L96,152.3 L104,155.4 L112,158.1 L120,160.6 L128,163.1 L136,165.6 L144,168.4 L152,171.7 L160,175.5 L168,179.9 L176,185.0 L184,190.7 L192,196.8 L200,203.2 L208,209.5 L216,215.5 L224,220.9 L232,225.5 L240,229.1 L248,231.4 L256,232.4 L264,232.1 L272,230.6 L280,228.1 L288,224.8 L296,220.9 L304,216.8 L312,212.8 L320,209.1 L328,205.9 L336,203.3 L344,201.5 L352,200.3 L360,199.8 L368,199.7 L376,199.9 L384,200.1 L392,200.3 L400,200.1 L408,199.6 L416,198.6 L424,197.0 L432,195.1 L440,193.0 L448,190.7 L456,188.6 L464,186.7 L472,185.4 L480,184.8 L488,184.8 L496,185.7 L504,187.3 L512,189.5 L520,192.1 L528,194.8 L536,197.3 L544,199.5 L552,200.9 L560,201.5 L568,200.9 L576,199.1 L584,196.2 L592,192.2 L600,187.2 L608,181.4 L616,175.3 L624,168.9 L632,162.6 L640,156.7 L648,151.4 L656,146.7 L664,142.8 L672,139.6 L680,137.2 L688,135.2 L696,133.7 L704,132.3 L712,131.0 L720,129.5 L728,127.8 L736,125.8 L744,123.6 L752,121.3 L760,119.0 L768,116.9 L776,115.2 L784,114.2 L792,114.0 L800,114.9 L808,116.9 L816,120.1 L824,124.4 L832,129.6 L840,135.6 L848,142.0 L856,148.6 L864,155.2 L872,161.3 L880,166.7 L888,171.2 L896,174.8 L904,177.2 L912,178.7 L920,179.3 L928,179.2 L936,178.5 L944,177.7 L952,176.8 L960,176.1 L968,175.8 L976,176.0 L984,176.7 L992,177.9 L1000,179.5 L1008,181.4 L1016,183.3 L1024,185.0 L1032,186.5 L1040,187.6 L1048,188.1 L1056,188.0 L1064,187.4 L1072,186.3 L1080,185.0 L1088,183.7 L1096,182.6 L1104,181.9 L1112,181.9 L1120,182.8 L1128,184.6 L1136,187.5 L1144,191.3 L1152,196.0 L1160,201.3 L1168,207.0 L1176,212.9 L1184,218.5 L1192,223.7 L1200,228.0 L1208,231.5 L1216,233.8 L1224,234.9 L1232,235.0 L1240,234.0 L1248,232.1 L1256,229.7 L1264,226.7 L1272,223.6 L1280,220.5 L1288,217.6 L1296,214.9 L1304,212.5 L1312,210.3 L1320,208.4 L1328,206.4 L1336,204.2 L1344,201.7 L1352,198.7 L1360,195.1 L1368,190.7 L1376,185.7 L1384,180.0 L1392,173.7 L1400,167.2 L1408,160.6 L1416,154.3 L1424,148.5 L1432,143.4 L1440,139.3 L1440,260 Z"/><path class="m3" d="M0,260 L0,187.9 L8,187.4 L16,187.5 L24,188.4 L32,190.1 L40,192.5 L48,195.4 L56,198.5 L64,201.5 L72,204.2 L80,206.2 L88,207.5 L96,207.9 L104,207.5 L112,206.4 L120,204.9 L128,203.2 L136,201.6 L144,200.4 L152,199.6 L160,199.4 L168,199.7 L176,200.5 L184,201.4 L192,202.4 L200,203.0 L208,203.2 L216,202.6 L224,201.4 L232,199.4 L240,196.9 L248,194.1 L256,191.3 L264,188.7 L272,186.7 L280,185.4 L288,185.1 L296,185.6 L304,186.9 L312,188.9 L320,191.3 L328,193.7 L336,196.0 L344,198.0 L352,199.4 L360,200.4 L368,200.8 L376,201.0 L384,201.1 L392,201.4 L400,202.1 L408,203.4 L416,205.5 L424,208.4 L432,211.9 L440,215.8 L448,220.0 L456,224.1 L464,227.8 L472,230.9 L480,233.1 L488,234.5 L496,235.0 L504,234.8 L512,234.0 L520,233.0 L528,232.1 L536,231.4 L544,231.1 L552,231.3 L560,232.1 L568,233.3 L576,234.6 L584,235.9 L592,236.9 L600,237.4 L608,237.2 L616,236.1 L624,234.4 L632,232.1 L640,229.3 L648,226.5 L656,223.9 L664,221.7 L672,220.3 L680,219.7 L688,220.0 L696,221.0 L704,222.6 L712,224.6 L720,226.7 L728,228.6 L736,230.1 L744,231.1 L752,231.5 L760,231.3 L768,230.8 L776,230.2 L784,229.7 L792,229.5 L800,229.9 L808,230.9 L816,232.7 L824,235.1 L832,238.0 L840,241.0 L848,244.0 L856,246.5 L864,248.4 L872,249.5 L880,249.6 L888,248.9 L896,247.3 L904,245.2 L912,242.9 L920,240.5 L928,238.3 L936,236.6 L944,235.4 L952,234.6 L960,234.3 L968,234.3 L976,234.2 L984,233.8 L992,232.9 L1000,231.4 L1008,229.1 L1016,226.1 L1024,222.5 L1032,218.5 L1040,214.4 L1048,210.5 L1056,207.1 L1064,204.4 L1072,202.6 L1080,201.7 L1088,201.6 L1096,202.1 L1104,203.1 L1112,204.2 L1120,205.1 L1128,205.8 L1136,205.9 L1144,205.4 L1152,204.5 L1160,203.3 L1168,201.9 L1176,200.6 L1184,199.7 L1192,199.3 L1200,199.7 L1208,200.8 L1216,202.6 L1224,204.9 L1232,207.5 L1240,210.0 L1248,212.2 L1256,213.8 L1264,214.6 L1272,214.6 L1280,213.7 L1288,212.1 L1296,209.9 L1304,207.5 L1312,205.1 L1320,202.9 L1328,201.2 L1336,200.1 L1344,199.5 L1352,199.5 L1360,199.7 L1368,200.0 L1376,200.1 L1384,199.8 L1392,198.9 L1400,197.3 L1408,195.0 L1416,192.2 L1424,189.0 L1432,185.8 L1440,182.8 L1440,260 Z"/></svg></div>
     <div class="wrap">
       <div class="hero-grid">
         <div>
@@ -382,6 +496,10 @@ html.lenis,html.lenis body{height:auto}
         </div>
       </div>
 
+      <div class="viewer-wrap">
+        <span class="flota f1" aria-hidden="true"><b>+12 %</b> reservas con tour 3D</span>
+        <span class="flota f2" aria-hidden="true">Listo en <b>48 h</b></span>
+        <span class="flota f3" aria-hidden="true">Etiquetas <b>ES · EN</b></span>
       <div class="viewer mode-doll" id="viewer" data-lenis-prevent>
         <div class="stage" id="stage">
           <div class="labels" id="labels"></div>
@@ -413,6 +531,7 @@ html.lenis,html.lenis body{height:auto}
           <p class="en" id="hotEn"></p>
         </div>
       </div>
+      </div>
     </div>
   </section>
 
@@ -425,35 +544,41 @@ html.lenis,html.lenis body{height:auto}
         <p class="lede">Capturamos el alojamiento con cámara 360° y escáner LiDAR. De esa captura salen todas las vistas, coherentes entre sí y con medidas reales.</p>
       </div>
       <div class="views">
-        <article class="view">
+        <article class="view" data-tilt>
+          <div class="ico" aria-hidden="true"><svg viewBox="0 0 48 48"><path pathLength="1" d="M14 40 L18 10 H30 L34 40"/><path pathLength="1" d="M8 40 H40"/><path pathLength="1" d="M20 26 H31 M27 22 L31 26 L27 30"/></svg></div>
           <span class="badge">3D · recorrido</span>
           <h3>Recorrido en primera persona</h3>
           <p>El huésped camina de ambiente en ambiente como si estuviera ahí. Ve dónde está la ducha, cuánto espacio hay junto a la cama y qué se ve por la ventana.</p>
           <button class="try" type="button" data-go="walk">Pruébalo arriba</button>
         </article>
-        <article class="view">
+        <article class="view" data-tilt>
+          <div class="ico" aria-hidden="true"><svg viewBox="0 0 48 48"><path pathLength="1" d="M24 6 L40 15 V33 L24 42 L8 33 V15 Z"/><path pathLength="1" d="M8 15 L24 24 L40 15"/><path pathLength="1" d="M24 24 V42"/></svg></div>
           <span class="badge">3D · maqueta</span>
           <h3>Maqueta dollhouse</h3>
           <p>El alojamiento completo visto desde arriba, sin techo, como una maqueta. Se entiende la distribución en tres segundos.</p>
           <button class="try" type="button" data-go="doll">Pruébalo arriba</button>
         </article>
-        <article class="view">
+        <article class="view" data-tilt>
+          <div class="ico" aria-hidden="true"><svg viewBox="0 0 48 48"><rect pathLength="1" x="8" y="8" width="32" height="26" rx="2"/><path pathLength="1" d="M8 20 H22 V34"/><path pathLength="1" d="M30 8 V16"/><path pathLength="1" d="M8 41 H40 M8 39 V43 M40 39 V43"/></svg></div>
           <span class="badge">m² · planta</span>
           <h3>Plano con medidas</h3>
           <p>Planta acotada con el área de cada ambiente. Se sube como imagen al anuncio de Airbnb y Booking y responde la pregunta de cuánto mide.</p>
           <button class="try" type="button" data-go="plan">Pruébalo arriba</button>
         </article>
-        <article class="view">
+        <article class="view" data-tilt>
+          <div class="ico" aria-hidden="true"><svg viewBox="0 0 48 48"><rect pathLength="1" x="9" y="9" width="30" height="30" rx="4"/><path pathLength="1" d="M24 9 V39 M9 24 H39"/><circle pathLength="1" cx="31.5" cy="16.5" r="3.5"/></svg></div>
           <span class="badge">HDR · fotos</span>
           <h3>Fotos HDR corregidas</h3>
           <p>De 15 a 40 fotos con ventanas bien expuestas, líneas verticales rectas y color fiel. Son las primeras que ve el huésped en el buscador.</p>
         </article>
-        <article class="view">
+        <article class="view" data-tilt>
+          <div class="ico" aria-hidden="true"><svg viewBox="0 0 48 48"><path pathLength="1" d="M24 43 C24 43 11 30 11 20 A13 13 0 0 1 37 20 C37 30 24 43 24 43 Z"/><path pathLength="1" d="M24 18 V26"/><circle pathLength="1" cx="24" cy="13.5" r=".6"/></svg></div>
           <span class="badge">ES / EN · etiquetas</span>
           <h3>Etiquetas interactivas bilingües</h3>
           <p>Puntos que explican lo que importa en Cusco: calefacción, agua caliente, velocidad de Wi-Fi, escaleras y cómo llegar desde la Plaza de Armas.</p>
         </article>
-        <article class="view">
+        <article class="view" data-tilt>
+          <div class="ico" aria-hidden="true"><svg viewBox="0 0 48 48"><rect pathLength="1" x="15" y="5" width="18" height="38" rx="4"/><path pathLength="1" d="M21 18 L29 24 L21 30 Z"/></svg></div>
           <span class="badge">9:16 · video</span>
           <h3>Video vertical para redes</h3>
           <p>Un recorrido de 30 segundos generado desde el modelo 3D, listo para Instagram, TikTok y estados de WhatsApp.</p>
@@ -462,7 +587,7 @@ html.lenis,html.lenis body{height:auto}
     </div>
   </section>
 
-  <section class="block" id="cusco">
+  <section class="block sec sec-carmin" id="cusco">
     <div class="wrap">
       <div class="head">
         <p class="eyebrow">El mercado en Cusco</p>
@@ -509,7 +634,7 @@ html.lenis,html.lenis body{height:auto}
     </div>
   </section>
 
-  <section class="block" id="proceso">
+  <section class="block sec sec-noche" id="proceso">
     <div class="wrap">
       <div class="head">
         <p class="eyebrow">Cómo funciona</p>
@@ -525,7 +650,7 @@ html.lenis,html.lenis body{height:auto}
     </div>
   </section>
 
-  <section class="block" id="planes">
+  <section class="block sec sec-claro" id="planes">
     <div class="wrap">
       <div class="head">
         <p class="eyebrow">Planes</p>
@@ -533,7 +658,7 @@ html.lenis,html.lenis body{height:auto}
         <p class="lede">Pago único por escaneo. El tour queda publicado 12 meses y la renovación es opcional.</p>
       </div>
       <div class="plans">
-        <article class="plan">
+        <article class="plan" data-tilt>
           <h3>Esencial</h3>
           <div class="price">S/ 390 <small>hasta 60 m²</small></div>
           <p class="for">Para una habitación o un minidepartamento.</p>
@@ -546,7 +671,7 @@ html.lenis,html.lenis body{height:auto}
           </ul>
           <button class="btn btn-ghost" type="button" data-plan="Esencial">Elegir Esencial</button>
         </article>
-        <article class="plan featured">
+        <article class="plan featured" data-tilt>
           <span class="pill">El más pedido</span>
           <h3>Profesional</h3>
           <div class="price">S/ 790 <small>hasta 120 m²</small></div>
@@ -561,7 +686,7 @@ html.lenis,html.lenis body{height:auto}
           </ul>
           <button class="btn btn-primary" type="button" data-plan="Profesional">Elegir Profesional</button>
         </article>
-        <article class="plan">
+        <article class="plan" data-tilt>
           <h3>Premium</h3>
           <div class="price">S/ 1,490 <small>hasta 250 m²</small></div>
           <p class="for">Para casonas, lodges del Valle Sagrado y hoteles boutique.</p>
@@ -623,7 +748,7 @@ html.lenis,html.lenis body{height:auto}
     </div>
   </section>
 
-  <section class="block" id="peru">
+  <section class="block sec sec-noche" id="peru">
     <div class="wrap">
       <div class="head">
         <p class="eyebrow">Expansión</p>
@@ -667,7 +792,7 @@ html.lenis,html.lenis body{height:auto}
     </div>
   </section>
 
-  <section class="block" id="preguntas">
+  <section class="block sec sec-claro" id="preguntas">
     <div class="wrap">
       <div class="head">
         <p class="eyebrow">Preguntas frecuentes</p>
@@ -829,7 +954,7 @@ html.lenis,html.lenis body{height:auto}
   <div><small>Desde</small><b>S/ 390</b></div>
   <a class="btn btn-primary" href="#contacto">Agenda tu escaneo</a>
 </div>
-<footer>
+<footer class="sec sec-noche">
   <div class="wrap">
     <div class="row">
       <span><b style="font-family:var(--font-display);color:var(--ink)">Wasi 3D</b> · <i>Wasi</i> significa casa en quechua · Cusco, Perú</span>
@@ -862,7 +987,7 @@ const viewer=$('#viewer'),stage=$('#stage'),labelsEl=$('#labels');
 function fail(){const d=document.createElement('div');d.className='fail';d.textContent='Tu navegador no pudo iniciar el visor 3D. Prueba con Chrome, Safari o Firefox actualizados.';stage.appendChild(d);}
 if(!window.THREE){fail();return initRest();}
 let renderer;
-try{renderer=new THREE.WebGLRenderer({antialias:true});}catch(e){fail();return initRest();}
+try{renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});}catch(e){fail();return initRest();}
 renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,matchMedia('(pointer: coarse)').matches?1.5:2));
 renderer.outputEncoding=THREE.sRGBEncoding;
 renderer.shadowMap.enabled=true;
@@ -883,7 +1008,7 @@ persp.rotation.order='YXZ';
 const ortho=new THREE.OrthographicCamera(-1,1,1,-1,0.1,100);
 ortho.up.set(0,0,-1);
 
-function applyTheme(){dirty=true;renderer.setClearColor(new THREE.Color(cssVar('--viewer-bg')||'#DCE1DA'));}
+function applyTheme(){dirty=true;renderer.setClearColor(0x000000,0);}
 applyTheme();
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',applyTheme);
 new MutationObserver(applyTheme).observe(root,{attributes:true,attributeFilter:['data-theme']});
@@ -1237,6 +1362,8 @@ function initRest(){
 
 
   /* Barra fija en celular: visible cuando los botones del héroe ya no se ven y aún no llegas al formulario */
+  const top=document.querySelector('.top'),hero=document.querySelector('.hero');
+  if(top&&hero&&'IntersectionObserver' in window){new IntersectionObserver(([e])=>top.classList.toggle('sobre',e.isIntersecting&&e.boundingClientRect.bottom>90),{threshold:[0,.05,.1,.2,.3,.4,.5,.6,.7,.8,.9,1]}).observe(hero);}
   const barra=$('#barraMovil'),heroCta=document.querySelector('.hero .cta-row'),contacto=document.getElementById('contacto');
   if(barra&&heroCta&&contacto&&'IntersectionObserver' in window){
     barra.hidden=false;let ctaFuera=false,enContacto=false;
@@ -1568,6 +1695,26 @@ function initMotion(){
       gsap.fromTo('#routeTrack span',{scaleX:0},{scaleX:1,ease:'none',scrollTrigger:{trigger:'.phases',start:'top 85%',end:'bottom 60%',scrub:.6,
         onUpdate:self=>phases.forEach((p,i)=>p.classList.toggle('lit',i===0||self.progress>=i/phases.length))}});
     },
+    vida(){
+      const fino=matchMedia('(pointer: fine)').matches,hero=document.querySelector('.hero'),cielo=document.querySelector('.cielo');
+      gsap.to('.montes .m1',{yPercent:-10,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:true}});
+      gsap.to('.montes .m2',{yPercent:-5,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:true}});
+      gsap.to('.estrellas',{yPercent:20,ease:'none',scrollTrigger:{trigger:hero,start:'top top',end:'bottom top',scrub:true}});
+      gsap.from('.cinta',{rotate:0,xPercent:-4,duration:1.2,ease:'power3.out',scrollTrigger:{trigger:'.cinta',start:'top 95%',once:true}});
+      if(!fino)return;
+      hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();cielo.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');cielo.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');},{passive:true});
+      document.querySelectorAll('[data-tilt]').forEach(el=>{
+        const rx=gsap.quickTo(el,'rotationX',{duration:.5,ease:'power3.out'}),ry=gsap.quickTo(el,'rotationY',{duration:.5,ease:'power3.out'});
+        gsap.set(el,{transformPerspective:900});
+        el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();ry(((e.clientX-r.left)/r.width-.5)*8);rx(-((e.clientY-r.top)/r.height-.5)*8);});
+        el.addEventListener('pointerleave',()=>{rx(0);ry(0);});
+      });
+      document.querySelectorAll('.btn-primary').forEach(b=>{
+        const mx=gsap.quickTo(b,'x',{duration:.4,ease:'power3.out'}),my=gsap.quickTo(b,'y',{duration:.4,ease:'power3.out'});
+        b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();mx((e.clientX-r.left-r.width/2)*.18);my((e.clientY-r.top-r.height/2)*.25);});
+        b.addEventListener('pointerleave',()=>{mx(0);my(0);});
+      });
+    },
     headerHide(){
       const top=document.querySelector('.top');let hidden=false;
       ST.create({start:0,end:'max',onUpdate:self=>{const h=self.scroll()>240&&self.direction===1;if(h!==hidden){hidden=h;gsap.to(top,{yPercent:h?-100:0,duration:.35,ease:'power2.out',overwrite:true});}}});
@@ -1581,7 +1728,7 @@ function initMotion(){
     Motion.smooth();
     const fontsReady=Promise.race([document.fonts?document.fonts.ready:Promise.resolve(),new Promise(r=>setTimeout(r,1200))]);
     fontsReady.then(()=>{
-      Motion.intro();Motion.headings();Motion.reveals();Motion.counters();Motion.tracks();Motion.headerHide();
+      Motion.intro();Motion.vida();Motion.headings();Motion.reveals();Motion.counters();Motion.tracks();Motion.headerHide();
       ST.refresh();
     });
   });
