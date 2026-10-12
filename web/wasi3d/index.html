@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-CYJpeknJB93JtiwQMx5mnir7KfpTE43MqxijLCToMa8=' 'sha256-E7IfuLGDoSF7avOmR09CaWF1XzR6czhksLNSdxKxK8k=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-CYJpeknJB93JtiwQMx5mnir7KfpTE43MqxijLCToMa8=' 'sha256-1lpe6nWWcumZwOAOIIxkLrXxrlrQ38bePaOJOr6rzPs=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Wasi 3D</title>
 <meta name="description" content="Tours 3D, maqueta interactiva, plano con medidas y fotos HDR para alojamientos de Airbnb en Cusco. Listo en 48 horas.">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_PE">
 <meta name="theme-color" content="#A3123F">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23A3123F' d='M9 1h6v4h4v4h4v6h-4v4h-4v4H9v-4H5v-4H1V9h4V5h4z'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22 width=%2264%22 height=%2264%22 role=%22img%22 aria-label=%22Wasi 3D%22%3E%3Ctitle%3EWasi 3D%3C/title%3E%3Cpolygon points=%2232.00,3.00 57.11,17.50 32.00,32.00 6.89,17.50%22 fill=%22#D7476F%22/%3E%3Cpolygon points=%226.89,17.50 32.00,32.00 32.00,61.00 6.89,46.50%22 fill=%22#A3123F%22/%3E%3Cpolygon points=%2232.00,32.00 57.11,17.50 57.11,46.50 32.00,61.00%22 fill=%22#6A0A28%22/%3E%3Cpolygon points=%2214.42,50.85 16.18,34.47 22.71,38.23 24.47,56.65%22 fill=%22#18201C%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -256,6 +256,21 @@ html.lenis,html.lenis body{height:auto}
 .plan{transition:transform .3s ease,box-shadow .3s ease}
 .plan:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.12)}
 @media (prefers-reduced-motion: reduce){.hot .dot{animation:none}.plan:hover{transform:none}}
+
+/* Cinta de servicios (idea tomada de nexotesis: pista duplicada que se desplaza -50 %) */
+.cinta{overflow:hidden;border-block:1px solid var(--line);background:var(--surface);padding-block:14px;white-space:nowrap}
+.cinta__pista{display:inline-flex;gap:22px;align-items:center;animation:cinta 40s linear infinite}
+.cinta span{font-family:var(--font-display);font-weight:700;font-size:clamp(15px,1.6vw,19px)}
+.cinta i{font-style:normal;color:var(--accent);font-size:.7em}
+.cinta:hover .cinta__pista{animation-play-state:paused}
+@keyframes cinta{to{transform:translateX(-50%)}}
+/* Barra fija con precio en celular: aparece cuando el botón principal sale de pantalla */
+.barra-movil{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .3s ease}
+.barra-movil.visible{transform:none}
+.barra-movil small{display:block;font-size:.72rem;color:var(--muted)}
+.barra-movil b{font-family:var(--font-display);font-size:1.25rem}
+@media (min-width:761px){.barra-movil{display:none!important}}
+@media (prefers-reduced-motion: reduce){.cinta__pista{animation:none}.barra-movil{transition:none}}
 </style>
 </head>
 <body>
@@ -263,7 +278,7 @@ html.lenis,html.lenis body{height:auto}
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#inicio" aria-label="Wasi 3D, inicio">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="var(--accent)" d="M9 1h6v4h4v4h4v6h-4v4h-4v4H9v-4H5v-4H1V9h4V5h4z"/><rect x="10" y="10" width="4" height="4" fill="var(--bg)"/></svg>
+      <svg viewBox="0 0 32 32" aria-hidden="true"><polygon points="16.00,1.00 28.99,8.50 16.00,16.00 3.01,8.50" fill="#D7476F"/><polygon points="3.01,8.50 16.00,16.00 16.00,31.00 3.01,23.50" fill="#A3123F"/><polygon points="16.00,16.00 28.99,8.50 28.99,23.50 16.00,31.00" fill="#6A0A28"/><polygon points="6.91,25.75 7.82,17.27 11.19,19.23 12.10,28.75" fill="#18201C"/><polygon points="7.30,16.38 11.71,18.93 11.71,18.18 7.30,15.62" fill="#18201C" opacity=".55"/></svg>
       Wasi 3D
     </a>
     <nav class="nav" aria-label="Secciones">
@@ -328,6 +343,7 @@ html.lenis,html.lenis body{height:auto}
     </div>
   </section>
 
+  <div class="cinta" aria-hidden="true"><div class="cinta__pista"><span>Recorrido 3D</span><i>◆</i><span>Maqueta dollhouse</span><i>◆</i><span>Plano con medidas</span><i>◆</i><span>Fotos HDR</span><i>◆</i><span>Etiquetas ES / EN</span><i>◆</i><span>Video vertical</span><i>◆</i><span>Entrega en 48 h</span><i>◆</i><span>Yape y tarjeta</span><i>◆</i><span>Recorrido 3D</span><i>◆</i><span>Maqueta dollhouse</span><i>◆</i><span>Plano con medidas</span><i>◆</i><span>Fotos HDR</span><i>◆</i><span>Etiquetas ES / EN</span><i>◆</i><span>Video vertical</span><i>◆</i><span>Entrega en 48 h</span><i>◆</i><span>Yape y tarjeta</span><i>◆</i></div></div>
   <section class="block" id="vistas">
     <div class="wrap">
       <div class="head">
@@ -647,6 +663,10 @@ html.lenis,html.lenis body{height:auto}
   </section>
 </main>
 
+<div class="barra-movil" id="barraMovil" hidden>
+  <div><small>Desde</small><b>S/ 390</b></div>
+  <a class="btn btn-primary" href="#contacto">Agenda tu escaneo</a>
+</div>
 <footer>
   <div class="wrap">
     <div class="row">
@@ -1053,6 +1073,15 @@ function initRest(){
 
   document.querySelectorAll('[data-plan]').forEach(b=>b.addEventListener('click',()=>{const p=b.dataset.plan;$('#fPlan').value=p;const map={Esencial:'390',Profesional:'790',Premium:'1490'};$('#cPlan').value=map[p];calc();wasiScrollTo(document.getElementById('contacto'));$('#fName').focus({preventScroll:true});}));
 
+
+  /* Barra fija en celular: visible cuando los botones del héroe ya no se ven y aún no llegas al formulario */
+  const barra=$('#barraMovil'),heroCta=document.querySelector('.hero .cta-row'),contacto=document.getElementById('contacto');
+  if(barra&&heroCta&&contacto&&'IntersectionObserver' in window){
+    barra.hidden=false;let ctaFuera=false,enContacto=false;
+    const pintar=()=>barra.classList.toggle('visible',ctaFuera&&!enContacto);
+    new IntersectionObserver(([e])=>{ctaFuera=!e.isIntersecting&&e.boundingClientRect.top<0;pintar();}).observe(heroCta);
+    new IntersectionObserver(([e])=>{enContacto=e.isIntersecting;pintar();},{threshold:.15}).observe(contacto);
+  }
   const leadForm=$('#leadForm');
   leadForm.addEventListener('submit',e=>{
     e.preventDefault();
