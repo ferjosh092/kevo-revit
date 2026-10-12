@@ -39,9 +39,10 @@ Mídelo en el sitio publicado con PageSpeed Insights o con el MCP de Chrome DevT
 - Solo acepta JPG, PNG y WebP (60 MB por foto, 40 ambientes). Los textos del usuario se limpian y se insertan con `textContent`.
 - `marca/panoramas.js` regenera los panoramas de ejemplo de `demo/` a partir de la maqueta de la landing.
 
-## Mejorar con IA (`worker/`)
+## Describir y mejorar con IA (`worker/`)
 
-- La clave de OpenAI vive solo como secreto del Cloudflare Worker; el navegador nunca la ve.
+- Las claves de Anthropic (Claude) y OpenAI viven solo como secretos del Cloudflare Worker; el navegador nunca las ve.
 - Cada pedido exige un código de acceso y el Worker valida tipo, tamaño (20 MB), modo y origen.
-- El Estudio llama a `/api/mejorar` en el mismo dominio, por eso la CSP no necesita cambios.
+- El Estudio llama a `/api/describir` y `/api/mejorar` en el mismo dominio, por eso la CSP no necesita cambios.
+- Las propuestas de Claude son solo eso: el anfitrión revisa y marca qué agregar. Sus textos se limpian en el Worker y se insertan con `textContent`.
 - Las imágenes generadas quedan marcadas como «Ambientado con IA».

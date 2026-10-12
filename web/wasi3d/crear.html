@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-GlJslMkt1sgwuzFAUIkS1J2EG/RQP8t2wcQ0D/+YOTs=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-a+07LehWi8cAGF6FcB2LGLgV/ZPoENfwwRGdp+VWlAQ=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Wasi 3D Estudio</title>
 <meta name="description" content="Sube tus fotos 360° o normales y conviértelas en un recorrido virtual con enlaces entre ambientes, puntos de información y plano.">
@@ -169,6 +169,17 @@ textarea.campo{resize:vertical;min-height:70px}
 .opt-ia input:focus-visible+span{outline:2px solid var(--oro);outline-offset:2px}
 .sello-ia{display:inline-block;margin-left:8px;font:600 .66rem/1 var(--font-body);letter-spacing:.04em;text-transform:uppercase;color:#231500;background:var(--oro);padding:4px 7px;border-radius:999px;vertical-align:middle}
 .estado.ok{color:var(--ok)}
+.bloque h4{margin:6px 0 0;font:700 .9rem var(--font-display);display:flex;justify-content:space-between;align-items:center}
+.bloque h4 small{font:500 .72rem var(--font-mono);color:var(--suave)}
+.propuesta{display:grid;gap:8px;border:1px solid var(--linea-2);border-radius:12px;padding:10px;background:rgba(255,255,255,.03)}
+.propuesta .resumen{margin:0;font-size:.84rem;color:var(--suave)}
+.propuesta label{display:grid;grid-template-columns:18px 1fr;gap:8px;align-items:start;font-size:.84rem;cursor:pointer}
+.propuesta label input{width:16px;height:16px;margin-top:2px;accent-color:var(--oro)}
+.propuesta label small{display:block;color:var(--suave);font-size:.78rem}
+.privacidad{border:1px solid rgba(233,185,73,.55);background:rgba(233,185,73,.1);border-radius:10px;padding:8px 10px;font-size:.82rem}
+.privacidad b{color:var(--oro)}
+.privacidad ul{margin:4px 0 0;padding-left:18px}
+.ficha .en{margin-top:6px;font-style:italic;color:#6A726E}
 
 @media (max-width:900px){
   body{overflow:auto;height:auto}
@@ -218,7 +229,7 @@ textarea.campo{resize:vertical;min-height:70px}
       <div class="mapa-cab"><span>Plano</span><button type="button" id="mapaTam" aria-label="Agrandar plano">Agrandar</button></div>
       <div class="mapa-lienzo" id="mapaLienzo"><img id="mapaImg" alt="Plano del alojamiento"><div class="radar" id="radar" hidden></div></div>
     </div>
-    <div class="ficha" id="ficha" hidden role="dialog" aria-labelledby="fichaT"><button type="button" class="x" id="fichaX" aria-label="Cerrar">×</button><h3 id="fichaT"></h3><p id="fichaP"></p></div>
+    <div class="ficha" id="ficha" hidden role="dialog" aria-labelledby="fichaT"><button type="button" class="x" id="fichaX" aria-label="Cerrar">×</button><h3 id="fichaT"></h3><p id="fichaP"></p><p class="en" id="fichaEn" hidden></p></div>
     <div class="pop" id="pop" hidden></div>
     <div class="toast" id="toast" role="status"></div>
     <nav class="tira" id="tira" aria-label="Ambientes"></nav>
@@ -272,7 +283,16 @@ textarea.campo{resize:vertical;min-height:70px}
     </div>
 
     <div class="bloque" id="bIA">
-      <h3>Mejorar con IA <small>ChatGPT</small></h3>
+      <h3>Asistente con IA</h3>
+      <input class="campo" id="iaCodigo" type="password" autocomplete="off" maxlength="80" placeholder="Código de acceso del Estudio" aria-label="Código de acceso del Estudio">
+
+      <h4>Describir con IA <small>Claude</small></h4>
+      <p class="ayuda">Claude mira este ambiente y propone su nombre y puntos de información en español e inglés, ya ubicados en la foto. Tú eliges cuáles agregar.</p>
+      <div class="acciones"><button type="button" class="btn btn-sm btn-pri" id="aDesc">Describir este ambiente</button><button type="button" class="btn btn-sm" id="aDescx" hidden>Cancelar</button></div>
+      <p class="estado" id="descEstado" aria-live="polite"></p>
+      <div class="propuesta" id="descProp" hidden></div>
+
+      <h4>Mejorar con IA <small>ChatGPT</small></h4>
       <div class="opts-ia" role="radiogroup" aria-label="Tipo de mejora">
         <label class="opt-ia"><input type="radio" name="iaModo" value="ordenar" checked><span><b>Ordenar y ambientar</b><small>Quita el desorden y mejora la luz de una foto real</small></span></label>
         <label class="opt-ia"><input type="radio" name="iaModo" value="render"><span><b>Render fotorrealista</b><small>Convierte una maqueta 3D en foto</small></span></label>
@@ -282,7 +302,6 @@ textarea.campo{resize:vertical;min-height:70px}
         <label class="opt-ia"><input type="radio" name="iaAlcance" value="panorama"><span><b>Panorama 360 completo</b><small>Experimental: baja a 2048 px</small></span></label>
       </div>
       <textarea class="campo" id="iaExtra" maxlength="300" placeholder="Indicaciones extra (opcional): «sofás grises», «luz de tarde»…"></textarea>
-      <input class="campo" id="iaCodigo" type="password" autocomplete="off" maxlength="80" placeholder="Código de acceso del Estudio" aria-label="Código de acceso del Estudio">
       <div class="acciones"><button type="button" class="btn btn-sm btn-pri" id="aIA">Mejorar con IA</button><button type="button" class="btn btn-sm" id="aIAx" hidden>Cancelar</button></div>
       <p class="estado" id="iaEstado" aria-live="polite"></p>
       <p class="ayuda">Las imágenes generadas se marcan como «Ambientado con IA». Airbnb pide que las fotos muestren el espacio real: avisa en tu anuncio cuando una foto esté ambientada.</p>
@@ -484,7 +503,7 @@ function clicPunto(p,b){
   if(p.tipo==='enlace')irA(p.destino,p);
   else abrirFicha(p);
 }
-function abrirFicha(p){$('#fichaT').textContent=p.titulo;$('#fichaP').textContent=p.texto||'';$('#ficha').hidden=false;}
+function abrirFicha(p){$('#fichaT').textContent=p.titulo;$('#fichaP').textContent=p.texto||'';const en=$('#fichaEn');en.textContent=p.titulo_en?`${p.titulo_en}${p.texto_en?': '+p.texto_en:''}`:'';en.hidden=!p.titulo_en;$('#ficha').hidden=false;}
 function cerrarFicha(){$('#ficha').hidden=true;}
 $('#fichaX').addEventListener('click',cerrarFicha);
 
@@ -687,6 +706,7 @@ function pintarPanel(){
     ul.appendChild(el('li',{},el('i',{textContent:p.tipo==='enlace'?'ENLACE':'INFO'}),ver,q));
   });
   $('#sinPuntos').hidden=e.puntos.length>0;
+  if(desc&&desc.id!==actual)ocultarDesc();
 }
 function pintarEscena(){
   const e=escena(actual),i=tour.escenas.indexOf(e);
@@ -798,6 +818,71 @@ $('#aIA').addEventListener('click',async()=>{
   finally{clearInterval(reloj);clearTimeout(corte);iaPedido=null;$('#aIA').disabled=false;$('#aIAx').hidden=true;}
 });
 $('#aIAx').addEventListener('click',()=>{if(iaPedido)iaPedido.abort();});
+
+/* ================= Describir con IA (Claude vía el Worker de /api) ================= */
+/* var y no let: pintarPanel() puede consultarla antes de que este bloque se ejecute */
+var desc=null;
+let descPedido=null;
+function descEstado(t,err){const n=$('#descEstado');n.textContent=t;n.classList.toggle('err',!!err);}
+function ocultarDesc(){desc=null;const p=$('#descProp');p.hidden=true;p.replaceChildren();}
+async function fotoParaClaude(e){
+  /* Claude trabaja a ~1568 px en el lado mayor: más resolución solo encarece el pedido */
+  const img=await cargarImagen(e.blob),k=Math.min(1,1568/Math.max(img.width,img.height));
+  const c=document.createElement('canvas');c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);
+  c.getContext('2d').drawImage(img,0,0,c.width,c.height);return aBlob(c,'image/jpeg',.85);
+}
+/* Posición en la imagen (0–1) → dirección en el visor, con la misma geometría que geometria() */
+function aDireccion(e,x,y){
+  let H,V;
+  if(e.tipo==='360'){H=360;V=e.vcov||180;}
+  else{H=e.hfov||75;V=deg(2*Math.atan(Math.tan(rad(H)/2)/(e.ancho/e.alto)));}
+  return{lon:Math.round((x-.5)*H*10)/10,lat:Math.round(clamp((.5-y)*V,-85,85)*10)/10};
+}
+function mostrarDesc(e,d){
+  desc={id:e.id,d};
+  const p=$('#descProp');p.replaceChildren();
+  const caja=(texto,chico,marcado)=>{const i=el('input',{type:'checkbox',checked:marcado});return[el('label',{},i,el('span',{},texto,chico?el('small',{textContent:chico}):'')),i];};
+  const filas=[];
+  if(d.nombre&&d.nombre!==e.nombre){const[l,i]=caja(`Llamar al ambiente «${d.nombre}»`,d.nombre_en,true);p.appendChild(l);filas.push(()=>{if(i.checked){e.nombre=d.nombre;e.nombre_en=d.nombre_en;}});}
+  if(d.resumen)p.appendChild(el('p',{className:'resumen',textContent:d.resumen}));
+  d.puntos.forEach(pt=>{const[l,i]=caja(pt.titulo,pt.texto,true);p.appendChild(l);filas.push(()=>{if(i.checked)e.puntos.push(Object.assign({id:uid(),tipo:'info',titulo:pt.titulo,texto:pt.texto,titulo_en:pt.titulo_en,texto_en:pt.texto_en,ia:'claude'},aDireccion(e,pt.x,pt.y)));});});
+  if(d.privacidad.length){const ul=el('ul');d.privacidad.forEach(t=>ul.appendChild(el('li',{textContent:t})));p.appendChild(el('div',{className:'privacidad'},el('b',{textContent:'Antes de publicar, revisa: '}),ul));}
+  const ok=el('button',{type:'button',className:'btn btn-sm btn-pri',textContent:'Agregar lo marcado'});
+  const no=el('button',{type:'button',className:'btn btn-sm',textContent:'Descartar'});
+  ok.addEventListener('click',()=>{const n=e.puntos.length;filas.forEach(f=>f());if(d.resumen){e.resumen=d.resumen;e.resumen_en=d.resumen_en;}ocultarDesc();guardar();pintarEscena();
+    const k=e.puntos.length-n;descEstado(k?`${k>1?`Se agregaron ${k} puntos`:'Se agregó 1 punto'}. Revisa que cada uno quedó en su lugar: si no, elimínalo y colócalo a mano.`:'Listo.');aviso('Propuesta de Claude aplicada');});
+  no.addEventListener('click',()=>{ocultarDesc();descEstado('');});
+  p.appendChild(el('div',{className:'acciones'},ok,no));
+  p.hidden=false;
+}
+$('#aDesc').addEventListener('click',async()=>{
+  const e=escena(actual);if(!e||descPedido)return;
+  const codigo=$('#iaCodigo').value.trim();
+  if(!codigo){descEstado('Escribe el código de acceso del Estudio.',true);$('#iaCodigo').focus();return;}
+  try{sessionStorage.setItem('wasi-ia-codigo',codigo);}catch(_){}
+  ocultarDesc();
+  const ctl=new AbortController();descPedido=ctl;
+  $('#aDesc').disabled=true;$('#aDescx').hidden=false;
+  const t0=Date.now(),reloj=setInterval(()=>descEstado(`Claude está mirando la foto… ${Math.round((Date.now()-t0)/1000)} s`),1000);
+  const corte=setTimeout(()=>ctl.abort(),120000);
+  try{
+    const fd=new FormData();
+    fd.append('imagen',await fotoParaClaude(e),'ambiente.jpg');
+    fd.append('tipo',e.tipo==='360'?((e.vcov||180)<179?'parcial':'360'):'foto');
+    fd.append('nombre',e.nombre);fd.append('lugar',tour.nombre);
+    let r;
+    try{r=await fetch('/api/describir',{method:'POST',headers:{'X-Wasi-Codigo':codigo},body:fd,signal:ctl.signal});}
+    catch(err){throw new Error(err.name==='AbortError'?'Se canceló la descripción.':'No se pudo conectar con el servidor de IA. Funciona cuando la web está publicada junto al Worker (ver worker/README.md).');}
+    let j={};try{j=await r.json();}catch(_){}
+    if(!r.ok)throw new Error(j.error||`El servidor respondió ${r.status}.`);
+    if(!Array.isArray(j.puntos))throw new Error('El servidor no devolvió una propuesta.');
+    if(actual!==e.id){descEstado('Cambiaste de ambiente: vuelve a pedir la descripción.');return;}
+    mostrarDesc(e,j);
+    descEstado(`Propuesta lista: ${j.puntos.length} punto${j.puntos.length===1?'':'s'}. Marca lo que quieras agregar.`);
+  }catch(err){descEstado(err.message||'No se pudo describir el ambiente.',true);}
+  finally{clearInterval(reloj);clearTimeout(corte);descPedido=null;$('#aDesc').disabled=false;$('#aDescx').hidden=true;}
+});
+$('#aDescx').addEventListener('click',()=>{if(descPedido)descPedido.abort();});
 
 /* ================= Recorrido de ejemplo ================= */
 async function cargarEjemploReal(){

@@ -1,12 +1,17 @@
 // Wasi 3D · servidor de IA para el Estudio (Cloudflare Worker).
 //
-// Recibe una imagen del Estudio y la envía a la API de imágenes de OpenAI (ChatGPT)
-// para ordenarla y ambientarla, o para convertir una maqueta 3D en un render fotorrealista.
-// La clave de OpenAI vive solo aquí, como secreto del Worker: nunca llega al navegador.
+// /api/mejorar   Envía una imagen a la API de imágenes de OpenAI (ChatGPT) para ordenarla y ambientarla,
+//                o para convertir una maqueta 3D en un render fotorrealista.
+// /api/describir Envía la foto de un ambiente a Claude (Anthropic), que propone su nombre y los puntos
+//                de información en español e inglés (ver describir.js).
+// Las claves viven solo aquí, como secretos del Worker: nunca llegan al navegador.
 //
-// Secretos:  OPENAI_API_KEY, CODIGO_ACCESO   (wrangler secret put …)
-// Variables: MODELO, CALIDAD, FIDELIDAD, ORIGENES   (wrangler.toml)
+// Secretos:  OPENAI_API_KEY, ANTHROPIC_API_KEY, CODIGO_ACCESO   (wrangler secret put …)
+//            Basta con la clave del servicio que uses.
+// Variables: MODELO, CALIDAD, FIDELIDAD, MODELO_CLAUDE, ESFUERZO_CLAUDE, ORIGENES   (wrangler.toml)
 // Opcional:  LIMITE  (binding de Rate Limiting de Cloudflare)
+
+import { describir } from "./describir.js";
 
 const MAX_BYTES = 20 * 1024 * 1024;
 const TIPOS = new Set(["image/jpeg", "image/png", "image/webp"]);
@@ -63,7 +68,8 @@ export default {
     const permitidos = String(env.ORIGENES || "").split(",").map((s) => s.trim()).filter(Boolean);
     const cors = permitidos.includes(origen) ? { "Access-Control-Allow-Origin": origen, Vary: "Origin" } : {};
 
-    if (url.pathname !== "/api/mejorar") return json({ error: "No encontrado." }, 404, cors);
+    const ruta = { "/api/mejorar": "OPENAI_API_KEY", "/api/describir": "ANTHROPIC_API_KEY" }[url.pathname];
+    if (!ruta) return json({ error: "No encontrado." }, 404, cors);
     if (req.method === "OPTIONS") {
       return new Response(null, {
         status: 204,
@@ -72,7 +78,7 @@ export default {
     }
     if (req.method !== "POST") return json({ error: "Usa POST." }, 405, cors);
     if (origen && !permitidos.includes(origen) && origen !== url.origin) return json({ error: "Origen no permitido." }, 403, cors);
-    if (!env.OPENAI_API_KEY || !env.CODIGO_ACCESO) return json({ error: "El servidor de IA no está configurado." }, 500, cors);
+    if (!env[ruta] || !env.CODIGO_ACCESO) return json({ error: "El servidor de IA no está configurado." }, 500, cors);
     if (!(await igual(req.headers.get("X-Wasi-Codigo") || "", env.CODIGO_ACCESO))) return json({ error: "Código de acceso incorrecto." }, 401, cors);
     if (env.LIMITE) {
       const { success } = await env.LIMITE.limit({ key: req.headers.get("CF-Connecting-IP") || "anon" });
@@ -85,6 +91,7 @@ export default {
     const imagen = form.get("imagen");
     if (!imagen || typeof imagen === "string" || !TIPOS.has(imagen.type)) return json({ error: "Envía una imagen JPG, PNG o WebP." }, 400, cors);
     if (imagen.size > MAX_BYTES) return json({ error: "La imagen pesa más de 20 MB." }, 413, cors);
+    if (url.pathname === "/api/describir") return describir(form, env, (cuerpo, estado) => json(cuerpo, estado, cors));
     const modo = String(form.get("modo") || "");
     if (!PROMPTS[modo]) return json({ error: "Modo no válido." }, 400, cors);
     const panorama = form.get("alcance") === "panorama";

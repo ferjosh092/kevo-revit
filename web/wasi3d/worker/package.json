@@ -2,5 +2,10 @@
   "name": "wasi3d-ia",
   "private": true,
   "type": "module",
-  "scripts": { "test": "node --test test/worker.test.mjs" }
+  "scripts": {
+    "test": "node --test test/worker.test.mjs test/describir.test.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.133.0"
+  }
 }
