@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-CYJpeknJB93JtiwQMx5mnir7KfpTE43MqxijLCToMa8=' 'sha256-P6/uDIIOS4JGcWfxUVeNt14Qhb9NNGfgGL7sLKp5iOI=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-CYJpeknJB93JtiwQMx5mnir7KfpTE43MqxijLCToMa8=' 'sha256-RCU3KMFoaZweg/IMU9MnoYy/F1by212ayzWxIVtM01w=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Wasi 3D</title>
 <meta name="description" content="Tours 3D, maqueta interactiva, plano con medidas y fotos HDR para alojamientos de Airbnb en Cusco. Listo en 48 horas.">
@@ -18,76 +18,311 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <script>(function(){if(!matchMedia('(prefers-reduced-motion: reduce)').matches){var r=document.documentElement;r.classList.add('motion-pending');setTimeout(function(){r.classList.remove('motion-pending')},3000);}})();</script>
 <style>
-/* Layout: banda de encabezado, héroe con visor 3D a todo el ancho, luego secciones en una columna de 1180px con grillas que se apilan en móvil. */
+:root{--tejido:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2248%22%20height%3D%2214%22%20viewBox%3D%220%200%2048%2014%22%3E%3Crect%20width%3D%2248%22%20height%3D%2214%22%20fill%3D%22%236A0A28%22%2F%3E%3Cpath%20d%3D%22M0%207%20L6%201%20L12%207%20L6%2013Z%20M24%207%20L30%201%20L36%207%20L30%2013Z%22%20fill%3D%22%23E9B949%22%2F%3E%3Cpath%20d%3D%22M12%207%20L18%203%20L24%207%20L18%2011Z%20M36%207%20L42%203%20L48%207%20L42%2011Z%22%20fill%3D%22%23F4DCE3%22%2F%3E%3C%2Fsvg%3E")}
+/* Layout: narración por capítulos (patrón Scroll-Triggered Storytelling de UI/UX Pro Max).
+   Héroe a todo el ancho → problema → antes/después → ciclo fijado con scroll → modelo en bento → planes → cotizador → cierre.
+   Cada capítulo tiene su color; la intensidad sube de la noche al carmín y termina en oro. */
 :root{
-  --bg:#EEF0EB;          /* piedra andesita clara */
-  --surface:#F8F9F5;
-  --ink:#18201C;
-  --muted:#58635D;
-  --line:#D2D7CF;
-  --accent:#A3123F;      /* carmín de cochinilla */
-  --accent-ink:#FFFFFF;
-  --accent-soft:#F4DCE3;
-  --indigo:#2A3C8E;
-  --maize:#B9830F;
+  --bg:#EEF0EB;--surface:#F8F9F5;--ink:#18201C;--muted:#55605A;--line:#D2D7CF;
+  --accent:#A3123F;--accent-ink:#FFFFFF;--accent-soft:#F4DCE3;--indigo:#2A3C8E;--maize:#B9830F;--ok:#2F7A5B;
   --viewer-bg:#DCE1DA;
-  --ok:#2F7A5B;
+  --noche:#0E1430;--noche-2:#1B2350;--carmin:#9E1240;--carmin-2:#6A0A28;--oro:#E9B949;
+  --cielo:linear-gradient(180deg,#0E1430 0%,#1E2252 28%,#4A2160 52%,#8E1F4F 72%,#C8473E 88%,#E9A54A 100%);
   --font-display:"Syne","Avenir Next","Segoe UI",system-ui,sans-serif;
   --font-body:"Figtree","Segoe UI",system-ui,-apple-system,sans-serif;
   --font-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
-  --radius:10px;
+  --radius:12px;--r-lg:28px;--r-md:18px;
+  --sombra:0 1px 2px rgba(20,27,58,.06),0 18px 40px -18px rgba(20,27,58,.28);
+  --ease-out:cubic-bezier(.16,1,.3,1);
 }
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#111513; --surface:#181E1B; --ink:#E7EBE5; --muted:#9BA59F; --line:#2B3430;
-    --accent:#E8577F; --accent-ink:#1B0710; --accent-soft:#3A1622; --indigo:#93A2F2; --maize:#E2B24A;
-    --viewer-bg:#1C2320; --ok:#5FBF92; color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#111513; --surface:#181E1B; --ink:#E7EBE5; --muted:#9BA59F; --line:#2B3430;
-  --accent:#E8577F; --accent-ink:#1B0710; --accent-soft:#3A1622; --indigo:#93A2F2; --maize:#E2B24A;
-  --viewer-bg:#1C2320; --ok:#5FBF92; color-scheme:dark;
-}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#101412;--surface:#171D1A;--ink:#E7EBE5;--muted:#9EA8A2;--line:#2B3430;--accent:#E8577F;--accent-ink:#1B0710;--accent-soft:#3A1622;--indigo:#93A2F2;--maize:#E2B24A;--ok:#5FBF92;--viewer-bg:#1C2320;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#101412;--surface:#171D1A;--ink:#E7EBE5;--muted:#9EA8A2;--line:#2B3430;--accent:#E8577F;--accent-ink:#1B0710;--accent-soft:#3A1622;--indigo:#93A2F2;--maize:#E2B24A;--ok:#5FBF92;--viewer-bg:#1C2320;color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--font-body);-webkit-font-smoothing:antialiased}
+main{overflow-x:clip}
 a{color:inherit}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.wrap{max-width:1180px;margin:0 auto;padding-inline:20px}
-h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;line-height:1.08}
-h2{font-size:clamp(1.7rem,3.2vw,2.5rem);font-weight:700;letter-spacing:-.01em}
-h3{font-size:1.15rem;font-weight:700}
+:focus-visible{outline:2px solid var(--oro);outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--font-display);margin:0;line-height:1.05;text-wrap:balance}
+h2{font-size:clamp(2rem,4.4vw,3.4rem);font-weight:800;letter-spacing:-.025em}
+h3{font-size:1.15rem;font-weight:700;line-height:1.2}
 p{margin:0}
-.eyebrow{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:500}
-.lede{color:var(--muted);max-width:62ch;font-size:1.06rem}
-.btn{display:inline-flex;align-items:center;gap:.5em;font:600 .95rem/1 var(--font-body);padding:.85em 1.2em;border-radius:999px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:transform .15s ease,background .15s ease}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--accent);color:var(--accent-ink)}
-.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
-.btn-ghost:hover{border-color:var(--ink)}
+.lede{color:var(--muted);font-size:clamp(1.02rem,1.4vw,1.15rem);max-width:60ch}
+.kicker{display:inline-flex;align-items:center;gap:10px;font:500 .78rem/1 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.kicker::before{content:"";width:22px;height:2px;background:currentColor}
+.src{font:400 .74rem/1.5 var(--font-mono);color:var(--muted)}
+.src a{color:inherit}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:46px;font:600 .96rem/1 var(--font-body);padding:.85em 1.35em;border-radius:999px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:transform .2s var(--ease-out),background .2s,border-color .2s,box-shadow .2s;will-change:transform}
+.btn-primary{background:linear-gradient(135deg,#D7336A,var(--carmin) 55%,var(--carmin-2));color:#fff;box-shadow:0 12px 28px -12px rgba(158,18,64,.75)}
+.btn-primary::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s ease}
+.btn-primary:hover::after{transform:translateX(120%)}
+.btn-ghost{background:transparent;color:inherit;border-color:currentColor}
+.btn-ghost:hover{background:color-mix(in srgb,currentColor 10%,transparent)}
+.btn-oro{background:var(--oro);color:#231500}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+section.cap{position:relative;padding-block:clamp(84px,11vw,140px);isolation:isolate}
+.cap-head{display:grid;gap:16px;max-width:820px;margin-bottom:clamp(36px,5vw,64px)}
 
 /* Encabezado */
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;gap:24px;padding-block:12px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--font-display);font-weight:800;font-size:1.25rem;letter-spacing:-.01em}
-.brand svg{width:26px;height:26px;flex:none}
-.nav{display:flex;gap:20px;margin-left:auto;font-size:.92rem}
-.nav a{text-decoration:none;color:var(--muted)}
-.nav a:hover{color:var(--ink)}
-.top .btn{padding:.65em 1em;font-size:.88rem}
-@media (max-width:820px){.nav{display:none}.top .btn{margin-left:auto}}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;transition:background .3s,border-color .3s,color .3s;border-bottom:1px solid transparent}
+.top .wrap{display:flex;align-items:center;gap:22px;padding-block:12px}
+.top.solido{background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);border-color:var(--line)}
+.top:not(.solido){color:#fff}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 1.2rem var(--font-display);letter-spacing:-.01em}
+.brand svg{width:28px;height:28px;flex:none}
+.nav{display:flex;gap:22px;margin-left:auto;font-size:.92rem}
+.nav a{text-decoration:none;opacity:.78;transition:opacity .2s}
+.nav a:hover,.nav a[aria-current="true"]{opacity:1}
+.top .btn{min-height:40px;padding:.6em 1.05em;font-size:.88rem}
+@media (max-width:900px){.nav{display:none}.top .btn{margin-left:auto}}
+
+/* Indicador de capítulos */
+.progreso{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:35;display:grid;gap:12px;mix-blend-mode:difference;color:#fff}
+.progreso a{display:flex;align-items:center;justify-content:flex-end;gap:10px;text-decoration:none;font:500 .7rem var(--font-mono);letter-spacing:.06em;text-transform:uppercase}
+.progreso a span{opacity:0;transform:translateX(6px);transition:opacity .25s,transform .25s var(--ease-out)}
+.progreso a i{width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor;transition:transform .3s var(--ease-out),background .3s}
+.progreso a:hover span,.progreso a[aria-current="true"] span{opacity:1;transform:none}
+.progreso a[aria-current="true"] i{background:currentColor;transform:scale(1.4)}
+@media (max-width:1100px){.progreso{display:none}}
 
 /* Héroe */
-.hero{padding-block:36px 28px}
-.hero-grid{display:grid;grid-template-columns:7fr 5fr;gap:36px;align-items:end}
-.hero h1{font-size:clamp(2rem,4.3vw,3.6rem);font-weight:800;letter-spacing:-.025em}
-.hero h1 em{font-style:normal;color:var(--accent)}
-.hero-side{display:grid;gap:18px}
-.cta-row{display:flex;flex-wrap:wrap;gap:10px}
-@media (max-width:860px){.hero-grid{grid-template-columns:1fr;gap:18px}}
+.hero{position:relative;margin-top:-66px;padding-block:120px 190px;background:var(--cielo);color:#F4F2FB;overflow:hidden;isolation:isolate}
+.cielo{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.cielo::before{content:"";position:absolute;inset:0;background:radial-gradient(640px circle at var(--mx,72%) var(--my,34%),rgba(233,185,73,.24),transparent 60%)}
+.estrellas{position:absolute;inset:0 0 45% 0;opacity:.85;background-image:radial-gradient(1px 1px at 8% 18%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 18% 42%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 27% 9%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 39% 30%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 52% 12%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 61% 36%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 72% 8%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 84% 26%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 93% 14%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 97% 44%,#fff 50%,transparent 51%);animation:titilar 5s ease-in-out infinite alternate}
+@keyframes titilar{to{opacity:.4}}
+.montes{position:absolute;left:0;right:0;bottom:-2px;width:100%;height:240px;pointer-events:none}
+.montes .m1{fill:#5A2A5E;opacity:.85}.montes .m2{fill:#2E1D46}.montes .m3{fill:var(--noche)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,11fr) minmax(0,12fr);gap:clamp(24px,4vw,56px);align-items:center}
+.hero .kicker{color:var(--oro)}
+.hero h1{font-size:clamp(2.3rem,4.3vw,4rem);font-weight:800;letter-spacing:-.035em;color:#fff;margin-top:18px}
+.hero h1 em{font-style:normal;color:var(--oro)}
+.hero .lede{color:#D6D2EC;margin-top:22px}
+.hero .cta-row{margin-top:30px}
+.hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.4)}
+.hero-datos{display:flex;flex-wrap:wrap;gap:10px 26px;margin:34px 0 0;padding:0}
+.hero-datos div{display:grid;gap:2px}
+.hero-datos dt{font:500 .7rem var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:#B9B4D6}
+.hero-datos dd{margin:0;font:800 1.35rem var(--font-display);color:#fff}
+.hero .viewer{color:var(--ink);margin:0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:var(--r-lg);backdrop-filter:blur(6px);box-shadow:0 40px 90px -36px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.18)}
+.hero .stage{height:clamp(420px,62vh,640px)}
+@media (max-width:980px){.hero-grid{grid-template-columns:1fr}.hero{padding-block:104px 150px}.montes{height:150px}}
+
+/* Faja tejida */
+.cinta{position:relative;z-index:5;margin-top:-34px;transform:rotate(-1.6deg);background:var(--carmin);color:#FFF4F2;padding-block:16px;white-space:nowrap;overflow:hidden;box-shadow:0 18px 40px -18px rgba(106,10,40,.6)}
+.cinta::before,.cinta::after{content:"";position:absolute;left:0;right:0;height:10px;background:var(--tejido) repeat-x left center/auto 100%}
+.cinta::before{top:0}.cinta::after{bottom:0}
+.cinta__pista{display:inline-flex;gap:22px;align-items:center;animation:cinta 40s linear infinite}
+.cinta span{font:700 clamp(15px,1.6vw,19px) var(--font-display)}
+.cinta i{font-style:normal;color:var(--oro);font-size:.7em}
+.cinta:hover .cinta__pista{animation-play-state:paused}
+@keyframes cinta{to{transform:translateX(-50%)}}
+
+/* Capítulo 1: el problema (noche fría) */
+.cap-problema{background:var(--noche);color:#EEF0FF;margin-top:-30px;padding-top:clamp(120px,14vw,170px)}
+.cap-problema .kicker{color:#8FA0FF}
+.cap-problema .lede{color:#AAB3D9}
+.problema-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(28px,5vw,72px);align-items:center}
+.mosaico{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;aspect-ratio:6/5}
+.mosaico i{border-radius:8px;background:linear-gradient(160deg,#2A3157,#1B2244);position:relative;overflow:hidden}
+.mosaico i::after{content:"";position:absolute;left:18%;right:18%;bottom:22%;height:30%;border-radius:3px;background:linear-gradient(#3A4370,#2C345E)}
+.mosaico i.tuyo{grid-column:span 2;grid-row:span 2;background:linear-gradient(150deg,#C21F52,#6A0A28);box-shadow:0 0 0 2px var(--oro),0 20px 50px -10px rgba(194,31,82,.7);display:grid;place-items:center;align-content:center;gap:8px;color:#fff;font:700 .8rem/1.2 var(--font-display);text-align:center;padding:8px}
+.mosaico i.tuyo::after{display:none}
+.mosaico i.tuyo svg{width:46%;height:auto}
+.cifras{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:40px}
+.cifra{border-top:1px solid rgba(255,255,255,.18);padding-top:14px;display:grid;gap:4px}
+.cifra b{font:800 clamp(1.8rem,3.2vw,2.6rem)/1 var(--font-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cifra span{font-size:.88rem;color:#AAB3D9}
+@media (max-width:900px){.problema-grid{grid-template-columns:1fr}.cifras{grid-template-columns:1fr 1fr 1fr}}
+@media (max-width:520px){.cifras{grid-template-columns:1fr}}
+
+/* Capítulo 2: antes y después (claro) */
+.cap-antes{background:var(--bg)}
+.comparar{position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sombra);aspect-ratio:16/10;max-height:72vh;width:100%;background:#222;user-select:none;touch-action:pan-y;--pos:50%}
+.comparar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.comparar .despues{clip-path:inset(0 0 0 var(--pos))}
+.comparar .capa{position:absolute;inset:0;pointer-events:none}
+.comparar .despues-ui{clip-path:inset(0 0 0 var(--pos))}
+.comparar .antes-ui{clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
+.etq{position:absolute;top:16px;font:600 .74rem/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 11px;border-radius:999px}
+.antes-ui .etq{left:16px;background:rgba(0,0,0,.55);color:#ddd}
+.despues-ui .etq{right:16px;background:var(--oro);color:#231500}
+.antes-ui .quejas{position:absolute;left:16px;bottom:16px;display:grid;gap:6px}
+.antes-ui .quejas span{background:rgba(0,0,0,.6);color:#eee;font-size:.82rem;padding:6px 10px;border-radius:10px;width:max-content}
+.chips{position:absolute;right:16px;bottom:16px;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px;max-width:60%}
+.chips span{background:rgba(14,20,48,.82);color:#fff;font:600 .78rem var(--font-body);padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(4px)}
+.pin{position:absolute;display:flex;align-items:center;gap:6px;transform:translate(-50%,-50%)}
+.pin i{width:26px;height:26px;border-radius:50%;background:var(--oro);border:2px solid #fff;box-shadow:0 0 0 0 rgba(233,185,73,.6);animation:latido 2.4s ease-out infinite}
+.pin span{background:rgba(14,20,48,.82);color:#fff;font:600 .74rem var(--font-body);padding:4px 9px;border-radius:999px;white-space:nowrap}
+@keyframes latido{70%{box-shadow:0 0 0 12px rgba(233,185,73,0)}100%{box-shadow:0 0 0 0 rgba(233,185,73,0)}}
+.mini-plano{position:absolute;left:auto;right:16px;top:58px;width:clamp(120px,18%,190px);border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,.85);box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.mini-plano img{position:static;height:auto}
+.divisor{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;background:#fff;transform:translateX(-1px);box-shadow:0 0 18px rgba(0,0,0,.35);pointer-events:none}
+.divisor::after{content:"";position:absolute;top:50%;left:50%;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.35);background-image:linear-gradient(90deg,transparent 14px,#18201C 14px,#18201C 16px,transparent 16px,transparent 32px,#18201C 32px,#18201C 34px,transparent 34px)}
+.comparar input[type=range]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.comparar:focus-within .divisor::after{outline:3px solid var(--oro);outline-offset:3px}
+.comparar-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:18px}
+.comparar-bar .seg2{display:flex;gap:8px}
+.comparar-bar button{min-height:44px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 .88rem var(--font-body);padding:0 18px;cursor:pointer}
+.comparar-bar button[aria-pressed="true"]{border-color:var(--ink)}
+@media (max-width:640px){.mini-plano{display:none}.chips{max-width:80%}.comparar{aspect-ratio:4/5}}
+
+/* Capítulo 3: el ciclo (carmín, fijado con scroll en escritorio) */
+.cap-ciclo{background:var(--carmin);color:#FFF4F2;background-image:radial-gradient(120% 80% at 85% 0%,rgba(233,185,73,.2),transparent 60%),radial-gradient(90% 70% at 0% 100%,rgba(20,27,58,.4),transparent 60%)}
+.cap-ciclo .kicker{color:var(--oro)}
+.cap-ciclo .lede{color:#F3C4D2}
+.ciclo{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(28px,5vw,80px);align-items:center}
+.pasos{list-style:none;margin:0;padding:0;display:grid;gap:18px;counter-reset:p}
+.pasos li{counter-increment:p;display:grid;grid-template-columns:52px 1fr;gap:4px 16px;align-items:start;padding:16px;border-radius:var(--r-md);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);transition:opacity .35s,background .35s,box-shadow .35s}
+.pasos li::before{content:counter(p,decimal-leading-zero);grid-row:span 2;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;border:1.5px solid var(--oro);color:var(--oro);font:700 1rem var(--font-display)}
+.pasos li b{font:700 1.15rem var(--font-display)}
+.pasos li p{color:#F3C4D2;font-size:.95rem}
+.ciclo.girando .pasos li{opacity:.35}
+.ciclo.girando .pasos li.activo{opacity:1;background:rgba(255,255,255,.13);box-shadow:inset 4px 0 0 var(--oro)}
+.rueda{position:relative;aspect-ratio:1;max-width:520px;width:100%;justify-self:center}
+.rueda svg{width:100%;height:100%;overflow:visible}
+.rueda .pista{fill:none;stroke:rgba(255,255,255,.18);stroke-width:2}
+.rueda .avance{fill:none;stroke:var(--oro);stroke-width:4;stroke-linecap:round}
+.rueda .nodo circle{fill:var(--carmin-2);stroke:rgba(255,255,255,.5);stroke-width:2;transition:fill .3s,stroke .3s}
+.rueda .nodo text{fill:#fff;font:700 15px var(--font-display);text-anchor:middle;dominant-baseline:central}
+.rueda .nodo.activo circle{fill:var(--oro);stroke:#fff}
+.rueda .nodo.activo text:not(.rot){fill:#231500}
+.rueda .nodo .rot{fill:#FFF4F2;font:600 12.5px var(--font-body)}
+.rueda-centro{position:absolute;inset:26%;display:grid;place-items:center;text-align:center;align-content:center;gap:6px}
+.rueda-centro small{font:500 .72rem var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--oro)}
+.rueda-centro b{font:800 clamp(1.1rem,2vw,1.5rem)/1.1 var(--font-display)}
+@media (max-width:900px){.ciclo{grid-template-columns:1fr}.rueda{max-width:360px}}
+
+/* Capítulo 4: el modelo de negocio en bento (noche) */
+.cap-modelo{background:var(--noche);color:#EEF0FF;background-image:radial-gradient(80% 60% at 50% 120%,rgba(158,18,64,.35),transparent 70%)}
+.cap-modelo .kicker{color:var(--oro)}
+.cap-modelo .lede{color:#AAB3D9}
+.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(170px,auto);gap:14px}
+.celda{--gx:50%;--gy:50%;position:relative;overflow:hidden;border-radius:var(--r-lg);padding:24px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;gap:10px;transform-style:preserve-3d;will-change:transform}
+.celda::before{content:"";position:absolute;inset:0;background:radial-gradient(360px circle at var(--gx) var(--gy),rgba(233,185,73,.16),transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none}
+.celda:hover::before{opacity:1}
+.celda h3{font-size:1.25rem}
+.celda p{color:#AAB3D9;font-size:.95rem}
+.celda .etq2{font:500 .7rem var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--oro)}
+.celda .grande{font:800 clamp(2.2rem,4vw,3.4rem)/1 var(--font-display);letter-spacing:-.03em;color:#fff}
+.celda a{color:var(--oro);font-weight:600;text-decoration:none;margin-top:auto}
+.celda a:hover{text-decoration:underline}
+.c-escaneo{grid-column:span 2;grid-row:span 2;background:linear-gradient(160deg,rgba(194,31,82,.35),rgba(106,10,40,.25));border-color:rgba(233,185,73,.35)}
+.barras{display:flex;align-items:flex-end;gap:12px;height:140px;margin-top:auto}
+.barras div{flex:1;align-self:stretch;display:flex;flex-direction:column;justify-content:flex-end;gap:6px}
+.barras i{display:block;border-radius:10px 10px 4px 4px;background:linear-gradient(var(--oro),#C98F12);transform-origin:bottom}
+.barras span{font:600 .78rem var(--font-body);color:#fff;text-align:center}
+.barras small{font:500 .68rem var(--font-mono);color:#AAB3D9;text-align:center}
+.c-anfitrion{grid-column:span 2;background:linear-gradient(160deg,rgba(47,122,91,.28),rgba(14,20,48,.2));border-color:rgba(127,224,180,.3)}
+.c-anfitrion .grande{color:#7FE0B4}
+.ico2{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:rgba(233,185,73,.14);color:var(--oro)}
+.ico2 svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.para-quien{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.para-quien span{border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.45em .95em;font-size:.88rem;color:#EEF0FF}
+@media (max-width:980px){.bento{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.bento{grid-template-columns:1fr}.c-escaneo,.c-anfitrion{grid-column:auto;grid-row:auto}}
+
+/* Qué recibes, planes y calculadora (claro) */
+.cap-planes{background:var(--bg)}
+.recibes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:clamp(48px,6vw,80px)}
+.recibe{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line)}
+.recibe .ico{flex:none;width:48px;height:48px;border-radius:16px 16px 16px 5px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.recibe .ico svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.recibe b{display:block;font-family:var(--font-display);font-size:1rem}
+.recibe p{color:var(--muted);font-size:.9rem}
+@media (max-width:900px){.recibes{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.recibes{grid-template-columns:1fr}}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--sombra);transform-style:preserve-3d;will-change:transform}
+.plan.featured{border:0;color:#FFF4F2;background:linear-gradient(160deg,#B3164A,#7A0E31 70%,#4A0820);--ink:#FFF4F2;--muted:#F3C4D2;--ok:var(--oro);--line:rgba(255,255,255,.2);box-shadow:0 30px 60px -24px rgba(158,18,64,.65);position:relative;top:-12px}
+.plan .pill{align-self:flex-start;font:500 .7rem/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;background:var(--oro);color:#231500;padding:5px 8px;border-radius:4px}
+.price{font:800 2.4rem/1 var(--font-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.price small{font:500 .8rem var(--font-body);color:var(--muted);letter-spacing:0}
+.plan ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:.93rem;flex:1}
+.plan li{padding-left:22px;position:relative}
+.plan li::before{content:"";position:absolute;left:2px;top:.55em;width:10px;height:6px;border-left:2px solid var(--ok);border-bottom:2px solid var(--ok);transform:rotate(-45deg)}
+.plan .for{color:var(--muted);font-size:.9rem}
+.plan.featured .btn-primary{background:#fff;color:var(--carmin)}
+.plan .btn-ghost{color:var(--ink);border-color:var(--line)}
+.plans-foot{margin-top:18px;color:var(--muted);font-size:.88rem}
+@media (max-width:900px){.plans{grid-template-columns:1fr}.plan.featured{top:0}}
+.field{display:grid;gap:6px}
+.field label{font-size:.86rem;font-weight:600}
+.field .row{display:flex;align-items:center;gap:10px}
+.field input[type=range]{flex:1;accent-color:var(--accent);min-width:0}
+.field output{font:500 .9rem var(--font-mono);min-width:72px;text-align:right;font-variant-numeric:tabular-nums}
+.field select,.field input[type=text],.field input[type=tel],.field input[type=number],.field input[type=date]{font:inherit;font-size:.95rem;min-height:44px;padding:.6em .75em;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.calc{margin-top:48px;display:grid;grid-template-columns:5fr 6fr;border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;background:var(--surface);box-shadow:var(--sombra)}
+.calc-in{padding:26px;display:grid;gap:16px;border-right:1px solid var(--line);min-width:0}
+.calc-out{padding:26px;display:grid;gap:18px;align-content:start;min-width:0}
+.big{font:800 clamp(2rem,4vw,2.8rem)/1 var(--font-display);color:var(--accent);font-variant-numeric:tabular-nums}
+.kv{display:grid;grid-template-columns:1fr auto;gap:8px 16px;font-size:.92rem;border-top:1px solid var(--line);padding-top:14px;margin:0}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;font-family:var(--font-mono);text-align:right;font-variant-numeric:tabular-nums}
+.eyebrow{font:500 .74rem var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+@media (max-width:860px){.calc{grid-template-columns:1fr}.calc-in{border-right:0;border-bottom:1px solid var(--line)}}
+
+/* Expansión (franja) */
+.cap-peru{background:var(--surface);padding-block:clamp(70px,8vw,110px);border-top:1px solid var(--line)}
+.ruta{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;position:relative}
+.ruta::before{content:"";position:absolute;left:12px;right:12px;top:11px;height:2px;background:var(--line)}
+.ruta .linea{position:absolute;left:12px;top:11px;height:2px;width:calc(100% - 24px);background:var(--accent);transform-origin:left;transform:scaleX(.25)}
+.ruta .fase{position:relative;padding:36px 16px 0 0;display:grid;gap:6px}
+.ruta .fase::before{content:"";position:absolute;left:4px;top:3px;width:18px;height:18px;border-radius:50%;background:var(--surface);border:2px solid var(--line)}
+.ruta .fase.on::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 5px var(--accent-soft)}
+.ruta small{font:500 .72rem var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ruta b{font:700 1.15rem var(--font-display)}
+.ruta p{color:var(--muted);font-size:.9rem}
+@media (max-width:760px){.ruta{grid-template-columns:1fr 1fr;row-gap:24px}.ruta::before,.ruta .linea{display:none}}
+
+/* Cotizador y preguntas (claro) */
+.cap-cotiza,.cap-faq{background:var(--bg)}
+.cap-faq{padding-top:0}
+.head{display:grid;gap:12px;margin-bottom:34px;max-width:780px}
+.head h2{font-size:clamp(1.8rem,3.6vw,2.8rem)}
+.faq{display:grid;gap:10px;max-width:880px}
+.faq details{border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;background:var(--surface);transition:box-shadow .25s}
+.faq details[open]{box-shadow:var(--sombra)}
+.faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px;min-height:28px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--font-mono);color:var(--accent);font-size:1.2rem}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--muted);margin-top:10px;max-width:68ch;font-size:.95rem}
+
+/* Cierre */
+.final{position:relative;padding-block:clamp(90px,12vw,150px);text-align:center;color:#231500;background:linear-gradient(120deg,#F2C96A,var(--oro) 40%,#E39B3A);overflow:hidden;isolation:isolate}
+.final::before{content:"";position:absolute;inset:-40%;background:conic-gradient(from var(--giro,0deg),transparent,rgba(255,255,255,.35),transparent 30%);z-index:-1;animation:girar 14s linear infinite}
+@keyframes girar{to{transform:rotate(360deg)}}
+.final h2{font-size:clamp(2.4rem,6vw,4.8rem);max-width:16ch;margin:0 auto}
+.final p{margin:18px auto 30px;max-width:52ch;font-size:1.08rem;color:#4A3500}
+.final .cta-row{justify-content:center}
+.final .btn-ghost{color:#231500}
+
+footer{background:var(--noche);color:#AAB3D9;padding-block:56px 48px;font-size:.88rem}
+footer .wrap{display:grid;gap:14px}
+footer .fila{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center}
+footer b{color:#fff;font-family:var(--font-display)}
+footer a{color:#EEF0FF}
+footer ol{margin:0;padding-left:18px;display:grid;gap:4px;font:400 .74rem var(--font-mono)}
+
+/* Barra móvil */
+.barra-movil{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .3s ease}
+.barra-movil.visible{transform:none}
+.barra-movil small{display:block;font-size:.72rem;color:var(--muted)}
+.barra-movil b{font:800 1.25rem var(--font-display)}
+@media (min-width:761px){.barra-movil{display:none!important}}
+
+/* Movimiento: estados previos a la intro y reducción de movimiento */
+.motion-pending .hero h1,.motion-pending .hero-copy>*,.motion-pending #viewer{visibility:hidden}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.estrellas,.cinta__pista,.pin i,.final::before{animation:none}.btn-primary::after{display:none}.pasos li{transition:none}}
+
+.sub-planes{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px;margin-bottom:22px}
+.sub-planes h3{font-size:clamp(1.4rem,2.6vw,2rem)}
+.cap-cotiza .cot{margin-top:8px}
 
 /* Visor */
 .viewer{margin-top:30px;position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--viewer-bg)}
@@ -135,92 +370,6 @@ p{margin:0}
   .seg button{padding:.6em .7em;font-size:.8rem}
 }
 
-/* Secciones */
-section.block{padding-block:72px;border-top:1px solid var(--line)}
-.head{display:grid;gap:12px;align-content:start;margin-bottom:34px;max-width:760px}
-
-.views{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-.view{background:var(--surface);padding:22px;display:grid;gap:10px;align-content:start;min-width:0}
-.view .badge{font:500 .78rem/1 var(--font-mono);color:var(--indigo);border:1px solid currentColor;border-radius:4px;padding:4px 6px;justify-self:start}
-.view p{color:var(--muted);font-size:.93rem}
-.view .try{justify-self:start;border:0;background:none;padding:0;color:var(--accent);font:600 .86rem/1 var(--font-body);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
-@media (max-width:900px){.views{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.views{grid-template-columns:1fr}}
-
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
-.stat{display:grid;gap:6px;align-content:start;border-top:2px solid var(--ink);padding-top:14px;min-width:0}
-.stat .n{font-family:var(--font-display);font-weight:800;font-size:clamp(2.2rem,4.2vw,3.2rem);letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
-.stat .n.acc{color:var(--accent)}
-.stat p{color:var(--muted);font-size:.92rem}
-.src{font:400 .72rem/1.4 var(--font-mono);color:var(--muted)}
-.src a{color:var(--muted)}
-@media (max-width:860px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-
-.where{margin-top:44px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
-.where-list{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}
-.where-list li{display:grid;grid-template-columns:150px 1fr;gap:16px;padding-block:12px;border-bottom:1px solid var(--line);font-size:.93rem}
-.where-list li b{font-weight:600}
-.where-list li span{color:var(--muted)}
-.note{background:var(--accent-soft);border-radius:var(--radius);padding:18px 20px;font-size:.93rem;align-self:start}
-.note b{color:var(--accent)}
-@media (max-width:860px){.where{grid-template-columns:1fr}.where-list li{grid-template-columns:1fr;gap:2px}}
-
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;counter-reset:s}
-.steps li{display:grid;gap:8px;align-content:start;counter-increment:s;min-width:0}
-.steps li::before{content:counter(s,decimal-leading-zero);font:500 .8rem/1 var(--font-mono);color:var(--accent);border-bottom:1px solid var(--line);padding-bottom:10px}
-.steps .t{font:500 .76rem/1 var(--font-mono);color:var(--muted)}
-.steps p{color:var(--muted);font-size:.93rem}
-@media (max-width:860px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:520px){.steps{grid-template-columns:1fr}}
-
-.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
-.plan{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px;min-width:0}
-.plan.featured{border:2px solid var(--accent)}
-.plan .pill{align-self:flex-start;font:500 .7rem/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;background:var(--accent);color:var(--accent-ink);padding:5px 8px;border-radius:4px}
-.price{font-family:var(--font-display);font-weight:800;font-size:2.3rem;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
-.price small{font:500 .8rem var(--font-body);color:var(--muted);letter-spacing:0}
-.plan ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:.92rem;flex:1}
-.plan li{padding-left:22px;position:relative}
-.plan li::before{content:"";position:absolute;left:2px;top:.55em;width:10px;height:6px;border-left:2px solid var(--ok);border-bottom:2px solid var(--ok);transform:rotate(-45deg)}
-.plan .for{color:var(--muted);font-size:.88rem}
-.plans-foot{margin-top:16px;color:var(--muted);font-size:.86rem}
-@media (max-width:900px){.plans{grid-template-columns:1fr}}
-
-.calc{margin-top:48px;display:grid;grid-template-columns:5fr 6fr;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
-.calc-in{padding:24px;display:grid;gap:16px;border-right:1px solid var(--line);min-width:0}
-.calc-out{padding:24px;display:grid;gap:18px;align-content:start;min-width:0}
-.field{display:grid;gap:6px}
-.field label{font-size:.84rem;font-weight:600}
-.field .row{display:flex;align-items:center;gap:10px}
-.field input[type=range]{flex:1;accent-color:var(--accent);min-width:0}
-.field output{font:500 .9rem var(--font-mono);min-width:72px;text-align:right;font-variant-numeric:tabular-nums}
-.field select,.field input[type=text],.field input[type=tel],.field input[type=number]{font:inherit;font-size:.95rem;padding:.65em .75em;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
-.big{font-family:var(--font-display);font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
-.kv{display:grid;grid-template-columns:1fr auto;gap:8px 16px;font-size:.92rem;border-top:1px solid var(--line);padding-top:14px}
-.kv dt{color:var(--muted)}
-.kv dd{margin:0;font-family:var(--font-mono);text-align:right;font-variant-numeric:tabular-nums}
-@media (max-width:860px){.calc{grid-template-columns:1fr}.calc-in{border-right:0;border-bottom:1px solid var(--line)}}
-
-.phases{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid var(--line)}
-.phase{padding:20px 20px 20px 0;display:grid;gap:8px;align-content:start;min-width:0;position:relative}
-.phase+.phase{padding-left:20px;border-left:1px solid var(--line)}
-.phase .when{font:500 .74rem/1 var(--font-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-.phase h3{font-size:1.35rem}
-.phase p{color:var(--muted);font-size:.9rem}
-.status{justify-self:start;font:600 .72rem/1 var(--font-body);padding:5px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
-.status.now{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.who{margin-top:36px;display:flex;flex-wrap:wrap;gap:8px}
-.who span{border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.88rem;background:var(--surface)}
-@media (max-width:860px){.phases{grid-template-columns:repeat(2,minmax(0,1fr))}.phase:nth-child(3){padding-left:0;border-left:0}.phase{border-bottom:1px solid var(--line)}}
-@media (max-width:520px){.phases{grid-template-columns:1fr}.phase,.phase+.phase{padding-left:0;border-left:0}}
-
-.faq{display:grid;gap:0;border-top:1px solid var(--line);max-width:860px}
-.faq details{border-bottom:1px solid var(--line);padding-block:16px}
-.faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";font-family:var(--font-mono);color:var(--accent)}
-.faq details[open] summary::after{content:"–"}
-.faq p{color:var(--muted);margin-top:10px;max-width:68ch;font-size:.95rem}
 
 /* Cotizador por pasos con vista previa en vivo */
 .cot{display:grid;grid-template-columns:7fr 5fr;gap:28px;align-items:start}
@@ -302,183 +451,7 @@ legend.sub{font-weight:600;font-size:.86rem;padding:0;margin-bottom:8px}
 @media (max-width:520px){.opts,.steppers,.grid2{grid-template-columns:1fr}.opts-4{grid-template-columns:repeat(2,minmax(0,1fr))}.cot-form{padding:16px}}
 @media (prefers-reduced-motion: reduce){.vivo::before{animation:none}.rail-bar span{transition:none}}
 
-footer{border-top:1px solid var(--line);padding-block:36px 48px;color:var(--muted);font-size:.86rem}
-footer .wrap{display:grid;gap:14px}
-footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center}
-footer ol{margin:0;padding-left:18px;display:grid;gap:4px;font-family:var(--font-mono);font-size:.74rem}
 
-/* Movimiento (GSAP + Lenis) */
-.motion-pending .hero h1,.motion-pending .hero-side,.motion-pending .hero .eyebrow,.motion-pending #viewer{visibility:hidden}
-html.lenis,html.lenis body{height:auto}
-.lenis.lenis-smooth{scroll-behavior:auto!important}
-.lenis.lenis-stopped{overflow:hidden}
-.seg{position:relative}
-.seg button{position:relative;z-index:1;transition:color .25s}
-.seg-ind{position:absolute;top:3px;bottom:3px;left:0;width:0;border-radius:999px;background:var(--ink);z-index:0;pointer-events:none}
-.seg.has-ind button[aria-pressed="true"]{background:transparent}
-.hot .dot{animation:pulse 2.4s ease-out infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
-.track{height:2px;background:var(--line);position:relative;overflow:hidden;margin-bottom:24px}
-.track span{position:absolute;inset:0;background:var(--accent);transform-origin:left center}
-.phase .when::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--line);margin-right:8px;vertical-align:1px;transition:background .3s,box-shadow .3s}
-.phase.lit .when::before{background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
-.view{transition:background .25s}
-.view:hover{background:var(--bg)}
-.view .badge{transition:transform .25s}
-.view:hover .badge{transform:translateX(4px)}
-.plan{transition:transform .3s ease,box-shadow .3s ease}
-.plan:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.12)}
-@media (prefers-reduced-motion: reduce){.hot .dot{animation:none}.plan:hover{transform:none}}
-
-/* Cinta de servicios (idea tomada de nexotesis: pista duplicada que se desplaza -50 %) */
-.cinta{overflow:hidden;border-block:1px solid var(--line);background:var(--surface);padding-block:14px;white-space:nowrap}
-.cinta__pista{display:inline-flex;gap:22px;align-items:center;animation:cinta 40s linear infinite}
-.cinta span{font-family:var(--font-display);font-weight:700;font-size:clamp(15px,1.6vw,19px)}
-.cinta i{font-style:normal;color:var(--accent);font-size:.7em}
-.cinta:hover .cinta__pista{animation-play-state:paused}
-@keyframes cinta{to{transform:translateX(-50%)}}
-/* Barra fija con precio en celular: aparece cuando el botón principal sale de pantalla */
-.barra-movil{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line);transform:translateY(110%);transition:transform .3s ease}
-.barra-movil.visible{transform:none}
-.barra-movil small{display:block;font-size:.72rem;color:var(--muted)}
-.barra-movil b{font-family:var(--font-display);font-size:1.25rem}
-@media (min-width:761px){.barra-movil{display:none!important}}
-@media (prefers-reduced-motion: reduce){.cinta__pista{animation:none}.barra-movil{transition:none}}
-
-/* ================= Vida: atardecer en Cusco =================
-   Secciones con color propio que suben sobre la anterior con un perfil de cerro o de andenes.
-   Las secciones de color redefinen los tokens: todo lo que llevan dentro se adapta solo. */
-:root{
-  --noche:#141B3A;--noche-2:#222B57;--carmin:#9E1240;--carmin-2:#6A0A28;--oro:#E9B949;
-  --cielo:linear-gradient(180deg,#0E1430 0%,#1E2252 26%,#4A2160 48%,#8E1F4F 66%,#C8473E 82%,#E9A54A 100%);
-  --r-lg:26px;--r-md:18px;
-  --sombra:0 1px 2px rgba(20,27,58,.06),0 12px 32px -12px rgba(20,27,58,.22);
-  --mask-cerro:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%2090%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M0%2C90%20L0%2C32.3%20L9%2C30.7%20L18%2C29.7%20L27%2C29.2%20L36%2C29.5%20L45%2C30.4%20L54%2C31.9%20L63%2C33.8%20L72%2C36.2%20L81%2C38.7%20L90%2C41.3%20L99%2C43.7%20L108%2C45.8%20L117%2C47.4%20L126%2C48.5%20L135%2C49.1%20L144%2C49.2%20L153%2C48.7%20L162%2C47.9%20L171%2C46.9%20L180%2C45.8%20L189%2C44.7%20L198%2C43.8%20L207%2C43.1%20L216%2C42.8%20L225%2C42.8%20L234%2C43.1%20L243%2C43.7%20L252%2C44.4%20L261%2C45.2%20L270%2C45.8%20L279%2C46.2%20L288%2C46.2%20L297%2C45.8%20L306%2C44.9%20L315%2C43.7%20L324%2C42.0%20L333%2C40.0%20L342%2C37.9%20L351%2C35.9%20L360%2C34.0%20L369%2C32.5%20L378%2C31.5%20L387%2C31.2%20L396%2C31.5%20L405%2C32.5%20L414%2C34.2%20L423%2C36.5%20L432%2C39.2%20L441%2C42.3%20L450%2C45.5%20L459%2C48.7%20L468%2C51.8%20L477%2C54.6%20L486%2C57.0%20L495%2C59.1%20L504%2C60.7%20L513%2C62.1%20L522%2C63.2%20L531%2C64.2%20L540%2C65.2%20L549%2C66.4%20L558%2C67.7%20L567%2C69.4%20L576%2C71.4%20L585%2C73.7%20L594%2C76.3%20L603%2C79.1%20L612%2C81.9%20L621%2C84.6%20L630%2C87.1%20L639%2C89.1%20L648%2C90.5%20L657%2C91.3%20L666%2C91.4%20L675%2C90.8%20L684%2C89.5%20L693%2C87.7%20L702%2C85.4%20L711%2C82.9%20L720%2C80.3%20L729%2C77.8%20L738%2C75.5%20L747%2C73.6%20L756%2C72.1%20L765%2C71.2%20L774%2C70.7%20L783%2C70.6%20L792%2C70.8%20L801%2C71.2%20L810%2C71.7%20L819%2C72.1%20L828%2C72.3%20L837%2C72.3%20L846%2C71.9%20L855%2C71.2%20L864%2C70.2%20L873%2C69.0%20L882%2C67.6%20L891%2C66.3%20L900%2C65.2%20L909%2C64.4%20L918%2C64.0%20L927%2C64.0%20L936%2C64.6%20L945%2C65.8%20L954%2C67.3%20L963%2C69.3%20L972%2C71.4%20L981%2C73.6%20L990%2C75.7%20L999%2C77.4%20L1008%2C78.7%20L1017%2C79.5%20L1026%2C79.6%20L1035%2C79.0%20L1044%2C77.8%20L1053%2C76.0%20L1062%2C73.8%20L1071%2C71.2%20L1080%2C68.5%20L1089%2C65.8%20L1098%2C63.2%20L1107%2C60.8%20L1116%2C58.8%20L1125%2C57.1%20L1134%2C55.7%20L1143%2C54.5%20L1152%2C53.6%20L1161%2C52.7%20L1170%2C51.7%20L1179%2C50.6%20L1188%2C49.2%20L1197%2C47.3%20L1206%2C45.2%20L1215%2C42.6%20L1224%2C39.7%20L1233%2C36.6%20L1242%2C33.4%20L1251%2C30.3%20L1260%2C27.5%20L1269%2C25.1%20L1278%2C23.2%20L1287%2C22.0%20L1296%2C21.5%20L1305%2C21.8%20L1314%2C22.7%20L1323%2C24.2%20L1332%2C26.2%20L1341%2C28.6%20L1350%2C31.0%20L1359%2C33.5%20L1368%2C35.8%20L1377%2C37.8%20L1386%2C39.4%20L1395%2C40.6%20L1404%2C41.4%20L1413%2C41.8%20L1422%2C42.0%20L1431%2C42.1%20L1440%2C42.1%20L1440%2C90%20Z%22%2F%3E%3C%2Fsvg%3E");--mask-andenes:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201440%2090%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M0%2C90%20L0%2C60%20L6%2C60%20L120%2C60%20L128%2C70%20L134%2C70%20L218%2C70%20L226%2C70%20L232%2C70%20L406%2C70%20L414%2C58%20L420%2C58%20L504%2C58%20L512%2C40%20L518%2C40%20L602%2C40%20L610%2C58%20L616%2C58%20L760%2C58%20L768%2C40%20L774%2C40%20L888%2C40%20L896%2C52%20L902%2C52%20L1046%2C52%20L1054%2C40%20L1060%2C40%20L1144%2C40%20L1152%2C52%20L1158%2C52%20L1272%2C52%20L1280%2C34%20L1286%2C34%20L1430%2C34%20L1438%2C46%20L1444%2C46%20L1440%2C46%20L1448%2C34%20L1440%2C90%20Z%22%2F%3E%3C%2Fsvg%3E");--tejido:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2248%22%20height%3D%2214%22%20viewBox%3D%220%200%2048%2014%22%3E%3Crect%20width%3D%2248%22%20height%3D%2214%22%20fill%3D%22%236A0A28%22%2F%3E%3Cpath%20d%3D%22M0%207%20L6%201%20L12%207%20L6%2013Z%20M24%207%20L30%201%20L36%207%20L30%2013Z%22%20fill%3D%22%23E9B949%22%2F%3E%3Cpath%20d%3D%22M12%207%20L18%203%20L24%207%20L18%2011Z%20M36%207%20L42%203%20L48%207%20L42%2011Z%22%20fill%3D%22%23F4DCE3%22%2F%3E%3C%2Fsvg%3E");
-}
-section.block{border-top:0;padding-block:96px}
-.sec{position:relative;background:var(--sec-bg);isolation:isolate}
-.sec::before{content:"";position:absolute;left:0;right:0;top:-70px;height:72px;background:var(--sec-bg);-webkit-mask:var(--sec-mask) bottom/100% 100% no-repeat;mask:var(--sec-mask) bottom/100% 100% no-repeat;pointer-events:none;z-index:1}
-.sec-claro{--sec-bg:var(--bg);--sec-mask:var(--mask-cerro)}
-.sec-carmin{--sec-bg:var(--carmin);--sec-mask:var(--mask-andenes);
-  --ink:#FFF4F2;--muted:#F3C4D2;--line:rgba(255,255,255,.22);--surface:rgba(255,255,255,.07);--accent:var(--oro);--accent-soft:rgba(255,255,255,.12);--accent-ink:#2A1600;color:var(--ink);
-  background-image:radial-gradient(120% 80% at 85% 0%,rgba(233,185,73,.18),transparent 60%),radial-gradient(90% 70% at 0% 100%,rgba(20,27,58,.35),transparent 60%)}
-.sec-noche{--sec-bg:var(--noche);--sec-mask:var(--mask-cerro);
-  --ink:#EEF0FF;--muted:#AAB3D9;--line:rgba(255,255,255,.14);--surface:rgba(255,255,255,.05);--bg:rgba(255,255,255,.04);--accent:var(--oro);--accent-soft:rgba(233,185,73,.14);--accent-ink:#2A1600;--ok:#7FE0B4;color:var(--ink);
-  background-image:radial-gradient(1px 1px at 12% 22%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 28% 68%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 44% 14%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 63% 48%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 79% 24%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 91% 72%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 6% 86%,#fff 50%,transparent 51%),radial-gradient(80% 60% at 50% 120%,rgba(158,18,64,.35),transparent 70%)}
-.sec-noche .btn-ghost,.sec-carmin .btn-ghost{color:var(--ink);border-color:var(--line)}
-
-/* ---------- Héroe ---------- */
-.hero{position:relative;overflow:hidden;color:#F3F1FA;background:var(--cielo);padding-block:56px 170px;isolation:isolate}
-.hero .eyebrow{color:var(--oro)}
-.hero h1{color:#FFF}
-.hero h1 em{color:var(--oro)}
-.hero .lede{color:#D4D0EA}
-.hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.35)}
-.hero .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
-.cielo{position:absolute;inset:0;z-index:-1;pointer-events:none}
-.cielo::before{content:"";position:absolute;inset:0;background:radial-gradient(600px circle at var(--mx,70%) var(--my,30%),rgba(233,185,73,.22),transparent 60%);transition:background .2s}
-.estrellas{position:absolute;inset:0 0 40% 0;opacity:.8;background-image:radial-gradient(1px 1px at 8% 18%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 18% 42%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 27% 9%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 39% 30%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 52% 12%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 61% 36%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 72% 8%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 84% 26%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 93% 14%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 97% 44%,#fff 50%,transparent 51%);animation:titilar 5s ease-in-out infinite alternate}
-@keyframes titilar{to{opacity:.45}}
-.montes{position:absolute;left:0;right:0;bottom:-2px;width:100%;height:260px}
-.montes .m1{fill:#5A2A5E;opacity:.85}
-.montes .m2{fill:#2E1D46}
-.montes .m3{fill:var(--bg)}
-.viewer-wrap{position:relative;margin-top:34px}
-.hero .viewer{margin-top:0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:var(--r-lg);backdrop-filter:blur(6px);box-shadow:0 30px 80px -30px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.18)}
-.hero .viewer:fullscreen{background:#1E2252}
-.flota{position:absolute;z-index:4;font:600 .82rem/1 var(--font-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:9px 14px;box-shadow:var(--sombra);animation:flotar 6s ease-in-out infinite;white-space:nowrap}
-.flota b{color:var(--accent);font-family:var(--font-display)}
-.flota.f1{left:-18px;top:22%;animation-delay:-1s}
-.flota.f2{right:-14px;top:46%;animation-delay:-3s}
-.flota.f3{left:12%;bottom:-18px;animation-delay:-4.5s}
-@keyframes flotar{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@media (max-width:860px){.flota{display:none}.hero{padding-block:36px 130px}.montes{height:170px}}
-
-/* Encabezado transparente sobre el cielo */
-.top{transition:background .3s,border-color .3s}
-.top.sobre{background:transparent;border-color:transparent;backdrop-filter:none}
-.top.sobre .brand,.top.sobre .nav a{color:#fff}
-.top.sobre .nav a:hover{color:var(--oro)}
-
-/* ---------- Faja tejida ---------- */
-.cinta{position:relative;z-index:5;margin-top:-58px;transform:rotate(-1.6deg);background:var(--carmin);border:0;color:#FFF4F2;padding-block:16px;box-shadow:0 18px 40px -18px rgba(106,10,40,.6)}
-.cinta::before,.cinta::after{content:"";position:absolute;left:0;right:0;height:10px;background:var(--tejido) repeat-x left center/auto 100%}
-.cinta::before{top:0}.cinta::after{bottom:0}
-.cinta i{color:var(--oro)}
-
-/* ---------- Tarjetas con vida ---------- */
-.views{gap:18px;background:none;border:0;border-radius:0;overflow:visible}
-.view{border-radius:var(--r-lg);border:1px solid var(--line);box-shadow:var(--sombra);transform-style:preserve-3d;will-change:transform;transition:background .25s,box-shadow .3s}
-.view:hover{background:var(--surface);box-shadow:0 1px 2px rgba(20,27,58,.06),0 26px 50px -18px rgba(158,18,64,.35)}
-.ico{width:58px;height:58px;border-radius:20px 20px 20px 6px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
-.ico svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.view:hover .ico path,.view:hover .ico rect,.view:hover .ico circle{stroke-dasharray:1;stroke-dashoffset:1;animation:trazar .9s ease forwards}
-@keyframes trazar{to{stroke-dashoffset:0}}
-.stats{gap:20px}
-.stat{border-top:0;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:var(--r-lg);padding:22px}
-.stat .n{font-size:clamp(2.4rem,4.6vw,3.6rem)}
-.where-list{border-top:0;display:grid;gap:10px}
-.where-list li{border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;background:var(--surface)}
-.note{border-radius:var(--r-lg);border:1px dashed var(--line)}
-.steps li::before{content:counter(s);display:grid;place-items:center;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);font:600 1.05rem var(--font-display);padding:0;box-shadow:0 0 0 6px var(--accent-soft),0 0 28px rgba(233,185,73,.35)}
-.steps li{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px}
-.track{border-radius:3px;height:3px}
-.plan{border-radius:var(--r-lg);box-shadow:var(--sombra);transform-style:preserve-3d;will-change:transform}
-.plan.featured{border:0;color:#FFF4F2;background:linear-gradient(160deg,#B3164A 0%,#7A0E31 70%,#4A0820 100%);--ink:#FFF4F2;--muted:#F3C4D2;--ok:var(--oro);--line:rgba(255,255,255,.2);box-shadow:0 30px 60px -24px rgba(158,18,64,.65);position:relative;top:-10px}
-.plan.featured .pill{background:var(--oro);color:#2A1600}
-.plan.featured .btn-primary{background:#fff;color:var(--carmin)}
-.calc{border-radius:var(--r-lg);box-shadow:var(--sombra)}
-.phases{border-top:0;gap:14px}
-.phase,.phase+.phase{border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;background:var(--surface)}
-.who span{background:var(--surface);border-color:var(--line)}
-.faq{border-top:0;display:grid;gap:10px}
-.faq details{border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;background:var(--surface);transition:box-shadow .25s}
-.faq details[open]{box-shadow:var(--sombra)}
-.cot-form,.mirador{border-radius:var(--r-lg);box-shadow:var(--sombra)}
-.opt span{border-radius:14px}
-.stepper{border-radius:14px}
-#cotPlano{border-radius:16px}
-
-/* Botones con brillo */
-.btn{position:relative;overflow:hidden;will-change:transform}
-.btn-primary{background:linear-gradient(135deg,#C21F52,var(--accent) 55%,#7A0E31);box-shadow:0 10px 24px -10px rgba(158,18,64,.7)}
-.sec-carmin .btn-primary,.sec-noche .btn-primary{background:var(--oro);color:#2A1600;box-shadow:0 10px 24px -10px rgba(233,185,73,.7)}
-.btn-primary::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s ease}
-.btn-primary:hover::after{transform:translateX(120%)}
-
-/* Pie de página nocturno */
-footer.sec{border-top:0;padding-block:70px 56px}
-footer.sec a{color:var(--ink)}
-
-@media (prefers-reduced-motion: reduce){.estrellas,.flota{animation:none}.btn-primary::after{display:none}.view:hover .ico *{animation:none}}
-
-/* El encabezado se superpone al cielo; el héroe sube por debajo */
-main{overflow-x:clip}
-.hero{margin-top:-62px;padding-top:118px}
-.stat .n{font-size:clamp(1.7rem,2.6vw,2.5rem);white-space:nowrap}
-@media (max-width:860px){.hero{padding-top:98px}.stat .n{font-size:clamp(2rem,9vw,2.8rem)}}
-
-/* Recorrido real 360 */
-.real{position:relative;height:clamp(380px,62vh,640px);border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);background:#0E1430;box-shadow:0 30px 70px -30px rgba(0,0,0,.7)}
-.real canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab;opacity:0;transition:opacity .8s ease}
-.real.listo canvas{opacity:1}
-.real canvas:active{cursor:grabbing}
-.real-capa{position:absolute;inset:0;pointer-events:none}
-.p360{position:absolute;left:0;top:0;pointer-events:auto;border:0;background:none;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;color:#fff}
-.p360 i{width:30px;height:30px;border-radius:50%;background:var(--oro);border:2px solid #fff;box-shadow:0 0 0 0 rgba(233,185,73,.6);animation:latido360 2.4s ease-out infinite;font:700 15px/26px var(--font-display);font-style:normal;color:#231500;text-align:center}
-.p360 span{font:600 .76rem var(--font-body);background:rgba(14,20,48,.72);border:1px solid rgba(255,255,255,.2);padding:3px 9px;border-radius:999px;white-space:nowrap;backdrop-filter:blur(4px)}
-.p360.activo i{background:#fff}
-@keyframes latido360{70%{box-shadow:0 0 0 12px rgba(233,185,73,0)}100%{box-shadow:0 0 0 0 rgba(233,185,73,0)}}
-.real-ficha{position:absolute;left:50%;top:18px;transform:translateX(-50%);width:min(380px,calc(100% - 28px));background:#fff;color:#18201C;border-radius:16px;padding:14px 16px;box-shadow:0 20px 50px rgba(0,0,0,.45);z-index:3}
-.real-ficha b{font:700 1rem var(--font-display);display:block}
-.real-ficha p{margin:4px 0 0;color:#4A544F;font-size:.9rem}
-.real-carga{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font:500 .9rem var(--font-mono)}
-.real.listo .real-carga{display:none}
-.real-bar{position:absolute;left:14px;right:14px;bottom:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;z-index:2}
-.real-bar .btn-ghost{background:rgba(14,20,48,.55);backdrop-filter:blur(6px)}
-.real-nota{margin-left:auto;font:500 .72rem var(--font-mono);color:rgba(255,255,255,.75);background:rgba(14,20,48,.55);padding:5px 9px;border-radius:999px}
-@media (max-width:640px){.real-nota{display:none}}
-@media (prefers-reduced-motion: reduce){.p360 i{animation:none}.real canvas{transition:none}}
 </style>
 </head>
 <body>
@@ -486,44 +459,49 @@ main{overflow-x:clip}
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#inicio" aria-label="Wasi 3D, inicio">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><polygon points="16.00,1.00 28.99,8.50 16.00,16.00 3.01,8.50" fill="#D7476F"/><polygon points="3.01,8.50 16.00,16.00 16.00,31.00 3.01,23.50" fill="#A3123F"/><polygon points="16.00,16.00 28.99,8.50 28.99,23.50 16.00,31.00" fill="#6A0A28"/><polygon points="6.91,25.75 7.82,17.27 11.19,19.23 12.10,28.75" fill="#18201C"/><polygon points="7.30,16.38 11.71,18.93 11.71,18.18 7.30,15.62" fill="#18201C" opacity=".55"/></svg>
+  <svg viewBox="0 0 32 32" aria-hidden="true"><polygon points="16.00,1.00 28.99,8.50 16.00,16.00 3.01,8.50" fill="#D7476F"/><polygon points="3.01,8.50 16.00,16.00 16.00,31.00 3.01,23.50" fill="#A3123F"/><polygon points="16.00,16.00 28.99,8.50 28.99,23.50 16.00,31.00" fill="#6A0A28"/><polygon points="6.91,25.75 7.82,17.27 11.19,19.23 12.10,28.75" fill="#18201C"/><polygon points="7.30,16.38 11.71,18.93 11.71,18.18 7.30,15.62" fill="#18201C" opacity=".55"/></svg>
       Wasi 3D
     </a>
     <nav class="nav" aria-label="Secciones">
-      <a href="#vistas">Vistas</a>
-      <a href="#real">Recorrido real</a>
-      <a href="#cusco">Por qué</a>
+      <a href="#modelo">Modelo</a>
+      <a href="#ciclo">Cómo funciona</a>
       <a href="#planes">Planes</a>
-      <a href="#peru">Cusco → Perú</a>
+      <a href="crear.html">Estudio</a>
       <a href="#preguntas">Preguntas</a>
-      <a href="crear.html">Crear recorrido</a>
     </nav>
-    <a class="btn btn-primary" href="#contacto">Agenda tu escaneo</a>
+    <a class="btn btn-primary" href="#contacto">Cotiza tu escaneo</a>
   </div>
 </header>
 
-<main id="inicio">
-  <section class="hero">
+<nav class="progreso" aria-label="Capítulos">
+  <a href="#inicio"><span>Inicio</span><i></i></a>
+  <a href="#problema"><span>El problema</span><i></i></a>
+  <a href="#antes"><span>Antes y después</span><i></i></a>
+  <a href="#ciclo"><span>El ciclo</span><i></i></a>
+  <a href="#modelo"><span>El modelo</span><i></i></a>
+  <a href="#planes"><span>Planes</span><i></i></a>
+  <a href="#contacto"><span>Cotiza</span><i></i></a>
+</nav>
+
+<main>
+  <section class="hero" id="inicio">
     <div class="cielo" aria-hidden="true"><div class="estrellas"></div><svg class="montes" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true"><path class="m1" d="M0,260 L0,98.0 L8,96.4 L16,95.6 L24,95.5 L32,96.0 L40,97.0 L48,98.3 L56,99.7 L64,101.2 L72,102.6 L80,103.8 L88,104.7 L96,105.3 L104,105.6 L112,105.6 L120,105.3 L128,104.9 L136,104.4 L144,104.0 L152,103.7 L160,103.7 L168,104.1 L176,104.9 L184,106.2 L192,108.0 L200,110.3 L208,113.1 L216,116.3 L224,119.8 L232,123.4 L240,127.0 L248,130.5 L256,133.7 L264,136.5 L272,138.7 L280,140.2 L288,141.0 L296,141.0 L304,140.2 L312,138.7 L320,136.6 L328,133.8 L336,130.7 L344,127.3 L352,123.8 L360,120.4 L368,117.3 L376,114.5 L384,112.3 L392,110.7 L400,109.8 L408,109.7 L416,110.2 L424,111.5 L432,113.4 L440,115.8 L448,118.7 L456,121.8 L464,125.1 L472,128.4 L480,131.6 L488,134.6 L496,137.4 L504,139.9 L512,142.1 L520,144.0 L528,145.7 L536,147.2 L544,148.7 L552,150.2 L560,152.0 L568,154.0 L576,156.4 L584,159.3 L592,162.7 L600,166.7 L608,171.3 L616,176.4 L624,181.9 L632,187.8 L640,193.9 L648,200.0 L656,206.0 L664,211.7 L672,217.0 L680,221.6 L688,225.5 L696,228.5 L704,230.6 L712,231.7 L720,231.8 L728,231.0 L736,229.3 L744,226.8 L752,223.8 L760,220.2 L768,216.3 L776,212.3 L784,208.2 L792,204.3 L800,200.6 L808,197.3 L816,194.3 L824,191.6 L832,189.4 L840,187.5 L848,185.8 L856,184.3 L864,182.9 L872,181.4 L880,179.7 L888,177.8 L896,175.6 L904,172.9 L912,169.8 L920,166.4 L928,162.5 L936,158.4 L944,154.1 L952,149.7 L960,145.3 L968,141.2 L976,137.4 L984,134.1 L992,131.4 L1000,129.4 L1008,128.2 L1016,127.8 L1024,128.1 L1032,129.2 L1040,131.0 L1048,133.4 L1056,136.1 L1064,139.1 L1072,142.2 L1080,145.2 L1088,148.0 L1096,150.3 L1104,152.1 L1112,153.3 L1120,153.8 L1128,153.5 L1136,152.6 L1144,150.9 L1152,148.7 L1160,145.9 L1168,142.8 L1176,139.4 L1184,136.0 L1192,132.5 L1200,129.3 L1208,126.2 L1216,123.6 L1224,121.3 L1232,119.4 L1240,117.9 L1248,116.8 L1256,115.9 L1264,115.2 L1272,114.6 L1280,114.0 L1288,113.2 L1296,112.1 L1304,110.7 L1312,108.9 L1320,106.7 L1328,104.0 L1336,101.0 L1344,97.6 L1352,94.0 L1360,90.3 L1368,86.6 L1376,83.1 L1384,80.1 L1392,77.5 L1400,75.6 L1408,74.5 L1416,74.3 L1424,75.1 L1432,76.8 L1440,79.5 L1440,260 Z"/><path class="m2" d="M0,260 L0,127.4 L8,125.2 L16,124.0 L24,124.0 L32,125.0 L40,127.1 L48,129.9 L56,133.4 L64,137.3 L72,141.2 L80,145.2 L88,148.9 L96,152.3 L104,155.4 L112,158.1 L120,160.6 L128,163.1 L136,165.6 L144,168.4 L152,171.7 L160,175.5 L168,179.9 L176,185.0 L184,190.7 L192,196.8 L200,203.2 L208,209.5 L216,215.5 L224,220.9 L232,225.5 L240,229.1 L248,231.4 L256,232.4 L264,232.1 L272,230.6 L280,228.1 L288,224.8 L296,220.9 L304,216.8 L312,212.8 L320,209.1 L328,205.9 L336,203.3 L344,201.5 L352,200.3 L360,199.8 L368,199.7 L376,199.9 L384,200.1 L392,200.3 L400,200.1 L408,199.6 L416,198.6 L424,197.0 L432,195.1 L440,193.0 L448,190.7 L456,188.6 L464,186.7 L472,185.4 L480,184.8 L488,184.8 L496,185.7 L504,187.3 L512,189.5 L520,192.1 L528,194.8 L536,197.3 L544,199.5 L552,200.9 L560,201.5 L568,200.9 L576,199.1 L584,196.2 L592,192.2 L600,187.2 L608,181.4 L616,175.3 L624,168.9 L632,162.6 L640,156.7 L648,151.4 L656,146.7 L664,142.8 L672,139.6 L680,137.2 L688,135.2 L696,133.7 L704,132.3 L712,131.0 L720,129.5 L728,127.8 L736,125.8 L744,123.6 L752,121.3 L760,119.0 L768,116.9 L776,115.2 L784,114.2 L792,114.0 L800,114.9 L808,116.9 L816,120.1 L824,124.4 L832,129.6 L840,135.6 L848,142.0 L856,148.6 L864,155.2 L872,161.3 L880,166.7 L888,171.2 L896,174.8 L904,177.2 L912,178.7 L920,179.3 L928,179.2 L936,178.5 L944,177.7 L952,176.8 L960,176.1 L968,175.8 L976,176.0 L984,176.7 L992,177.9 L1000,179.5 L1008,181.4 L1016,183.3 L1024,185.0 L1032,186.5 L1040,187.6 L1048,188.1 L1056,188.0 L1064,187.4 L1072,186.3 L1080,185.0 L1088,183.7 L1096,182.6 L1104,181.9 L1112,181.9 L1120,182.8 L1128,184.6 L1136,187.5 L1144,191.3 L1152,196.0 L1160,201.3 L1168,207.0 L1176,212.9 L1184,218.5 L1192,223.7 L1200,228.0 L1208,231.5 L1216,233.8 L1224,234.9 L1232,235.0 L1240,234.0 L1248,232.1 L1256,229.7 L1264,226.7 L1272,223.6 L1280,220.5 L1288,217.6 L1296,214.9 L1304,212.5 L1312,210.3 L1320,208.4 L1328,206.4 L1336,204.2 L1344,201.7 L1352,198.7 L1360,195.1 L1368,190.7 L1376,185.7 L1384,180.0 L1392,173.7 L1400,167.2 L1408,160.6 L1416,154.3 L1424,148.5 L1432,143.4 L1440,139.3 L1440,260 Z"/><path class="m3" d="M0,260 L0,187.9 L8,187.4 L16,187.5 L24,188.4 L32,190.1 L40,192.5 L48,195.4 L56,198.5 L64,201.5 L72,204.2 L80,206.2 L88,207.5 L96,207.9 L104,207.5 L112,206.4 L120,204.9 L128,203.2 L136,201.6 L144,200.4 L152,199.6 L160,199.4 L168,199.7 L176,200.5 L184,201.4 L192,202.4 L200,203.0 L208,203.2 L216,202.6 L224,201.4 L232,199.4 L240,196.9 L248,194.1 L256,191.3 L264,188.7 L272,186.7 L280,185.4 L288,185.1 L296,185.6 L304,186.9 L312,188.9 L320,191.3 L328,193.7 L336,196.0 L344,198.0 L352,199.4 L360,200.4 L368,200.8 L376,201.0 L384,201.1 L392,201.4 L400,202.1 L408,203.4 L416,205.5 L424,208.4 L432,211.9 L440,215.8 L448,220.0 L456,224.1 L464,227.8 L472,230.9 L480,233.1 L488,234.5 L496,235.0 L504,234.8 L512,234.0 L520,233.0 L528,232.1 L536,231.4 L544,231.1 L552,231.3 L560,232.1 L568,233.3 L576,234.6 L584,235.9 L592,236.9 L600,237.4 L608,237.2 L616,236.1 L624,234.4 L632,232.1 L640,229.3 L648,226.5 L656,223.9 L664,221.7 L672,220.3 L680,219.7 L688,220.0 L696,221.0 L704,222.6 L712,224.6 L720,226.7 L728,228.6 L736,230.1 L744,231.1 L752,231.5 L760,231.3 L768,230.8 L776,230.2 L784,229.7 L792,229.5 L800,229.9 L808,230.9 L816,232.7 L824,235.1 L832,238.0 L840,241.0 L848,244.0 L856,246.5 L864,248.4 L872,249.5 L880,249.6 L888,248.9 L896,247.3 L904,245.2 L912,242.9 L920,240.5 L928,238.3 L936,236.6 L944,235.4 L952,234.6 L960,234.3 L968,234.3 L976,234.2 L984,233.8 L992,232.9 L1000,231.4 L1008,229.1 L1016,226.1 L1024,222.5 L1032,218.5 L1040,214.4 L1048,210.5 L1056,207.1 L1064,204.4 L1072,202.6 L1080,201.7 L1088,201.6 L1096,202.1 L1104,203.1 L1112,204.2 L1120,205.1 L1128,205.8 L1136,205.9 L1144,205.4 L1152,204.5 L1160,203.3 L1168,201.9 L1176,200.6 L1184,199.7 L1192,199.3 L1200,199.7 L1208,200.8 L1216,202.6 L1224,204.9 L1232,207.5 L1240,210.0 L1248,212.2 L1256,213.8 L1264,214.6 L1272,214.6 L1280,213.7 L1288,212.1 L1296,209.9 L1304,207.5 L1312,205.1 L1320,202.9 L1328,201.2 L1336,200.1 L1344,199.5 L1352,199.5 L1360,199.7 L1368,200.0 L1376,200.1 L1384,199.8 L1392,198.9 L1400,197.3 L1408,195.0 L1416,192.2 L1424,189.0 L1432,185.8 L1440,182.8 L1440,260 Z"/></svg></div>
     <div class="wrap">
       <div class="hero-grid">
-        <div>
-          <p class="eyebrow">Tours 3D para alojamientos · Cusco</p>
-          <h1 style="margin-top:14px">Que tus huéspedes <em>caminen</em> tu espacio antes de reservar.</h1>
-        </div>
-        <div class="hero-side">
-          <p class="lede">Escaneamos tu Airbnb y te entregamos recorrido 3D, maqueta interactiva, plano con medidas y fotos HDR. Todo listo en 48 horas, desde S/ 390.</p>
+        <div class="hero-copy">
+          <p class="kicker">Tours 3D para Airbnb · Cusco</p>
+          <h1>Que tus huéspedes <em>caminen</em> tu espacio antes de reservar.</h1>
+          <p class="lede">Escaneamos tu alojamiento una vez y te entregamos recorrido 3D, maqueta, plano con medidas y fotos HDR. Pagas por escaneo, sin mensualidades.</p>
           <div class="cta-row">
-            <a class="btn btn-primary" href="#contacto">Agenda tu escaneo</a>
-            <a class="btn btn-ghost" href="crear.html">Crea tu recorrido con tus fotos</a>
+            <a class="btn btn-primary" href="#contacto">Cotiza tu escaneo</a>
+            <a class="btn btn-ghost" href="#modelo">Cómo ganamos los dos</a>
           </div>
+          <dl class="hero-datos">
+            <div><dt>Entrega</dt><dd>48 h</dd></div>
+            <div><dt>Desde</dt><dd>S/ 390</dd></div>
+            <div><dt>Idiomas</dt><dd>ES · EN</dd></div>
+          </dl>
         </div>
-      </div>
-
-      <div class="viewer-wrap">
-        <span class="flota f1" aria-hidden="true"><b>+12 %</b> reservas con tour 3D</span>
-        <span class="flota f2" aria-hidden="true">Listo en <b>48 h</b></span>
-        <span class="flota f3" aria-hidden="true">Etiquetas <b>ES · EN</b></span>
       <div class="viewer mode-doll" id="viewer" data-lenis-prevent>
         <div class="stage" id="stage">
           <div class="labels" id="labels"></div>
@@ -560,147 +538,193 @@ main{overflow-x:clip}
   </section>
 
   <div class="cinta" aria-hidden="true"><div class="cinta__pista"><span>Recorrido 3D</span><i>◆</i><span>Maqueta dollhouse</span><i>◆</i><span>Plano con medidas</span><i>◆</i><span>Fotos HDR</span><i>◆</i><span>Etiquetas ES / EN</span><i>◆</i><span>Video vertical</span><i>◆</i><span>Entrega en 48 h</span><i>◆</i><span>Yape y tarjeta</span><i>◆</i><span>Recorrido 3D</span><i>◆</i><span>Maqueta dollhouse</span><i>◆</i><span>Plano con medidas</span><i>◆</i><span>Fotos HDR</span><i>◆</i><span>Etiquetas ES / EN</span><i>◆</i><span>Video vertical</span><i>◆</i><span>Entrega en 48 h</span><i>◆</i><span>Yape y tarjeta</span><i>◆</i></div></div>
-  <section class="block" id="vistas">
-    <div class="wrap">
-      <div class="head">
-        <p class="eyebrow">Vistas profesionales</p>
-        <h2>Una sola visita de escaneo, seis formas de mostrar tu espacio</h2>
-        <p class="lede">Capturamos el alojamiento con cámara 360° y escáner LiDAR. De esa captura salen todas las vistas, coherentes entre sí y con medidas reales.</p>
+
+  <section class="cap cap-problema" id="problema">
+    <div class="wrap problema-grid">
+      <div>
+        <div class="cap-head">
+          <p class="kicker">Capítulo 1 · El problema</p>
+          <h2>En Cusco hay miles de anuncios. Casi todos se ven igual.</h2>
+          <p class="lede">El viajero que llega desde otro continente, a 3,399 metros de altura, compara decenas de fotos de balcón y cama tendida. Quiere saber dónde va a dormir. Quien se lo muestra mejor se lleva la reserva.</p>
+        </div>
+        <div class="cifras">
+          <div class="cifra"><b data-count="4996">4,996</b><span>alojamientos activos en Cusco</span></div>
+          <div class="cifra"><b data-count="52" data-suffix="%">52%</b><span>de ocupación: una de cada dos noches queda vacía</span></div>
+          <div class="cifra"><b data-count="36" data-prefix="US$">US$36</b><span>de tarifa promedio por noche</span></div>
+        </div>
+        <p class="src" style="margin-top:16px">Fuente: AirDNA, 12 meses a setiembre de 2026.</p>
       </div>
-      <div class="views">
-        <article class="view" data-tilt>
-          <div class="ico" aria-hidden="true"><svg viewBox="0 0 48 48"><path pathLength="1" d="M14 40 L18 10 H30 L34 40"/><path pathLength="1" d="M8 40 H40"/><path pathLength="1" d="M20 26 H31 M27 22 L31 26 L27 30"/></svg></div>
-          <span class="badge">3D · recorrido</span>
-          <h3>Recorrido en primera persona</h3>
-          <p>El huésped camina de ambiente en ambiente como si estuviera ahí. Ve dónde está la ducha, cuánto espacio hay junto a la cama y qué se ve por la ventana.</p>
-          <button class="try" type="button" data-go="walk">Pruébalo arriba</button>
-        </article>
-        <article class="view" data-tilt>
-          <div class="ico" aria-hidden="true"><svg viewBox="0 0 48 48"><path pathLength="1" d="M24 6 L40 15 V33 L24 42 L8 33 V15 Z"/><path pathLength="1" d="M8 15 L24 24 L40 15"/><path pathLength="1" d="M24 24 V42"/></svg></div>
-          <span class="badge">3D · maqueta</span>
-          <h3>Maqueta dollhouse</h3>
-          <p>El alojamiento completo visto desde arriba, sin techo, como una maqueta. Se entiende la distribución en tres segundos.</p>
-          <button class="try" type="button" data-go="doll">Pruébalo arriba</button>
-        </article>
-        <article class="view" data-tilt>
-          <div class="ico" aria-hidden="true"><svg viewBox="0 0 48 48"><rect pathLength="1" x="8" y="8" width="32" height="26" rx="2"/><path pathLength="1" d="M8 20 H22 V34"/><path pathLength="1" d="M30 8 V16"/><path pathLength="1" d="M8 41 H40 M8 39 V43 M40 39 V43"/></svg></div>
-          <span class="badge">m² · planta</span>
-          <h3>Plano con medidas</h3>
-          <p>Planta acotada con el área de cada ambiente. Se sube como imagen al anuncio de Airbnb y Booking y responde la pregunta de cuánto mide.</p>
-          <button class="try" type="button" data-go="plan">Pruébalo arriba</button>
-        </article>
-        <article class="view" data-tilt>
-          <div class="ico" aria-hidden="true"><svg viewBox="0 0 48 48"><rect pathLength="1" x="9" y="9" width="30" height="30" rx="4"/><path pathLength="1" d="M24 9 V39 M9 24 H39"/><circle pathLength="1" cx="31.5" cy="16.5" r="3.5"/></svg></div>
-          <span class="badge">HDR · fotos</span>
-          <h3>Fotos HDR corregidas</h3>
-          <p>De 15 a 40 fotos con ventanas bien expuestas, líneas verticales rectas y color fiel. Son las primeras que ve el huésped en el buscador.</p>
-        </article>
-        <article class="view" data-tilt>
-          <div class="ico" aria-hidden="true"><svg viewBox="0 0 48 48"><path pathLength="1" d="M24 43 C24 43 11 30 11 20 A13 13 0 0 1 37 20 C37 30 24 43 24 43 Z"/><path pathLength="1" d="M24 18 V26"/><circle pathLength="1" cx="24" cy="13.5" r=".6"/></svg></div>
-          <span class="badge">ES / EN · etiquetas</span>
-          <h3>Etiquetas interactivas bilingües</h3>
-          <p>Puntos que explican lo que importa en Cusco: calefacción, agua caliente, velocidad de Wi-Fi, escaleras y cómo llegar desde la Plaza de Armas.</p>
-        </article>
-        <article class="view" data-tilt>
-          <div class="ico" aria-hidden="true"><svg viewBox="0 0 48 48"><rect pathLength="1" x="15" y="5" width="18" height="38" rx="4"/><path pathLength="1" d="M21 18 L29 24 L21 30 Z"/></svg></div>
-          <span class="badge">9:16 · video</span>
-          <h3>Video vertical para redes</h3>
-          <p>Un recorrido de 30 segundos generado desde el modelo 3D, listo para Instagram, TikTok y estados de WhatsApp.</p>
-        </article>
+      <div class="mosaico" role="img" aria-label="Una cuadrícula de anuncios iguales y uno destacado con recorrido 3D">
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i class="tuyo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg><span>Tu anuncio con recorrido 3D</span></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
       </div>
     </div>
   </section>
 
-  <section class="block sec sec-noche" id="real">
+  <section class="cap cap-antes" id="antes">
     <div class="wrap">
-      <div class="head">
-        <p class="eyebrow">Recorrido real</p>
-        <h2>La sala principal de un departamento en Cusco, en 360°</h2>
-        <p class="lede">Uno de los ambientes del recorrido, tomado con un celular y armado en Wasi 3D Estudio. Arrastra para mirar alrededor, toca los puntos o deja que el recorrido guiado te la muestre.</p>
+      <div class="cap-head">
+        <p class="kicker">Capítulo 2 · La diferencia</p>
+        <h2>El mismo espacio, contado de otra forma.</h2>
+        <p class="lede">A la izquierda, la foto que sube casi todo el mundo. A la derecha, lo que entregamos: luz corregida, ambientes etiquetados, plano con medidas y un recorrido que el huésped camina a su ritmo. Arrastra la línea para comparar.</p>
       </div>
-      <div class="real" id="real360" data-lenis-prevent>
-        <div class="real-capa" id="realPuntos"></div>
-        <div class="real-ficha" id="realFicha" hidden><b id="realFichaT"></b><p id="realFichaP"></p></div>
-        <div class="real-carga" id="realCarga">Cargando panorama…</div>
-        <div class="real-bar">
-          <button type="button" class="btn btn-primary" id="realGuia" aria-pressed="false">Iniciar recorrido guiado</button>
-          <a class="btn btn-ghost" href="crear.html">Sube tus fotos</a>
-          <span class="real-nota">Personas y reflejos difuminados por privacidad</span>
+      <div class="comparar" id="comparar">
+        <img class="antes" src="demo/antes.jpg" alt="Sala y comedor fotografiados con celular: imagen oscura y sin detalle" width="1200" height="750" loading="lazy" decoding="async">
+        <img class="despues" src="demo/despues.jpg" alt="El mismo ambiente procesado por Wasi 3D: luz cálida, colores reales y detalle" width="1200" height="750" loading="lazy" decoding="async">
+        <div class="capa antes-ui" aria-hidden="true">
+          <span class="etq">Antes · foto de celular</span>
+          <div class="quejas"><span>¿Cuánto mide la sala?</span><span>¿Dónde está el baño?</span><span>¿Entra la luz de la mañana?</span></div>
+        </div>
+        <div class="capa despues-ui" aria-hidden="true">
+          <span class="etq">Después · Wasi 3D</span>
+          <span class="pin" style="left:66%;top:62%"><i></i><span>Comedor · 4 personas</span></span>
+          <span class="pin" style="left:61%;top:36%"><i></i><span>Luz cálida</span></span>
+          <span class="pin" style="left:54%;top:44%"><i></i><span>Vista a los tejados</span></span>
+          <div class="mini-plano"><img src="demo/plano.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="chips"><span>Recorrido 3D</span><span>Plano 63 m²</span><span>ES · EN</span></div>
+        </div>
+        <div class="divisor" aria-hidden="true"></div>
+        <input type="range" id="compararRango" min="0" max="100" value="50" step="1" aria-label="Comparar antes y después. Mueve a la derecha para ver más del antes">
+      </div>
+      <div class="comparar-bar">
+        <div class="seg2" role="group" aria-label="Ver una sola imagen">
+          <button type="button" data-ver="100" aria-pressed="false">Ver antes</button>
+          <button type="button" data-ver="50" aria-pressed="true">Mitad y mitad</button>
+          <button type="button" data-ver="0" aria-pressed="false">Ver después</button>
+        </div>
+        <p class="src">Ilustración hecha con la maqueta 3D de ejemplo. No es una propiedad real.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cap cap-ciclo" id="ciclo">
+    <div class="wrap">
+      <div class="cap-head">
+        <p class="kicker">Capítulo 3 · Cómo funciona</p>
+        <h2>Un ciclo de cinco pasos que se paga solo.</h2>
+        <p class="lede">Tú pones el espacio una mañana. Nosotros lo convertimos en un activo digital que trabaja todo el año y que vuelve a ponerse al día cuando lo necesitas.</p>
+      </div>
+      <div class="ciclo" id="cicloGrid">
+        <ol class="pasos">
+          <li><b>Agendas por WhatsApp</b><p>Eliges día y hora con buena luz. Te enviamos una lista corta para dejar el espacio listo.</p></li>
+          <li><b>Escaneamos en 1 o 2 horas</b><p>Cámara 360° y LiDAR. No capturamos documentos, fotos familiares ni rostros.</p></li>
+          <li><b>Entregamos en 48 horas</b><p>Enlace del recorrido, QR, plano en PNG y PDF, fotos HDR y etiquetas en español e inglés.</p></li>
+          <li><b>El huésped recorre y reserva</b><p>Lo comparte en tu web, Instagram, Google y en cada conversación de WhatsApp.</p></li>
+          <li><b>Renuevas y recomiendas</b><p>A los 12 meses renuevas el alojamiento del tour, o lo actualizamos si remodelas.</p></li>
+        </ol>
+        <div class="rueda" aria-hidden="true">
+          <svg viewBox="-70 -35 540 470">
+            <circle class="pista" cx="200" cy="200" r="160"/>
+            <circle class="avance" id="ruedaAvance" cx="200" cy="200" r="160" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" transform="rotate(-90 200 200)"/>
+            <g class="nodo"><circle cx="200" cy="40" r="24"/><text x="200" y="40">1</text><text class="rot" x="200" y="-6">Agendas</text></g>
+            <g class="nodo"><circle cx="352.2" cy="150.6" r="24"/><text x="352.2" y="150.6">2</text><text class="rot" x="388" y="108">Escaneo</text></g>
+            <g class="nodo"><circle cx="294" cy="329.4" r="24"/><text x="294" y="329.4">3</text><text class="rot" x="318" y="374">48 h</text></g>
+            <g class="nodo"><circle cx="106" cy="329.4" r="24"/><text x="106" y="329.4">4</text><text class="rot" x="82" y="374">Reservas</text></g>
+            <g class="nodo"><circle cx="47.8" cy="150.6" r="24"/><text x="47.8" y="150.6">5</text><text class="rot" x="12" y="108">Renuevas</text></g>
+          </svg>
+          <div class="rueda-centro"><small id="ruedaPaso">Paso 1 de 5</small><b id="ruedaTxt">Agendas</b></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="block sec sec-carmin" id="cusco">
+  <section class="cap cap-modelo" id="modelo">
     <div class="wrap">
-      <div class="head">
-        <p class="eyebrow">El mercado en Cusco</p>
-        <h2>Miles de anuncios compiten con las mismas fotos de balcón</h2>
-        <p class="lede">La mitad de las noches quedan libres. El huésped que llega desde otro continente, a 3,399 metros de altura, quiere saber exactamente dónde va a dormir. Quien se lo muestre mejor se lleva la reserva.</p>
+      <div class="cap-head">
+        <p class="kicker">Capítulo 4 · El modelo</p>
+        <h2>Así ganamos nosotros. Así ganas tú.</h2>
+        <p class="lede">Cobramos una vez por escaneo según el tamaño del espacio, y una renovación anual opcional para mantener el tour en línea. El Estudio y la mejora con IA atraen a quien todavía no está listo para el escaneo.</p>
       </div>
-      <div class="stats">
-        <div class="stat">
-          <span class="n" data-count="4996">4,996</span>
-          <p>alojamientos de corta estancia activos en Cusco.</p>
-          <span class="src">AirDNA, 12 meses a set. 2026</span>
-        </div>
-        <div class="stat">
-          <span class="n" data-count="52" data-suffix="%">52%</span>
-          <p>de ocupación promedio. Casi una de cada dos noches queda vacía.</p>
-          <span class="src">AirDNA, 12 meses a set. 2026</span>
-        </div>
-        <div class="stat">
-          <span class="n" data-count="36" data-prefix="US$">US$36</span>
-          <p>de tarifa promedio por noche. El ingreso anual medio ronda US$6,400.</p>
-          <span class="src">AirDNA, 12 meses a set. 2026</span>
-        </div>
-        <div class="stat">
-          <span class="n acc" data-count="12" data-prefix="+" data-suffix="%">+12%</span>
-          <p>reservas en anuncios con tour 3D, que además se miraron 3 veces más tiempo.</p>
-          <span class="src">Caso Vacasa, publicado por Matterport</span>
-        </div>
+      <div class="bento">
+        <article class="celda c-escaneo">
+          <span class="etq2">Ingreso principal</span>
+          <h3>Pago único por escaneo</h3>
+          <p>El precio depende de los metros cuadrados, no de cuántas veces se mire el tour. Sin mensualidades ni comisión por reserva.</p>
+          <div class="barras" aria-label="Precios por plan">
+            <div><small>60 m²</small><i style="height:26px"></i><span>S/ 390</span></div>
+            <div><small>120 m²</small><i style="height:52px"></i><span>S/ 790</span></div>
+            <div><small>250 m²</small><i style="height:92px"></i><span>S/ 1,490</span></div>
+          </div>
+        </article>
+        <article class="celda">
+          <div class="ico2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></div>
+          <span class="etq2">Ingreso recurrente</span>
+          <h3>Renovación anual</h3>
+          <p>El primer año está incluido. Después, una cuota baja mantiene el enlace y el QR activos.</p>
+        </article>
+        <article class="celda">
+          <div class="ico2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg></div>
+          <span class="etq2">Para empezar</span>
+          <h3>Wasi 3D Estudio</h3>
+          <p>El anfitrión sube sus fotos 360° y arma un recorrido en el navegador. Cuando quiere el acabado profesional, nos llama.</p>
+          <a href="crear.html">Abrir el Estudio →</a>
+        </article>
+        <article class="celda">
+          <div class="ico2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="m6.3 6.3 2.1 2.1M15.6 15.6l2.1 2.1M6.3 17.7l2.1-2.1M15.6 8.4l2.1-2.1"/></svg></div>
+          <span class="etq2">Servicio adicional</span>
+          <h3>Mejora con IA</h3>
+          <p>Ordena una foto o convierte la maqueta en un render realista. Cada imagen queda marcada como ambientada.</p>
+        </article>
+        <article class="celda">
+          <div class="ico2"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21V9l6-4 6 4v12"/><path d="M15 21V12l6 3v6"/><path d="M7 13h4M7 17h4"/></svg></div>
+          <span class="etq2">Volumen</span>
+          <h3>Agencias y administradores</h3>
+          <p>Desde 5 propiedades, tarifa por volumen y un panel con todos sus tours.</p>
+        </article>
+        <article class="celda c-anfitrion">
+          <span class="etq2">Lo que gana el anfitrión</span>
+          <p class="grande" id="bentoMeses">≈ 5 meses</p>
+          <p>Es lo que tarda en recuperarse el plan Profesional con 8% más de reservas, a la tarifa y ocupación promedio de Cusco. Después, todo es ganancia.</p>
+          <a href="#calc">Haz tu propio cálculo →</a>
+        </article>
       </div>
-
-      <div class="where">
-        <div>
-          <h3 style="margin-bottom:14px">Dónde trabaja cada vista</h3>
-          <ul class="where-list">
-            <li><b>Anuncio de Airbnb</b><span>Fotos HDR y plano con medidas como imágenes del anuncio.</span></li>
-            <li><b>Reserva directa</b><span>Tour 3D en tu web, Instagram, WhatsApp y perfil de Google. Ahí no pagas comisión.</span></li>
-            <li><b>Booking y Expedia</b><span>Fotos HDR y plano. El tour va en la conversación con el huésped.</span></li>
-            <li><b>Después de reservar</b><span>Guía del huésped con el recorrido desde la puerta de calle, el uso de la terma y la ubicación de la calefacción.</span></li>
-          </ul>
-        </div>
-        <div class="note">
-          <b>Sobre Airbnb.</b> Airbnb no permite enlaces externos dentro del anuncio, así que ahí el tour 3D no aparece como visor. Lo que sí sube al anuncio son las fotos HDR y el plano, que salen del mismo escaneo. El recorrido 3D trabaja en tus canales directos y en los mensajes con el huésped, que es donde se decide la reserva directa.
-        </div>
+      <div class="para-quien" role="group" aria-label="Para quién es">
+        <span>Anfitriones de Airbnb</span><span>Administradores de propiedades</span><span>Hostales y hoteles boutique</span><span>Lodges y glamping</span><span>Inmobiliarias</span>
       </div>
     </div>
   </section>
 
-  <section class="block sec sec-noche" id="proceso">
+  <section class="cap cap-planes" id="planes">
     <div class="wrap">
-      <div class="head">
-        <p class="eyebrow">Cómo funciona</p>
-        <h2>De la visita al enlace en dos días</h2>
+      <div class="cap-head">
+        <p class="kicker">Capítulo 5 · Qué recibes</p>
+        <h2>Un escaneo, seis entregables.</h2>
+        <p class="lede">Todo sale de la misma visita. Las fotos y el plano van a tu anuncio de Airbnb. El recorrido trabaja en tus canales directos, donde no pagas comisión.</p>
       </div>
-      <div class="track" id="stepsTrack" aria-hidden="true"><span></span></div>
-      <ol class="steps">
-        <li><h3>Agenda</h3><span class="t">5 minutos</span><p>Nos escribes por WhatsApp y elegimos una hora con buena luz. Te mandamos una lista corta para dejar el espacio listo.</p></li>
-        <li><h3>Escaneo</h3><span class="t">60 a 120 minutos</span><p>Vamos con cámara 360° y LiDAR. Tapamos objetos personales y no capturamos documentos ni rostros.</p></li>
-        <li><h3>Procesamiento</h3><span class="t">48 horas</span><p>Armamos el modelo 3D, el plano acotado, las fotos HDR y las etiquetas en español e inglés.</p></li>
-        <li><h3>Entrega</h3><span class="t">Mismo día</span><p>Recibes el enlace del tour, un código QR para la entrada, el plano en PNG y PDF y las fotos listas para subir.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="block sec sec-claro" id="planes">
-    <div class="wrap">
-      <div class="head">
-        <p class="eyebrow">Planes</p>
-        <h2>Precios pensados para un alojamiento de Cusco</h2>
-        <p class="lede">Pago único por escaneo. El tour queda publicado 12 meses y la renovación es opcional.</p>
+      <div class="recibes">
+        <div class="recibe"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></span><div><b>Recorrido 3D</b><p>El huésped camina cada ambiente desde el celular, sin instalar nada.</p></div></div>
+        <div class="recibe"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h9V3M12 12v9M16 12h5"/></svg></span><div><b>Plano con medidas</b><p>Áreas en m² y cotas, en PNG y PDF, listo para el anuncio.</p></div></div>
+        <div class="recibe"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="4"/><path d="M5 7h3l2-3h4l2 3h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/></svg></span><div><b>Fotos HDR</b><p>Luz de ventana y de interior equilibradas, sin zonas quemadas.</p></div></div>
+        <div class="recibe"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H8l-4 4V5Z"/><path d="M8 9h8M8 12h5"/></svg></span><div><b>Etiquetas ES · EN</b><p>Terma, calefacción, llaves y wifi explicados dentro del recorrido.</p></div></div>
+        <div class="recibe"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="m11 9 3 2-3 2V9Z"/></svg></span><div><b>Video vertical</b><p>30 segundos para Instagram, TikTok y estados de WhatsApp.</p></div></div>
+        <div class="recibe"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM20 14v1M14 20h1M18 18h3v3"/></svg></span><div><b>Enlace y QR</b><p>Para tu web, tu perfil de Google y la puerta del alojamiento.</p></div></div>
       </div>
+      <div class="sub-planes"><h3>Elige según el tamaño de tu espacio</h3><p class="src">Pago único. Yape, Plin, transferencia o tarjeta.</p></div>
       <div class="plans">
         <article class="plan" data-tilt>
           <h3>Esencial</h3>
@@ -792,89 +816,27 @@ main{overflow-x:clip}
     </div>
   </section>
 
-  <section class="block sec sec-noche" id="peru">
+  <section class="cap cap-peru" id="peru">
     <div class="wrap">
       <div class="head">
-        <p class="eyebrow">Expansión</p>
+        <p class="kicker">La ruta</p>
         <h2>Empezamos en Cusco. Después, la ruta turística del Perú.</h2>
         <p class="lede">Cada fase abre cuando la anterior tiene un equipo de captura local y una cartera estable de anfitriones.</p>
       </div>
-      <div class="track" id="routeTrack" aria-hidden="true"><span></span></div>
-      <div class="phases">
-        <div class="phase lit">
-          <span class="when">Fase 1</span>
-          <h3>Cusco ciudad</h3>
-          <p>San Blas, Centro Histórico, San Cristóbal, Santa Ana y Wanchaq.</p>
-          <span class="status now">Ahora</span>
-        </div>
-        <div class="phase">
-          <span class="when">Fase 2</span>
-          <h3>Valle Sagrado</h3>
-          <p>Pisac, Urubamba, Ollantaytambo y lodges rurales. Ahí el plan Premium tiene más sentido.</p>
-          <span class="status">Siguiente</span>
-        </div>
-        <div class="phase">
-          <span class="when">Fase 3</span>
-          <h3>Arequipa y Puno</h3>
-          <p>Casonas de sillar, el Colca y el lago Titicaca. Mismo turista, misma ruta.</p>
-          <span class="status">Después</span>
-        </div>
-        <div class="phase">
-          <span class="when">Fase 4</span>
-          <h3>Lima y la costa</h3>
-          <p>Miraflores y Barranco, luego Paracas y Máncora. Ahí está el mayor volumen de anuncios del país.</p>
-          <span class="status">Meta</span>
-        </div>
-      </div>
-      <div class="who" role="group" aria-label="Clientes">
-        <span>Anfitriones de Airbnb</span>
-        <span>Administradores de propiedades</span>
-        <span>Hostales y hoteles boutique</span>
-        <span>Lodges y glamping</span>
-        <span>Inmobiliarias y alquiler largo</span>
+      <div class="ruta" role="list">
+        <span class="linea" aria-hidden="true"></span>
+        <div role="listitem" class="fase on"><small>Fase 1 · Ahora</small><b>Cusco ciudad</b><p>San Blas, Centro Histórico, San Cristóbal, Santa Ana y Wanchaq.</p></div>
+        <div role="listitem" class="fase"><small>Fase 2 · Siguiente</small><b>Valle Sagrado</b><p>Pisac, Urubamba, Ollantaytambo y lodges rurales.</p></div>
+        <div role="listitem" class="fase"><small>Fase 3 · Después</small><b>Arequipa y Puno</b><p>Casonas de sillar, el Colca y el lago Titicaca.</p></div>
+        <div role="listitem" class="fase"><small>Fase 4 · Meta</small><b>Lima y la costa</b><p>Miraflores, Barranco, Paracas y Máncora.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="block sec sec-claro" id="preguntas">
+  <section class="cap cap-cotiza" id="contacto">
     <div class="wrap">
       <div class="head">
-        <p class="eyebrow">Preguntas frecuentes</p>
-        <h2>Lo que preguntan los anfitriones</h2>
-      </div>
-      <div class="faq">
-        <details>
-          <summary>¿El tour 3D aparece dentro de mi anuncio de Airbnb?</summary>
-          <p>No como visor, porque Airbnb no permite enlaces externos en el anuncio. Al anuncio suben las fotos HDR y el plano con medidas. El tour 3D lo usas en tus reservas directas, en redes, en Google y en los mensajes con el huésped.</p>
-        </details>
-        <details>
-          <summary>¿Tengo que estar presente durante el escaneo?</summary>
-          <p>Solo para abrir la puerta. El escaneo funciona mejor con el espacio vacío de personas. Te enviamos antes una lista de preparación: camas tendidas, luces encendidas y objetos personales guardados.</p>
-        </details>
-        <details>
-          <summary>¿Qué equipo usan?</summary>
-          <p>Una cámara 360° profesional para el recorrido y un escáner LiDAR para las medidas. En el plan Premium sumamos captura fotogramétrica para el modelo fotorrealista.</p>
-        </details>
-        <details>
-          <summary>¿Qué pasa después de los 12 meses?</summary>
-          <p>Puedes renovar el alojamiento del tour o descargar tus fotos y planos, que son tuyos para siempre. Si remodelas, volvemos a escanear con descuento.</p>
-        </details>
-        <details>
-          <summary>¿Funciona en celular?</summary>
-          <p>Sí. El recorrido funciona en el navegador del celular, sin instalar nada. La mayoría de tus huéspedes lo van a abrir desde ahí.</p>
-        </details>
-        <details>
-          <summary>¿Y la privacidad de mi casa?</summary>
-          <p>Tú decides qué ambientes se publican. No capturamos documentos, fotos familiares ni rostros, y la dirección exacta nunca aparece en el tour.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <section class="block" id="contacto">
-    <div class="wrap">
-      <div class="head">
-        <p class="eyebrow">Cotizador</p>
+        <p class="kicker">Capítulo 6 · Cotiza</p>
         <h2>Cotiza tu escaneo en cuatro pasos</h2>
         <p class="lede">Mientras respondes, a la derecha se arma el plano de tu alojamiento y se calcula el precio. Al final te queda el mensaje listo para WhatsApp.</p>
       </div>
@@ -992,22 +954,68 @@ main{overflow-x:clip}
       </div>
     </div>
   </section>
+
+  <section class="cap cap-faq" id="preguntas">
+    <div class="wrap">
+      <div class="head">
+        <p class="kicker">Preguntas</p>
+        <h2>Lo que nos preguntan los anfitriones</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>¿El tour 3D aparece dentro de mi anuncio de Airbnb?</summary>
+          <p>No como visor, porque Airbnb no permite enlaces externos en el anuncio. Al anuncio suben las fotos HDR y el plano con medidas. El tour 3D lo usas en tus reservas directas, en redes, en Google y en los mensajes con el huésped.</p>
+        </details>
+        <details>
+          <summary>¿Tengo que estar presente durante el escaneo?</summary>
+          <p>Solo para abrir la puerta. El escaneo funciona mejor con el espacio vacío de personas. Te enviamos antes una lista de preparación: camas tendidas, luces encendidas y objetos personales guardados.</p>
+        </details>
+        <details>
+          <summary>¿Qué equipo usan?</summary>
+          <p>Una cámara 360° profesional para el recorrido y un escáner LiDAR para las medidas. En el plan Premium sumamos captura fotogramétrica para el modelo fotorrealista.</p>
+        </details>
+        <details>
+          <summary>¿Qué pasa después de los 12 meses?</summary>
+          <p>Puedes renovar el alojamiento del tour o descargar tus fotos y planos, que son tuyos para siempre. Si remodelas, volvemos a escanear con descuento.</p>
+        </details>
+        <details>
+          <summary>¿Funciona en celular?</summary>
+          <p>Sí. El recorrido funciona en el navegador del celular, sin instalar nada. La mayoría de tus huéspedes lo van a abrir desde ahí.</p>
+        </details>
+        <details>
+          <summary>¿Y la privacidad de mi casa?</summary>
+          <p>Tú decides qué ambientes se publican. No capturamos documentos, fotos familiares ni rostros, y la dirección exacta nunca aparece en el tour.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Tu espacio merece que lo recorran.</h2>
+      <p>Una mañana de escaneo, un año de reservas mejor informadas. Cotiza en dos minutos y recibe el mensaje listo para WhatsApp.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#contacto">Cotiza tu escaneo</a>
+        <a class="btn btn-ghost" href="crear.html">Prueba el Estudio gratis</a>
+      </div>
+    </div>
+  </section>
 </main>
 
 <div class="barra-movil" id="barraMovil" hidden>
   <div><small>Desde</small><b>S/ 390</b></div>
-  <a class="btn btn-primary" href="#contacto">Agenda tu escaneo</a>
+  <a class="btn btn-primary" href="#contacto">Cotiza tu escaneo</a>
 </div>
-<footer class="sec sec-noche">
+<footer>
   <div class="wrap">
-    <div class="row">
-      <span><b style="font-family:var(--font-display);color:var(--ink)">Wasi 3D</b> · <i>Wasi</i> significa casa en quechua · Cusco, Perú</span>
+    <div class="fila">
+      <span><b>Wasi 3D</b> · <i>Wasi</i> significa casa en quechua · Cusco, Perú</span>
       <a href="#inicio">Volver arriba</a>
     </div>
     <ol>
       <li>Datos de mercado: <a href="https://www.airdna.co/vacation-rental-data/app/pe/default/cusco/overview" target="_blank" rel="noopener noreferrer">AirDNA, Cusco overview</a> (consultado oct. 2026).</li>
       <li>Caso Vacasa (+12% reservas, 3× tiempo de visualización): <a href="https://matterport.com/industries/case-studies/vacasa-boosts-vacation-rental-bookings-and-improves-guest-services" target="_blank" rel="noopener noreferrer">Matterport</a>.</li>
-      <li>El alojamiento del visor es un modelo de ejemplo, no una propiedad real.</li>
+      <li>El alojamiento del visor y la comparación antes y después son modelos de ejemplo, no propiedades reales.</li>
     </ol>
   </div>
 </footer>
@@ -1380,7 +1388,6 @@ initRest();
 
 })();
 
-/* ---------- Calculadora y formulario ---------- */
 function initRest(){
   if(initRest.done)return;initRest.done=true;
   const $=s=>document.querySelector(s);
@@ -1406,20 +1413,55 @@ function initRest(){
 
   document.querySelectorAll('[data-plan]').forEach(b=>b.addEventListener('click',()=>{const p=b.dataset.plan;const map={Esencial:'390',Profesional:'790',Premium:'1490'};$('#cPlan').value=map[p];calc();if(window.wasiElegirPlan)wasiElegirPlan(p);wasiScrollTo(document.getElementById('contacto'));}));
 
+  /* Encabezado transparente sobre el cielo del héroe, sólido en el resto */
+  const top=$('.top'),hero=$('.hero');
+  if(top&&hero&&'IntersectionObserver' in window){new IntersectionObserver(([e])=>top.classList.toggle('solido',!(e.isIntersecting&&e.boundingClientRect.bottom>90)),{threshold:[0,.05,.1,.2,.4,.6,.8,1]}).observe(hero);}
+  else if(top)top.classList.add('solido');
 
-  /* Barra fija en celular: visible cuando los botones del héroe ya no se ven y aún no llegas al formulario */
-  const top=document.querySelector('.top'),hero=document.querySelector('.hero');
-  if(top&&hero&&'IntersectionObserver' in window){new IntersectionObserver(([e])=>top.classList.toggle('sobre',e.isIntersecting&&e.boundingClientRect.bottom>90),{threshold:[0,.05,.1,.2,.3,.4,.5,.6,.7,.8,.9,1]}).observe(hero);}
-  const barra=$('#barraMovil'),heroCta=document.querySelector('.hero .cta-row'),contacto=document.getElementById('contacto');
+  /* Barra fija en celular: visible cuando los botones del héroe ya no se ven y aún no llegas al cotizador */
+  const barra=$('#barraMovil'),heroCta=$('.hero .cta-row'),contacto=document.getElementById('contacto');
   if(barra&&heroCta&&contacto&&'IntersectionObserver' in window){
     barra.hidden=false;let ctaFuera=false,enContacto=false;
     const pintar=()=>barra.classList.toggle('visible',ctaFuera&&!enContacto);
     new IntersectionObserver(([e])=>{ctaFuera=!e.isIntersecting&&e.boundingClientRect.top<0;pintar();}).observe(heroCta);
     new IntersectionObserver(([e])=>{enContacto=e.isIntersecting;pintar();},{threshold:.15}).observe(contacto);
   }
-  /* ---------- Cotizador por pasos con vista previa en vivo ---------- */
+
+  /* Antes y después: el rango nativo da teclado y lector de pantalla; los botones son la alternativa a arrastrar */
+  const comp=$('#comparar'),rango=$('#compararRango'),verBtns=document.querySelectorAll('[data-ver]');
+  if(comp&&rango){
+    const marcar=v=>verBtns.forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.ver===Math.round(v))));
+    const poner=v=>{comp.style.setProperty('--pos',v+'%');rango.value=v;marcar(v);};
+    window.__wasiComparar=poner;
+    rango.addEventListener('input',()=>{if(window.gsap)gsap.killTweensOf(comp.__est||{});poner(+rango.value);});
+    verBtns.forEach(b=>b.addEventListener('click',()=>{
+      const fin=+b.dataset.ver;
+      if(window.gsap&&!matchMedia('(prefers-reduced-motion: reduce)').matches){const o=comp.__est={v:+rango.value};gsap.to(o,{v:fin,duration:.6,ease:'power3.inOut',onUpdate:()=>poner(+o.v.toFixed(1)),onComplete:()=>poner(fin)});}
+      else poner(fin);
+    }));
+    poner(50);
+  }
+
+  /* Brillo que sigue al puntero en las celdas del modelo */
+  if(matchMedia('(pointer: fine)').matches)document.querySelectorAll('.celda').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--gx',(e.clientX-r.left)+'px');c.style.setProperty('--gy',(e.clientY-r.top)+'px');},{passive:true}));
+
+  /* Indicador de capítulos y enlace activo del menú */
+  const links=[...document.querySelectorAll('.progreso a, .nav a[href^="#"]')];
+  const caps=[...new Set(links.map(a=>a.getAttribute('href')))].map(h=>document.querySelector(h)).filter(Boolean);
+  if('IntersectionObserver' in window&&caps.length){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const h='#'+e.target.id;links.forEach(a=>{if(a.getAttribute('href')===h)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');});}),{rootMargin:'-45% 0px -50% 0px'});
+    caps.forEach(c=>io.observe(c));
+  }
+
+  /* Ciclo sin animación de scroll (celular o movimiento reducido): todos los pasos visibles y la rueda completa */
+  window.__wasiCiclo=function(i){
+    const pasos=document.querySelectorAll('.pasos li'),nodos=document.querySelectorAll('.rueda .nodo'),nombres=['Agendas','Escaneamos','Entregamos','Reservan','Renuevas'];
+    pasos.forEach((p,k)=>p.classList.toggle('activo',k===i));nodos.forEach((n,k)=>n.classList.toggle('activo',k<=i));
+    const t=$('#ruedaTxt'),p=$('#ruedaPaso');if(t)t.textContent=nombres[i];if(p)p.textContent=`Paso ${i+1} de 5`;
+  };
+  window.__wasiCiclo(4);
+
   initCotizador();
-  initReal();
 }
 
 function initCotizador(){
@@ -1666,87 +1708,15 @@ function initCotizador(){
   actualizar();
 }
 
-
-/* ---------- Recorrido real 360 (foto de celular, 360° horizontal y 166° vertical) ---------- */
-function initReal(){
-  const caja=document.getElementById('real360');if(!caja||!window.THREE)return;
-  const quieto=matchMedia('(prefers-reduced-motion: reduce)').matches,rad=d=>d*Math.PI/180,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-  const PUNTOS=[
-    {lon:-165.6,lat:-17.7,t:'Comedor',d:'Mesa de comedor junto a la sala, con sillas tapizadas.'},
-    {lon:-119.7,lat:-7,t:'Ingreso',d:'Puerta de madera hacia el pasillo y la cocina.'},
-    {lon:-102.6,lat:-24.9,t:'Zona de estar',d:'Sofás y sillones frente al televisor. Hay espacio para toda la familia.'},
-    {lon:9,lat:-23.1,t:'Televisor y equipo de sonido',d:'Mueble con repisas, televisor grande y parlantes.'},
-    {lon:66.6,lat:-24.9,t:'Rincón de trabajo',d:'Escritorio con monitor y silla, a un costado de la sala.'},
-    {lon:126,lat:-1.5,t:'Ventanales',d:'Ventanas con cortinas en toda la fachada. Mucha luz natural durante el día.'}];
-  const VF=166.1,v={lon:-40,lat:-8,fov:75};
-  let visible=false,iniciado=false,sucio=true,ultima=0,guia=null;
-  new IntersectionObserver(([e])=>{visible=e.isIntersecting;if(visible){sucio=true;if(!iniciado){iniciado=true;arrancar();}}},{rootMargin:'300px'}).observe(caja);
-  function arrancar(){
-    let r;try{r=new THREE.WebGLRenderer({antialias:true});}catch(e){document.getElementById('realCarga').textContent='Tu navegador no tiene WebGL activo.';return;}
-    r.setPixelRatio(Math.min(window.devicePixelRatio||1,2));r.outputEncoding=THREE.sRGBEncoding;r.setClearColor(0x0E1430,1);
-    caja.prepend(r.domElement);
-    const cv=r.domElement,sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(75,1,.1,1200);cam.rotation.order='YXZ';
-    const img=new Image();
-    img.onload=()=>{const t=new THREE.Texture(img);t.encoding=THREE.sRGBEncoding;t.minFilter=THREE.LinearFilter;t.generateMipmaps=false;t.needsUpdate=true;
-      const g=new THREE.SphereGeometry(500,72,48,0,Math.PI*2,Math.PI/2-rad(VF)/2,rad(VF));g.scale(-1,1,1);
-      const m=new THREE.Mesh(g,new THREE.MeshBasicMaterial({map:t}));m.rotation.y=-Math.PI/2;sc.add(m);caja.classList.add('listo');sucio=true;};
-    img.onerror=()=>{document.getElementById('realCarga').textContent='No se pudo cargar el panorama.';};
-    img.src='demo/sala-real.jpg';
-    /* Puntos */
-    const capa=document.getElementById('realPuntos'),ficha=document.getElementById('realFicha');
-    const nodos=PUNTOS.map(p=>{const b=document.createElement('button');b.type='button';b.className='p360';
-      const i=document.createElement('i');i.textContent='i';const s=document.createElement('span');s.textContent=p.t;b.append(i,s);
-      b.setAttribute('aria-label','Información: '+p.t);b.addEventListener('click',()=>{parar();ir(p);});capa.appendChild(b);return{p,b};});
-    function abrir(p){document.getElementById('realFichaT').textContent=p.t;document.getElementById('realFichaP').textContent=p.d;ficha.hidden=false;nodos.forEach(n=>n.b.classList.toggle('activo',n.p===p));}
-    function cerrar(){ficha.hidden=true;nodos.forEach(n=>n.b.classList.remove('activo'));}
-    function animar(dur,fn){return new Promise(res=>{if(quieto){fn(1);sucio=true;return res();}const t0=performance.now();const paso=t=>{const k=clamp((t-t0)/dur,0,1),s=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;fn(s);sucio=true;if(k<1)requestAnimationFrame(paso);else res();};requestAnimationFrame(paso);});}
-    function mirar(lon,lat,fov,dur){const l0=v.lon,a0=v.lat,f0=v.fov,dl=((lon-l0+540)%360)-180;return animar(dur,s=>{v.lon=l0+dl*s;v.lat=a0+(lat-a0)*s;v.fov=f0+(fov-f0)*s;});}
-    async function ir(p){cerrar();await mirar(p.lon,p.lat,60,1100);abrir(p);ultima=performance.now()+6000;}
-    /* Recorrido guiado */
-    const bG=document.getElementById('realGuia');
-    function parar(){if(guia)guia.stop=true;guia=null;bG.setAttribute('aria-pressed','false');bG.textContent='Iniciar recorrido guiado';}
-    bG.addEventListener('click',async()=>{
-      if(guia){parar();cerrar();return;}
-      const g=guia={stop:false};bG.setAttribute('aria-pressed','true');bG.textContent='Detener recorrido';
-      const espera=ms=>new Promise(res=>{const t0=performance.now();const tic=()=>{if(g.stop||performance.now()-t0>=ms)return res();requestAnimationFrame(tic);};tic();});
-      for(const p of PUNTOS){if(g.stop)break;cerrar();await mirar(p.lon,p.lat,62,1400);if(g.stop)break;abrir(p);await espera(4000);}
-      cerrar();if(!g.stop)await mirar(v.lon,-5,75,900);if(guia===g)parar();ultima=performance.now();
-    });
-    /* Arrastre y zoom */
-    let px=null,py=0,mov=false,armado=false;
-    cv.addEventListener('pointerdown',e=>{parar();try{cv.setPointerCapture(e.pointerId);}catch(_){}px=e.clientX;py=e.clientY;mov=false;armado=true;ultima=performance.now();});
-    cv.addEventListener('pointermove',e=>{if(px===null)return;const dx=e.clientX-px,dy=e.clientY-py;px=e.clientX;py=e.clientY;if(Math.abs(dx)+Math.abs(dy)>2)mov=true;const k=v.fov/caja.clientHeight;v.lon-=dx*k;v.lat+=dy*k;sucio=true;ultima=performance.now();});
-    const fin=()=>{if(px!==null&&!mov)cerrar();px=null;};cv.addEventListener('pointerup',fin);cv.addEventListener('pointercancel',fin);
-    caja.addEventListener('pointerleave',()=>{armado=false;});
-    cv.addEventListener('wheel',e=>{if(!armado)return;e.preventDefault();v.fov=clamp(v.fov*(e.deltaY>0?1.08:.93),35,95);sucio=true;},{passive:false});
-    /* Bucle: solo dibuja si la sección está a la vista y algo cambió */
-    const tmp=new THREE.Vector3(),fw=new THREE.Vector3();
-    function tam(){const w=caja.clientWidth,h=caja.clientHeight;r.setSize(w,h);cam.aspect=w/Math.max(1,h);cam.updateProjectionMatrix();sucio=true;}
-    new ResizeObserver(tam).observe(caja);tam();
-    let antes=performance.now();
-    function cuadro(t){
-      requestAnimationFrame(cuadro);const dt=Math.min(.05,(t-antes)/1000);antes=t;
-      if(!visible||!caja.classList.contains('listo'))return;
-      if(!guia&&!quieto&&px===null&&t-ultima>3500){v.lon+=dt*3;sucio=true;}
-      if(!sucio)return;sucio=false;
-      v.lon=((v.lon+540)%360)-180;v.lat=clamp(v.lat,-(VF-v.fov)/2,(VF-v.fov)/2);
-      cam.fov=v.fov;cam.updateProjectionMatrix();cam.rotation.set(rad(v.lat),-rad(v.lon),0);r.render(sc,cam);
-      cam.getWorldDirection(fw);const w=caja.clientWidth,h=caja.clientHeight;
-      nodos.forEach(({p,b})=>{const d=new THREE.Vector3(Math.sin(rad(p.lon))*Math.cos(rad(p.lat)),Math.sin(rad(p.lat)),-Math.cos(rad(p.lon))*Math.cos(rad(p.lat)));
-        if(d.dot(fw)<.1){b.hidden=true;return;}tmp.copy(d).multiplyScalar(450).project(cam);b.hidden=false;
-        b.style.transform=`translate(${((tmp.x*.5+.5)*w).toFixed(1)}px,${((-tmp.y*.5+.5)*h).toFixed(1)}px) translate(-50%,-15px)`;});
-    }
-    requestAnimationFrame(cuadro);
-  }
-}
-
-/* Desplazamiento compartido: usa Lenis si está activo */
 function wasiScrollTo(el,center){
   if(window.__wasiLenis){const off=center?-(innerHeight-el.offsetHeight)/2:-72;window.__wasiLenis.scrollTo(el,{offset:off});return;}
   el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:center?'center':'start'});
 }
 
-/* ---------- Movimiento: GSAP + ScrollTrigger + SplitText + Lenis ---------- */
+/* ---------- Movimiento: GSAP + ScrollTrigger + SplitText + Lenis ----------
+   Cada animación explica algo: el mosaico muestra cómo destaca tu anuncio, el barrido compara antes y después,
+   la rueda fijada recorre el ciclo del servicio y las barras dicen cuánto cuesta cada plan.
+   Entradas con desaceleración (power3.out); solo una sección fijada (el ciclo) y solo en escritorio. */
 function initMotion(){
   const html=document.documentElement;
   const reveal=()=>html.classList.remove('motion-pending');
@@ -1769,7 +1739,7 @@ function initMotion(){
       const lenis=new Lenis({duration:1.1,smoothWheel:true});
       lenis.on('scroll',ST.update);
       gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
-      document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();lenis.scrollTo(t,{offset:-72});}}));
+      document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();lenis.scrollTo(t,{offset:t.classList.contains('hero')?0:-60});}}));
       window.__wasiLenis=lenis;
     },
     intro(){
@@ -1781,27 +1751,28 @@ function initMotion(){
       reveal();
       const state={v:0};
       tl.from('.top',{yPercent:-100,duration:.6})
-        .from('.hero .eyebrow',{autoAlpha:0,y:12,duration:.5},'-=.3')
+        .from('.hero .kicker',{autoAlpha:0,y:12,duration:.5},'-=.3')
         .from(words||h1,{yPercent:110,duration:.9,stagger:.04},'-=.25')
-        .from('.hero-side > *',{autoAlpha:0,y:18,duration:.6,stagger:.1},'-=.6')
-        .to('#viewer',{autoAlpha:1,y:0,scale:1,duration:.9},'-=.45')
+        .from('.hero-copy > .lede, .hero-copy > .cta-row, .hero-datos > div',{autoAlpha:0,y:18,duration:.6,stagger:.08},'-=.6')
+        .to('#viewer',{autoAlpha:1,y:0,scale:1,duration:.9},'-=.6')
         .from('.viewer .toolbar > *, .viewer .listing, .viewer .hint',{autoAlpha:0,y:-8,stagger:.06,duration:.45},'-=.5')
         .to(state,{v:1,duration:2.6,ease:'power2.inOut',onUpdate:()=>setBuild(state.v)},'-=.7');
     },
-    reveals(){
-      ['.views .view','.stats .stat','.where > *','.steps li','.plans .plan','.plans-foot','.calc','.phases .phase','.who span','.faq details','.cot-form','.mirador'].forEach(sel=>{
-        const els=gsap.utils.toArray(sel);if(!els.length)return;
-        gsap.set(els,{autoAlpha:0,y:36});
-        ST.batch(els,{start:'top 90%',once:true,onEnter:b=>gsap.to(b,{autoAlpha:1,y:0,duration:.75,stagger:.08,ease:'power3.out',overwrite:true})});
-      });
-    },
     headings(){
-      gsap.utils.toArray('.block .head').forEach(head=>{
-        const h2=head.querySelector('h2'),rest=head.querySelectorAll('.eyebrow, .lede');
+      gsap.utils.toArray('.cap-head, .head').forEach(head=>{
+        const h2=head.querySelector('h2'),rest=head.querySelectorAll('.kicker, .eyebrow, .lede');
         const tl=gsap.timeline({scrollTrigger:{trigger:head,start:'top 85%',once:true}});
         if(Split&&h2){const s=Split.create(h2,{type:'lines',mask:'lines'});tl.from(s.lines,{yPercent:105,duration:.85,stagger:.09,ease:'power3.out'});}
         else if(h2)tl.from(h2,{autoAlpha:0,y:24,duration:.7});
         if(rest.length)tl.from(rest,{autoAlpha:0,y:14,duration:.6,stagger:.08},'-=.5');
+      });
+      if(Split){const f=document.querySelector('.final h2');if(f){const s=Split.create(f,{type:'words',mask:'words'});gsap.from(s.words,{yPercent:110,duration:.8,stagger:.05,ease:'power3.out',scrollTrigger:{trigger:f,start:'top 85%',once:true}});}}
+    },
+    reveals(){
+      ['.cifra','.recibe','.plans .plan','.plans-foot','.calc','.para-quien span','.faq details','.cot-form','.mirador','.comparar-bar','.final p','.final .cta-row'].forEach(sel=>{
+        const els=gsap.utils.toArray(sel);if(!els.length)return;
+        gsap.set(els,{autoAlpha:0,y:32});
+        ST.batch(els,{start:'top 90%',once:true,onEnter:b=>gsap.to(b,{autoAlpha:1,y:0,duration:.75,stagger:.07,ease:'power3.out',overwrite:true})});
       });
     },
     counters(){
@@ -1810,11 +1781,53 @@ function initMotion(){
         gsap.to(o,{v:end,duration:1.6,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 90%',once:true},onUpdate:()=>{el.textContent=pre+Math.round(o.v).toLocaleString('en-US')+suf;}});
       });
     },
-    tracks(){
-      gsap.fromTo('#stepsTrack span',{scaleX:0},{scaleX:1,ease:'none',scrollTrigger:{trigger:'.steps',start:'top 85%',end:'bottom 60%',scrub:.6}});
-      const phases=gsap.utils.toArray('.phase');
-      gsap.fromTo('#routeTrack span',{scaleX:0},{scaleX:1,ease:'none',scrollTrigger:{trigger:'.phases',start:'top 85%',end:'bottom 60%',scrub:.6,
-        onUpdate:self=>phases.forEach((p,i)=>p.classList.toggle('lit',i===0||self.progress>=i/phases.length))}});
+    mosaico(){
+      const m=document.querySelector('.mosaico');if(!m)return;
+      const grises=m.querySelectorAll('i:not(.tuyo)'),tuyo=m.querySelector('.tuyo');
+      const tl=gsap.timeline({scrollTrigger:{trigger:m,start:'top 80%',once:true}});
+      tl.from(grises,{autoAlpha:0,scale:.6,duration:.5,ease:'power2.out',stagger:{each:.025,from:'random'}})
+        .from(tuyo,{autoAlpha:0,scale:.4,duration:.8,ease:'back.out(1.7)'},'-=.1')
+        .to(grises,{opacity:.45,duration:.6},'-=.4');
+    },
+    comparar(){
+      const comp=document.getElementById('comparar');if(!comp||!window.__wasiComparar)return;
+      const o={v:50},poner=()=>window.__wasiComparar(+o.v.toFixed(1));
+      comp.__est=o;
+      gsap.timeline({scrollTrigger:{trigger:comp,start:'top 65%',once:true},onUpdate:poner})
+        .to(o,{v:84,duration:1.1,ease:'power2.inOut'})
+        .to(o,{v:18,duration:1.4,ease:'power2.inOut'})
+        .to(o,{v:50,duration:.9,ease:'power3.out'});
+      gsap.from('.despues-ui .pin, .despues-ui .chips span',{autoAlpha:0,y:10,stagger:.08,duration:.5,ease:'power3.out',scrollTrigger:{trigger:comp,start:'top 65%',once:true}});
+    },
+    ciclo(){
+      const sec=document.querySelector('.cap-ciclo'),grid=document.getElementById('cicloGrid'),avance=document.getElementById('ruedaAvance');
+      if(!sec||!grid||!avance)return;
+      /* Entradas antes del pin, con valores finales explícitos y limpieza al terminar, para que no choquen con el estado .activo */
+      gsap.fromTo('.pasos li',{autoAlpha:0,x:-24},{autoAlpha:1,x:0,stagger:.08,duration:.6,ease:'power3.out',clearProps:'transform,opacity,visibility',scrollTrigger:{trigger:sec,start:'top 55%',once:true}});
+      gsap.fromTo('.rueda',{autoAlpha:0,scale:.85,rotate:-30},{autoAlpha:1,scale:1,rotate:0,duration:1,ease:'power3.out',clearProps:'transform,opacity,visibility',scrollTrigger:{trigger:sec,start:'top 55%',once:true}});
+      const mm=gsap.matchMedia();
+      mm.add('(min-width:861px) and (min-height:700px)',()=>{
+        grid.classList.add('girando');
+        let actual=-1;
+        const paso=i=>{if(i!==actual){actual=i;window.__wasiCiclo(i);}};
+        paso(0);
+        gsap.fromTo(avance,{attr:{'stroke-dashoffset':1}},{attr:{'stroke-dashoffset':0},ease:'none',scrollTrigger:{
+          trigger:grid,start:'center center',end:'+=1600',pin:true,scrub:.8,anticipatePin:1,
+          onUpdate:self=>paso(Math.min(4,Math.floor(self.progress*5)))
+        }});
+        return()=>{grid.classList.remove('girando');avance.setAttribute('stroke-dashoffset','0');window.__wasiCiclo(4);};
+      });
+    },
+    modelo(){
+      const celdas=gsap.utils.toArray('.celda');if(!celdas.length)return;
+      gsap.set(celdas,{autoAlpha:0,y:40,scale:.96});
+      ST.batch(celdas,{start:'top 88%',once:true,onEnter:b=>gsap.to(b,{autoAlpha:1,y:0,scale:1,duration:.8,stagger:.08,ease:'power3.out',overwrite:true})});
+      gsap.from('.barras i',{scaleY:0,duration:1,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:'.barras',start:'top 85%',once:true}});
+    },
+    ruta(){
+      const lis=gsap.utils.toArray('.ruta .fase');if(!lis.length)return;
+      gsap.fromTo('.ruta .linea',{scaleX:.12},{scaleX:1,ease:'none',scrollTrigger:{trigger:'.ruta',start:'top 85%',end:'bottom 55%',scrub:.6,
+        onUpdate:self=>lis.forEach((p,i)=>p.classList.toggle('on',i===0||self.progress>=i/(lis.length-1)-.02))}});
     },
     vida(){
       const fino=matchMedia('(pointer: fine)').matches,hero=document.querySelector('.hero'),cielo=document.querySelector('.cielo');
@@ -1824,10 +1837,11 @@ function initMotion(){
       gsap.from('.cinta',{rotate:0,xPercent:-4,duration:1.2,ease:'power3.out',scrollTrigger:{trigger:'.cinta',start:'top 95%',once:true}});
       if(!fino)return;
       hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();cielo.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');cielo.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');},{passive:true});
-      document.querySelectorAll('[data-tilt]').forEach(el=>{
+      document.querySelectorAll('[data-tilt], .celda').forEach(el=>{
         const rx=gsap.quickTo(el,'rotationX',{duration:.5,ease:'power3.out'}),ry=gsap.quickTo(el,'rotationY',{duration:.5,ease:'power3.out'});
+        const k=el.classList.contains('celda')?4:8;
         gsap.set(el,{transformPerspective:900});
-        el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();ry(((e.clientX-r.left)/r.width-.5)*8);rx(-((e.clientY-r.top)/r.height-.5)*8);});
+        el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();ry(((e.clientX-r.left)/r.width-.5)*k);rx(-((e.clientY-r.top)/r.height-.5)*k);});
         el.addEventListener('pointerleave',()=>{rx(0);ry(0);});
       });
       document.querySelectorAll('.btn-primary').forEach(b=>{
@@ -1838,7 +1852,7 @@ function initMotion(){
     },
     headerHide(){
       const top=document.querySelector('.top');let hidden=false;
-      ST.create({start:0,end:'max',onUpdate:self=>{const h=self.scroll()>240&&self.direction===1;if(h!==hidden){hidden=h;gsap.to(top,{yPercent:h?-100:0,duration:.35,ease:'power2.out',overwrite:true});}}});
+      ST.create({start:0,end:'max',onUpdate:self=>{const h=self.scroll()>240&&self.direction===1;if(h!==hidden){hidden=h;gsap.to(top,{yPercent:h?-100:0,duration:h?.25:.35,ease:h?'power2.in':'power2.out',overwrite:true});}}});
     }
   };
 
@@ -1849,7 +1863,8 @@ function initMotion(){
     Motion.smooth();
     const fontsReady=Promise.race([document.fonts?document.fonts.ready:Promise.resolve(),new Promise(r=>setTimeout(r,1200))]);
     fontsReady.then(()=>{
-      Motion.intro();Motion.vida();Motion.headings();Motion.reveals();Motion.counters();Motion.tracks();Motion.headerHide();
+      Motion.intro();Motion.vida();Motion.headings();Motion.reveals();Motion.counters();
+      Motion.mosaico();Motion.comparar();Motion.ciclo();Motion.modelo();Motion.ruta();Motion.headerHide();
       ST.refresh();
     });
   });
