@@ -3,7 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-CYJpeknJB93JtiwQMx5mnir7KfpTE43MqxijLCToMa8=' 'sha256-E7IfuLGDoSF7avOmR09CaWF1XzR6czhksLNSdxKxK8k=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Wasi 3D</title>
+<meta name="description" content="Tours 3D, maqueta interactiva, plano con medidas y fotos HDR para alojamientos de Airbnb en Cusco. Listo en 48 horas.">
+<meta property="og:title" content="Wasi 3D · Tours 3D para alojamientos en Cusco">
+<meta property="og:description" content="Que tus huéspedes caminen tu espacio antes de reservar. Recorrido 3D, planta con medidas y fotos HDR.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_PE">
+<meta name="theme-color" content="#A3123F">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23A3123F' d='M9 1h6v4h4v4h4v6h-4v4h-4v4H9v-4H5v-4H1V9h4V5h4z'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -559,7 +568,7 @@ html.lenis,html.lenis body{height:auto}
           <span class="status">Meta</span>
         </div>
       </div>
-      <div class="who" aria-label="Clientes">
+      <div class="who" role="group" aria-label="Clientes">
         <span>Anfitriones de Airbnb</span>
         <span>Administradores de propiedades</span>
         <span>Hostales y hoteles boutique</span>
@@ -611,9 +620,10 @@ html.lenis,html.lenis body{height:auto}
         <h2>Cuéntanos de tu alojamiento</h2>
         <p class="lede">Completa los datos y prepara tu mensaje. Lo copias y lo envías por WhatsApp. Respondemos el mismo día con fecha y precio final.</p>
       </div>
-      <form class="f" id="leadForm" novalidate>
-        <div class="field"><label for="fName">Nombre</label><input type="text" id="fName" autocomplete="name" required></div>
-        <div class="field"><label for="fPhone">WhatsApp</label><input type="tel" id="fPhone" autocomplete="tel" placeholder="+51 9…"></div>
+      <form class="f" id="leadForm" novalidate autocomplete="on">
+        <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label for="fWeb">No completar</label><input type="text" id="fWeb" tabindex="-1" autocomplete="off"></div>
+        <div class="field"><label for="fName">Nombre</label><input type="text" id="fName" autocomplete="name" required maxlength="60" spellcheck="false"></div>
+        <div class="field"><label for="fPhone">WhatsApp</label><input type="tel" id="fPhone" autocomplete="tel" placeholder="+51 9…" maxlength="20" inputmode="tel" pattern="[+0-9 ()-]{6,20}"></div>
         <div class="field"><label for="fZone">Zona</label>
           <select id="fZone">
             <option>San Blas</option><option>Centro Histórico</option><option>San Cristóbal</option><option>Santa Ana</option><option>Wanchaq</option><option>Santiago</option><option>Valle Sagrado</option><option>Otra ciudad</option>
@@ -629,6 +639,7 @@ html.lenis,html.lenis body{height:auto}
           <div class="cta-row">
             <button class="btn btn-ghost" type="button" id="copyMsg">Copiar mensaje</button>
           </div>
+          <p class="src" id="leadErr" role="alert" hidden></p>
           <p class="src" id="copyState">Envíalo a nuestro WhatsApp: +51 9XX XXX XXX</p>
         </div>
       </form>
@@ -643,19 +654,20 @@ html.lenis,html.lenis body{height:auto}
       <a href="#inicio">Volver arriba</a>
     </div>
     <ol>
-      <li>Datos de mercado: <a href="https://www.airdna.co/vacation-rental-data/app/pe/default/cusco/overview" target="_blank" rel="noopener">AirDNA, Cusco overview</a> (consultado oct. 2026).</li>
-      <li>Caso Vacasa (+12% reservas, 3× tiempo de visualización): <a href="https://matterport.com/industries/case-studies/vacasa-boosts-vacation-rental-bookings-and-improves-guest-services" target="_blank" rel="noopener">Matterport</a>.</li>
+      <li>Datos de mercado: <a href="https://www.airdna.co/vacation-rental-data/app/pe/default/cusco/overview" target="_blank" rel="noopener noreferrer">AirDNA, Cusco overview</a> (consultado oct. 2026).</li>
+      <li>Caso Vacasa (+12% reservas, 3× tiempo de visualización): <a href="https://matterport.com/industries/case-studies/vacasa-boosts-vacation-rental-bookings-and-improves-guest-services" target="_blank" rel="noopener noreferrer">Matterport</a>.</li>
       <li>El alojamiento del visor es un modelo de ejemplo, no una propiedad real.</li>
     </ol>
   </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" integrity="sha512-P2IDYZfqSwjcSjX0BKeNhwRUH8zRPGlgcWl5n6gBLzdi4Y5/0O4zaXrtO4K9TZK6Hn1BenYpKowuCavNandERg==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js" integrity="sha512-wOeEC+9qERAzhliwBFPDb6t8TiFFxdxG8vhK/Ygs7TuC44bpg8pg/X2/U/u+0X4fK05wb9id1EIipnF02+CFQw==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" integrity="sha512-0QtkFezYmkDNj7o9F9K53WGPBBqZg0XMsBIfMZvnkPvHuxQIrbBGRGN1UGBAdlyT62Z4Pw1AM5bn3s1FeoBYHg==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
 <script>
+document.addEventListener('DOMContentLoaded',function(){
 (function(){
 "use strict";
 const $=s=>document.querySelector(s);
@@ -669,9 +681,14 @@ function fail(){const d=document.createElement('div');d.className='fail';d.textC
 if(!window.THREE){fail();return initRest();}
 let renderer;
 try{renderer=new THREE.WebGLRenderer({antialias:true});}catch(e){fail();return initRest();}
-renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,matchMedia('(pointer: coarse)').matches?1.5:2));
 renderer.outputEncoding=THREE.sRGBEncoding;
 renderer.shadowMap.enabled=true;
+/* La luz y la geometría son estáticas: las sombras se recalculan solo mientras la maqueta se arma o se cortan muros */
+renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=true;
+/* Modo ligero: GPU por software (SwiftShader, llvmpipe) o equipo con poca memoria */
+const lite=(()=>{try{const gl=renderer.getContext(),ext=gl.getExtension('WEBGL_debug_renderer_info');const name=ext?String(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL)):'';return /swiftshader|llvmpipe|software/i.test(name)||(navigator.deviceMemory&&navigator.deviceMemory<=2);}catch(e){return false;}})();
+if(lite){renderer.shadowMap.enabled=false;renderer.setPixelRatio(1);}
 renderer.shadowMap.type=THREE.PCFSoftShadowMap;
 stage.insertBefore(renderer.domElement,labelsEl);
 const canvas=renderer.domElement;
@@ -684,7 +701,7 @@ persp.rotation.order='YXZ';
 const ortho=new THREE.OrthographicCamera(-1,1,1,-1,0.1,100);
 ortho.up.set(0,0,-1);
 
-function applyTheme(){renderer.setClearColor(new THREE.Color(cssVar('--viewer-bg')||'#DCE1DA'));}
+function applyTheme(){dirty=true;renderer.setClearColor(new THREE.Color(cssVar('--viewer-bg')||'#DCE1DA'));}
 applyTheme();
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',applyTheme);
 new MutationObserver(applyTheme).observe(root,{attributes:true,attributeFilter:['data-theme']});
@@ -949,10 +966,13 @@ canvas.addEventListener('keydown',e=>{const k=e.key;if(!['ArrowLeft','ArrowRight
   else{const s=.4/plan.zoom;if(k==='ArrowLeft')plan.cx-=s;if(k==='ArrowRight')plan.cx+=s;if(k==='ArrowUp')plan.cz-=s;if(k==='ArrowDown')plan.cz+=s;}});
 
 /* Tamaño y visibilidad */
+/* Render bajo demanda: solo se dibuja si algo cambió o hay una animación en curso */
+var dirty=true;
+['pointermove','pointerdown','wheel','keydown','click'].forEach(t=>viewer.addEventListener(t,()=>{dirty=true;},{passive:true}));
 let vw=1,vh=1,visible=true;
-function resize(){vw=stage.clientWidth||1;vh=stage.clientHeight||1;renderer.setSize(vw,vh);persp.aspect=vw/vh;persp.updateProjectionMatrix();}
+function resize(){dirty=true;vw=stage.clientWidth||1;vh=stage.clientHeight||1;renderer.setSize(vw,vh);persp.aspect=vw/vh;persp.updateProjectionMatrix();}
 new ResizeObserver(resize).observe(stage);resize();
-new IntersectionObserver(es=>{visible=es[0].isIntersecting;}).observe(viewer);
+new IntersectionObserver(es=>{visible=es[0].isIntersecting;dirty=true;}).observe(viewer);
 
 {const o=orbitPose();persp.position.copy(o.p);persp.quaternion.copy(o.q);}
 const tmp=new THREE.Vector3(),cutScale={N:1,S:1,W:1,E:1};
@@ -961,7 +981,8 @@ function frame(now){
   requestAnimationFrame(frame);
   const dt=Math.min(.05,(now-last)/1000);last=now;
   if(!visible)return;
-  if(mode==='doll'&&!interacted&&!reduced)orbit.theta+=dt*.12;
+  const spin=mode==='doll'&&!interacted&&!reduced&&!lite&&now<14000,tweening=!!tween;
+  if(spin)orbit.theta+=dt*.12;
   if(tween){const k=clamp((now-tween.t0)/tween.dur,0,1),s=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;persp.position.lerpVectors(tween.fp,tween.tp,s);THREE.Quaternion.slerp(tween.fq,tween.tq,persp.quaternion,s);if(k>=1)tween=null;}
   else if(mode==='doll'){const o=orbitPose();persp.position.copy(o.p);persp.quaternion.copy(o.q);}
   else if(mode==='walk'){persp.position.copy(walk.pos);persp.rotation.set(walk.pitch,walk.yaw,0);}
@@ -969,9 +990,14 @@ function frame(now){
   const cp=persp.position,cut=mode==='doll';
   const want={N:cut&&cp.z<0?.3:1,S:cut&&cp.z>D?.3:1,W:cut&&cp.x<0?.3:1,E:cut&&cp.x>W?.3:1};
   const wb=clamp(build/.45,0,1),we=1-Math.pow(1-wb,3);
-  for(const k in sides){cutScale[k]+=(want[k]-cutScale[k])*.15;sides[k].scale.y=Math.max(.001,cutScale[k]*we);}
+  let cutMoving=false;
+  for(const k in sides){const dd=want[k]-cutScale[k];if(Math.abs(dd)>.002){cutScale[k]+=dd*.15;cutMoving=true;}else cutScale[k]=want[k];sides[k].scale.y=Math.max(.001,cutScale[k]*we);}
+  const building=build<1||!furnDone;
+  if(cutMoving||building)renderer.shadowMap.needsUpdate=true;
   interiorG.scale.y=Math.max(.001,we);
   if(!furnDone){const n=furn.length;furn.forEach((o,i)=>{const p=clamp((build-.4-.35*i/n)/.25,0,1),e=1-Math.pow(1-p,3);o.visible=p>0;o.position.y=o.userData.by+(1-e)*2.2;});furnDone=build>=1;}
+  if(!(spin||tweening||cutMoving||building||dirty))return;
+  dirty=false;
   let cam=persp;
   if(mode==='plan'){const a=vw/vh,fitH=Math.max(D+2.6,(W+2.6)/a)/2/plan.zoom;ortho.left=-fitH*a;ortho.right=fitH*a;ortho.top=fitH;ortho.bottom=-fitH;ortho.position.set(plan.cx,30,plan.cz);ortho.lookAt(plan.cx,0,plan.cz);ortho.updateProjectionMatrix();cam=ortho;}
   renderer.render(scene,cam);
@@ -1027,12 +1053,23 @@ function initRest(){
 
   document.querySelectorAll('[data-plan]').forEach(b=>b.addEventListener('click',()=>{const p=b.dataset.plan;$('#fPlan').value=p;const map={Esencial:'390',Profesional:'790',Premium:'1490'};$('#cPlan').value=map[p];calc();wasiScrollTo(document.getElementById('contacto'));$('#fName').focus({preventScroll:true});}));
 
-  $('#leadForm').addEventListener('submit',e=>{
+  const leadForm=$('#leadForm');
+  leadForm.addEventListener('submit',e=>{
     e.preventDefault();
-    const name=$('#fName').value.trim();
-    if(!name){$('#fName').focus();$('#fName').setAttribute('aria-invalid','true');return;}
-    $('#fName').removeAttribute('aria-invalid');
-    const msg=`Hola Wasi 3D, soy ${name}.\nQuiero escanear mi alojamiento en ${$('#fZone').value}, de unos ${$('#fM2').value || '—'} m².\nMe interesa el plan ${$('#fPlan').value}.${$('#fPhone').value.trim()?`\nMi WhatsApp: ${$('#fPhone').value.trim()}`:''}\n¿Qué fechas tienen disponibles?`;
+    /* Limpieza de entradas: sin caracteres de control, largo acotado */
+    const clean=(v,n)=>String(v||'').replace(/[\u0000-\u001F\u007F<>]/g,'').replace(/\s+/g,' ').trim().slice(0,n);
+    const err=$('#leadErr');err.hidden=true;
+    if($('#fWeb').value)return;                       /* trampa para bots */
+    const now=Date.now();if(now-(leadForm.last||0)<8000){err.textContent='Espera unos segundos antes de preparar otro mensaje.';err.hidden=false;return;}
+    const name=clean($('#fName').value,60),phone=clean($('#fPhone').value,20),m2=Math.round(+$('#fM2').value);
+    const bad=(el,msg)=>{el.setAttribute('aria-invalid','true');el.focus();err.textContent=msg;err.hidden=false;};
+    ['#fName','#fPhone','#fM2'].forEach(s=>$(s).removeAttribute('aria-invalid'));
+    if(name.length<2)return bad($('#fName'),'Escribe tu nombre para preparar el mensaje.');
+    if(phone&&!/^[+0-9 ()-]{6,20}$/.test(phone))return bad($('#fPhone'),'El WhatsApp solo puede tener números, espacios y el signo +.');
+    if(!(m2>=10&&m2<=2000))return bad($('#fM2'),'El área debe estar entre 10 y 2000 m².');
+    const allowed=(sel)=>[...sel.options].map(o=>o.text).includes(sel.value)?sel.value:'';
+    leadForm.last=now;
+    const msg=`Hola Wasi 3D, soy ${name}.\nQuiero escanear mi alojamiento en ${allowed($('#fZone'))}, de unos ${m2} m².\nMe interesa el plan ${allowed($('#fPlan'))}.${phone?`\nMi WhatsApp: ${phone}`:''}\n¿Qué fechas tienen disponibles?`;
     $('#leadMsg').textContent=msg;$('#leadOut').hidden=false;$('#copyState').textContent='Envíalo a nuestro WhatsApp: +51 9XX XXX XXX';
   });
   $('#copyMsg').addEventListener('click',()=>{
@@ -1137,6 +1174,7 @@ function initMotion(){
   });
 }
 try{initMotion();}catch(e){document.documentElement.classList.remove('motion-pending');window.__wasiViewer&&window.__wasiViewer.setBuild(1);}
+});
 </script>
 </body>
 </html>
