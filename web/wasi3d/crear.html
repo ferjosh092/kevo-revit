@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-anUcaAL3+2rAK86emBlaeMAY3TmVUw8GfNc1eTerShg=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-0w32opuD361I9FbzWDr8FC30Ea9nm3wVZAXeml4RPco=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Wasi 3D Estudio</title>
 <meta name="description" content="Sube tus fotos 360° o normales y conviértelas en un recorrido virtual con enlaces entre ambientes, puntos de información y plano.">
@@ -707,17 +707,17 @@ async function cargarEjemploReal(){
   $('#vacio').hidden=true;$('#tEscena').textContent='Cargando el ejemplo…';
   try{
     const r=await fetch('demo/sala-real.jpg');if(!r.ok)throw new Error('sin demo');
-    const e=await procesar(await r.blob(),'Sala de estar');
+    const e=await procesar(await r.blob(),'Sala principal');
     const P=(lon,lat,titulo,texto)=>({id:uid(),tipo:'info',lon,lat,titulo,texto});
     e.puntos=[
       P(-165.6,-17.7,'Comedor','Mesa de comedor junto a la sala, con sillas tapizadas.'),
       P(-119.7,-7,'Ingreso','Puerta de madera hacia el pasillo y la cocina.'),
-      P(-102.6,-24.9,'Sala de estar','Sofás y sillones frente al televisor. Hay espacio para toda la familia.'),
+      P(-102.6,-24.9,'Zona de estar','Sofás y sillones frente al televisor. Hay espacio para toda la familia.'),
       P(9,-23.1,'Televisor y equipo de sonido','Mueble con repisas, televisor grande y parlantes.'),
       P(66.6,-24.9,'Rincón de trabajo','Escritorio con monitor y silla, a un costado de la sala.'),
       P(126,-1.5,'Ventanales','Ventanas con cortinas en toda la fachada. Mucha luz natural durante el día.')];
     e.inicial={lon:-40,lat:-8};
-    tour={v:2,nombre:'Departamento en Cusco · foto real',escenas:[e],plano:null,opciones:{tripode:true,giro:true}};
+    tour={v:3,nombre:'Departamento en Cusco',escenas:[e],plano:null,opciones:{tripode:true,giro:true}};
     $('#tNombre').value=tour.nombre;
     await irA(e.id);
     guardar();
@@ -790,7 +790,7 @@ requestAnimationFrame(cuadro);
   await DB.abrir();
   const guardado=await DB.leer();
   /* El ejemplo de la versión anterior se reemplaza por el ejemplo real; los recorridos propios se conservan */
-  const viejoEjemplo=guardado&&!guardado.v&&guardado.nombre==='Casa Tullumayu · San Blas';
+  const viejoEjemplo=guardado&&((!guardado.v&&guardado.nombre==='Casa Tullumayu · San Blas')||(guardado.v===2&&guardado.nombre==='Departamento en Cusco · foto real'));
   if(guardado&&!viejoEjemplo&&Array.isArray(guardado.escenas)&&guardado.escenas.length){
     tour=guardado;tour.opciones=Object.assign({tripode:true,giro:true},tour.opciones||{});
     $('#tNombre').value=tour.nombre||'Mi recorrido';$('#oTripode').checked=tour.opciones.tripode;$('#oGiro').checked=tour.opciones.giro;$('#cGiro').setAttribute('aria-pressed',String(tour.opciones.giro));
