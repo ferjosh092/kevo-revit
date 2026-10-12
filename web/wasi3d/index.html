@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-CYJpeknJB93JtiwQMx5mnir7KfpTE43MqxijLCToMa8=' 'sha256-1lpe6nWWcumZwOAOIIxkLrXxrlrQ38bePaOJOr6rzPs=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-CYJpeknJB93JtiwQMx5mnir7KfpTE43MqxijLCToMa8=' 'sha256-29tLLVlD2OfBpRCC4aCjXM9hCyQfWqlBlH11Aq4pkao=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Wasi 3D</title>
 <meta name="description" content="Tours 3D, maqueta interactiva, plano con medidas y fotos HDR para alojamientos de Airbnb en Cusco. Listo en 48 horas.">
@@ -222,12 +222,85 @@ section.block{padding-block:72px;border-top:1px solid var(--line)}
 .faq details[open] summary::after{content:"–"}
 .faq p{color:var(--muted);margin-top:10px;max-width:68ch;font-size:.95rem}
 
-.contact{display:grid;grid-template-columns:5fr 6fr;gap:40px}
-form.f{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px}
-form.f .full{grid-column:1/-1}
-.out{grid-column:1/-1;display:grid;gap:10px;border-top:1px dashed var(--line);padding-top:14px}
+/* Cotizador por pasos con vista previa en vivo */
+.cot{display:grid;grid-template-columns:7fr 5fr;gap:28px;align-items:start}
+.cot-form{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:grid;gap:18px;min-width:0}
+.rail{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.rail button{width:100%;display:flex;align-items:center;gap:8px;border:0;background:none;padding:4px 0;color:var(--muted);font:600 .84rem/1.2 var(--font-body);cursor:pointer;text-align:left}
+.rail button:disabled{cursor:default;opacity:.55}
+.rail-n{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line);font:500 .78rem var(--font-mono);background:var(--bg);transition:background .25s,border-color .25s,color .25s}
+.rail button[aria-current="step"]{color:var(--ink)}
+.rail button[aria-current="step"] .rail-n{border-color:var(--accent);color:var(--accent)}
+.rail button.hecho .rail-n{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.rail-bar{height:3px;background:var(--line);border-radius:3px;overflow:hidden;margin-top:-8px}
+.rail-bar span{display:block;height:100%;background:var(--accent);transform-origin:left;transform:scaleX(.25);transition:transform .45s cubic-bezier(.2,.8,.25,1)}
+.paso{border:0;margin:0;padding:0;min-width:0;display:grid;gap:16px}
+.paso:focus{outline:none}
+.paso>legend{font-family:var(--font-display);font-weight:700;font-size:1.3rem;padding:0;margin-bottom:4px}
+legend.sub{font-weight:600;font-size:.86rem;padding:0;margin-bottom:8px}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.opts-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.opt{position:relative;cursor:pointer;min-width:0}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt span{display:grid;gap:2px;height:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px;background:var(--bg);transition:border-color .2s,background .2s,transform .2s}
+.opt b{font-size:.92rem}
+.opt small{color:var(--muted);font-size:.78rem}
+.opt:hover span{border-color:var(--muted)}
+.opt input:checked+span{border-color:var(--accent);background:var(--accent-soft)}
+.opt input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.steppers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stepper{display:grid;grid-template-columns:1fr 36px 40px 36px;align-items:center;gap:6px;border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--bg)}
+.stepper>span{font-weight:600;font-size:.9rem}
+.stepper button{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 1.1rem/1 var(--font-mono);cursor:pointer}
+.stepper button:disabled{opacity:.35;cursor:default}
+.stepper output{text-align:center;font:600 1.1rem var(--font-mono);font-variant-numeric:tabular-nums}
+.switches{display:grid;gap:8px}
+.switch,.check{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:.92rem}
+.switch input,.check input{width:18px;height:18px;accent-color:var(--accent);flex:none}
+.check{justify-content:flex-start;padding-block:5px;border-bottom:1px dashed var(--line)}
+.check span{flex:1}
+.check em{font:500 .8rem var(--font-mono);font-style:normal;color:var(--muted);white-space:nowrap}
+.check em.incl{color:var(--ok)}
+.extras{border:0;margin:0;padding:0;min-width:0}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.cot-err{margin:0;color:var(--accent);font-size:.9rem;font-weight:600}
+.cot-nav{display:flex;align-items:center;gap:10px;border-top:1px solid var(--line);padding-top:16px}
+.cot-nav #cotSig{margin-left:auto}
+.cot-mini{display:none;white-space:nowrap;font-family:var(--font-display);font-weight:800;font-size:1.05rem;font-variant-numeric:tabular-nums}
+.out{display:grid;gap:10px;border-top:1px dashed var(--line);padding-top:14px}
 .out pre{margin:0;white-space:pre-wrap;font:400 .84rem/1.5 var(--font-mono);background:var(--bg);border-radius:8px;padding:12px;overflow-wrap:anywhere}
-@media (max-width:860px){.contact{grid-template-columns:1fr}form.f{grid-template-columns:1fr}}
+.mirador{position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:12px;min-width:0}
+.mir-head{display:flex;justify-content:space-between;align-items:center}
+.mir-head b{font-family:var(--font-display);font-size:1.05rem}
+.vivo{display:inline-flex;align-items:center;gap:6px;font:500 .72rem var(--font-mono);color:var(--ok)}
+.vivo::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ok);animation:vivo 1.6s ease-in-out infinite}
+@keyframes vivo{50%{opacity:.25}}
+#cotPlano{width:100%;height:auto;display:block;background:var(--bg);border-radius:10px}
+#cotPlano rect.room{stroke:var(--ink);stroke-width:1.2}
+#cotPlano rect.r-social{fill:var(--surface)}
+#cotPlano rect.r-priv{fill:color-mix(in srgb,var(--maize) 12%,var(--surface))}
+#cotPlano rect.r-bano{fill:color-mix(in srgb,var(--indigo) 14%,var(--surface))}
+#cotPlano rect.r-ext{fill:color-mix(in srgb,var(--ok) 14%,var(--surface));stroke-dasharray:4 3}
+#cotPlano rect.muro{fill:none;stroke:var(--ink);stroke-width:4}
+#cotPlano text{fill:var(--ink);font:600 9.5px var(--font-body);text-anchor:middle;dominant-baseline:middle}
+#cotPlano text.m2{font:500 8px var(--font-mono);fill:var(--muted)}
+#cotPlano text.cota{font:500 8px var(--font-mono);fill:var(--muted)}
+.mir-meta{margin:0;font:500 .8rem/1.4 var(--font-mono);color:var(--muted)}
+.mirador .kv{border-top:1px solid var(--line);padding-top:12px;margin:0}
+.mirador .kv dd.cero{color:var(--ok)}
+.tot{display:flex;justify-content:space-between;align-items:baseline;border-top:2px solid var(--ink);padding-top:10px}
+.tot span{font-weight:600}
+.tot b{font-family:var(--font-display);font-weight:800;font-size:2rem;font-variant-numeric:tabular-nums;color:var(--accent)}
+@media (max-width:980px){.opts-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){
+  .cot{grid-template-columns:1fr}
+  .mirador{position:static;order:-1}
+  .cot-mini{display:inline}
+  .rail-t{display:none}
+  .rail{grid-template-columns:repeat(4,auto);justify-content:space-between}
+}
+@media (max-width:520px){.opts,.steppers,.grid2{grid-template-columns:1fr}.opts-4{grid-template-columns:repeat(2,minmax(0,1fr))}.cot-form{padding:16px}}
+@media (prefers-reduced-motion: reduce){.vivo::before{animation:none}.rail-bar span{transition:none}}
 
 footer{border-top:1px solid var(--line);padding-block:36px 48px;color:var(--muted);font-size:.86rem}
 footer .wrap{display:grid;gap:14px}
@@ -630,35 +703,124 @@ html.lenis,html.lenis body{height:auto}
   </section>
 
   <section class="block" id="contacto">
-    <div class="wrap contact">
-      <div class="head" style="margin:0">
-        <p class="eyebrow">Agenda</p>
-        <h2>Cuéntanos de tu alojamiento</h2>
-        <p class="lede">Completa los datos y prepara tu mensaje. Lo copias y lo envías por WhatsApp. Respondemos el mismo día con fecha y precio final.</p>
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Cotizador</p>
+        <h2>Cotiza tu escaneo en cuatro pasos</h2>
+        <p class="lede">Mientras respondes, a la derecha se arma el plano de tu alojamiento y se calcula el precio. Al final te queda el mensaje listo para WhatsApp.</p>
       </div>
-      <form class="f" id="leadForm" novalidate autocomplete="on">
-        <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label for="fWeb">No completar</label><input type="text" id="fWeb" tabindex="-1" autocomplete="off"></div>
-        <div class="field"><label for="fName">Nombre</label><input type="text" id="fName" autocomplete="name" required maxlength="60" spellcheck="false"></div>
-        <div class="field"><label for="fPhone">WhatsApp</label><input type="tel" id="fPhone" autocomplete="tel" placeholder="+51 9…" maxlength="20" inputmode="tel" pattern="[+0-9 ()-]{6,20}"></div>
-        <div class="field"><label for="fZone">Zona</label>
-          <select id="fZone">
-            <option>San Blas</option><option>Centro Histórico</option><option>San Cristóbal</option><option>Santa Ana</option><option>Wanchaq</option><option>Santiago</option><option>Valle Sagrado</option><option>Otra ciudad</option>
-          </select>
-        </div>
-        <div class="field"><label for="fM2">Área aproximada (m²)</label><input type="number" id="fM2" min="10" max="2000" value="60"></div>
-        <div class="field full"><label for="fPlan">Plan</label>
-          <select id="fPlan"><option>Esencial</option><option selected>Profesional</option><option>Premium</option><option>Aún no sé</option></select>
-        </div>
-        <div class="full"><button class="btn btn-primary" type="submit">Preparar mensaje</button></div>
-        <div class="out" id="leadOut" hidden>
-          <pre id="leadMsg"></pre>
-          <div class="cta-row">
-            <button class="btn btn-ghost" type="button" id="copyMsg">Copiar mensaje</button>
+      <div class="cot">
+        <form class="cot-form" id="cotForm" novalidate autocomplete="on">
+          <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label for="fWeb">No completar</label><input type="text" id="fWeb" tabindex="-1" autocomplete="off"></div>
+          <ol class="rail" aria-label="Pasos">
+            <li><button type="button" data-ir="0"><span class="rail-n">1</span><span class="rail-t">Alojamiento</span></button></li>
+            <li><button type="button" data-ir="1"><span class="rail-n">2</span><span class="rail-t">Ambientes</span></button></li>
+            <li><button type="button" data-ir="2"><span class="rail-n">3</span><span class="rail-t">Plan y fecha</span></button></li>
+            <li><button type="button" data-ir="3"><span class="rail-n">4</span><span class="rail-t">Tus datos</span></button></li>
+          </ol>
+          <div class="rail-bar" aria-hidden="true"><span id="cotProg"></span></div>
+
+          <fieldset class="paso" data-paso="0" tabindex="-1">
+            <legend>¿Qué vamos a escanear?</legend>
+            <div class="opts" role="radiogroup" aria-label="Tipo de alojamiento">
+              <label class="opt"><input type="radio" name="tipo" value="habitacion"><span><b>Habitación o estudio</b><small>Un ambiente con baño</small></span></label>
+              <label class="opt"><input type="radio" name="tipo" value="depa" checked><span><b>Departamento</b><small>De 1 a 3 dormitorios</small></span></label>
+              <label class="opt"><input type="radio" name="tipo" value="casa"><span><b>Casa</b><small>Con patio o varios pisos</small></span></label>
+              <label class="opt"><input type="radio" name="tipo" value="casona"><span><b>Casona o lodge</b><small>Hotel boutique o glamping</small></span></label>
+            </div>
+            <div class="field">
+              <label for="cZona">Zona</label>
+              <select id="cZona" name="zona">
+                <option>San Blas</option><option>Centro Histórico</option><option>San Cristóbal</option><option>Santa Ana</option><option>Wanchaq</option><option>Santiago</option><option>San Sebastián</option><option>San Jerónimo</option><option>Valle Sagrado</option><option>Otra ciudad del Perú</option>
+              </select>
+            </div>
+          </fieldset>
+
+          <fieldset class="paso" data-paso="1" tabindex="-1" hidden>
+            <legend>Ambientes y tamaño</legend>
+            <div class="steppers">
+              <div class="stepper"><span id="lDorm">Dormitorios</span><button type="button" data-paso-n="dorm" data-d="-1" aria-label="Menos dormitorios">−</button><output id="oDorm" aria-labelledby="lDorm">2</output><button type="button" data-paso-n="dorm" data-d="1" aria-label="Más dormitorios">+</button></div>
+              <div class="stepper"><span id="lBanos">Baños</span><button type="button" data-paso-n="banos" data-d="-1" aria-label="Menos baños">−</button><output id="oBanos" aria-labelledby="lBanos">1</output><button type="button" data-paso-n="banos" data-d="1" aria-label="Más baños">+</button></div>
+            </div>
+            <div class="switches">
+              <label class="switch"><input type="checkbox" id="cCocina" name="cocina" checked><span>Cocina separada de la sala</span></label>
+              <label class="switch"><input type="checkbox" id="cTerraza" name="terraza"><span>Terraza, balcón o patio</span></label>
+            </div>
+            <div class="field">
+              <label for="cArea">Área aproximada</label>
+              <div class="row"><input type="range" id="cArea" name="area" min="15" max="400" step="5" value="60"><output id="oArea" for="cArea">60 m²</output></div>
+              <p class="src" id="cAreaNota">La estimamos por tus ambientes. Muévela si conoces el área.</p>
+            </div>
+          </fieldset>
+
+          <fieldset class="paso" data-paso="2" tabindex="-1" hidden>
+            <legend>Plan, extras y fecha</legend>
+            <div class="opts opts-4" role="radiogroup" aria-label="Plan">
+              <label class="opt"><input type="radio" name="plan" value="auto" checked><span><b>Recomendado</b><small id="cRec">Según tu área</small></span></label>
+              <label class="opt"><input type="radio" name="plan" value="Esencial"><span><b>Esencial</b><small>S/ 390 · hasta 60 m²</small></span></label>
+              <label class="opt"><input type="radio" name="plan" value="Profesional"><span><b>Profesional</b><small>S/ 790 · hasta 120 m²</small></span></label>
+              <label class="opt"><input type="radio" name="plan" value="Premium"><span><b>Premium</b><small>S/ 1,490 · hasta 250 m²</small></span></label>
+            </div>
+            <p class="src" id="cAjuste" hidden></p>
+            <fieldset class="extras">
+              <legend class="sub">Extras</legend>
+              <label class="check"><input type="checkbox" name="extra" value="video"><span>Video vertical de 30 s</span><em data-extra="video"></em></label>
+              <label class="check"><input type="checkbox" name="extra" value="ingles"><span>Etiquetas en inglés</span><em data-extra="ingles"></em></label>
+              <label class="check"><input type="checkbox" name="extra" value="atardecer"><span>Fotos al atardecer</span><em data-extra="atardecer"></em></label>
+              <label class="check"><input type="checkbox" name="extra" value="dron"><span>Toma con dron, sujeta a permisos</span><em data-extra="dron"></em></label>
+              <label class="check"><input type="checkbox" name="extra" value="expres"><span>Entrega en 24 horas</span><em data-extra="expres"></em></label>
+            </fieldset>
+            <div class="grid2">
+              <div class="field"><label for="cFecha">Fecha preferida</label><input type="date" id="cFecha" name="fecha"></div>
+              <div class="field"><label for="cFranja">Horario</label>
+                <select id="cFranja" name="franja"><option value="mañana">Mañana, de 8 a 11 (mejor luz)</option><option value="tarde">Tarde, de 14 a 17</option></select>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="paso" data-paso="3" tabindex="-1" hidden>
+            <legend>Tus datos</legend>
+            <div class="grid2">
+              <div class="field"><label for="fName">Nombre</label><input type="text" id="fName" autocomplete="name" maxlength="60" spellcheck="false"></div>
+              <div class="field"><label for="fPhone">WhatsApp</label><input type="tel" id="fPhone" autocomplete="tel" placeholder="+51 9…" maxlength="20" inputmode="tel"></div>
+            </div>
+            <fieldset class="extras">
+              <legend class="sub">¿Cómo prefieres pagar el adelanto?</legend>
+              <div class="opts opts-4" role="radiogroup" aria-label="Forma de pago">
+                <label class="opt"><input type="radio" name="pago" value="Yape o Plin" checked><span><b>Yape o Plin</b><small>Al instante</small></span></label>
+                <label class="opt"><input type="radio" name="pago" value="Tarjeta"><span><b>Tarjeta</b><small>Link de pago</small></span></label>
+                <label class="opt"><input type="radio" name="pago" value="PayPal"><span><b>PayPal</b><small>Desde el extranjero</small></span></label>
+                <label class="opt"><input type="radio" name="pago" value="Transferencia"><span><b>Transferencia</b><small>BCP, Interbank, BBVA</small></span></label>
+              </div>
+            </fieldset>
+            <label class="switch"><input type="checkbox" id="cIngles" name="english"><span>Prefiero que me respondan en inglés</span></label>
+          </fieldset>
+
+          <p class="cot-err" id="leadErr" role="alert" hidden></p>
+          <div class="cot-nav">
+            <button type="button" class="btn btn-ghost" id="cotAtras" hidden>Atrás</button>
+            <span class="cot-mini" id="cotMini" aria-hidden="true">S/ 790</span>
+            <button type="button" class="btn btn-primary" id="cotSig">Continuar</button>
           </div>
-          <p class="src" id="leadErr" role="alert" hidden></p>
-          <p class="src" id="copyState">Envíalo a nuestro WhatsApp: +51 9XX XXX XXX</p>
-        </div>
-      </form>
+          <div class="out" id="leadOut" hidden>
+            <pre id="leadMsg"></pre>
+            <div class="cta-row">
+              <button class="btn btn-primary" type="button" id="copyMsg">Copiar mensaje</button>
+              <button class="btn btn-ghost" type="button" id="cotNueva">Empezar otra cotización</button>
+            </div>
+            <p class="src" id="copyState">Envíalo a nuestro WhatsApp: +51 9XX XXX XXX</p>
+          </div>
+        </form>
+
+        <aside class="mirador" aria-label="Vista previa de la cotización">
+          <div class="mir-head"><b>Tu cotización</b><span class="vivo">En vivo</span></div>
+          <svg id="cotPlano" viewBox="0 0 320 220" role="img" aria-label="Plano estimado de tu alojamiento"></svg>
+          <p class="mir-meta" id="cotMeta"></p>
+          <dl class="kv" id="cotLineas" aria-live="polite"></dl>
+          <div class="tot"><span>Total</span><b id="cotTotal">S/ 790</b></div>
+          <p class="src" id="cotAdel"></p>
+        </aside>
+      </div>
     </div>
   </section>
 </main>
@@ -1071,7 +1233,7 @@ function initRest(){
   ids.forEach(i=>{const el=$('#'+i);el.addEventListener('input',calc);el.addEventListener('change',calc);});
   calc();
 
-  document.querySelectorAll('[data-plan]').forEach(b=>b.addEventListener('click',()=>{const p=b.dataset.plan;$('#fPlan').value=p;const map={Esencial:'390',Profesional:'790',Premium:'1490'};$('#cPlan').value=map[p];calc();wasiScrollTo(document.getElementById('contacto'));$('#fName').focus({preventScroll:true});}));
+  document.querySelectorAll('[data-plan]').forEach(b=>b.addEventListener('click',()=>{const p=b.dataset.plan;const map={Esencial:'390',Profesional:'790',Premium:'1490'};$('#cPlan').value=map[p];calc();if(window.wasiElegirPlan)wasiElegirPlan(p);wasiScrollTo(document.getElementById('contacto'));}));
 
 
   /* Barra fija en celular: visible cuando los botones del héroe ya no se ven y aún no llegas al formulario */
@@ -1082,30 +1244,252 @@ function initRest(){
     new IntersectionObserver(([e])=>{ctaFuera=!e.isIntersecting&&e.boundingClientRect.top<0;pintar();}).observe(heroCta);
     new IntersectionObserver(([e])=>{enContacto=e.isIntersecting;pintar();},{threshold:.15}).observe(contacto);
   }
-  const leadForm=$('#leadForm');
-  leadForm.addEventListener('submit',e=>{
-    e.preventDefault();
-    /* Limpieza de entradas: sin caracteres de control, largo acotado */
-    const clean=(v,n)=>String(v||'').replace(/[\u0000-\u001F\u007F<>]/g,'').replace(/\s+/g,' ').trim().slice(0,n);
-    const err=$('#leadErr');err.hidden=true;
-    if($('#fWeb').value)return;                       /* trampa para bots */
-    const now=Date.now();if(now-(leadForm.last||0)<8000){err.textContent='Espera unos segundos antes de preparar otro mensaje.';err.hidden=false;return;}
-    const name=clean($('#fName').value,60),phone=clean($('#fPhone').value,20),m2=Math.round(+$('#fM2').value);
-    const bad=(el,msg)=>{el.setAttribute('aria-invalid','true');el.focus();err.textContent=msg;err.hidden=false;};
-    ['#fName','#fPhone','#fM2'].forEach(s=>$(s).removeAttribute('aria-invalid'));
-    if(name.length<2)return bad($('#fName'),'Escribe tu nombre para preparar el mensaje.');
-    if(phone&&!/^[+0-9 ()-]{6,20}$/.test(phone))return bad($('#fPhone'),'El WhatsApp solo puede tener números, espacios y el signo +.');
-    if(!(m2>=10&&m2<=2000))return bad($('#fM2'),'El área debe estar entre 10 y 2000 m².');
-    const allowed=(sel)=>[...sel.options].map(o=>o.text).includes(sel.value)?sel.value:'';
-    leadForm.last=now;
-    const msg=`Hola Wasi 3D, soy ${name}.\nQuiero escanear mi alojamiento en ${allowed($('#fZone'))}, de unos ${m2} m².\nMe interesa el plan ${allowed($('#fPlan'))}.${phone?`\nMi WhatsApp: ${phone}`:''}\n¿Qué fechas tienen disponibles?`;
-    $('#leadMsg').textContent=msg;$('#leadOut').hidden=false;$('#copyState').textContent='Envíalo a nuestro WhatsApp: +51 9XX XXX XXX';
+  /* ---------- Cotizador por pasos con vista previa en vivo ---------- */
+  initCotizador();
+}
+
+function initCotizador(){
+  /* Precios y reglas en un solo lugar: cámbialos aquí. */
+  const COT={
+    planes:[
+      {id:'Esencial',precio:390,max:60,incl:[]},
+      {id:'Profesional',precio:790,max:120,incl:['video','ingles']},
+      {id:'Premium',precio:1490,max:250,incl:['video','ingles','atardecer','dron']}
+    ],
+    extras:{
+      video:{t:'Video vertical de 30 s',p:120},
+      ingles:{t:'Etiquetas en inglés',p:60},
+      atardecer:{t:'Fotos al atardecer',p:90},
+      dron:{t:'Toma con dron',p:250},
+      expres:{t:'Entrega en 24 horas',p:150}
+    },
+    m2Extra:4,                          /* S/ por m² sobre el máximo del plan Premium */
+    traslado:{'Valle Sagrado':80},
+    adelanto:.5
+  };
+  const TIPOS={habitacion:'Habitación o estudio',depa:'Departamento',casa:'Casa',casona:'Casona o lodge'};
+  const $=s=>document.querySelector(s),form=$('#cotForm');
+  if(!form)return;
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const anim=()=>window.gsap&&!reduced;
+  const soles=n=>'S/ '+Math.round(n).toLocaleString('en-US');
+  const val=n=>(form.querySelector(`[name="${n}"]:checked`)||{}).value;
+  const st={paso:0,visto:0,dorm:2,banos:1,areaManual:false};
+  const LIM={dorm:[0,12],banos:[1,8]};
+  const CLAVE='wasi-cotizacion';
+
+  /* ---- Estado guardado en este navegador (solo la configuración, nunca nombre ni teléfono) ---- */
+  function guardar(){
+    try{localStorage.setItem(CLAVE,JSON.stringify({tipo:val('tipo'),zona:$('#cZona').value,dorm:st.dorm,banos:st.banos,cocina:$('#cCocina').checked,terraza:$('#cTerraza').checked,area:+$('#cArea').value,areaManual:st.areaManual,plan:val('plan'),extras:[...form.querySelectorAll('[name="extra"]:checked')].map(i=>i.value),franja:$('#cFranja').value}));}catch(e){}
+  }
+  function restaurar(){
+    let d=null;try{d=JSON.parse(localStorage.getItem(CLAVE)||'null');}catch(e){}
+    if(!d||typeof d!=='object')return;
+    const marcar=(n,v)=>{const r=form.querySelector(`[name="${n}"][value="${CSS.escape(String(v))}"]`);if(r)r.checked=true;};
+    if(TIPOS[d.tipo])marcar('tipo',d.tipo);
+    if([...$('#cZona').options].some(o=>o.value===d.zona))$('#cZona').value=d.zona;
+    if(Number.isInteger(d.dorm))st.dorm=Math.min(LIM.dorm[1],Math.max(LIM.dorm[0],d.dorm));
+    if(Number.isInteger(d.banos))st.banos=Math.min(LIM.banos[1],Math.max(LIM.banos[0],d.banos));
+    $('#cCocina').checked=!!d.cocina;$('#cTerraza').checked=!!d.terraza;
+    if(d.areaManual&&d.area>=15&&d.area<=400){st.areaManual=true;$('#cArea').value=d.area;}
+    if(d.plan)marcar('plan',d.plan);
+    (Array.isArray(d.extras)?d.extras:[]).forEach(e=>{if(COT.extras[e])marcar('extra',e);});
+    if(d.franja==='tarde')$('#cFranja').value='tarde';
+  }
+
+  /* ---- Cálculo ---- */
+  function estimarArea(){
+    const tipo=val('tipo'),coc=$('#cCocina').checked,ter=$('#cTerraza').checked;
+    let a;
+    if(tipo==='habitacion')a=18+st.banos*4+(ter?6:0);
+    else{
+      a=22+(coc?8:0)+st.dorm*11+st.banos*4.5+(ter?8:0);
+      if(tipo==='casa')a=a*1.25+15;
+      if(tipo==='casona')a=a*1.5+40;
+    }
+    return Math.min(400,Math.max(15,Math.round(a/5)*5));
+  }
+  function cotizar(){
+    const a=+$('#cArea').value,elegido=val('plan')||'auto';
+    const extras=[...form.querySelectorAll('[name="extra"]:checked')].map(i=>i.value);
+    const rec=COT.planes.find(p=>a<=p.max)||COT.planes[COT.planes.length-1];
+    let plan=elegido==='auto'?rec:(COT.planes.find(p=>p.id===elegido)||rec),ajustado=false;
+    if(plan.max<a){plan=rec;ajustado=true;}
+    const lineas=[[`Plan ${plan.id}`,plan.precio]];
+    const tope=COT.planes[COT.planes.length-1].max;
+    if(a>tope)lineas.push([`Área adicional, ${a-tope} m²`,(a-tope)*COT.m2Extra]);
+    extras.forEach(e=>lineas.push(plan.incl.includes(e)?[COT.extras[e].t,0]:[COT.extras[e].t,COT.extras[e].p]));
+    const zona=$('#cZona').value;
+    if(COT.traslado[zona])lineas.push([`Traslado a ${zona}`,COT.traslado[zona]]);
+    const total=lineas.reduce((s,l)=>s+l[1],0);
+    return{a,plan,rec,ajustado,elegido,extras,zona,lineas,total,adelanto:Math.round(total*COT.adelanto),otra:zona==='Otra ciudad del Perú'};
+  }
+
+  /* ---- Plano en vivo (SVG) ---- */
+  const svg=$('#cotPlano'),NS='http://www.w3.org/2000/svg',nodos=new Map();
+  function el(tag,cls){const n=document.createElementNS(NS,tag);if(cls)n.setAttribute('class',cls);return n;}
+  const muro=el('rect','muro'),cotaW=el('text','cota'),cotaD=el('text','cota');
+  function ambientes(){
+    const tipo=val('tipo'),coc=$('#cCocina').checked,ter=$('#cTerraza').checked;
+    const banos=Array.from({length:st.banos},(_,i)=>({k:'b'+i,t:st.banos>1?`Baño ${i+1}`:'Baño',c:'bano',w:4.5,corto:'B'+(i+1)}));
+    if(tipo==='habitacion')return[[{k:'hab',t:'Habitación',c:'priv',w:18,corto:'Hab.'},...banos],ter?[{k:'ter',t:'Terraza',c:'ext',w:6,corto:'Ter.'}]:[]];
+    const social=[{k:'sala',t:coc?'Sala y comedor':'Sala, comedor y cocina',c:'social',w:coc?22:30,corto:'Sala'}];
+    if(coc)social.push({k:'coc',t:'Cocina',c:'social',w:8,corto:'Coc.'});
+    if(ter)social.push({k:'ter',t:'Terraza',c:'ext',w:8,corto:'Ter.'});
+    const dorms=Array.from({length:st.dorm},(_,i)=>({k:'d'+i,t:`Dorm. ${i+1}`,c:'priv',w:11,corto:'D'+(i+1)}));
+    return[social,[...dorms,...banos]];
+  }
+  function ponerAttrs(n,a,suave){
+    if(suave&&anim())gsap.to(n,{attr:a,duration:.55,ease:'power3.out',overwrite:true});
+    else Object.entries(a).forEach(([k,v])=>n.setAttribute(k,typeof v==='number'?v.toFixed(1):v));
+  }
+  function dibujar(a){
+    const filas=ambientes().filter(f=>f.length),pesoT=filas.flat().reduce((s,r)=>s+r.w,0);
+    const Wm=Math.sqrt(a*1.45),Dm=a/Wm,esc=Math.min(280/Wm,178/Dm),W=Wm*esc,D=Dm*esc,x0=(320-W)/2,y0=(212-D)/2;
+    const vistos=new Set();let y=y0;
+    filas.forEach(fila=>{
+      const pf=fila.reduce((s,r)=>s+r.w,0),h=D*pf/pesoT;let x=x0;
+      fila.forEach(r=>{
+        const w=W*r.w/pf,m2=a*r.w/pesoT;vistos.add(r.k);
+        let n=nodos.get(r.k);const nuevo=!n;
+        if(nuevo){n={g:el('g'),rect:el('rect','room'),t:el('text'),m:el('text','m2')};n.g.append(n.rect,n.t,n.m);svg.insertBefore(n.g,svg.firstChild);nodos.set(r.k,n);}
+        n.rect.setAttribute('class','room r-'+r.c);
+        const ancho=w>=52,alto=h>=34;
+        n.t.textContent=ancho?r.t:r.corto;
+        n.m.textContent=Math.round(m2)+' m²';
+        n.m.style.display=alto&&w>=30?'':'none';
+        ponerAttrs(n.rect,{x,y,width:w,height:h},!nuevo);
+        ponerAttrs(n.t,{x:x+w/2,y:y+h/2-(alto?5:0)},!nuevo);
+        ponerAttrs(n.m,{x:x+w/2,y:y+h/2+7},!nuevo);
+        if(nuevo&&anim())gsap.from(n.g,{opacity:0,duration:.45,ease:'power2.out'});
+        x+=w;
+      });
+      y+=h;
+    });
+    nodos.forEach((n,k)=>{
+      if(vistos.has(k))return;
+      nodos.delete(k);
+      if(anim())gsap.to(n.g,{opacity:0,duration:.25,onComplete:()=>n.g.remove()});else n.g.remove();
+    });
+    svg.append(muro,cotaW,cotaD);
+    const nuevoMuro=!muro.hasAttribute('width');
+    ponerAttrs(muro,{x:x0,y:y0,width:W,height:D},!nuevoMuro);
+    cotaW.textContent=Wm.toFixed(1)+' m';cotaD.textContent=Dm.toFixed(1)+' m';
+    ponerAttrs(cotaW,{x:160,y:y0+D+9},!nuevoMuro);
+    ponerAttrs(cotaD,{x:x0-12,y:y0+D/2},false);
+    cotaD.setAttribute('transform',`rotate(-90 ${(x0-12).toFixed(1)} ${(y0+D/2).toFixed(1)})`);
+  }
+
+  /* ---- Resumen ---- */
+  const totalVis={v:null};
+  function pintarTotal(v){$('#cotTotal').textContent=soles(v);$('#cotMini').textContent=soles(v);}
+  function actualizar(){
+    if(!st.areaManual)$('#cArea').value=estimarArea();
+    const q=cotizar(),tipo=val('tipo');
+    $('#oArea').textContent=q.a+' m²';
+    $('#cAreaNota').textContent=st.areaManual?'Usamos el área que indicaste.':'La estimamos por tus ambientes. Muévela si conoces el área.';
+    $('#oDorm').textContent=tipo==='habitacion'?'—':st.dorm;$('#oBanos').textContent=st.banos;
+    form.querySelectorAll('[data-paso-n]').forEach(b=>{
+      const k=b.dataset.pasoN,d=+b.dataset.d;
+      b.disabled=(k==='dorm'&&tipo==='habitacion')||(d<0?st[k]<=LIM[k][0]:st[k]>=LIM[k][1]);
+    });
+    $('#cRec').textContent=`${q.rec.id} para ${q.a} m²`;
+    const aj=$('#cAjuste');aj.hidden=!q.ajustado;
+    if(q.ajustado)aj.textContent=`El plan ${q.elegido} cubre hasta ${COT.planes.find(p=>p.id===q.elegido).max} m². Para ${q.a} m² aplicamos ${q.plan.id}.`;
+    form.querySelectorAll('[data-extra]').forEach(e=>{const k=e.dataset.extra,inc=q.plan.incl.includes(k);e.textContent=inc?'Incluido':'+'+soles(COT.extras[k].p);e.classList.toggle('incl',inc);});
+    const det=tipo==='habitacion'?`${st.banos} baño${st.banos>1?'s':''}`:`${st.dorm} dorm · ${st.banos} baño${st.banos>1?'s':''}`;
+    $('#cotMeta').textContent=`${TIPOS[tipo]} · ${det} · ${q.a} m² · ${q.zona}`;
+    const dl=$('#cotLineas');dl.replaceChildren();
+    q.lineas.forEach(([t,p])=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=t;dd.textContent=p?soles(p):'Incluido';if(!p)dd.className='cero';dl.append(dt,dd);});
+    $('#cotAdel').textContent=q.otra?`Adelanto 50 %: ${soles(q.adelanto)}. El traslado fuera de Cusco se cotiza aparte.`:`Adelanto 50 %: ${soles(q.adelanto)} · saldo al entregar el tour`;
+    if(totalVis.v===null||!anim()){totalVis.v=q.total;pintarTotal(q.total);}
+    else gsap.to(totalVis,{v:q.total,duration:.5,ease:'power2.out',overwrite:true,onUpdate:()=>pintarTotal(totalVis.v)});
+    dibujar(q.a);
+    guardar();
+    return q;
+  }
+
+  /* ---- Pasos ---- */
+  const pasos=[...form.querySelectorAll('.paso')],rail=[...form.querySelectorAll('.rail button')],err=$('#leadErr');
+  function error(msg,campo){err.textContent=msg;err.hidden=!msg;if(campo){campo.setAttribute('aria-invalid','true');campo.focus();}}
+  function validar(i){
+    form.querySelectorAll('[aria-invalid]').forEach(n=>n.removeAttribute('aria-invalid'));
+    if(i===2){const f=$('#cFecha');if(f.value&&f.value<f.min){error('Elige una fecha desde mañana.',f);return false;}}
+    error('');return true;
+  }
+  function ir(i,enfocar){
+    i=Math.max(0,Math.min(pasos.length-1,i));
+    const antes=st.paso;st.paso=i;st.visto=Math.max(st.visto,i);
+    pasos.forEach((p,k)=>{p.hidden=k!==i;});
+    rail.forEach((b,k)=>{b.setAttribute('aria-current',k===i?'step':'false');b.disabled=k>st.visto;b.classList.toggle('hecho',k<i);});
+    $('#cotProg').style.transform=`scaleX(${(i+1)/pasos.length})`;
+    $('#cotAtras').hidden=i===0;
+    $('#cotSig').textContent=i===pasos.length-1?'Preparar mensaje':'Continuar';
+    if(anim()&&i!==antes)gsap.fromTo(pasos[i],{autoAlpha:0,x:i>antes?28:-28},{autoAlpha:1,x:0,duration:.45,ease:'power3.out',clearProps:'transform'});
+    if(enfocar)pasos[i].focus({preventScroll:true});
+  }
+  rail.forEach((b,k)=>b.addEventListener('click',()=>{if(k<=st.visto&&(k<st.paso||validar(st.paso)))ir(k,true);}));
+  $('#cotAtras').addEventListener('click',()=>{error('');ir(st.paso-1,true);});
+  $('#cotSig').addEventListener('click',()=>{
+    if(!validar(st.paso))return;
+    if(st.paso<pasos.length-1){ir(st.paso+1,true);return;}
+    preparar();
   });
+
+  /* ---- Mensaje final ---- */
+  const limpiar=(v,n)=>String(v||'').replace(/[\u0000-\u001F\u007F<>]/g,'').replace(/\s+/g,' ').trim().slice(0,n);
+  let ultimo=0;
+  function codigo(){const b=new Uint16Array(1);(window.crypto||{}).getRandomValues?crypto.getRandomValues(b):(b[0]=Math.random()*65535);return 'WS-'+String(b[0]%10000).padStart(4,'0');}
+  function preparar(){
+    if($('#fWeb').value)return;
+    const ahora=Date.now();
+    if(ahora-ultimo<8000){error('Espera unos segundos antes de preparar otro mensaje.');return;}
+    const nombre=limpiar($('#fName').value,60),tel=limpiar($('#fPhone').value,20);
+    if(nombre.length<2){error('Escribe tu nombre para preparar el mensaje.',$('#fName'));return;}
+    if(tel&&!/^[+0-9 ()-]{6,20}$/.test(tel)){error('El WhatsApp solo puede tener números, espacios y el signo +.',$('#fPhone'));return;}
+    error('');ultimo=ahora;
+    const q=actualizar(),tipo=val('tipo'),f=$('#cFecha').value;
+    const amb=tipo==='habitacion'?`${st.banos} baño(s)`:`${st.dorm} dorm., ${st.banos} baño(s)${$('#cCocina').checked?', cocina separada':''}`;
+    const fecha=f?new Date(f+'T12:00:00').toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long'}):'a coordinar';
+    const lineas=q.lineas.map(([t,p])=>`  - ${t}: ${p?soles(p):'incluido'}`).join('\n');
+    const msg=[
+      `Hola Wasi 3D, soy ${nombre}. Quiero reservar un escaneo.`,
+      `Cotización ${codigo()}`,
+      `• ${TIPOS[tipo]} en ${q.zona}, unos ${q.a} m²: ${amb}${$('#cTerraza').checked?', terraza':''}`,
+      `• Detalle:\n${lineas}`,
+      `• Total: ${soles(q.total)} (adelanto ${soles(q.adelanto)})${q.otra?' + traslado a coordinar':''}`,
+      `• Fecha preferida: ${fecha}, ${$('#cFranja').value==='tarde'?'por la tarde':'por la mañana'}`,
+      `• Pago del adelanto: ${val('pago')}`,
+      tel?`• Mi WhatsApp: ${tel}`:'',
+      $('#cIngles').checked?'• Please reply in English.':''
+    ].filter(Boolean).join('\n');
+    $('#leadMsg').textContent=msg;$('#leadOut').hidden=false;
+    $('#copyState').textContent='Envíalo a nuestro WhatsApp: +51 9XX XXX XXX';
+    if(anim())gsap.from('#leadOut',{autoAlpha:0,y:12,duration:.4,ease:'power2.out'});
+  }
   $('#copyMsg').addEventListener('click',()=>{
     const txt=$('#leadMsg').textContent;
     const sel=()=>{const r=document.createRange();r.selectNodeContents($('#leadMsg'));const s=getSelection();s.removeAllRanges();s.addRange(r);$('#copyState').textContent='Texto seleccionado. Cópialo con Ctrl+C o mantén presionado.';};
     try{navigator.clipboard.writeText(txt).then(()=>{$('#copyState').textContent='Mensaje copiado. Pégalo en WhatsApp: +51 9XX XXX XXX';},sel);}catch(_){sel();}
   });
+  $('#cotNueva').addEventListener('click',()=>{$('#leadOut').hidden=true;ir(0,true);});
+
+  /* ---- Entradas ---- */
+  form.querySelectorAll('[data-paso-n]').forEach(b=>b.addEventListener('click',()=>{
+    const k=b.dataset.pasoN;st[k]=Math.min(LIM[k][1],Math.max(LIM[k][0],st[k]+ +b.dataset.d));actualizar();
+  }));
+  form.addEventListener('input',e=>{if(e.target.id==='cArea')st.areaManual=true;if(e.target.name!=='fWeb')actualizar();});
+  form.addEventListener('change',()=>actualizar());
+  form.addEventListener('submit',e=>e.preventDefault());
+
+  /* Botones «Elegir plan» de la sección de planes */
+  window.wasiElegirPlan=p=>{const r=form.querySelector(`[name="plan"][value="${CSS.escape(p)}"]`);if(r){r.checked=true;actualizar();}};
+
+  const man=new Date();man.setDate(man.getDate()+1);
+  $('#cFecha').min=`${man.getFullYear()}-${String(man.getMonth()+1).padStart(2,'0')}-${String(man.getDate()).padStart(2,'0')}`;
+  restaurar();
+  ir(0,false);
+  actualizar();
 }
 
 /* Desplazamiento compartido: usa Lenis si está activo */
@@ -1157,7 +1541,7 @@ function initMotion(){
         .to(state,{v:1,duration:2.6,ease:'power2.inOut',onUpdate:()=>setBuild(state.v)},'-=.7');
     },
     reveals(){
-      ['.views .view','.stats .stat','.where > *','.steps li','.plans .plan','.plans-foot','.calc','.phases .phase','.who span','.faq details','form.f'].forEach(sel=>{
+      ['.views .view','.stats .stat','.where > *','.steps li','.plans .plan','.plans-foot','.calc','.phases .phase','.who span','.faq details','.cot-form','.mirador'].forEach(sel=>{
         const els=gsap.utils.toArray(sel);if(!els.length)return;
         gsap.set(els,{autoAlpha:0,y:36});
         ST.batch(els,{start:'top 90%',once:true,onEnter:b=>gsap.to(b,{autoAlpha:1,y:0,duration:.75,stagger:.08,ease:'power3.out',overwrite:true})});
