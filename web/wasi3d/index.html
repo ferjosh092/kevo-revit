@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-CYJpeknJB93JtiwQMx5mnir7KfpTE43MqxijLCToMa8=' 'sha256-z8sjc8DFlnbEBqmr3QduSK2E0kmNtianqcclqoTWch8=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-CYJpeknJB93JtiwQMx5mnir7KfpTE43MqxijLCToMa8=' 'sha256-eXdL8U5uOD4JuZoInY2mJluTcvYXbAzMMD1VFZeb3Og=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Wasi 3D</title>
 <meta name="description" content="Tours 3D, maqueta interactiva, plano con medidas y fotos HDR para alojamientos de Airbnb en Cusco. Listo en 48 horas.">
@@ -457,6 +457,28 @@ main{overflow-x:clip}
 .hero{margin-top:-62px;padding-top:118px}
 .stat .n{font-size:clamp(1.7rem,2.6vw,2.5rem);white-space:nowrap}
 @media (max-width:860px){.hero{padding-top:98px}.stat .n{font-size:clamp(2rem,9vw,2.8rem)}}
+
+/* Recorrido real 360 */
+.real{position:relative;height:clamp(380px,62vh,640px);border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);background:#0E1430;box-shadow:0 30px 70px -30px rgba(0,0,0,.7)}
+.real canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab;opacity:0;transition:opacity .8s ease}
+.real.listo canvas{opacity:1}
+.real canvas:active{cursor:grabbing}
+.real-capa{position:absolute;inset:0;pointer-events:none}
+.p360{position:absolute;left:0;top:0;pointer-events:auto;border:0;background:none;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;color:#fff}
+.p360 i{width:30px;height:30px;border-radius:50%;background:var(--oro);border:2px solid #fff;box-shadow:0 0 0 0 rgba(233,185,73,.6);animation:latido360 2.4s ease-out infinite;font:700 15px/26px var(--font-display);font-style:normal;color:#231500;text-align:center}
+.p360 span{font:600 .76rem var(--font-body);background:rgba(14,20,48,.72);border:1px solid rgba(255,255,255,.2);padding:3px 9px;border-radius:999px;white-space:nowrap;backdrop-filter:blur(4px)}
+.p360.activo i{background:#fff}
+@keyframes latido360{70%{box-shadow:0 0 0 12px rgba(233,185,73,0)}100%{box-shadow:0 0 0 0 rgba(233,185,73,0)}}
+.real-ficha{position:absolute;left:50%;top:18px;transform:translateX(-50%);width:min(380px,calc(100% - 28px));background:#fff;color:#18201C;border-radius:16px;padding:14px 16px;box-shadow:0 20px 50px rgba(0,0,0,.45);z-index:3}
+.real-ficha b{font:700 1rem var(--font-display);display:block}
+.real-ficha p{margin:4px 0 0;color:#4A544F;font-size:.9rem}
+.real-carga{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font:500 .9rem var(--font-mono)}
+.real.listo .real-carga{display:none}
+.real-bar{position:absolute;left:14px;right:14px;bottom:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;z-index:2}
+.real-bar .btn-ghost{background:rgba(14,20,48,.55);backdrop-filter:blur(6px)}
+.real-nota{margin-left:auto;font:500 .72rem var(--font-mono);color:rgba(255,255,255,.75);background:rgba(14,20,48,.55);padding:5px 9px;border-radius:999px}
+@media (max-width:640px){.real-nota{display:none}}
+@media (prefers-reduced-motion: reduce){.p360 i{animation:none}.real canvas{transition:none}}
 </style>
 </head>
 <body>
@@ -469,6 +491,7 @@ main{overflow-x:clip}
     </a>
     <nav class="nav" aria-label="Secciones">
       <a href="#vistas">Vistas</a>
+      <a href="#real">Recorrido real</a>
       <a href="#cusco">Por qué</a>
       <a href="#planes">Planes</a>
       <a href="#peru">Cusco → Perú</a>
@@ -584,6 +607,26 @@ main{overflow-x:clip}
           <h3>Video vertical para redes</h3>
           <p>Un recorrido de 30 segundos generado desde el modelo 3D, listo para Instagram, TikTok y estados de WhatsApp.</p>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block sec sec-noche" id="real">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Recorrido real</p>
+        <h2>Una sala en Cusco, en 360°</h2>
+        <p class="lede">Foto tomada con un celular y armada en Wasi 3D Estudio. Arrastra para mirar alrededor, toca los puntos o deja que el recorrido guiado te la muestre.</p>
+      </div>
+      <div class="real" id="real360" data-lenis-prevent>
+        <div class="real-capa" id="realPuntos"></div>
+        <div class="real-ficha" id="realFicha" hidden><b id="realFichaT"></b><p id="realFichaP"></p></div>
+        <div class="real-carga" id="realCarga">Cargando panorama…</div>
+        <div class="real-bar">
+          <button type="button" class="btn btn-primary" id="realGuia" aria-pressed="false">Iniciar recorrido guiado</button>
+          <a class="btn btn-ghost" href="crear.html">Sube tus fotos</a>
+          <span class="real-nota">Personas y reflejos difuminados por privacidad</span>
+        </div>
       </div>
     </div>
   </section>
@@ -1376,6 +1419,7 @@ function initRest(){
   }
   /* ---------- Cotizador por pasos con vista previa en vivo ---------- */
   initCotizador();
+  initReal();
 }
 
 function initCotizador(){
@@ -1620,6 +1664,80 @@ function initCotizador(){
   restaurar();
   ir(0,false);
   actualizar();
+}
+
+
+/* ---------- Recorrido real 360 (foto de celular, 360° horizontal y 166° vertical) ---------- */
+function initReal(){
+  const caja=document.getElementById('real360');if(!caja||!window.THREE)return;
+  const quieto=matchMedia('(prefers-reduced-motion: reduce)').matches,rad=d=>d*Math.PI/180,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  const PUNTOS=[
+    {lon:-165.6,lat:-17.7,t:'Comedor',d:'Mesa de comedor junto a la sala, con sillas tapizadas.'},
+    {lon:-119.7,lat:-7,t:'Ingreso',d:'Puerta de madera hacia el pasillo y la cocina.'},
+    {lon:-102.6,lat:-24.9,t:'Sala de estar',d:'Sofás y sillones frente al televisor. Hay espacio para toda la familia.'},
+    {lon:9,lat:-23.1,t:'Televisor y equipo de sonido',d:'Mueble con repisas, televisor grande y parlantes.'},
+    {lon:66.6,lat:-24.9,t:'Rincón de trabajo',d:'Escritorio con monitor y silla, a un costado de la sala.'},
+    {lon:126,lat:-1.5,t:'Ventanales',d:'Ventanas con cortinas en toda la fachada. Mucha luz natural durante el día.'}];
+  const VF=166.1,v={lon:-40,lat:-8,fov:75};
+  let visible=false,iniciado=false,sucio=true,ultima=0,guia=null;
+  new IntersectionObserver(([e])=>{visible=e.isIntersecting;if(visible){sucio=true;if(!iniciado){iniciado=true;arrancar();}}},{rootMargin:'300px'}).observe(caja);
+  function arrancar(){
+    let r;try{r=new THREE.WebGLRenderer({antialias:true});}catch(e){document.getElementById('realCarga').textContent='Tu navegador no tiene WebGL activo.';return;}
+    r.setPixelRatio(Math.min(window.devicePixelRatio||1,2));r.outputEncoding=THREE.sRGBEncoding;r.setClearColor(0x0E1430,1);
+    caja.prepend(r.domElement);
+    const cv=r.domElement,sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(75,1,.1,1200);cam.rotation.order='YXZ';
+    const img=new Image();
+    img.onload=()=>{const t=new THREE.Texture(img);t.encoding=THREE.sRGBEncoding;t.minFilter=THREE.LinearFilter;t.generateMipmaps=false;t.needsUpdate=true;
+      const g=new THREE.SphereGeometry(500,72,48,0,Math.PI*2,Math.PI/2-rad(VF)/2,rad(VF));g.scale(-1,1,1);
+      const m=new THREE.Mesh(g,new THREE.MeshBasicMaterial({map:t}));m.rotation.y=-Math.PI/2;sc.add(m);caja.classList.add('listo');sucio=true;};
+    img.onerror=()=>{document.getElementById('realCarga').textContent='No se pudo cargar el panorama.';};
+    img.src='demo/sala-real.jpg';
+    /* Puntos */
+    const capa=document.getElementById('realPuntos'),ficha=document.getElementById('realFicha');
+    const nodos=PUNTOS.map(p=>{const b=document.createElement('button');b.type='button';b.className='p360';
+      const i=document.createElement('i');i.textContent='i';const s=document.createElement('span');s.textContent=p.t;b.append(i,s);
+      b.setAttribute('aria-label','Información: '+p.t);b.addEventListener('click',()=>{parar();ir(p);});capa.appendChild(b);return{p,b};});
+    function abrir(p){document.getElementById('realFichaT').textContent=p.t;document.getElementById('realFichaP').textContent=p.d;ficha.hidden=false;nodos.forEach(n=>n.b.classList.toggle('activo',n.p===p));}
+    function cerrar(){ficha.hidden=true;nodos.forEach(n=>n.b.classList.remove('activo'));}
+    function animar(dur,fn){return new Promise(res=>{if(quieto){fn(1);sucio=true;return res();}const t0=performance.now();const paso=t=>{const k=clamp((t-t0)/dur,0,1),s=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;fn(s);sucio=true;if(k<1)requestAnimationFrame(paso);else res();};requestAnimationFrame(paso);});}
+    function mirar(lon,lat,fov,dur){const l0=v.lon,a0=v.lat,f0=v.fov,dl=((lon-l0+540)%360)-180;return animar(dur,s=>{v.lon=l0+dl*s;v.lat=a0+(lat-a0)*s;v.fov=f0+(fov-f0)*s;});}
+    async function ir(p){cerrar();await mirar(p.lon,p.lat,60,1100);abrir(p);ultima=performance.now()+6000;}
+    /* Recorrido guiado */
+    const bG=document.getElementById('realGuia');
+    function parar(){if(guia)guia.stop=true;guia=null;bG.setAttribute('aria-pressed','false');bG.textContent='Iniciar recorrido guiado';}
+    bG.addEventListener('click',async()=>{
+      if(guia){parar();cerrar();return;}
+      const g=guia={stop:false};bG.setAttribute('aria-pressed','true');bG.textContent='Detener recorrido';
+      const espera=ms=>new Promise(res=>{const t0=performance.now();const tic=()=>{if(g.stop||performance.now()-t0>=ms)return res();requestAnimationFrame(tic);};tic();});
+      for(const p of PUNTOS){if(g.stop)break;cerrar();await mirar(p.lon,p.lat,62,1400);if(g.stop)break;abrir(p);await espera(4000);}
+      cerrar();if(!g.stop)await mirar(v.lon,-5,75,900);if(guia===g)parar();ultima=performance.now();
+    });
+    /* Arrastre y zoom */
+    let px=null,py=0,mov=false,armado=false;
+    cv.addEventListener('pointerdown',e=>{parar();try{cv.setPointerCapture(e.pointerId);}catch(_){}px=e.clientX;py=e.clientY;mov=false;armado=true;ultima=performance.now();});
+    cv.addEventListener('pointermove',e=>{if(px===null)return;const dx=e.clientX-px,dy=e.clientY-py;px=e.clientX;py=e.clientY;if(Math.abs(dx)+Math.abs(dy)>2)mov=true;const k=v.fov/caja.clientHeight;v.lon-=dx*k;v.lat+=dy*k;sucio=true;ultima=performance.now();});
+    const fin=()=>{if(px!==null&&!mov)cerrar();px=null;};cv.addEventListener('pointerup',fin);cv.addEventListener('pointercancel',fin);
+    caja.addEventListener('pointerleave',()=>{armado=false;});
+    cv.addEventListener('wheel',e=>{if(!armado)return;e.preventDefault();v.fov=clamp(v.fov*(e.deltaY>0?1.08:.93),35,95);sucio=true;},{passive:false});
+    /* Bucle: solo dibuja si la sección está a la vista y algo cambió */
+    const tmp=new THREE.Vector3(),fw=new THREE.Vector3();
+    function tam(){const w=caja.clientWidth,h=caja.clientHeight;r.setSize(w,h);cam.aspect=w/Math.max(1,h);cam.updateProjectionMatrix();sucio=true;}
+    new ResizeObserver(tam).observe(caja);tam();
+    let antes=performance.now();
+    function cuadro(t){
+      requestAnimationFrame(cuadro);const dt=Math.min(.05,(t-antes)/1000);antes=t;
+      if(!visible||!caja.classList.contains('listo'))return;
+      if(!guia&&!quieto&&px===null&&t-ultima>3500){v.lon+=dt*3;sucio=true;}
+      if(!sucio)return;sucio=false;
+      v.lon=((v.lon+540)%360)-180;v.lat=clamp(v.lat,-(VF-v.fov)/2,(VF-v.fov)/2);
+      cam.fov=v.fov;cam.updateProjectionMatrix();cam.rotation.set(rad(v.lat),-rad(v.lon),0);r.render(sc,cam);
+      cam.getWorldDirection(fw);const w=caja.clientWidth,h=caja.clientHeight;
+      nodos.forEach(({p,b})=>{const d=new THREE.Vector3(Math.sin(rad(p.lon))*Math.cos(rad(p.lat)),Math.sin(rad(p.lat)),-Math.cos(rad(p.lon))*Math.cos(rad(p.lat)));
+        if(d.dot(fw)<.1){b.hidden=true;return;}tmp.copy(d).multiplyScalar(450).project(cam);b.hidden=false;
+        b.style.transform=`translate(${((tmp.x*.5+.5)*w).toFixed(1)}px,${((-tmp.y*.5+.5)*h).toFixed(1)}px) translate(-50%,-15px)`;});
+    }
+    requestAnimationFrame(cuadro);
+  }
 }
 
 /* Desplazamiento compartido: usa Lenis si está activo */
