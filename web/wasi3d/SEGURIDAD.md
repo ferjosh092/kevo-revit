@@ -38,3 +38,10 @@ Mídelo en el sitio publicado con PageSpeed Insights o con el MCP de Chrome DevT
 - El recorrido se guarda en IndexedDB del navegador del anfitrión. Para compartir un enlace público hace falta un servidor (por ejemplo Cloudflare R2 + Workers).
 - Solo acepta JPG, PNG y WebP (60 MB por foto, 40 ambientes). Los textos del usuario se limpian y se insertan con `textContent`.
 - `marca/panoramas.js` regenera los panoramas de ejemplo de `demo/` a partir de la maqueta de la landing.
+
+## Mejorar con IA (`worker/`)
+
+- La clave de OpenAI vive solo como secreto del Cloudflare Worker; el navegador nunca la ve.
+- Cada pedido exige un código de acceso y el Worker valida tipo, tamaño (20 MB), modo y origen.
+- El Estudio llama a `/api/mejorar` en el mismo dominio, por eso la CSP no necesita cambios.
+- Las imágenes generadas quedan marcadas como «Ambientado con IA».

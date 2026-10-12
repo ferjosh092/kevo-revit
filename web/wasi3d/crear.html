@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-0w32opuD361I9FbzWDr8FC30Ea9nm3wVZAXeml4RPco=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-GlJslMkt1sgwuzFAUIkS1J2EG/RQP8t2wcQ0D/+YOTs=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Wasi 3D Estudio</title>
 <meta name="description" content="Sube tus fotos 360° o normales y conviértelas en un recorrido virtual con enlaces entre ambientes, puntos de información y plano.">
@@ -158,6 +158,16 @@ textarea.campo{resize:vertical;min-height:70px}
 .rango input{flex:1;accent-color:var(--oro)}
 .rango output{font:500 .8rem var(--font-mono);min-width:44px;text-align:right}
 .estado{font:500 .74rem var(--font-mono);color:var(--suave)}
+.estado.err{color:#FF8A95}
+.opts-ia{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt-ia{position:relative;cursor:pointer}
+.opt-ia input{position:absolute;opacity:0;pointer-events:none}
+.opt-ia span{display:grid;gap:2px;height:100%;border:1.5px solid var(--linea-2);border-radius:12px;padding:9px 10px;transition:border-color .2s,background .2s}
+.opt-ia b{font-size:.84rem}
+.opt-ia small{font-size:.72rem;color:var(--suave)}
+.opt-ia input:checked+span{border-color:var(--oro);background:rgba(233,185,73,.1)}
+.opt-ia input:focus-visible+span{outline:2px solid var(--oro);outline-offset:2px}
+.sello-ia{display:inline-block;margin-left:8px;font:600 .66rem/1 var(--font-body);letter-spacing:.04em;text-transform:uppercase;color:#231500;background:var(--oro);padding:4px 7px;border-radius:999px;vertical-align:middle}
 .estado.ok{color:var(--ok)}
 
 @media (max-width:900px){
@@ -259,6 +269,23 @@ textarea.campo{resize:vertical;min-height:70px}
         <label class="ayuda" for="eNorte">Hacia dónde mira el centro de la foto en el plano</label>
         <div class="rango"><input type="range" id="eNorte" min="0" max="359" step="1" value="0"><output id="oNorte" for="eNorte">0°</output></div>
       </div>
+    </div>
+
+    <div class="bloque" id="bIA">
+      <h3>Mejorar con IA <small>ChatGPT</small></h3>
+      <div class="opts-ia" role="radiogroup" aria-label="Tipo de mejora">
+        <label class="opt-ia"><input type="radio" name="iaModo" value="ordenar" checked><span><b>Ordenar y ambientar</b><small>Quita el desorden y mejora la luz de una foto real</small></span></label>
+        <label class="opt-ia"><input type="radio" name="iaModo" value="render"><span><b>Render fotorrealista</b><small>Convierte una maqueta 3D en foto</small></span></label>
+      </div>
+      <div class="opts-ia" role="radiogroup" aria-label="Qué mejorar">
+        <label class="opt-ia"><input type="radio" name="iaAlcance" value="vista" checked><span><b>Vista actual</b><small>Sale una foto para el anuncio</small></span></label>
+        <label class="opt-ia"><input type="radio" name="iaAlcance" value="panorama"><span><b>Panorama 360 completo</b><small>Experimental: baja a 2048 px</small></span></label>
+      </div>
+      <textarea class="campo" id="iaExtra" maxlength="300" placeholder="Indicaciones extra (opcional): «sofás grises», «luz de tarde»…"></textarea>
+      <input class="campo" id="iaCodigo" type="password" autocomplete="off" maxlength="80" placeholder="Código de acceso del Estudio" aria-label="Código de acceso del Estudio">
+      <div class="acciones"><button type="button" class="btn btn-sm btn-pri" id="aIA">Mejorar con IA</button><button type="button" class="btn btn-sm" id="aIAx" hidden>Cancelar</button></div>
+      <p class="estado" id="iaEstado" aria-live="polite"></p>
+      <p class="ayuda">Las imágenes generadas se marcan como «Ambientado con IA». Airbnb pide que las fotos muestren el espacio real: avisa en tu anuncio cuando una foto esté ambientada.</p>
     </div>
 
     <div class="bloque">
@@ -664,6 +691,7 @@ function pintarPanel(){
 function pintarEscena(){
   const e=escena(actual),i=tour.escenas.indexOf(e);
   $('#tEscena').textContent=e?e.nombre:'';
+  if(e&&e.ia){const s=document.createElement('span');s.className='sello-ia';s.textContent='Ambientado con IA';$('#tEscena').appendChild(s);}
   $('#tCuenta').textContent=e?`${tour.nombre} · ${i+1} de ${tour.escenas.length}`:'';
   pintarPuntos();pintarTira();pintarPanel();pintarMapa();
 }
@@ -701,6 +729,75 @@ function vaciar(){
 }
 let tAviso=null;
 function aviso(t){const n=$('#toast');n.textContent=t;n.classList.add('on');clearTimeout(tAviso);tAviso=setTimeout(()=>n.classList.remove('on'),2400);}
+
+/* ================= Mejorar con IA (ChatGPT vía el Worker de /api) ================= */
+try{$('#iaCodigo').value=sessionStorage.getItem('wasi-ia-codigo')||'';}catch(e){}
+let iaPedido=null;
+function iaEstado(t,err){const n=$('#iaEstado');n.textContent=t;n.classList.toggle('err',!!err);}
+function capturarVista(){
+  /* Dibuja la vista actual a 1536×1024 (proporción que acepta la API) y la devuelve como JPG */
+  const W=1536,H=1024,tam=new THREE.Vector2();renderer.getSize(tam);const pr=renderer.getPixelRatio(),asp=cam.aspect;
+  renderer.setPixelRatio(1);renderer.setSize(W,H,false);cam.aspect=W/H;cam.updateProjectionMatrix();
+  renderer.render(escena3d,cam);
+  const c=document.createElement('canvas');c.width=W;c.height=H;c.getContext('2d').drawImage(renderer.domElement,0,0,W,H);
+  renderer.setPixelRatio(pr);renderer.setSize(tam.x,tam.y);cam.aspect=asp;cam.updateProjectionMatrix();sucio=true;
+  const hfov=deg(2*Math.atan(Math.tan(rad(vista.fov)/2)*W/H));
+  return aBlob(c,'image/jpeg',.92).then(b=>({blob:b,hfov}));
+}
+async function prepararPanorama(e){
+  /* El panorama se estira a 1536×1024: la API no acepta 2:1. La respuesta se devuelve a su proporción original */
+  const img=await cargarImagen(e.blob),c=document.createElement('canvas');c.width=1536;c.height=1024;
+  c.getContext('2d').drawImage(img,0,0,1536,1024);return aBlob(c,'image/jpeg',.92);
+}
+async function devolverPanorama(blob,e){
+  const img=await decodificar(blob),W=2048,H=Math.round(W*e.alto/e.ancho),c=document.createElement('canvas');c.width=W;c.height=H;
+  const x=c.getContext('2d');x.drawImage(img,0,0,W,H);
+  /* Une los bordes izquierdo y derecho para que no se note la costura del 360 */
+  const B=24,izq=x.getImageData(0,0,B,H),der=x.getImageData(W-B,0,B,H);
+  for(let y=0;y<H;y++)for(let i=0;i<B;i++){const t=.5*(1-i/B),a=(y*B+i)*4,b=(y*B+(B-1-i))*4;
+    for(let k=0;k<3;k++){const l=izq.data[a+k],r=der.data[b+k];izq.data[a+k]=l*(1-t)+r*t;der.data[b+k]=r*(1-t)+l*t;}}
+  x.putImageData(izq,0,0);x.putImageData(der,W-B,0);
+  return aBlob(c,'image/jpeg',.9);
+}
+$('#aIA').addEventListener('click',async()=>{
+  const e=escena(actual);if(!e||iaPedido)return;
+  const codigo=$('#iaCodigo').value.trim();
+  if(!codigo){iaEstado('Escribe el código de acceso del Estudio.',true);$('#iaCodigo').focus();return;}
+  try{sessionStorage.setItem('wasi-ia-codigo',codigo);}catch(_){}
+  const modo=(document.querySelector('[name="iaModo"]:checked')||{}).value||'ordenar';
+  const alcance=(document.querySelector('[name="iaAlcance"]:checked')||{}).value||'vista';
+  if(alcance==='panorama'&&e.tipo!=='360'){iaEstado('Este ambiente es una foto normal: usa «Vista actual».',true);return;}
+  detenerGuia();
+  const ctl=new AbortController();iaPedido=ctl;
+  $('#aIA').disabled=true;$('#aIAx').hidden=false;
+  const t0=Date.now(),reloj=setInterval(()=>iaEstado(`ChatGPT está trabajando… ${Math.round((Date.now()-t0)/1000)} s (suele tardar entre 30 s y 2 min)`),1000);
+  const corte=setTimeout(()=>ctl.abort(),240000);
+  try{
+    const vistaCap=alcance==='vista'?await capturarVista():null;
+    const fd=new FormData();
+    fd.append('imagen',vistaCap?vistaCap.blob:await prepararPanorama(e),'imagen.jpg');
+    fd.append('modo',modo);fd.append('alcance',alcance);fd.append('extra',limpiar($('#iaExtra').value,300));
+    let r;
+    try{r=await fetch('/api/mejorar',{method:'POST',headers:{'X-Wasi-Codigo':codigo},body:fd,signal:ctl.signal});}
+    catch(err){throw new Error(err.name==='AbortError'?'Se canceló la mejora.':'No se pudo conectar con el servidor de IA. Funciona cuando la web está publicada junto al Worker (ver worker/README.md).');}
+    if(!r.ok){let m='';try{m=(await r.json()).error;}catch(_){}throw new Error(m||`El servidor respondió ${r.status}.`);}
+    const salida=await r.blob();
+    if(!/^image\//.test(salida.type))throw new Error('El servidor no devolvió una imagen.');
+    const ia={modo,alcance,fecha:new Date().toISOString()};
+    const nombre=limpiar(`${e.nombre} · IA`,40);
+    let nueva;
+    if(alcance==='vista'){
+      nueva=await procesar(salida,nombre,{hfov:Math.round(vistaCap.hfov),ia});
+    }else{
+      nueva=await procesar(await devolverPanorama(salida,e),nombre,{ia,inicial:{...e.inicial},puntos:e.puntos.filter(p=>p.tipo==='info').map(p=>({...p,id:uid()})),mapa:e.mapa,norte:e.norte});
+    }
+    const i=tour.escenas.indexOf(e);tour.escenas.splice(i+1,0,nueva);
+    guardar();await irA(nueva.id);
+    iaEstado(`Listo: «${nueva.nombre}» se agregó junto a la original.`);
+  }catch(err){iaEstado(err.message||'No se pudo mejorar la imagen.',true);}
+  finally{clearInterval(reloj);clearTimeout(corte);iaPedido=null;$('#aIA').disabled=false;$('#aIAx').hidden=true;}
+});
+$('#aIAx').addEventListener('click',()=>{if(iaPedido)iaPedido.abort();});
 
 /* ================= Recorrido de ejemplo ================= */
 async function cargarEjemploReal(){
