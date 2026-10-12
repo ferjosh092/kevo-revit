@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-CYJpeknJB93JtiwQMx5mnir7KfpTE43MqxijLCToMa8=' 'sha256-E4No/FwGOc5SFNxkQQwaPI88bJ9qgpdnjqnr2CC7Gdk=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-CYJpeknJB93JtiwQMx5mnir7KfpTE43MqxijLCToMa8=' 'sha256-z8sjc8DFlnbEBqmr3QduSK2E0kmNtianqcclqoTWch8=' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Wasi 3D</title>
 <meta name="description" content="Tours 3D, maqueta interactiva, plano con medidas y fotos HDR para alojamientos de Airbnb en Cusco. Listo en 48 horas.">
@@ -473,6 +473,7 @@ main{overflow-x:clip}
       <a href="#planes">Planes</a>
       <a href="#peru">Cusco → Perú</a>
       <a href="#preguntas">Preguntas</a>
+      <a href="crear.html">Crear recorrido</a>
     </nav>
     <a class="btn btn-primary" href="#contacto">Agenda tu escaneo</a>
   </div>
@@ -491,7 +492,7 @@ main{overflow-x:clip}
           <p class="lede">Escaneamos tu Airbnb y te entregamos recorrido 3D, maqueta interactiva, plano con medidas y fotos HDR. Todo listo en 48 horas, desde S/ 390.</p>
           <div class="cta-row">
             <a class="btn btn-primary" href="#contacto">Agenda tu escaneo</a>
-            <a class="btn btn-ghost" href="#planes">Ver planes</a>
+            <a class="btn btn-ghost" href="crear.html">Crea tu recorrido con tus fotos</a>
           </div>
         </div>
       </div>
@@ -1183,6 +1184,8 @@ const ringMat=new THREE.MeshBasicMaterial({color:col('#FFFFFF'),transparent:true
 const waypoints=[[1.2,2.6],[2.6,1.4],[4.6,3.3],[7.0,1.5],[2.0,4.8],[4.7,5.6],[6.6,5.0]];
 const rings=waypoints.map(([x,z])=>{const m=new THREE.Mesh(new THREE.RingGeometry(.2,.28,40),ringMat);m.rotation.x=-Math.PI/2;m.position.set(x,.012,z);m.visible=false;scene.add(m);return m;});
 
+/* Acceso para generar panoramas de ejemplo (solo con #panoramas en la URL) */
+if(location.hash==='#panoramas')window.__wasiEscena={scene,renderer,ceiling,pano,rings,W,D};
 /* Etiquetas */
 const hotspots=[
   {p:[.2,.85,3.75],t:'Calefactor eléctrico',d:'En julio las noches de Cusco bajan a 1 °C. Cada dormitorio y la sala tienen calefactor.',en:'Electric heater in every room. July nights drop to 1 °C.',wp:[1.2,3.0]},

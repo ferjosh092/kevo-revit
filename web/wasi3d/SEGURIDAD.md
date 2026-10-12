@@ -31,3 +31,10 @@ Si no se ejecuta, el navegador bloqueará los scripts editados.
 Lighthouse local (13.5.0, móvil simulado): accesibilidad 100, buenas prácticas 100, SEO 100.
 El puntaje de rendimiento local no es representativo, porque el contenedor no tiene GPU ni acceso a Google Fonts.
 Mídelo en el sitio publicado con PageSpeed Insights o con el MCP de Chrome DevTools (`.mcp.json`).
+
+## Creador de recorridos (`crear.html`)
+
+- Las fotos se procesan en el navegador: se reducen al tamaño máximo de textura del equipo y nunca salen de él.
+- El recorrido se guarda en IndexedDB del navegador del anfitrión. Para compartir un enlace público hace falta un servidor (por ejemplo Cloudflare R2 + Workers).
+- Solo acepta JPG, PNG y WebP (60 MB por foto, 40 ambientes). Los textos del usuario se limpian y se insertan con `textContent`.
+- `marca/panoramas.js` regenera los panoramas de ejemplo de `demo/` a partir de la maqueta de la landing.
