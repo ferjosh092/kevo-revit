@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>(function(){if(!matchMedia('(prefers-reduced-motion: reduce)').matches){var r=document.documentElement;r.classList.add('motion-pending');setTimeout(function(){r.classList.remove('motion-pending')},3000);}})();</script>
 <style>
 /* Layout: banda de encabezado, héroe con visor 3D a todo el ancho, luego secciones en una columna de 1180px con grillas que se apilan en móvil. */
 :root{
@@ -40,6 +41,7 @@
   --viewer-bg:#1C2320; --ok:#5FBF92; color-scheme:dark;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.55}
@@ -126,7 +128,7 @@ p{margin:0}
 
 /* Secciones */
 section.block{padding-block:72px;border-top:1px solid var(--line)}
-.head{display:grid;gap:12px;margin-bottom:34px;max-width:760px}
+.head{display:grid;gap:12px;align-content:start;margin-bottom:34px;max-width:760px}
 
 .views{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
 .view{background:var(--surface);padding:22px;display:grid;gap:10px;align-content:start;min-width:0}
@@ -222,6 +224,29 @@ footer{border-top:1px solid var(--line);padding-block:36px 48px;color:var(--mute
 footer .wrap{display:grid;gap:14px}
 footer .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center}
 footer ol{margin:0;padding-left:18px;display:grid;gap:4px;font-family:var(--font-mono);font-size:.74rem}
+
+/* Movimiento (GSAP + Lenis) */
+.motion-pending .hero h1,.motion-pending .hero-side,.motion-pending .hero .eyebrow,.motion-pending #viewer{visibility:hidden}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+.seg{position:relative}
+.seg button{position:relative;z-index:1;transition:color .25s}
+.seg-ind{position:absolute;top:3px;bottom:3px;left:0;width:0;border-radius:999px;background:var(--ink);z-index:0;pointer-events:none}
+.seg.has-ind button[aria-pressed="true"]{background:transparent}
+.hot .dot{animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.track{height:2px;background:var(--line);position:relative;overflow:hidden;margin-bottom:24px}
+.track span{position:absolute;inset:0;background:var(--accent);transform-origin:left center}
+.phase .when::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--line);margin-right:8px;vertical-align:1px;transition:background .3s,box-shadow .3s}
+.phase.lit .when::before{background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.view{transition:background .25s}
+.view:hover{background:var(--bg)}
+.view .badge{transition:transform .25s}
+.view:hover .badge{transform:translateX(4px)}
+.plan{transition:transform .3s ease,box-shadow .3s ease}
+.plan:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.12)}
+@media (prefers-reduced-motion: reduce){.hot .dot{animation:none}.plan:hover{transform:none}}
 </style>
 </head>
 <body>
@@ -260,7 +285,7 @@ footer ol{margin:0;padding-left:18px;display:grid;gap:4px;font-family:var(--font
         </div>
       </div>
 
-      <div class="viewer mode-doll" id="viewer">
+      <div class="viewer mode-doll" id="viewer" data-lenis-prevent>
         <div class="stage" id="stage">
           <div class="labels" id="labels"></div>
         </div>
@@ -348,22 +373,22 @@ footer ol{margin:0;padding-left:18px;display:grid;gap:4px;font-family:var(--font
       </div>
       <div class="stats">
         <div class="stat">
-          <span class="n">4,996</span>
+          <span class="n" data-count="4996">4,996</span>
           <p>alojamientos de corta estancia activos en Cusco.</p>
           <span class="src">AirDNA, 12 meses a set. 2026</span>
         </div>
         <div class="stat">
-          <span class="n">52%</span>
+          <span class="n" data-count="52" data-suffix="%">52%</span>
           <p>de ocupación promedio. Casi una de cada dos noches queda vacía.</p>
           <span class="src">AirDNA, 12 meses a set. 2026</span>
         </div>
         <div class="stat">
-          <span class="n">US$36</span>
+          <span class="n" data-count="36" data-prefix="US$">US$36</span>
           <p>de tarifa promedio por noche. El ingreso anual medio ronda US$6,400.</p>
           <span class="src">AirDNA, 12 meses a set. 2026</span>
         </div>
         <div class="stat">
-          <span class="n acc">+12%</span>
+          <span class="n acc" data-count="12" data-prefix="+" data-suffix="%">+12%</span>
           <p>reservas en anuncios con tour 3D, que además se miraron 3 veces más tiempo.</p>
           <span class="src">Caso Vacasa, publicado por Matterport</span>
         </div>
@@ -392,6 +417,7 @@ footer ol{margin:0;padding-left:18px;display:grid;gap:4px;font-family:var(--font
         <p class="eyebrow">Cómo funciona</p>
         <h2>De la visita al enlace en dos días</h2>
       </div>
+      <div class="track" id="stepsTrack" aria-hidden="true"><span></span></div>
       <ol class="steps">
         <li><h3>Agenda</h3><span class="t">5 minutos</span><p>Nos escribes por WhatsApp y elegimos una hora con buena luz. Te mandamos una lista corta para dejar el espacio listo.</p></li>
         <li><h3>Escaneo</h3><span class="t">60 a 120 minutos</span><p>Vamos con cámara 360° y LiDAR. Tapamos objetos personales y no capturamos documentos ni rostros.</p></li>
@@ -506,8 +532,9 @@ footer ol{margin:0;padding-left:18px;display:grid;gap:4px;font-family:var(--font
         <h2>Empezamos en Cusco. Después, la ruta turística del Perú.</h2>
         <p class="lede">Cada fase abre cuando la anterior tiene un equipo de captura local y una cartera estable de anfitriones.</p>
       </div>
+      <div class="track" id="routeTrack" aria-hidden="true"><span></span></div>
       <div class="phases">
-        <div class="phase">
+        <div class="phase lit">
           <span class="when">Fase 1</span>
           <h3>Cusco ciudad</h3>
           <p>San Blas, Centro Histórico, San Cristóbal, Santa Ana y Wanchaq.</p>
@@ -624,6 +651,10 @@ footer ol{margin:0;padding-left:18px;display:grid;gap:4px;font-family:var(--font
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 (function(){
 "use strict";
@@ -679,6 +710,7 @@ const panoTex=canvasTex(2048,512,(ctx,w,h)=>{
 });
 
 const W=9,D=7,H=2.6,T=0.15;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const M={
   wall:new THREE.MeshStandardMaterial({color:col('#F1ECE2'),roughness:.95}),
   wallTop:new THREE.MeshStandardMaterial({color:col('#2B312E'),roughness:1}),
@@ -726,6 +758,7 @@ rooms.forEach(r=>{const w=r.x1-r.x0,d=r.z1-r.z0;const m=new THREE.Mesh(new THREE
 const sides={N:new THREE.Group(),S:new THREE.Group(),W:new THREE.Group(),E:new THREE.Group()};
 Object.values(sides).forEach(g=>scene.add(g));
 const wallMeshes=[];
+const interiorG=new THREE.Group();scene.add(interiorG);
 function wall(x1,z1,x2,z2,ops,parent,ext){
   const horiz=z1===z2,L=horiz?x2-x1:z2-z1,e=ext?T/2:0;
   const place=(a,b,y0,y1)=>{if(b-a<.01||y1-y0<.01)return;const mid=(a+b)/2,len=b-a;const m=horiz?box(len,y1-y0,T,x1+mid,y0,z1,wallMats,parent):box(T,y1-y0,len,x1,y0,z1+mid,wallMats,parent);wallMeshes.push(m);};
@@ -749,10 +782,10 @@ wall(0,0,W,0,[{s:1.0,w:2.4,sill:.85,top:2.2},{s:6.4,w:1.4,sill:1.05,top:2.1}],si
 wall(0,D,W,D,[{s:1.0,w:1.8,sill:.9,top:2.1},{s:4.4,w:.6,sill:1.6,top:2.1},{s:6.6,w:1.6,sill:.9,top:2.1}],sides.S,true);
 wall(0,0,0,D,[{s:.7,w:1.4,sill:.85,top:2.2},{s:2.9,w:1.0,t:'door',top:2.15}],sides.W);
 wall(W,0,W,D,[{s:5.0,w:1.2,sill:.9,top:2.1}],sides.E);
-wall(0,4.2,W,4.2,[{s:2.6,w:.9,t:'door'},{s:4.35,w:.8,t:'door'},{s:6.0,w:.9,t:'door'}]);
-wall(5.4,0,5.4,4.2,[{s:.9,w:2.2,t:'door',top:2.3}]);
-wall(3.8,4.2,3.8,D,[]);
-wall(5.6,4.2,5.6,D,[]);
+wall(0,4.2,W,4.2,[{s:2.6,w:.9,t:'door'},{s:4.35,w:.8,t:'door'},{s:6.0,w:.9,t:'door'}],interiorG);
+wall(5.4,0,5.4,4.2,[{s:.9,w:2.2,t:'door',top:2.3}],interiorG);
+wall(3.8,4.2,3.8,D,[],interiorG);
+wall(5.6,4.2,5.6,D,[],interiorG);
 /* Puerta de entrada entreabierta */
 const door=new THREE.Group();door.position.set(.05,0,2.9);scene.add(door);box(.05,2.1,1.0,0,0,.5,M.wood,door);door.rotation.y=-.5;
 
@@ -763,6 +796,7 @@ const ceiling=new THREE.Group();scene.add(ceiling);
 ceiling.visible=false;
 
 /* Mobiliario */
+const furnStart=scene.children.length;
 function chair(x,z,ry){const g=new THREE.Group();g.position.set(x,0,z);g.rotation.y=ry;scene.add(g);box(.44,.05,.44,0,.44,0,M.wood,g);box(.44,.46,.05,0,.49,-.2,M.wood,g);[[-.19,-.19],[.19,-.19],[-.19,.19],[.19,.19]].forEach(([a,b])=>box(.04,.44,.04,a,0,b,M.wood,g));}
 function plant(x,z,s){cyl(.17*s,.13*s,.34*s,x,0,z,M.terracotta);const f=new THREE.Mesh(new THREE.IcosahedronGeometry(.34*s,1),M.leaf);f.position.set(x,.34*s+.3*s,z);f.castShadow=true;scene.add(f);}
 function bed(x,z,w,d,ry,quilt){const g=new THREE.Group();g.position.set(x,0,z);g.rotation.y=ry;scene.add(g);box(w,.32,d,0,0,0,M.wood,g);box(w-.06,.2,d-.06,0,.32,0,M.linen,g);box(w,.08,d*.62,0,.5,d*.17,quilt?M.textile:M.fabricWarm,g);box(w*.38,.12,.32,-w*.22,.52,-d/2+.25,M.linen,g);box(w*.38,.12,.32,w*.22,.52,-d/2+.25,M.linen,g);box(w+.06,1.0,.08,0,0,-d/2-.02,M.wood,g);}
@@ -802,6 +836,11 @@ box(.55,.04,1.1,8.68,.74,4.95,M.wood);box(.5,.74,.04,8.68,0,4.43,M.wood);box(.5,
 chair(8.15,4.95,-Math.PI/2);
 plant(5.95,6.7,.8);
 
+const furn=scene.children.slice(furnStart);furn.forEach(o=>{o.userData.by=o.position.y;});
+/* Armado animado: 0 = solo pisos, 1 = maqueta completa. La intro de GSAP lo controla. */
+let build=(window.gsap&&!reduced)?0:1,buildTouched=false,furnDone=false;
+window.__wasiViewer={setBuild(v){buildTouched=true;build=clamp(v,0,1);}};
+setTimeout(()=>{if(!buildTouched)build=1;},4000);
 /* Paisaje (visible en recorrido) */
 const pano=new THREE.Mesh(new THREE.CylinderGeometry(40,40,30,64,1,true),new THREE.MeshBasicMaterial({map:panoTex,side:THREE.BackSide}));
 pano.position.set(W/2,8,D/2);pano.visible=false;scene.add(pano);
@@ -849,7 +888,6 @@ let mode='doll',labelsOn=true,measuresOn=false,interacted=false,tween=null,wheel
 const orbit={theta:-.75,phi:.88,r:12.5,target:new THREE.Vector3(W/2,0,D/2)};
 const walk={pos:new THREE.Vector3(1.2,1.55,2.6),yaw:-.35,pitch:-.06};
 const plan={cx:W/2,cz:D/2,zoom:1};
-const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 function orbitPose(){const o=orbit,p=new THREE.Vector3(o.target.x+o.r*Math.sin(o.phi)*Math.sin(o.theta),o.target.y+o.r*Math.cos(o.phi),o.target.z+o.r*Math.sin(o.phi)*Math.cos(o.theta));const m=new THREE.Matrix4().lookAt(p,o.target,new THREE.Vector3(0,1,0));return{p,q:new THREE.Quaternion().setFromRotationMatrix(m)};}
 function walkPose(){const e=new THREE.Euler(walk.pitch,walk.yaw,0,'YXZ');return{p:walk.pos.clone(),q:new THREE.Quaternion().setFromEuler(e)};}
 function startTween(to,dur,done){tween={t0:performance.now(),dur:reduced?1:dur,fp:persp.position.clone(),fq:persp.quaternion.clone(),tp:to.p,tq:to.q,done};}
@@ -863,7 +901,7 @@ function setMode(m,at){
   const prev=mode;
   document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===m)));
   hint.textContent=hints[m];
-  const apply=()=>{mode=m;viewer.classList.remove('mode-doll','mode-walk','mode-plan');viewer.classList.add('mode-'+m);ceiling.visible=pano.visible=(m==='walk');rings.forEach(r=>r.visible=(m==='walk'));dimGroup.visible=measuresOn&&m!=='walk';};
+  const apply=()=>{mode=m;viewer.dispatchEvent(new CustomEvent('modechange',{detail:m}));viewer.classList.remove('mode-doll','mode-walk','mode-plan');viewer.classList.add('mode-'+m);ceiling.visible=pano.visible=(m==='walk');rings.forEach(r=>r.visible=(m==='walk'));dimGroup.visible=measuresOn&&m!=='walk';};
   if(m==='plan'||prev==='plan'){
     stage.classList.add('swap');
     setTimeout(()=>{apply();tween=null;if(m==='walk'){if(at){walk.pos.set(at.x,1.55,at.z);walk.yaw=orbit.theta;}const w=walkPose();persp.position.copy(w.p);persp.quaternion.copy(w.q);}else if(m==='doll'){const o=orbitPose();persp.position.copy(o.p);persp.quaternion.copy(o.q);}stage.classList.remove('swap');},reduced?0:170);
@@ -874,7 +912,7 @@ function setMode(m,at){
   else startTween(orbitPose(),1100);
 }
 document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{interacted=true;setMode(b.dataset.mode);}));
-document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{interacted=true;setMode(b.dataset.go);viewer.scrollIntoView({behavior:reduced?'auto':'smooth',block:'center'});}));
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{interacted=true;setMode(b.dataset.go);wasiScrollTo(viewer,true);}));
 $('#tgLabels').addEventListener('click',e=>{labelsOn=!labelsOn;e.currentTarget.setAttribute('aria-pressed',String(labelsOn));});
 $('#tgMeasures').addEventListener('click',e=>{measuresOn=!measuresOn;e.currentTarget.setAttribute('aria-pressed',String(measuresOn));viewer.classList.toggle('measures',measuresOn);dimGroup.visible=measuresOn&&mode!=='walk';});
 function zoom(f){interacted=true;if(mode==='doll')orbit.r=clamp(orbit.r*f,6,26);else if(mode==='plan')plan.zoom=clamp(plan.zoom/f,.6,3.5);else{persp.fov=clamp(persp.fov*f,30,75);persp.updateProjectionMatrix();}}
@@ -930,7 +968,10 @@ function frame(now){
   /* Corte de muros que miran a la cámara */
   const cp=persp.position,cut=mode==='doll';
   const want={N:cut&&cp.z<0?.3:1,S:cut&&cp.z>D?.3:1,W:cut&&cp.x<0?.3:1,E:cut&&cp.x>W?.3:1};
-  for(const k in sides){cutScale[k]+=(want[k]-cutScale[k])*.15;sides[k].scale.y=cutScale[k];}
+  const wb=clamp(build/.45,0,1),we=1-Math.pow(1-wb,3);
+  for(const k in sides){cutScale[k]+=(want[k]-cutScale[k])*.15;sides[k].scale.y=Math.max(.001,cutScale[k]*we);}
+  interiorG.scale.y=Math.max(.001,we);
+  if(!furnDone){const n=furn.length;furn.forEach((o,i)=>{const p=clamp((build-.4-.35*i/n)/.25,0,1),e=1-Math.pow(1-p,3);o.visible=p>0;o.position.y=o.userData.by+(1-e)*2.2;});furnDone=build>=1;}
   let cam=persp;
   if(mode==='plan'){const a=vw/vh,fitH=Math.max(D+2.6,(W+2.6)/a)/2/plan.zoom;ortho.left=-fitH*a;ortho.right=fitH*a;ortho.top=fitH;ortho.bottom=-fitH;ortho.position.set(plan.cx,30,plan.cz);ortho.lookAt(plan.cx,0,plan.cz);ortho.updateProjectionMatrix();cam=ortho;}
   renderer.render(scene,cam);
@@ -939,7 +980,7 @@ function frame(now){
 function updateLabels(cam){
   for(const L of labels){
     let show=false;
-    if(L.kind==='hot')show=labelsOn;
+    if(L.kind==='hot')show=labelsOn&&build>.95;
     else if(L.kind==='room')show=labelsOn&&mode!=='walk';
     else show=measuresOn&&mode!=='walk';
     if(show){
@@ -948,7 +989,7 @@ function updateLabels(cam){
       else if(L.kind==='hot'&&mode!=='plan'){
         const dist=cam.position.distanceTo(L.pos);
         if(mode==='walk'&&dist>7.5)show=false;
-        else{ray.set(cam.position,L.pos.clone().sub(cam.position).normalize());ray.far=dist-.15;const h=ray.intersectObjects(wallMeshes)[0];ray.far=Infinity;if(h&&h.object.parent&&h.object.parent.scale.y>.9)show=false;else if(h&&h.object.parent===scene)show=false;}
+        else{ray.set(cam.position,L.pos.clone().sub(cam.position).normalize());ray.far=dist-.15;const h=ray.intersectObjects(wallMeshes)[0];ray.far=Infinity;if(h&&h.object.parent.scale.y>.9)show=false;}
       }
       if(show){const x=(tmp.x*.5+.5)*vw,y=(-tmp.y*.5+.5)*vh;L.el.style.transform=`translate(${x.toFixed(1)}px,${y.toFixed(1)}px) translate(-50%,-50%)`;}
     }
@@ -966,6 +1007,7 @@ function initRest(){
   const $=s=>document.querySelector(s);
   const fmt=(n,d=0)=>n.toLocaleString('es-PE',{minimumFractionDigits:d,maximumFractionDigits:d});
   const ids=['cAdr','cOcc','cUp','cPlan','cFx'];
+  const payState={m:null};
   function calc(){
     const adr=+$('#cAdr').value,occ=+$('#cOcc').value,up=+$('#cUp').value,price=+$('#cPlan').value;
     const fx=Math.max(1,+$('#cFx').value||3.7);
@@ -975,13 +1017,15 @@ function initRest(){
     $('#rRev').textContent='US$ '+fmt(rev)+' · S/ '+fmt(rev*fx);
     $('#rExtra').textContent='S/ '+fmt(extraS);
     $('#rCost').textContent='S/ '+fmt(price);
-    $('#rPay').textContent=months<1?'Menos de 1 mes':(months<=36?`${fmt(months,1)} meses`:'Más de 3 años');
+    const renderPay=m=>{$('#rPay').textContent=m<1?'Menos de 1 mes':(m<=36?`${fmt(m,1)} meses`:'Más de 3 años');};
+    if(window.gsap&&payState.m!==null&&!matchMedia('(prefers-reduced-motion: reduce)').matches)gsap.to(payState,{m:months,duration:.55,ease:'power2.out',overwrite:true,onUpdate:()=>renderPay(payState.m)});
+    else{payState.m=months;renderPay(months);}
     $('#rPayTxt').textContent=months<=12?`Con ${fmt(up)}% más de reservas, el plan se recupera dentro del primer año y deja S/ ${fmt(Math.max(0,extraS-price))} extra.`:'Con estos supuestos, el plan tarda más de un año en recuperarse. Prueba con el plan Esencial.';
   }
   ids.forEach(i=>{const el=$('#'+i);el.addEventListener('input',calc);el.addEventListener('change',calc);});
   calc();
 
-  document.querySelectorAll('[data-plan]').forEach(b=>b.addEventListener('click',()=>{const p=b.dataset.plan;$('#fPlan').value=p;const map={Esencial:'390',Profesional:'790',Premium:'1490'};$('#cPlan').value=map[p];calc();document.getElementById('contacto').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});$('#fName').focus({preventScroll:true});}));
+  document.querySelectorAll('[data-plan]').forEach(b=>b.addEventListener('click',()=>{const p=b.dataset.plan;$('#fPlan').value=p;const map={Esencial:'390',Profesional:'790',Premium:'1490'};$('#cPlan').value=map[p];calc();wasiScrollTo(document.getElementById('contacto'));$('#fName').focus({preventScroll:true});}));
 
   $('#leadForm').addEventListener('submit',e=>{
     e.preventDefault();
@@ -997,6 +1041,102 @@ function initRest(){
     try{navigator.clipboard.writeText(txt).then(()=>{$('#copyState').textContent='Mensaje copiado. Pégalo en WhatsApp: +51 9XX XXX XXX';},sel);}catch(_){sel();}
   });
 }
+
+/* Desplazamiento compartido: usa Lenis si está activo */
+function wasiScrollTo(el,center){
+  if(window.__wasiLenis){const off=center?-(innerHeight-el.offsetHeight)/2:-72;window.__wasiLenis.scrollTo(el,{offset:off});return;}
+  el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:center?'center':'start'});
+}
+
+/* ---------- Movimiento: GSAP + ScrollTrigger + SplitText + Lenis ---------- */
+function initMotion(){
+  const html=document.documentElement;
+  const reveal=()=>html.classList.remove('motion-pending');
+  const setBuild=v=>window.__wasiViewer&&window.__wasiViewer.setBuild(v);
+  if(!window.gsap||!window.ScrollTrigger){reveal();setBuild(1);return;}
+  const ST=window.ScrollTrigger,Split=window.SplitText;
+  gsap.registerPlugin(ST);if(Split)gsap.registerPlugin(Split);
+
+  const Motion={
+    segIndicator(instant){
+      const seg=document.querySelector('.seg');if(!seg)return;
+      const ind=document.createElement('span');ind.className='seg-ind';seg.prepend(ind);seg.classList.add('has-ind');
+      const place=fast=>{const b=seg.querySelector('button[aria-pressed="true"]');if(b)gsap.to(ind,{x:b.offsetLeft,width:b.offsetWidth,duration:fast?0:.45,ease:'power3.out',overwrite:true});};
+      place(true);
+      document.getElementById('viewer').addEventListener('modechange',()=>requestAnimationFrame(()=>place(instant)));
+      addEventListener('resize',()=>place(true));
+    },
+    smooth(){
+      if(!window.Lenis)return;
+      const lenis=new Lenis({duration:1.1,smoothWheel:true});
+      lenis.on('scroll',ST.update);
+      gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
+      document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();lenis.scrollTo(t,{offset:-72});}}));
+      window.__wasiLenis=lenis;
+    },
+    intro(){
+      const h1=document.querySelector('.hero h1');
+      let words=null;
+      if(Split){const s=Split.create(h1,{type:'words,lines',mask:'lines'});words=s.words;}
+      const tl=gsap.timeline({defaults:{ease:'power3.out'}});
+      gsap.set('#viewer',{autoAlpha:0,y:40,scale:.97});
+      reveal();
+      const state={v:0};
+      tl.from('.top',{yPercent:-100,duration:.6})
+        .from('.hero .eyebrow',{autoAlpha:0,y:12,duration:.5},'-=.3')
+        .from(words||h1,{yPercent:110,duration:.9,stagger:.04},'-=.25')
+        .from('.hero-side > *',{autoAlpha:0,y:18,duration:.6,stagger:.1},'-=.6')
+        .to('#viewer',{autoAlpha:1,y:0,scale:1,duration:.9},'-=.45')
+        .from('.viewer .toolbar > *, .viewer .listing, .viewer .hint',{autoAlpha:0,y:-8,stagger:.06,duration:.45},'-=.5')
+        .to(state,{v:1,duration:2.6,ease:'power2.inOut',onUpdate:()=>setBuild(state.v)},'-=.7');
+    },
+    reveals(){
+      ['.views .view','.stats .stat','.where > *','.steps li','.plans .plan','.plans-foot','.calc','.phases .phase','.who span','.faq details','form.f'].forEach(sel=>{
+        const els=gsap.utils.toArray(sel);if(!els.length)return;
+        gsap.set(els,{autoAlpha:0,y:36});
+        ST.batch(els,{start:'top 90%',once:true,onEnter:b=>gsap.to(b,{autoAlpha:1,y:0,duration:.75,stagger:.08,ease:'power3.out',overwrite:true})});
+      });
+    },
+    headings(){
+      gsap.utils.toArray('.block .head').forEach(head=>{
+        const h2=head.querySelector('h2'),rest=head.querySelectorAll('.eyebrow, .lede');
+        const tl=gsap.timeline({scrollTrigger:{trigger:head,start:'top 85%',once:true}});
+        if(Split&&h2){const s=Split.create(h2,{type:'lines',mask:'lines'});tl.from(s.lines,{yPercent:105,duration:.85,stagger:.09,ease:'power3.out'});}
+        else if(h2)tl.from(h2,{autoAlpha:0,y:24,duration:.7});
+        if(rest.length)tl.from(rest,{autoAlpha:0,y:14,duration:.6,stagger:.08},'-=.5');
+      });
+    },
+    counters(){
+      gsap.utils.toArray('[data-count]').forEach(el=>{
+        const end=+el.dataset.count,pre=el.dataset.prefix||'',suf=el.dataset.suffix||'',o={v:0};
+        gsap.to(o,{v:end,duration:1.6,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 90%',once:true},onUpdate:()=>{el.textContent=pre+Math.round(o.v).toLocaleString('en-US')+suf;}});
+      });
+    },
+    tracks(){
+      gsap.fromTo('#stepsTrack span',{scaleX:0},{scaleX:1,ease:'none',scrollTrigger:{trigger:'.steps',start:'top 85%',end:'bottom 60%',scrub:.6}});
+      const phases=gsap.utils.toArray('.phase');
+      gsap.fromTo('#routeTrack span',{scaleX:0},{scaleX:1,ease:'none',scrollTrigger:{trigger:'.phases',start:'top 85%',end:'bottom 60%',scrub:.6,
+        onUpdate:self=>phases.forEach((p,i)=>p.classList.toggle('lit',i===0||self.progress>=i/phases.length))}});
+    },
+    headerHide(){
+      const top=document.querySelector('.top');let hidden=false;
+      ST.create({start:0,end:'max',onUpdate:self=>{const h=self.scroll()>240&&self.direction===1;if(h!==hidden){hidden=h;gsap.to(top,{yPercent:h?-100:0,duration:.35,ease:'power2.out',overwrite:true});}}});
+    }
+  };
+
+  const mm=gsap.matchMedia();
+  mm.add({motion:'(prefers-reduced-motion: no-preference)',still:'(prefers-reduced-motion: reduce)'},ctx=>{
+    if(!ctx.conditions.motion){reveal();setBuild(1);Motion.segIndicator(true);return;}
+    Motion.segIndicator(false);
+    Motion.smooth();
+    const fontsReady=Promise.race([document.fonts?document.fonts.ready:Promise.resolve(),new Promise(r=>setTimeout(r,1200))]);
+    fontsReady.then(()=>{
+      Motion.intro();Motion.headings();Motion.reveals();Motion.counters();Motion.tracks();Motion.headerHide();
+      ST.refresh();
+    });
+  });
+}
+try{initMotion();}catch(e){document.documentElement.classList.remove('motion-pending');window.__wasiViewer&&window.__wasiViewer.setBuild(1);}
 </script>
 </body>
 </html>
