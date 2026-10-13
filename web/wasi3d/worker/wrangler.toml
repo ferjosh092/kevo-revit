@@ -1,0 +1,23 @@
+# Servidor de IA de Wasi 3D. Despliegue: ver README.md de esta carpeta.
+name = "wasi3d-ia"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+# Sirve /api/* en el mismo dominio de la web, así el Estudio no necesita CORS y la CSP
+# (connect-src 'self') no cambia. Reemplaza wasi3d.pe por tu dominio real.
+routes = [{ pattern = "wasi3d.pe/api/*", zone_name = "wasi3d.pe" }]
+
+[vars]
+MODELO = "gpt-image-1"     # modelo de imágenes de OpenAI; confirma el vigente en platform.openai.com
+CALIDAD = "high"           # low | medium | high
+FIDELIDAD = "high"         # input_fidelity: conserva mejor la geometría de la foto original
+MODELO_CLAUDE = "claude-sonnet-5-5"  # «Describir con IA». claude-opus-5-5 es más capaz y cuesta el doble; claude-haiku-5-5, mucho menos
+ESFUERZO_CLAUDE = "medium"           # low | medium | high: cuánto razona Claude antes de responder
+ORIGENES = "https://wasi3d.pe"
+
+# Límite de solicitudes por IP (opcional). Revisa la sintaxis vigente en la documentación
+# de Rate Limiting de Cloudflare Workers antes de activarlo.
+# [[ratelimits]]
+# name = "LIMITE"
+# namespace_id = "1001"
+# simple = { limit = 10, period = 60 }
